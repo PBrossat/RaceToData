@@ -69,7 +69,7 @@ function grapheDriverPointMoyenParGP()
             datasets: [{
                 label: "Points moyen par Grand Prix ",
                 data: nbMoyenPointsParGpParPilote,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)', 
                 borderColor: 'rgb(255, 99, 132)',
                 pointBackgroundColor: 'rgb(255, 99, 132)',
                 pointBorderColor: '#fff',
