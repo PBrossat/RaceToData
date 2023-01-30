@@ -4,7 +4,7 @@ function afficherStatsGrandsPrix ()
     const sectionStatsGrandsPrix = document.createElement("section");
     sectionStatsGrandsPrix.innerHTML += "<h2>Analyse des données relatives aux Grands prix</h2>";
     const figureStatsGrandsPrix = document.createElement("figure");
-    figureStatsGrandsPrix.innerHTML = "<img src='graphe.png'>";
+    figureStatsGrandsPrix.innerHTML = "<img src='data/graphe.png'>";
 
     divStatsGrandsPrix.appendChild(sectionStatsGrandsPrix);
     sectionStatsGrandsPrix.appendChild(figureStatsGrandsPrix);
