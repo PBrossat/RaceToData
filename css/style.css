@@ -243,6 +243,25 @@ header{
 } */
 
 #stats #CanvaId {
-    position : absolute;
-    left: 40px;
+    width : 120px;
+    height : 80px;
+    margin : auto;
+    padding : 0;
+    border : none;
+    background-color : whitesmoke;
+}
+
+#stats select 
+{
+    margin-top: 10px;
+    padding: 0.6rem;
+    outline: none;
+    border-width: 2px;
+    border-color:red ;
+    border-radius: 10px;
+    background: black;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s ease;
 }

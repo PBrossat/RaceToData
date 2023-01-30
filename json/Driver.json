@@ -17,25 +17,6 @@
         "Nb GP disputés" : 163
     },
 
-
-    {
-        "Name": "Logan Sargeant",
-        "Team": "Williams",
-        "Naissance": "2000-12-31",
-        "âge" : 22,
-        "Nationalité": "États-Unis",
-        "Nb points" : 0,
-        "Nb points moyen/GP" : 0,
-        "Nb Victoires" : 0,
-        "Nb Champion" : 0,
-        "Nb podiums" : 0,
-        "Nb pôle Position" : 0,
-        "Nb meilleurs tours" : 0,
-        "Nb DNF" : 0,
-        "Pourcent DNF moyen/GP": 0,
-        "Nb GP disputés" : 0
-    },
-
     {
         "Name": "Lando Norris",
         "Team": "McLaren",
@@ -164,23 +145,6 @@
         "Nb GP disputés" : 141
     },
 
-    {
-        "Name": "Nyck de Vries",
-        "Team": "AlphaTauri",
-        "Naissance": "1995-02-06",
-        "âge" : 27,
-        "Nationalité": "Pays-Bas",
-        "Nb points" : 2,
-        "Nb points moyen/GP" : 2.00,
-        "Nb Victoires" : 0,
-        "Nb Champion" : 0,
-        "Nb podiums" : 0,
-        "Nb pôle Position" : 0,
-        "Nb meilleurs tours" : 0,
-        "Nb DNF" : 0,
-        "Pourcent DNF moyen/GP": 0,
-        "Nb GP disputés" : 1
-    },
 
     {
         "Name": "Yuki Tsunoda",
@@ -343,25 +307,7 @@
         "Pourcent DNF moyen/GP": 11.50,
         "Nb GP disputés" : 200
     },
-
-    {
-        "Name": "Oscar Piastri",
-        "Team": "McLaren",
-        "Naissance": "2001-04-06",
-        "âge" : 21,
-        "Nationalité": "Australie",
-        "Nb points" : 0,
-        "Nb points moyen/GP" : 0,
-        "Nb Victoires" : 0,
-        "Nb Champion" : 0,
-        "Nb podiums" : 0,
-        "Nb pôle Position" : 0,
-        "Nb meilleurs tours" : 0,
-        "Nb DNF" : 0,
-        "Pourcent DNF moyen/GP": 0,
-        "Nb GP disputés" : 0
-    },
-
+    
     {
         "Name": "Sebastian Vettel",
         "Team": "Aston Martin",
