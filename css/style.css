@@ -241,3 +241,8 @@ header{
     background-color: #fff;
     padding-top: 4rem;
 } */
+
+#stats #CanvaId {
+    position : absolute;
+    left: 40px;
+}
