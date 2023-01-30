@@ -1,3 +1,9 @@
+const api = "http://ergast.com/api/f1/";
+
+// Utility functions
+const json = (res) => res.json();
+const error = (err) => console.log("Request failed: ", err);
+
 function afficherStatsEcuries() {
   const divStatsEcuries = document.querySelector("#stats");
   const sectionStatsEcuries = document.createElement("section");
@@ -18,6 +24,6 @@ boutonDecouvrirStatsEcuries.addEventListener("click", function () {
   afficherStatsEcuries();
 });
 
-fetch("http://ergast.com/api/f1/constructors/mclaren/")
+fetch(api)
   .then((response) => response.json())
-  .then((data) => console.nationality(data));
+  .then((json) => console.nationality(json));
