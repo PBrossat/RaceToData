@@ -1,68 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width", initial-scale="1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <title>RaceToData</title>
-  <script type="module" src="js/script.js"></script>
-</head>
-<header>
-    <a href="index.html" class="logo"> 
-        <!-- # pour aller au top de la page mais après sera pour page accueil -->
-        <img src="data/logo.png" width="300px" height="auto
-        ">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>RaceToData</title>
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/scriptEcuries.js"></script>
+  </head>
+  <header>
+    <a href="index.html" class="logo">
+      <!-- # pour aller au top de la page mais après sera pour page accueil -->
+      <img
+        src="data/logo.png"
+        width="300px"
+        height="auto
+        "
+      />
     </a>
-</header>
-    <body>
-        <div class ="overlay">
-        <section class="showcase">
-            <video src="data/video.mp4" muted loop autoplay></video>
-            <div class="banner-txt">
-                <h2>Race To Data</h2>
-                <h3>Explorez le monde de la Formule 1 à travers les données et les statistiques</h3>
-                <p> © 2023 Copyright : Developed by Lucas, Matis and Pierrick.</p>
-            </div>
-        </section> 
+  </header>
+  <body>
+    <div class="overlay">
+      <section class="showcase">
+        <video src="data/video.mp4" muted loop autoplay></video>
+        <div class="banner-txt">
+          <h2>Race To Data</h2>
+          <h3>
+            Explorez le monde de la Formule 1 à travers les données et les
+            statistiques
+          </h3>
+          <p>© 2023 Copyright : Developed by Lucas, Matis and Pierrick.</p>
         </div>
-        <div class="wrapper">
-            <div class="card"><img src="data/pilote.jpeg"/>
-              <div class="info">
-                <h1>Pilotes</h1>
-                <p>Découvrez les statistiques sur les pilotes.</p>
-                <button class="btn-decouvrir-stats-pilotes" onclick="window.location.hash='stats'">C'est parti !</button>
-              </div>
-            </div>
-            <div class="card"><img src="data/ecuries.png"/>
-              <div class="info">
-                <h1>Écuries</h1>
-                <p>Découvrez les statistiques sur les écuries.</p>
-                <button class="btn-decouvrir-stats-ecuries" onclick="window.location.hash='stats'">C'est parti !</button>
-              </div>
-            </div>
-            <div class="card"><img src="data/grands-prix.jpg"/>
-              <div class="info">
-                <h1>Grands Prix</h1>
-                <p>Découvrez les statistiques sur les Grands Prix</p>
-                <button class="btn-decouvrir-stats-grands-prix" onclick="window.location.hash='stats'">C'est parti !</button>
-              </div>
-            </div>
-          </div>
-          <div class="presentation">
-            <p>
-                La Formule 1 est un sport extrêmement compétitif et technologique qui repose sur l'utilisation 
-                de données et de statistiques pour améliorer les performances des voitures et des équipes. 
-                Les données sont collectées à partir de capteurs installés sur les voitures, et les équipes 
-                utilisent ces informations pour optimiser les réglages de la voiture, la stratégie de course 
-                et la performance des pilotes. L'analyse de ces données est cruciale pour les équipes car elle 
-                leur permet de prendre des décisions informées et de gagner des avantages sur leurs concurrents. 
-            </p>
-          </div>
-          <section id="stats">
-
-          </section>
-    </body>
-<!-- <footer>
+      </section>
+    </div>
+    <div class="wrapper">
+      <div class="card">
+        <img src="data/pilote.jpeg" />
+        <div class="info">
+          <h1>Pilotes</h1>
+          <p>Découvrez les statistiques sur les pilotes.</p>
+          <button
+            class="btn-decouvrir-stats-pilotes"
+            onclick="window.location.hash='stats'"
+          >
+            C'est parti !
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="data/ecuries.png" />
+        <div class="info">
+          <h1>Écuries</h1>
+          <p>Découvrez les statistiques sur les écuries.</p>
+          <button
+            class="btn-decouvrir-stats-ecuries"
+            onclick="window.location.hash='stats'"
+          >
+            C'est parti !
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="data/grands-prix.jpg" />
+        <div class="info">
+          <h1>Grands Prix</h1>
+          <p>Découvrez les statistiques sur les Grands Prix</p>
+          <button
+            class="btn-decouvrir-stats-grands-prix"
+            onclick="window.location.hash='stats'"
+          >
+            C'est parti !
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="presentation">
+      <p>
+        La Formule 1 est un sport extrêmement compétitif et technologique qui
+        repose sur l'utilisation de données et de statistiques pour améliorer
+        les performances des voitures et des équipes. Les données sont
+        collectées à partir de capteurs installés sur les voitures, et les
+        équipes utilisent ces informations pour optimiser les réglages de la
+        voiture, la stratégie de course et la performance des pilotes. L'analyse
+        de ces données est cruciale pour les équipes car elle leur permet de
+        prendre des décisions informées et de gagner des avantages sur leurs
+        concurrents.
+      </p>
+    </div>
+    <section id="stats"></section>
+  </body>
+  <!-- <footer>
     <div class="text-center p-4 bg-secondary">
         <p>© 2023 Copyright : Developed by Lucas, Matis and Pierrick.</p>
     </div>
