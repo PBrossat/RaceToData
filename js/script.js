@@ -17,3 +17,4 @@ boutonDecouvrirStatsGrandsPrix.addEventListener("click", function() {
     document.querySelector("#stats").innerHTML = "";
     afficherStatsGrandsPrix();
 });
+
