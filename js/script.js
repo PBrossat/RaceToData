@@ -9,7 +9,7 @@ function afficherStatsGrandsPrix ()
     divStatsGrandsPrix.appendChild(sectionStatsGrandsPrix);
     sectionStatsGrandsPrix.appendChild(figureStatsGrandsPrix);
 
-}.
+}
 
 
 const boutonDecouvrirStatsGrandsPrix = document.querySelector(".btn-decouvrir-stats-grands-prix");
