@@ -7,12 +7,7 @@ function afficherStatsEcuries() {
     "<h2>Analyse des données relatives aux Ecuries</h2>";
   const divStatsEcuries = document.createElement("div");
   divStatsEcuries.id = "divId";
-  divStatsEcuries.innerHTML = `
-    <select class="choixGraphique">
-        <option value="">Type de graphique</option>
-        <option value="radar">Radar</option>
-    </select>
-  `;
+  divStatsEcuries.innerHTML = "";
   const graphique = document.createElement("canvas");
   graphique.id = "CanvaId";
 
@@ -27,6 +22,7 @@ const boutonDecouvrirStatsEcuries = document.querySelector(
 boutonDecouvrirStatsEcuries.addEventListener("click", function () {
   document.querySelector("#stats").innerHTML = "";
   afficherStatsEcuries();
+  grapheEcurieNbTitre();
 });
 
 //let url = api;
