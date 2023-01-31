@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 // import {listes des fonctions à importer} from "./fichier.js";
 
->>>>>>> main
 function afficherStatsGrandsPrix() {
   const divStatsGrandsPrix = document.querySelector("#stats");
   const sectionStatsGrandsPrix = document.createElement("section");
