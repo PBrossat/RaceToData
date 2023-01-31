@@ -44,6 +44,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", function () {
 
   // })
   grapheDriverPointMoyenParGPRadar();
+  grapheDriverPointMoyenParGPBaton();
 });
 
 //Récuperer les données dans un tableau globalTabData accessible partout dans le script
