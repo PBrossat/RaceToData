@@ -1,23 +1,34 @@
 function afficherStatsPilotes() {
   const StatsPilotes = document.querySelector("#stats");
+
   const sectionStatsPilotes = document.createElement("section");
   sectionStatsPilotes.innerHTML +=
     "<h2>Analyse des données relatives aux Pilotes</h2>";
-  const divStatsPilotes = document.createElement("div");
-  divStatsPilotes.id = "divId";
-  divStatsPilotes.innerHTML = `
+
+  const divStatsPilotes1 = document.createElement("div");
+  divStatsPilotes1.id = "divId1";
+  divStatsPilotes1.innerHTML += `
     <select class="choixGraphique">
         <option value="">Type de graphique</option>
         <option value="radar">Radar</option>
         <option value="baton">Bâton</option>
     </select>
   `;
-  const graphique = document.createElement("canvas");
-  graphique.id = "CanvaId";
+
+  const divStatsPilotes2 = document.createElement("div");
+  divStatsPilotes2.id = "divId2";
+
+  const graphique1 = document.createElement("canvas");
+  graphique1.id = "CanvaIdGauche";
+
+  const graphique2 = document.createElement("canvas");
+  graphique2.id = "CanvaIdDroite";
 
   StatsPilotes.appendChild(sectionStatsPilotes);
-  sectionStatsPilotes.appendChild(divStatsPilotes);
-  divStatsPilotes.appendChild(graphique);
+  sectionStatsPilotes.appendChild(divStatsPilotes1);
+  sectionStatsPilotes.appendChild(divStatsPilotes2);
+  divStatsPilotes1.appendChild(graphique1);
+  divStatsPilotes2.appendChild(graphique2);
 }
 
 const boutonDecouvrirStatsPilotes = document.querySelector(
@@ -156,9 +167,12 @@ function grapheDriverPointMoyenParGPRadar() {
         },
       ],
     },
+    options: {
+      responsive: false,
+    },
   };
 
-  const graphique = document.getElementById("CanvaId");
+  const graphique = document.getElementById("CanvaIdGauche");
   const chart = new Chart(graphique, configuration);
 }
 
@@ -179,7 +193,6 @@ function grapheDriverPointMoyenParGPBaton() {
     type: "bar",
     data: {
       labels: nomPilote,
-
       datasets: [
         {
           label: "Points moyen par Grand Prix ",
@@ -189,7 +202,11 @@ function grapheDriverPointMoyenParGPBaton() {
         },
       ],
     },
+    options: {
+      responsive: false,
+    },
   };
-  const graphique = document.getElementById("CanvaId");
+
+  const graphique = document.getElementById("CanvaIdDroite");
   const chart = new Chart(graphique, configuration);
 }

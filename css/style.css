@@ -233,22 +233,43 @@ header {
   margin: auto;
 }
 
-/* #stats {
-    background-color: #fff;
-    padding-top: 4rem;
+#stats {
+  background-color: black;
+  padding-top: 4rem;
+}
+
+#stats #CanvaIdGauche {
+  width: 50%;
+  background-color: white;
+  /* background-color: white; */
+  border-radius: 1em;
+  float: left;
+}
+
+#stats #CanvaIdDroite {
+  width: 50%;
+  background-color: white;
+  /* background-color: white; */
+  border-radius: 1em;
+  float: right;
+}
+
+/* #stats #divID {
+  display: block;
 } */
 
-#stats #CanvaId {
-  width: 120px;
-  height: 80px;
-  margin: auto;
-  padding: 0;
-  border: none;
-  background-color: whitesmoke;
+#divId1 {
+  float: left;
+  width: 100%;
+}
+
+#divId2 {
+  clear: both;
+  width: 100%;
 }
 
 #stats select {
-  margin-top: 10px;
+  margin-left: 15px;
   padding: 0.6rem;
   outline: none;
   border-width: 2px;
@@ -259,4 +280,8 @@ header {
   font-weight: bold;
   cursor: pointer;
   transition: 0.4s ease;
+}
+
+canvas {
+  display: block;
 }

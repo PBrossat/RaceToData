@@ -198,24 +198,6 @@
   },
 
   {
-    "Name": "Nico Hülkenberg",
-    "Team": "Haas F1 Team",
-    "Naissance": "1987-08-19",
-    "âge": 35,
-    "Nationalité": "Allemagne",
-    "Nb points": 521,
-    "Nb points moyen/GP": 2.88,
-    "Nb Victoires": 0,
-    "Nb Champion": 0,
-    "Nb podiums": 70,
-    "Nb pôle Position": 1,
-    "Nb meilleurs tours": 2,
-    "Nb DNF": 38,
-    "Pourcent DNF moyen/GP": 20.99,
-    "Nb GP disputés": 181
-  },
-
-  {
     "Name": "Esteban Ocon",
     "Team": "Alpine",
     "Naissance": "1996-09-17",
@@ -321,24 +303,6 @@
     "Nb DNF": 48,
     "Pourcent DNF moyen/GP": 13.99,
     "Nb GP disputés": 183
-  },
-
-  {
-    "Name": "Romain Grosjean",
-    "Team": "Haas F1 Team",
-    "Naissance": "1986-04-17",
-    "âge": 37,
-    "Nationalité": "France",
-    "Nb points": 521,
-    "Nb points moyen/GP": 2.88,
-    "Nb Victoires": 0,
-    "Nb Champion": 0,
-    "Nb podiums": 70,
-    "Nb pôle Position": 1,
-    "Nb meilleurs tours": 2,
-    "Nb DNF": 38,
-    "Pourcent DNF moyen/GP": 20.99,
-    "Nb GP disputés": 181
   },
 
   {
