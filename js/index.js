@@ -3,13 +3,13 @@ const fs = require("fs");
 const app = express();
 const PORT = 3000;
 
-app.get("/", (_, res) => {
+app.get("/index.html", (_, res) => {
   //pas besoin de la requete donc on peut remplacer req par _
   const indexHTML = fs.readFileSync("index.html", "utf-8");
   res.send(indexHTML);
 });
 
-app.get("/index.html", (_, res) => {
+app.get("/", (_, res) => {
   //pas besoin de la requete donc on peut remplacer req par _
   const indexHTML = fs.readFileSync("index.html", "utf-8");
   res.send(indexHTML);
