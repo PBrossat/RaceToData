@@ -4,6 +4,7 @@
     "positionText": "1",
     "points": "759",
     "wins": "17",
+    "pole": "8",
     "Constructor": {
       "constructorId": "red_bull",
       "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
@@ -16,6 +17,7 @@
     "positionText": "2",
     "points": "554",
     "wins": "4",
+    "pole": "12",
     "Constructor": {
       "constructorId": "ferrari",
       "url": "http://en.wikipedia.org/wiki/Scuderia_Ferrari",
@@ -28,6 +30,7 @@
     "positionText": "3",
     "points": "515",
     "wins": "1",
+    "pole": "1",
     "Constructor": {
       "constructorId": "mercedes",
       "url": "http://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One",
@@ -40,6 +43,7 @@
     "positionText": "4",
     "points": "173",
     "wins": "0",
+    "pole": "0",
     "Constructor": {
       "constructorId": "alpine",
       "url": "http://en.wikipedia.org/wiki/Alpine_F1_Team",
@@ -52,6 +56,7 @@
     "positionText": "5",
     "points": "159",
     "wins": "0",
+    "pole": "0",
     "Constructor": {
       "constructorId": "mclaren",
       "url": "http://en.wikipedia.org/wiki/McLaren",
@@ -64,6 +69,7 @@
     "positionText": "6",
     "points": "55",
     "wins": "0",
+    "pole": "0",
     "Constructor": {
       "constructorId": "alfa",
       "url": "http://en.wikipedia.org/wiki/Alfa_Romeo_in_Formula_One",
@@ -76,6 +82,7 @@
     "positionText": "7",
     "points": "55",
     "wins": "0",
+    "pole": "0",
     "Constructor": {
       "constructorId": "aston_martin",
       "url": "http://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One",
@@ -88,6 +95,7 @@
     "positionText": "8",
     "points": "37",
     "wins": "0",
+    "pole": "1",
     "Constructor": {
       "constructorId": "haas",
       "url": "http://en.wikipedia.org/wiki/Haas_F1_Team",
@@ -100,6 +108,7 @@
     "positionText": "9",
     "points": "35",
     "wins": "0",
+    "pole": "0",
     "Constructor": {
       "constructorId": "alphatauri",
       "url": "http://en.wikipedia.org/wiki/Scuderia_AlphaTauri",
@@ -112,6 +121,7 @@
     "positionText": "10",
     "points": "8",
     "wins": "0",
+    "pole": "0",
     "Constructor": {
       "constructorId": "williams",
       "url": "http://en.wikipedia.org/wiki/Williams_Grand_Prix_Engineering",

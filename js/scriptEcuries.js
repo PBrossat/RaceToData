@@ -20,8 +20,9 @@ const boutonDecouvrirStatsEcuries = document.querySelector(
 boutonDecouvrirStatsEcuries.addEventListener("click", function () {
   document.querySelector("#stats").innerHTML = "";
   afficherStatsEcuries();
-  grapheEcurieRadar();
-  //grapheEcurieBaton();
+  grapheEcurieRadarWinsPoles();
+  // grapheEcurieRadarWinsPosition();
+  // grapheEcurieBatonPoints();
 });
 
 let dataGlobalTab;
@@ -33,6 +34,7 @@ fetch("json/Ecuries.json")
       return {
         Points: ecurie["points"],
         Victoires: ecurie["wins"],
+        Poles: ecurie["pole"],
         Nom: ecurie.Constructor["name"],
         Nationalite: ecurie.Constructor["nationality"],
         Position: ecurie["position"],
@@ -62,6 +64,14 @@ function getNbVictoiresEcuries() {
   return victoireEcurie;
 }
 
+function getNbPolesEcuries() {
+  const poleEcurie = [];
+  for (var i = 0; i < dataGlobalTab.length; i++) {
+    poleEcurie.push(dataGlobalTab[i].Poles);
+  }
+  return poleEcurie;
+}
+
 function getNbPointsEcuries() {
   const pointsEcurie = [];
   for (var i = 0; i < dataGlobalTab.length; i++) {
@@ -86,7 +96,48 @@ function getNationaliteEcuries() {
   return nationaliteEcurie;
 }
 
-function grapheEcurieRadar() {
+function grapheEcurieRadarWinsPoles() {
+  const nomEcurie = getEcuries();
+  const nbVictoiresEcuries = getNbVictoiresEcuries();
+  const nbPolesEcuries = getNbPolesEcuries();
+
+  const configuration = {
+    type: "radar",
+    data: {
+      labels: nomEcurie,
+
+      datasets: [
+        {
+          label: "Nombre de poles positions par écurie",
+          data: nbPolesEcuries,
+          fill: true,
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgb(255, 99, 132)",
+          pointBackgroundColor: "rgb(255, 99, 132)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgb(255, 99, 132)",
+        },
+        {
+          label: "Nombre de victoires par écurie",
+          data: nbVictoiresEcuries,
+          fill: true,
+          backgroundColor: "rgba(54, 162, 235, 0.2)",
+          borderColor: "rgb(54, 162, 235)",
+          pointBackgroundColor: "rgb(54, 162, 235)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgb(54, 162, 235)",
+        },
+      ],
+    },
+  };
+
+  const graphique = document.getElementById("CanvaId");
+  const chart = new Chart(graphique, configuration);
+}
+
+function grapheEcurieRadarWinsPosition() {
   const nomEcurie = getEcuries();
   const nbVictoiresEcuries = getNbVictoiresEcuries();
   const positionEcuries = getPositionEcuries();
@@ -127,7 +178,7 @@ function grapheEcurieRadar() {
   const chart = new Chart(graphique, configuration);
 }
 
-function grapheEcurieBaton() {
+function grapheEcurieBatonPoints() {
   var tabCouleurs = [];
   for (var i = 0; i < dataGlobalTab.length; i++) {
     var r = Math.floor(Math.random() * 256);
