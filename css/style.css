@@ -254,6 +254,14 @@ header {
   float: right;
 }
 
+#stats #CanvaId {
+  width: 50%;
+  background-color: white;
+  /* background-color: white; */
+  border-radius: 1em;
+  float: left;
+}
+
 /* #stats #divID {
   display: block;
 } */
