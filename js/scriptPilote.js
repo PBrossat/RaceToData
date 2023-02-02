@@ -6,30 +6,32 @@ function afficherStatsPilotes() {
     "<h2>Analyse des données relatives aux Pilotes</h2>";
 
   const divMapEtInfos = document.createElement("div");
-  divMapEtInfos.id = "divMapEtInfos";
+  divMapEtInfos.id = "divMapEtInfosPilotes";
 
-  const divMapPilote = document.createElement("div");
-  divMapPilote.id = "divMapPilote";
-  divMapPilote.title = "Nationalité des Pilotes de F1";
+  // const divMapPilotes = document.createElement("div");
+  // divMapPilotes.id = "divMapPilotes";
 
-  const divStatsPilotes1 = document.createElement("div");
-  divStatsPilotes1.id = "divId1";
+  // const divStatsPilotes1 = document.createElement("div");
+  // divStatsPilotes1.id = "divId1";
 
-  const divStatsPilotes2 = document.createElement("div");
-  divStatsPilotes2.id = "divId2";
+  // const divStatsPilotes2 = document.createElement("div");
+  // divStatsPilotes2.id = "divId2";
 
-  const graphique1 = document.createElement("canvas");
-  graphique1.id = "CanvaIdGauche";
+  // const graphique1 = document.createElement("canvas");
+  // graphique1.id = "CanvaIdGauche";
 
-  const graphique2 = document.createElement("canvas");
-  graphique2.id = "CanvaIdDroite";
+  // const graphique2 = document.createElement("canvas");
+  // graphique2.id = "CanvaIdDroite";
 
   StatsPilotes.appendChild(sectionStatsPilotes);
   sectionStatsPilotes.appendChild(divMapEtInfos);
-  divMapEtInfos.appendChild(divMapPilote);
-  sectionStatsPilotes.appendChild(divStatsPilotes1);
-  // divStatsPilotes1.appendChild(graphique1);
-  divStatsPilotes1.appendChild(graphique2);
+
+  // Création de deux div enfants de divMapEtInfosPilotes
+  creationDivMapPilotes();
+  creationDivInfosPilotes();
+
+  // Création de la div Carte
+  creationDivCartePilotes();
 }
 
 const boutonDecouvrirStatsPilotes = document.querySelector(
@@ -39,9 +41,38 @@ boutonDecouvrirStatsPilotes.addEventListener("click", function () {
   document.querySelector("#stats").innerHTML = "";
   afficherStatsPilotes();
   mapPilote();
-  // grapheDriverPointMoyenParGPRadar();
-  grapheDriverPointMoyenParGPBaton();
 });
+
+function creationDivMapPilotes() {
+  const MapEtInfos = document.querySelector("#divMapEtInfosPilotes");
+
+  const divMapPilotes = document.createElement("div");
+  divMapPilotes.id = "divMapPilotes";
+
+  MapEtInfos.appendChild(divMapPilotes);
+}
+
+function creationDivInfosPilotes() {
+  const MapEtInfos = document.querySelector("#divMapEtInfosPilotes");
+
+  const divInfosPilotes = document.createElement("div");
+  divInfosPilotes.id = "divInfosPilotes";
+
+  MapEtInfos.appendChild(divInfosPilotes);
+}
+
+function creationDivCartePilotes() {
+  const divCartePilotes = document.querySelector("#divInfosPilotes");
+
+  const cartePilote = document.createElement("div");
+  cartePilote.id = "cardPilote";
+
+  const imagePilote = document.createElement("img");
+  imagePilote.id = "imagePilote";
+
+  divCartePilotes.appendChild(cartePilote);
+  cartePilote.appendChild(imagePilote);
+}
 
 //Récuperer les données dans un tableau globalTabData accessible partout dans le script
 let globalTabData;
@@ -205,7 +236,7 @@ function mapPilote() {
   };
 
   const zoomInitial = 1.5;
-  const mapPilote = L.map("divMapPilote").setView(
+  const mapPilote = L.map("divMapPilotes").setView(
     [centreMap.lat, centreMap.lng],
     zoomInitial
   );
@@ -214,6 +245,8 @@ function mapPilote() {
     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
       maxZoom: 15,
+      minZoom: 1.5,
+
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }
@@ -221,15 +254,25 @@ function mapPilote() {
 
   layerPrincipale.addTo(mapPilote);
 
+  //création de limite dans la map pour ne pas scroller à l'infini
+  var sudOuest = L.latLng(-90, -180),
+    nordEst = L.latLng(90, 180),
+    limiteMap = L.latLngBounds(sudOuest, nordEst);
+
+  mapPilote.setMaxBounds(limiteMap);
+  mapPilote.on("drag", function () {
+    mapPilote.panInsideBounds(limiteMap, { animate: false });
+  });
+
   //Placement des markers représentant les pilotes sur la map
 
-  const Hamilton = L.marker([51.907266, -0.196862]).addTo(mapPilote);
+  const Hamilton = L.marker([51.907266, -0.196862]).addTo(mapPilote); // Royaume Unis
   Hamilton.bindPopup(`
   <h1>Lewis Hamilton</h1>
   <img src="data/Hamilton.jpeg" alt="Lewis Hamilton" style="width: 115%">
   `);
 
-  const Verstappen = L.marker([52.3781, 4.9011]).addTo(mapPilote); // Netherlands
+  const Verstappen = L.marker([52.3781, 4.9011]).addTo(mapPilote); // Pays Bas
   Verstappen.bindPopup(`
     <h1>Max Verstappen</h1>
     <img src="data/Verstappen.jpeg" alt="Max Verstappen" style="width: 115%">
@@ -241,7 +284,7 @@ function mapPilote() {
     <img src="data/Perez.jpeg" alt="Sergio Perez" style="width: 115%">
   `);
 
-  const Russell = L.marker([52.6369, -1.1398]).addTo(mapPilote); // United Kingdom
+  const Russell = L.marker([52.6369, -1.1398]).addTo(mapPilote); // Royaume Uni
   Russell.bindPopup(`
     <h1>George Russell</h1>
     <img src="data/Russell.jpeg" alt="George Russell" style="width: 115%">
@@ -253,7 +296,7 @@ function mapPilote() {
     <img src="data/Leclerc.jpeg" alt="Charles Leclerc" style="width: 115%">
   `);
 
-  const Sainz = L.marker([43.3667, -5.85]).addTo(mapPilote); // Spain
+  const Sainz = L.marker([43.3667, -5.85]).addTo(mapPilote); // Espagne
   Sainz.bindPopup(`
     <h1>Carlos Sainz</h1>
     <img src="data/Sainz.jpeg" alt="Carlos Sainz" style="width: 115%">
@@ -271,55 +314,55 @@ function mapPilote() {
   <img src="data/Gasly.jpeg" alt="Pierre Gasly" style="width: 115%">
   `);
 
-  const Albon = L.marker([13.7563, 100.5018]).addTo(mapPilote); // United Kingdom
+  const Albon = L.marker([13.7563, 100.5018]).addTo(mapPilote); // Royaume Unis
   Albon.bindPopup(`
   <h1>Alexander Albon</h1>
   <img src="data/Albon.jpeg" alt="Alexander Albon" style="width: 115%">
   `);
 
-  const Magnussen = L.marker([55.6761, 12.5683]).addTo(mapPilote); // Denmark
+  const Magnussen = L.marker([55.6761, 12.5683]).addTo(mapPilote); // Danmark
   Magnussen.bindPopup(`
   <h1>Kevin Magnussen</h1>
   <img src="data/Magnussen.jpeg" alt="Kevin Magnussen" style="width: 115%">
   `);
 
-  const Alonso = L.marker([43.3629, -8.4139]).addTo(mapPilote); // Spain
+  const Alonso = L.marker([43.3629, -8.4139]).addTo(mapPilote); // Espagne
   Alonso.bindPopup(`
   <h1>Fernando Alonso</h1>
   <img src="data/Alonso.jpeg" alt="Fernando Alonso" style="width: 115%">
   `);
 
-  const Schumacher = L.marker([50.1147, 8.6843]).addTo(mapPilote); // Mick Schumacher's location in Germany
+  const Schumacher = L.marker([50.1147, 8.6843]).addTo(mapPilote); // Allemagne
   Schumacher.bindPopup(`
   <h1>Mick Schumacher</h1>
   <img src="data/Schumacher.jpeg" alt="Mick Schumacher" style="width: 115%">
   `);
 
-  const Tsunoda = L.marker([35.6586, 139.7454]).addTo(mapPilote); // Yuki Tsunoda's location in Japan
+  const Tsunoda = L.marker([35.6586, 139.7454]).addTo(mapPilote); // Japon
   Tsunoda.bindPopup(`
   <h1>Yuki Tsunoda</h1>
   <img src="data/Tsunoda.jpeg" alt="Yuki Tsunoda" style="width: 115%">
   `);
 
-  const Vettel = L.marker([48.7758, 9.1829]).addTo(mapPilote); // Sebastian Vettel's location in Germany
+  const Vettel = L.marker([48.7758, 9.1829]).addTo(mapPilote); // Allemagne
   Vettel.bindPopup(`
   <h1>Sebastian Vettel</h1>
   <img src="data/Vettel.jpeg" alt="Sebastian Vettel" style="width: 115%">
   `);
 
-  const Bottas = L.marker([60.9518, 25.6667]).addTo(mapPilote); // Valtteri Bottas's location in Nastola, Finland
+  const Bottas = L.marker([60.9518, 25.6667]).addTo(mapPilote); // Finland
   Bottas.bindPopup(`
   <h1>Valtteri Bottas</h1>
   <img src="data/Bottas.jpeg" alt="Valtteri Bottas" style="width: 115%">
   `);
 
-  const Stroll = L.marker([45.5, -73.5833]).addTo(mapPilote);
+  const Stroll = L.marker([45.5, -73.5833]).addTo(mapPilote); // Canada
   Stroll.bindPopup(`
   <h1>Lance Stroll</h1>
   <img src="data/Stroll.jpeg" alt="Lance Stroll" style="width: 115%">
 `);
 
-  const Zhou = L.marker([31.2165, 121.4365]).addTo(mapPilote);
+  const Zhou = L.marker([31.2165, 121.4365]).addTo(mapPilote); // Chine
   Zhou.bindPopup(`
   <h1>Guanyu Zhou</h1>
   <img src="data/Zhou.jpeg" alt="Guanyu Zhou" style="width: 115%">

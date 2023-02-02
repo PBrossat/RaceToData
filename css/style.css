@@ -234,7 +234,7 @@ header {
 }
 
 #stats {
-  background-color: black;
+  background-color: #111;
   padding-top: 4rem;
 }
 
@@ -276,11 +276,43 @@ header {
   width: 100%;
 }
 
-#stats #divMapPilote {
-  width: 700px;
+#stats #divMapPilotes {
+  width: 50%;
   height: 500px;
   border-radius: 1em;
+  float: left;
   left: 15px;
+}
+
+#stats #divInfosPilotes {
+  width: 700px;
+  height: 500px;
+  padding-top: 18px;
+  border-radius: 1em;
+  float: right;
+  justify-content: center;
+  align-items: center;
+}
+
+#stats #cardPilote {
+  width: 320px;
+  height: 460px;
+  border-radius: 15px;
+  /* permet de centrer la carte   */
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  background-color: white;
+}
+
+.zoomIn:hover {
+  transform: scale(1.4);
+}
+
+#stats #divMapEtInfosPilotes {
+  display: flex;
 }
 
 #stats select {
