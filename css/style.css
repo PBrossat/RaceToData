@@ -104,6 +104,7 @@ header {
   .banner-txt h3 {
     font-size: 0.7em;
   }
+  /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
 }
 
 @media (max-width: 991px) {
