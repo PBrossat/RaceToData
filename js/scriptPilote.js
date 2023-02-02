@@ -8,21 +8,6 @@ function afficherStatsPilotes() {
   const divMapEtInfos = document.createElement("div");
   divMapEtInfos.id = "divMapEtInfosPilotes";
 
-  // const divMapPilotes = document.createElement("div");
-  // divMapPilotes.id = "divMapPilotes";
-
-  // const divStatsPilotes1 = document.createElement("div");
-  // divStatsPilotes1.id = "divId1";
-
-  // const divStatsPilotes2 = document.createElement("div");
-  // divStatsPilotes2.id = "divId2";
-
-  // const graphique1 = document.createElement("canvas");
-  // graphique1.id = "CanvaIdGauche";
-
-  // const graphique2 = document.createElement("canvas");
-  // graphique2.id = "CanvaIdDroite";
-
   StatsPilotes.appendChild(sectionStatsPilotes);
   sectionStatsPilotes.appendChild(divMapEtInfos);
 
@@ -70,8 +55,36 @@ function creationDivCartePilotes() {
   const imagePilote = document.createElement("img");
   imagePilote.id = "imagePilote";
 
+  const infosPilote = document.createElement("div");
+  infosPilote.id = "infosPiloteDansCarte";
+
+  const nomPilote = document.createElement("h1");
+  nomPilote.className = "nomPilote";
+
+  const nationalité = document.createElement("p");
+  nationalité.className = "palmaresPilote";
+
+  const team = document.createElement("p");
+  team.className = "palmaresPilote";
+
+  const nbVictoires = document.createElement("p");
+  nbVictoires.className = "palmaresPilote";
+
+  const nbGpDisputes = document.createElement("p");
+  nbGpDisputes.className = "palmaresPilote";
+
+  const nbPodiums = document.createElement("p");
+  nbPodiums.className = "palmaresPilote";
+
   divCartePilotes.appendChild(cartePilote);
   cartePilote.appendChild(imagePilote);
+  cartePilote.appendChild(infosPilote);
+  infosPilote.appendChild(nomPilote);
+  infosPilote.appendChild(nationalité);
+  infosPilote.appendChild(team);
+  infosPilote.appendChild(nbVictoires);
+  infosPilote.appendChild(nbGpDisputes);
+  infosPilote.appendChild(nbPodiums);
 }
 
 //Récuperer les données dans un tableau globalTabData accessible partout dans le script
@@ -228,6 +241,8 @@ function grapheDriverPointMoyenParGPBaton() {
   const chart = new Chart(graphique, configuration);
 }
 
+//variable global permettant de recuper le nom du pilote lorsqu'on clique sur son marker
+let nomPiloteCliquee;
 function mapPilote() {
   //centree sur Paris
   const centreMap = {
@@ -366,5 +381,38 @@ function mapPilote() {
   Zhou.bindPopup(`
   <h1>Guanyu Zhou</h1>
   <img src="data/Zhou.jpeg" alt="Guanyu Zhou" style="width: 115%">
-`);
+  `);
+
+  return {
+    Hamilton,
+    Verstappen,
+    Perez,
+    Russell,
+    Leclerc,
+    Sainz,
+    Ocon,
+    Gasly,
+    Albon,
+    Magnussen,
+    Alonso,
+    Schumacher,
+    Tsunoda,
+    Vettel,
+    Bottas,
+    Stroll,
+    Zhou,
+  };
 }
+
+const tousLesMarkers = mapPilote();
+
+const clickMarkerFonction = function (nomPiloteCliquee) {
+  return function () {
+    const tabNomPilotes = getNomPilote();
+
+    const nomTrouve = tabNomPilotes.find((nom) => nom === nomPiloteCliquee);
+    document.getElementsByClassName("nomPilote")[0].innerHTML = nomTrouve;
+  };
+};
+
+tousLesMarkers.Hamilton.on("click", clickMarkerFonction("Hamilton"));
