@@ -257,13 +257,13 @@ function mapPilote() {
   );
 
   const layerPrincipale = L.tileLayer(
-    "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
     {
       maxZoom: 15,
       minZoom: 1.5,
 
       attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
     }
   );
 
@@ -293,103 +293,103 @@ function mapPilote() {
   const Hamilton = L.marker([51.907266, -0.196862]).addTo(mapPilote); // Royaume Unis
   Hamilton.bindPopup(`
   <h1>Lewis Hamilton</h1>
-  <img src="data/Hamilton.jpeg" alt="Lewis Hamilton" style="width: 115%">
+  <img src="data/pilotes/Hamilton.jpeg" alt="Lewis Hamilton" style="width: 115%">
   `);
 
   const Verstappen = L.marker([52.3781, 4.9011]).addTo(mapPilote); // Pays Bas
   Verstappen.bindPopup(`
     <h1>Max Verstappen</h1>
-    <img src="data/Verstappen.jpeg" alt="Max Verstappen" style="width: 115%">
+    <img src="data/pilotes/Verstappen.jpeg" alt="Max Verstappen" style="width: 115%">
   `);
 
   const Perez = L.marker([19.4326, -99.1332]).addTo(mapPilote); // Mexico
   Perez.bindPopup(`
     <h1>Sergio Perez</h1>
-    <img src="data/Perez.jpeg" alt="Sergio Perez" style="width: 115%">
+    <img src="data/pilotes/Perez.jpeg" alt="Sergio Perez" style="width: 115%">
   `);
 
   const Russell = L.marker([52.6369, -1.1398]).addTo(mapPilote); // Royaume Uni
   Russell.bindPopup(`
     <h1>George Russell</h1>
-    <img src="data/Russell.jpeg" alt="George Russell" style="width: 115%">
+    <img src="data/pilotes/Russell.jpeg" alt="George Russell" style="width: 115%">
   `);
 
   const Leclerc = L.marker([43.7313, 7.4265]).addTo(mapPilote); // Monaco
   Leclerc.bindPopup(`
     <h1>Charles Leclerc</h1>
-    <img src="data/Leclerc.jpeg" alt="Charles Leclerc" style="width: 115%">
+    <img src="data/pilotes/Leclerc.jpeg" alt="Charles Leclerc" style="width: 115%">
   `);
 
   const Sainz = L.marker([43.3667, -5.85]).addTo(mapPilote); // Espagne
   Sainz.bindPopup(`
     <h1>Carlos Sainz</h1>
-    <img src="data/Sainz.jpeg" alt="Carlos Sainz" style="width: 115%">
+    <img src="data/pilotes/Sainz.jpeg" alt="Carlos Sainz" style="width: 115%">
   `);
 
   const Ocon = L.marker([49.0256, 1.2183]).addTo(mapPilote); // France
   Ocon.bindPopup(`
   <h1>Esteban Ocon</h1>
-  <img src="data/Ocon.jpeg" alt="Esteban Ocon" style="width: 115%">
+  <img src="data/pilotes/Ocon.jpeg" alt="Esteban Ocon" style="width: 115%">
   `);
 
   const Gasly = L.marker([49.4431, 1.0993]).addTo(mapPilote); // France
   Gasly.bindPopup(`
   <h1>Pierre Gasly</h1>
-  <img src="data/Gasly.jpeg" alt="Pierre Gasly" style="width: 115%">
+  <img src="data/pilotes/Gasly.jpeg" alt="Pierre Gasly" style="width: 115%">
   `);
 
   const Albon = L.marker([13.7563, 100.5018]).addTo(mapPilote); // Royaume Unis
   Albon.bindPopup(`
   <h1>Alexander Albon</h1>
-  <img src="data/Albon.jpeg" alt="Alexander Albon" style="width: 115%">
+  <img src="data/pilotes/Albon.jpeg" alt="Alexander Albon" style="width: 115%">
   `);
 
   const Magnussen = L.marker([55.6761, 12.5683]).addTo(mapPilote); // Danmark
   Magnussen.bindPopup(`
   <h1>Kevin Magnussen</h1>
-  <img src="data/Magnussen.jpeg" alt="Kevin Magnussen" style="width: 115%">
+  <img src="data/pilotes/Magnussen.jpeg" alt="Kevin Magnussen" style="width: 115%">
   `);
 
   const Alonso = L.marker([43.3629, -8.4139]).addTo(mapPilote); // Espagne
   Alonso.bindPopup(`
   <h1>Fernando Alonso</h1>
-  <img src="data/Alonso.jpeg" alt="Fernando Alonso" style="width: 115%">
+  <img src="data/pilotes/Alonso.jpeg" alt="Fernando Alonso" style="width: 115%">
   `);
 
   const Schumacher = L.marker([50.1147, 8.6843]).addTo(mapPilote); // Allemagne
   Schumacher.bindPopup(`
   <h1>Mick Schumacher</h1>
-  <img src="data/Schumacher.jpeg" alt="Mick Schumacher" style="width: 115%">
+  <img src="data/pilotes/Schumacher.jpeg" alt="Mick Schumacher" style="width: 115%">
   `);
 
   const Tsunoda = L.marker([35.6586, 139.7454]).addTo(mapPilote); // Japon
   Tsunoda.bindPopup(`
   <h1>Yuki Tsunoda</h1>
-  <img src="data/Tsunoda.jpeg" alt="Yuki Tsunoda" style="width: 115%">
+  <img src="data/pilotes/Tsunoda.jpeg" alt="Yuki Tsunoda" style="width: 115%">
   `);
 
   const Vettel = L.marker([48.7758, 9.1829]).addTo(mapPilote); // Allemagne
   Vettel.bindPopup(`
   <h1>Sebastian Vettel</h1>
-  <img src="data/Vettel.jpeg" alt="Sebastian Vettel" style="width: 115%">
+  <img src="data/pilotes/Vettel.jpeg" alt="Sebastian Vettel" style="width: 115%">
   `);
 
   const Bottas = L.marker([60.9518, 25.6667]).addTo(mapPilote); // Finland
   Bottas.bindPopup(`
   <h1>Valtteri Bottas</h1>
-  <img src="data/Bottas.jpeg" alt="Valtteri Bottas" style="width: 115%">
+  <img src="data/pilotes/Bottas.jpeg" alt="Valtteri Bottas" style="width: 115%">
   `);
 
   const Stroll = L.marker([45.5, -73.5833]).addTo(mapPilote); // Canada
   Stroll.bindPopup(`
   <h1>Lance Stroll</h1>
-  <img src="data/Stroll.jpeg" alt="Lance Stroll" style="width: 115%">
+  <img src="data/pilotes/Stroll.jpeg" alt="Lance Stroll" style="width: 115%">
 `);
 
   const Zhou = L.marker([31.2165, 121.4365]).addTo(mapPilote); // Chine
   Zhou.bindPopup(`
   <h1>Guanyu Zhou</h1>
-  <img src="data/Zhou.jpeg" alt="Guanyu Zhou" style="width: 115%">
+  <img src="data/pilotes/Zhou.jpeg" alt="Guanyu Zhou" style="width: 115%">
   `);
 
   return {
@@ -413,15 +413,15 @@ function mapPilote() {
   };
 }
 
-const tousLesMarkers = mapPilote();
+// const tousLesMarkers = mapPilote();
 
-const clickMarkerFonction = function (nomPiloteCliquee) {
-  return function () {
-    const tabNomPilotes = getNomPilote();
+// const clickMarkerFonction = function (nomPiloteCliquee) {
+//   return function () {
+//     const tabNomPilotes = getNomPilote();
 
-    const nomTrouve = tabNomPilotes.find((nom) => nom === nomPiloteCliquee);
-    document.getElementsByClassName("nomPilote")[0].innerHTML = nomTrouve;
-  };
-};
+//     const nomTrouve = tabNomPilotes.find((nom) => nom === nomPiloteCliquee);
+//     document.getElementsByClassName("nomPilote")[0].innerHTML = nomTrouve;
+//   };
+// };
 
-tousLesMarkers.Hamilton.on("click", clickMarkerFonction("Hamilton"));
+// tousLesMarkers.Hamilton.on("click", clickMarkerFonction("Hamilton"));
