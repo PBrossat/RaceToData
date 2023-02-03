@@ -1,4 +1,4 @@
-function afficherMapEtInfosGP() {
+function afficherMapGP() {
   const sectionStats = document.querySelector("#stats");
   const divMapEtInfosGP = document.createElement("div");
   divMapEtInfosGP.id = "map-et-infos-gp";
@@ -21,7 +21,17 @@ function afficherMapEtInfosGP() {
     }
   );
   layerPrincipale.addTo(mapGP);
+  var sudOuest = L.latLng(-90, -180),
+    nordEst = L.latLng(90, 180),
+    limiteMap = L.latLngBounds(sudOuest, nordEst);
+
+  mapGP.setMaxBounds(limiteMap);
+  mapGP.on("drag", function () {
+    mapGP.panInsideBounds(limiteMap, { animate: false });
+  });
 }
+
+//-------------------------------Gestion du click sur le bouton de la carte des grands-prix--------------------------------------------------
 
 const boutonDecouvrirStatsGrandsPrix = document.querySelector(
   ".btn-decouvrir-stats-grands-prix"
@@ -29,5 +39,5 @@ const boutonDecouvrirStatsGrandsPrix = document.querySelector(
 boutonDecouvrirStatsGrandsPrix.addEventListener("click", function () {
   console.log("zebiiiiiii");
   document.querySelector("#stats").innerHTML = "";
-  afficherMapEtInfosGP();
+  afficherMapGP();
 });
