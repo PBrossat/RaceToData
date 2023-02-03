@@ -134,6 +134,16 @@ header {
   .presentation p {
     font-size: 0.7em;
   }
+
+  #map-et-infos-gp #mapGP {
+    width: 90%;
+    height: 40vh;
+  }
+
+  #map-et-infos-gp {
+    flex-direction: column;
+    align-items: center;
+  }
   /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
 }
 
@@ -382,4 +392,14 @@ header {
 
 canvas {
   display: block;
+}
+
+#mapGP {
+  width: 50%;
+  height: 50vh;
+  border-radius: 1em;
+}
+
+#map-et-infos-gp {
+  display: flex;
 }

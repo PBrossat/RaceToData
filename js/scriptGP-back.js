@@ -16,6 +16,7 @@ const boutonDecouvrirStatsGrandsPrix = document.querySelector(
   ".btn-decouvrir-stats-grands-prix"
 );
 boutonDecouvrirStatsGrandsPrix.addEventListener("click", function () {
+  console.log("zebiiiiiii");
   document.querySelector("#stats").innerHTML = "";
   afficherStatsGrandsPrix();
 });
