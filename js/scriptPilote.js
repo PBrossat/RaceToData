@@ -288,9 +288,26 @@ function mapPilote() {
     mapPilote.panInsideBounds(limiteMap, { animate: false });
   });
 
+  var LeafIcon = L.Icon.extend({
+    options: {
+      iconSize: [40, 40],
+      shadowSize: [50, 64],
+      iconAnchor: [20, 20],
+      shadowAnchor: [4, 62],
+      // popupAnchor: [, -76],
+    },
+  });
+
+  var pneuMaker = new LeafIcon({
+    iconUrl: "data/markerPneu.png",
+  });
+
   //Placement des markers représentant les pilotes sur la map
 
-  const Hamilton = L.marker([51.907266, -0.196862]).addTo(mapPilote); // Royaume Unis
+  const Hamilton = L.marker([51.907266, -0.196862], { icon: pneuMaker }).addTo(
+    mapPilote
+  ); // Royaume Unis
+
   Hamilton.bindPopup(`
   <h1>Lewis Hamilton</h1>
   <img src="data/pilotes/Hamilton.jpeg" alt="Lewis Hamilton" style="width: 115%">
