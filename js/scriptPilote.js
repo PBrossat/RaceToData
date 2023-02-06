@@ -1,3 +1,35 @@
+//----------------------------Récuperation Infos Pilotes-------------
+async function recupererInfosPilotes() {
+  let response = await fetch("json/Driver.json");
+  response = await response.json();
+  return response;
+}
+
+let tabGlobalDataPilotes;
+
+tabGlobalDataPilotes = recupererInfosPilotes();
+
+const VerstappenInfos = tabGlobalDataPilotes[0];
+const NorrisInfos = tabGlobalDataPilotes[1];
+const GaslyInfos = tabGlobalDataPilotes[2];
+const PerezInfos = tabGlobalDataPilotes[3];
+const AlonsoInfos = tabGlobalDataPilotes[4];
+const LeclercInfos = tabGlobalDataPilotes[5];
+const StrollInfos = tabGlobalDataPilotes[6];
+const MagnussenInfos = tabGlobalDataPilotes[7];
+const TsunodaInfos = tabGlobalDataPilotes[8];
+const AlbonInfos = tabGlobalDataPilotes[9];
+const ZhouInfos = tabGlobalDataPilotes[10];
+const OconInfos = tabGlobalDataPilotes[11];
+const HamiltonInfos = tabGlobalDataPilotes[12];
+const SainzInfos = tabGlobalDataPilotes[13];
+const RussellInfos = tabGlobalDataPilotes[14];
+const BottasInfos = tabGlobalDataPilotes[15];
+const VettelInfos = tabGlobalDataPilotes[16];
+const RicciardoInfos = tabGlobalDataPilotes[18];
+const LatifiInfos = tabGlobalDataPilotes[19];
+const SchumacherInfos = tabGlobalDataPilotes[20];
+
 function afficherStatsPilotes() {
   const StatsPilotes = document.querySelector("#stats");
 
@@ -51,8 +83,8 @@ function creationDivCartePilotes() {
   const cartePilote = document.createElement("div");
   cartePilote.id = "cardPilote";
 
-  const imagePilote = document.createElement("img");
-  imagePilote.id = "imagePilote";
+  // const imagePilote = document.createElement("img");
+  // imagePilote.id = "imagePilote";
 
   const infosPilote = document.createElement("div");
   infosPilote.id = "infosPiloteDansCarte";
@@ -81,7 +113,7 @@ function creationDivCartePilotes() {
   nbPodiums.id = "nbPodiums";
 
   divCartePilotes.appendChild(cartePilote);
-  cartePilote.appendChild(imagePilote);
+  // cartePilote.appendChild(imagePilote);
   cartePilote.appendChild(infosPilote);
   infosPilote.appendChild(nomPilote);
   infosPilote.appendChild(nationalité);
@@ -321,24 +353,28 @@ function mapPilote() {
 
   Hamilton.on("click", function () {
     mapPilote.flyTo([51.907266, -0.196862], mapPilote.getMaxZoom()); //zoom sur l'emplacement
-    divInfosPilotes.innerHTML = ""; //vide le container () parent
-    creationDivCartePilotes(); //création du container carte
-    //si il existe dejà des choses dans la carte => vider la carte sinon rien faire
-    //! palmaresPilote est remplie SSI la carte est remplie car on remplie tous les champs de la carte en même temps
-    const palmaresPilote = document.querySelector("#palmaresPilote");
-    const nomPilote = document.querySelector(".nomPilote");
-    const imgPilote = document.querySelector("#imagePilote");
-    if (palmaresPilote != null) {
-      palmaresPilote.innerHTML = "";
-      nomPilote.innerHTML = "";
-      imgPilote.innerHTML = "";
-    }
-    nomPilote.innerHTML = "Lewis Hamilton";
-    document.querySelector("#nationalité").innerHTML = "Grande Bretagne";
-    document.querySelector("#team").innerHTML = "Mercedes";
-    document.querySelector("#nbVictoires").innerHTML = "103";
-    document.querySelector("#nbGpDisputes").innerHTML = "310";
-    document.querySelector("#nbPodiums").innerHTML = "191";
+    // divInfosPilotes.innerHTML = ""; //vide le container () parent
+    // creationDivCartePilotes(); //création du container carte
+    // //si il existe dejà des choses dans la carte => vider la carte sinon rien faire
+    // //! palmaresPilote est remplie SSI la carte est remplie car on remplie tous les champs de la carte en même temps
+    // const palmaresPilote = document.querySelector("#palmaresPilote");
+    // const nomPilote = document.querySelector(".nomPilote");
+    // if (palmaresPilote != null) {
+    //   palmaresPilote.innerHTML = "";
+    //   nomPilote.innerHTML = "";
+    //   imgPilote.innerHTML = "";
+    // }
+    // var cardPilote = document.querySelector("#cardPilote");
+    // cardPilote.style.backgroundImage =
+    //   "url('data/pilotes/HamiltonBackground.jpg')";
+    // cardPilote.style.backgroundSize = "cover";
+    // nomPilote.innerHTML = "Lewis Hamilton";
+    // document.querySelector("#nationalité").innerHTML = "Grande Bretagne";
+    // document.querySelector("#team").innerHTML = "Mercedes";
+    // document.querySelector("#nbVictoires").innerHTML = "103";
+    // document.querySelector("#nbGpDisputes").innerHTML = "310";
+    // document.querySelector("#nbPodiums").innerHTML = "191";
+    creationCartePilote("Hamilton");
   });
 
   const Verstappen = L.marker([52.3781, 4.9011], { icon: pneuMaker }).addTo(
@@ -459,7 +495,7 @@ function mapPilote() {
   Stroll.bindPopup(`
   <h1>Lance Stroll</h1>
   <img src="data/pilotes/Stroll.jpeg" alt="Lance Stroll" style="width: 115%">
-`);
+  `);
 
   const Zhou = L.marker([31.2165, 121.4365], { icon: pneuMaker }).addTo(
     mapPilote
@@ -468,24 +504,29 @@ function mapPilote() {
   <h1>Guanyu Zhou</h1>
   <img src="data/pilotes/Zhou.jpeg" alt="Guanyu Zhou" style="width: 115%">
   `);
+}
 
-  return {
-    Hamilton,
-    Verstappen,
-    Perez,
-    Russell,
-    Leclerc,
-    Sainz,
-    Ocon,
-    Gasly,
-    Albon,
-    Magnussen,
-    Alonso,
-    Schumacher,
-    Tsunoda,
-    Vettel,
-    Bottas,
-    Stroll,
-    Zhou,
-  };
+function creationCartePilote(namePilote) {
+  divInfosPilotes.innerHTML = ""; //vide le container () parent
+  creationDivCartePilotes(); //création du container carte
+  //si il existe dejà des choses dans la carte => vider la carte sinon rien faire
+  //! palmaresPilote est remplie SSI la carte est remplie car on remplie tous les champs de la carte en même temps
+  const palmaresPilote = document.querySelector("#palmaresPilote");
+  const nomPilote = document.querySelector(".nomPilote");
+  if (palmaresPilote != null) {
+    palmaresPilote.innerHTML = "";
+    nomPilote.innerHTML = "";
+    imgPilote.innerHTML = "";
+  }
+  console.log(tabGlobalDataPilotes);
+  var cardPilote = document.querySelector("#cardPilote");
+  cardPilote.style.backgroundImage = `url("data/pilotes/${namePilote}Background.jpg")`;
+  cardPilote.style.backgroundSize = "cover";
+  nomPilote.innerHTML = `${namePilote}`;
+  document.querySelector("#nationalité").innerHTML =
+    "HamiltonInfos.Nationalité";
+  document.querySelector("#team").innerHTML = "Mercedes";
+  document.querySelector("#nbVictoires").innerHTML = "103";
+  document.querySelector("#nbGpDisputes").innerHTML = "310";
+  document.querySelector("#nbPodiums").innerHTML = "191";
 }
