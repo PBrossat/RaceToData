@@ -1,6 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-const { exec } = require("child_process");
+const request = require("request");
 const app = express();
 const PORT = 3000;
 
@@ -14,6 +14,20 @@ app.get("/", (_, res) => {
   //pas besoin de la requete donc on peut remplacer req par _
   const indexHTML = fs.readFileSync("index.html", "utf-8");
   res.send(indexHTML);
+});
+
+app.get("/infosGP", (_, res) => {
+  request(
+    "https://ergast.com/api/f1/2022/circuits.json",
+    function (error, response, body) {
+      if (error) {
+        console.log(error);
+        res.send(error);
+      } else {
+        res.send(body);
+      }
+    }
+  );
 });
 
 app.use("/css", express.static("css/"));
