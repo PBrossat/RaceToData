@@ -16,7 +16,6 @@ function afficherStatsPilotes() {
   creationDivInfosPilotes();
 
   // Création de la div Carte
-  creationDivCartePilotes();
 }
 
 const boutonDecouvrirStatsPilotes = document.querySelector(
@@ -63,18 +62,23 @@ function creationDivCartePilotes() {
 
   const nationalité = document.createElement("p");
   nationalité.className = "palmaresPilote";
+  nationalité.id = "nationalité";
 
   const team = document.createElement("p");
   team.className = "palmaresPilote";
+  team.id = "team";
 
   const nbVictoires = document.createElement("p");
   nbVictoires.className = "palmaresPilote";
+  nbVictoires.id = "nbVictoires";
 
   const nbGpDisputes = document.createElement("p");
   nbGpDisputes.className = "palmaresPilote";
+  nbGpDisputes.id = "nbGpDisputes";
 
   const nbPodiums = document.createElement("p");
   nbPodiums.className = "palmaresPilote";
+  nbPodiums.id = "nbPodiums";
 
   divCartePilotes.appendChild(cartePilote);
   cartePilote.appendChild(imagePilote);
@@ -174,6 +178,8 @@ function getNbGpDisputes() {
   return nbGpDisputes;
 }
 
+//---------------------------------GESTION DES GRAPHES--------------------------------------
+
 // fonction permettant d'afficher un graphe radar
 function grapheDriverPointMoyenParGPRadar() {
   const nomPilote = getNomPilote();
@@ -243,6 +249,9 @@ function grapheDriverPointMoyenParGPBaton() {
 
 //variable global permettant de recuper le nom du pilote lorsqu'on clique sur son marker
 let nomPiloteCliquee;
+
+//---------------------------------GESTION DE LA MAP--------------------------------------
+
 function mapPilote() {
   //centree sur Paris
   const centreMap = {
@@ -251,53 +260,50 @@ function mapPilote() {
   };
 
   const zoomInitial = 1.5;
+
+  //création de la map
   const mapPilote = L.map("divMapPilotes").setView(
     [centreMap.lat, centreMap.lng],
     zoomInitial
   );
 
+  //ajout d'un layer (physique de la marque)
   const layerPrincipale = L.tileLayer(
     "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
     {
-      maxZoom: 15,
+      maxZoom: 8,
       minZoom: 1.5,
 
+      //crédit de la map
       attribution:
         'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
     }
   );
 
-  //TODO Change map
-
-  // var layer = new L.StamenTileLayer("toner");
-  // var map = new L.Map("element_id", {
-  //     center: new L.LatLng(37.7, -122.4),
-  //     zoom: 12
-  // });
-  // map.addLayer(layer);
-
+  //ajout du layer à la map
   layerPrincipale.addTo(mapPilote);
 
   //création de limite dans la map pour ne pas scroller à l'infini
-  var sudOuest = L.latLng(-90, -180),
-    nordEst = L.latLng(90, 180),
-    limiteMap = L.latLngBounds(sudOuest, nordEst);
+  var sudOuest = L.latLng(-90, -180);
+  nordEst = L.latLng(90, 180);
+  limiteMap = L.latLngBounds(sudOuest, nordEst);
 
   mapPilote.setMaxBounds(limiteMap);
   mapPilote.on("drag", function () {
     mapPilote.panInsideBounds(limiteMap, { animate: false });
   });
 
+  //option des marker (taille, ombre)
   var LeafIcon = L.Icon.extend({
     options: {
       iconSize: [40, 40],
       shadowSize: [50, 64],
       iconAnchor: [20, 20],
       shadowAnchor: [4, 62],
-      // popupAnchor: [, -76],
     },
   });
 
+  //création d'un nouveau marker
   var pneuMaker = new LeafIcon({
     iconUrl: "data/markerPneu.png",
   });
@@ -312,6 +318,28 @@ function mapPilote() {
   <h1>Lewis Hamilton</h1>
   <img src="data/pilotes/Hamilton.jpeg" alt="Lewis Hamilton" style="width: 115%">
   `);
+
+  Hamilton.on("click", function () {
+    mapPilote.flyTo([51.907266, -0.196862], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    divInfosPilotes.innerHTML = ""; //vide le container () parent
+    creationDivCartePilotes(); //création du container carte
+    //si il existe dejà des choses dans la carte => vider la carte sinon rien faire
+    //! palmaresPilote est remplie SSI la carte est remplie car on remplie tous les champs de la carte en même temps
+    const palmaresPilote = document.querySelector("#palmaresPilote");
+    const nomPilote = document.querySelector(".nomPilote");
+    const imgPilote = document.querySelector("#imagePilote");
+    if (palmaresPilote != null) {
+      palmaresPilote.innerHTML = "";
+      nomPilote.innerHTML = "";
+      imgPilote.innerHTML = "";
+    }
+    nomPilote.innerHTML = "Lewis Hamilton";
+    document.querySelector("#nationalité").innerHTML = "Grande Bretagne";
+    document.querySelector("#team").innerHTML = "Mercedes";
+    document.querySelector("#nbVictoires").innerHTML = "103";
+    document.querySelector("#nbGpDisputes").innerHTML = "310";
+    document.querySelector("#nbPodiums").innerHTML = "191";
+  });
 
   const Verstappen = L.marker([52.3781, 4.9011], { icon: pneuMaker }).addTo(
     mapPilote
@@ -461,16 +489,3 @@ function mapPilote() {
     Zhou,
   };
 }
-
-// const tousLesMarkers = mapPilote();
-
-// const clickMarkerFonction = function (nomPiloteCliquee) {
-//   return function () {
-//     const tabNomPilotes = getNomPilote();
-
-//     const nomTrouve = tabNomPilotes.find((nom) => nom === nomPiloteCliquee);
-//     document.getElementsByClassName("nomPilote")[0].innerHTML = nomTrouve;
-//   };
-// };
-
-// tousLesMarkers.Hamilton.on("click", clickMarkerFonction("Hamilton"));

@@ -363,18 +363,35 @@ header {
 #stats #cardPilote .nomPilote {
   color: lightslategray;
   text-align: center;
-  font-size: x-large;
+  font-size: xx-large;
 }
 
 #stats #cardPilote .palmaresPilote {
   text-align: center;
   font-size: x-large;
   margin-bottom: 20px;
+  font-weight: bold;
+  margin-top: 5%;
 }
 
-#stats #cardPilote p:before {
-  content: "\0025A0 ";
-  margin-right: 10px;
+#stats #cardPilote #nationalité:before {
+  content: "Nationalité : ";
+}
+
+#stats #cardPilote #team:before {
+  content: "Ecurie : ";
+}
+
+#stats #cardPilote #nbVictoires:before {
+  content: "Victoires : ";
+}
+
+#stats #cardPilote #nbGpDisputes:before {
+  content: "Grand Prix : ";
+}
+
+#stats #cardPilote #nbPodiums:before {
+  content: "Podiums : ";
 }
 
 #stats #divMapEtInfosPilotes {
