@@ -114,7 +114,7 @@ function recupererInfosPilotes() {
           nbMeilleursTours: pilote["Nb meilleurs tours"],
           nbDNF: pilote["Nb DNF"],
           nbDnfMoyenParSaison: pilote["Pourcent DNF moyen/GP"],
-          nbGpDisputes: pilote["NB GP disputés"],
+          nbGpDisputes: pilote["Nb GP disputés"],
           Image: pilote["Image"],
         };
       });
@@ -393,6 +393,20 @@ function mapPilote() {
     mapPilote.flyTo([31.2165, 121.4365], mapPilote.getMaxZoom()); //zoom sur l'emplacement
     creationCartePilote("Zhou");
   });
+
+  const Ricciardo = L.marker([-31.935, 115.8111], { icon: pneuMaker }).addTo(
+    mapPilote
+  );
+  Ricciardo.on("click", function () {
+    mapPilote.flyTo([-31.935, 115.8111], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Ricciardo");
+  });
+
+  const Latifi = L.marker([43.7, -79.4], { icon: pneuMaker }).addTo(mapPilote);
+  Latifi.on("click", function () {
+    mapPilote.flyTo([43.7, -79.4], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Latifi");
+  });
 }
 
 function creationCartePilote(namePilote) {
@@ -407,9 +421,8 @@ function creationCartePilote(namePilote) {
     nomPilote.innerHTML = "";
     imgPilote.innerHTML = "";
   }
-  console.log(tabGlobalDataPilotes);
   var cardPilote = document.querySelector("#cardPilote");
-  cardPilote.style.backgroundImage = `url("tabGlobalDataPilotes[${namePilote}].Image")`;
+  cardPilote.style.backgroundImage = `url(${tabGlobalDataPilotes[namePilote].Image})`;
   cardPilote.style.backgroundSize = "cover";
   nomPilote.innerHTML = `${namePilote}`;
   document.querySelector("#nationalité").innerHTML =
