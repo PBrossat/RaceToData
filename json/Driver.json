@@ -293,16 +293,16 @@
     "Naissance": "1987-07-03",
     "âge": 36,
     "Nationalité": "Allemagne",
-    "Nb points": 1458,
-    "Nb points moyen/GP": 7.98,
-    "Nb Victoires": 52,
+    "Nb points": 3098,
+    "Nb points moyen/GP": 10.36,
+    "Nb Victoires": 53,
     "Nb Champion": 4,
-    "Nb podiums": 110,
+    "Nb podiums": 122,
     "Nb pôle Position": 57,
-    "Nb meilleurs tours": 39,
-    "Nb DNF": 48,
-    "Pourcent DNF moyen/GP": 13.99,
-    "Nb GP disputés": 183
+    "Nb meilleurs tours": 38,
+    "Nb DNF": 44,
+    "Pourcent DNF moyen/GP": 14.72,
+    "Nb GP disputés": 299
   },
 
   {
@@ -321,5 +321,59 @@
     "Nb DNF": 35,
     "Pourcent DNF moyen/GP": 11.06,
     "Nb GP disputés": 285
+  },
+
+  {
+    "Name": "Daniel Ricciardo",
+    "Team": "McLaren",
+    "Naissance": "1989-07-01",
+    "âge": 33,
+    "Nationalité": "Australie",
+    "Nb points": 1311,
+    "Nb points moyen/GP": 5.65,
+    "Nb Victoires": 8,
+    "Nb Champion": 0,
+    "Nb podiums": 32,
+    "Nb pôle Position": 3,
+    "Nb meilleurs tours": 16,
+    "Nb DNF": 37,
+    "Pourcent DNF moyen/GP": 15.95,
+    "Nb GP disputés": 232
+  },
+
+  {
+    "Name": "Nicholas Latifi",
+    "Team": "Williams",
+    "Naissance": "1995-06-29",
+    "âge": 27,
+    "Nationalité": "Canada",
+    "Nb points": 9,
+    "Nb points moyen/GP": 0.15,
+    "Nb Victoires": 0,
+    "Nb Champion": 0,
+    "Nb podiums": 0,
+    "Nb pôle Position": 0,
+    "Nb meilleurs tours": 0,
+    "Nb DNF": 13,
+    "Pourcent DNF moyen/GP": 21.31,
+    "Nb GP disputés": 61
+  },
+
+  {
+    "Name": "Mick Schumacher",
+    "Team": "Haas",
+    "Naissance": "1999-03-22",
+    "âge": 24,
+    "Nationalité": "Allemagne",
+    "Nb points": 12,
+    "Nb points moyen/GP": 0.28,
+    "Nb Victoires": 0,
+    "Nb Champion": 0,
+    "Nb podiums": 0,
+    "Nb pôle Position": 0,
+    "Nb meilleurs tours": 0,
+    "Nb DNF": 5,
+    "Pourcent DNF moyen/GP": 11.63,
+    "Nb GP disputés": 43
   }
 ]

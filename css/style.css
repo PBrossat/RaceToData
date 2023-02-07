@@ -333,6 +333,10 @@ header {
   width: 100%;
 }
 
+#stats #divMapEtInfosPilotes {
+  display: flex;
+}
+
 #stats #divMapPilotes {
   width: 50%;
   height: 500px;
@@ -363,9 +367,10 @@ header {
   background-color: rgb(51, 51, 51);
   display: flex;
   flex-direction: column;
+  color: #fff;
 }
 
-#stats #cardPilote #imagePilote {
+/* #stats #cardPilote #imagePilote {
   width: 90%;
   height: 33%;
   border-radius: 15px;
@@ -373,6 +378,10 @@ header {
   margin: 0 auto;
   margin-top: 10px;
   border: solid thick;
+} */
+
+#stats #cardPilote #infosPiloteDansCarte {
+  width: 40%;
 }
 
 #stats #cardPilote .nomPilote {
@@ -383,10 +392,10 @@ header {
 
 #stats #cardPilote .palmaresPilote {
   text-align: center;
-  font-size: x-large;
-  margin-bottom: 20px;
+  font-size: smaller;
+  margin-bottom: 16px;
   font-weight: bold;
-  margin-top: 5%;
+  margin-top: -3%;
 }
 
 #stats #cardPilote #nationalité:before {
@@ -407,10 +416,6 @@ header {
 
 #stats #cardPilote #nbPodiums:before {
   content: "Podiums : ";
-}
-
-#stats #divMapEtInfosPilotes {
-  display: flex;
 }
 
 #stats select {

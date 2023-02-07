@@ -1,6 +1,6 @@
 //Requete API pour avoir des infos sur les GP
 async function recupererInfosGP() {
-  let response = await fetch("https://ergast.com/api/f1/2022/circuits.json");
+  let response = await fetch("http://localhost:3000/infosGP");
   response = await response.json();
   return response["MRData"]["CircuitTable"]["Circuits"];
 }
@@ -55,7 +55,7 @@ function afficherMapGP() {
   const layerPrincipale = L.tileLayer(
     "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
     {
-      maxZoom: 12,
+      maxZoom: 8,
       minZoom: 1.5,
 
       attribution:
