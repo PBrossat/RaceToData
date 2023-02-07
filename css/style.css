@@ -150,6 +150,11 @@ header {
     align-items: center;
   }
 
+  #map-et-infos-Ecuries #boutonEcuries {
+    width: 90%;
+    height: 40vh;
+  }
+
   #map-et-infos-Ecuries #mapEcuries {
     width: 90%;
     height: 40vh;
@@ -464,14 +469,39 @@ canvas {
   box-shadow: 0px 0px 30px #fff;
 }
 
+#boutonEcuries {
+  color: #090909;
+  width: 10%;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+#boutonEcuries:hover {
+  border: 1px solid white;
+}
+
+#boutonEcuries:active {
+  box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+}
+
 #divInfosEcuries {
-  width: 50%;
+  width: 40%;
   height: 50vh;
   box-shadow: 0px 0px 30px #fff;
+  background-color: #ffffff;
 }
 
 #divInfosEcuries img {
   object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
 }
 
 #map-et-infos-Ecuries {
