@@ -285,62 +285,114 @@ function mapPilote() {
   const Russell = L.marker([52.6369, -1.1398], { icon: pneuMaker }).addTo(
     mapPilote
   );
-  Perez.on("click", function () {
+  Russell.on("click", function () {
     mapPilote.flyTo([52.6369, -1.1398], mapPilote.getMaxZoom()); //zoom sur l'emplacement
-    creationCartePilote("Russel");
+    creationCartePilote("Russell");
   });
 
   const Leclerc = L.marker([43.7313, 7.4265], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Leclerc.on("click", function () {
+    mapPilote.flyTo([43.7313, 7.4265], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Leclerc");
+  });
 
   const Sainz = L.marker([43.3667, -5.85], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Sainz.on("click", function () {
+    mapPilote.flyTo([43.3667, -5.85], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Sainz");
+  });
 
   const Ocon = L.marker([49.0256, 1.2183], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Ocon.on("click", function () {
+    mapPilote.flyTo([49.0256, 1.2183], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Ocon");
+  });
 
   const Gasly = L.marker([49.4431, 1.0993], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Gasly.on("click", function () {
+    mapPilote.flyTo([49.4431, 1.0993], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Gasly");
+  });
 
   const Albon = L.marker([13.7563, 100.5018], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Albon.on("click", function () {
+    mapPilote.flyTo([13.7563, 100.5018], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Albon");
+  });
 
   const Magnussen = L.marker([55.6761, 12.5683], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Magnussen.on("click", function () {
+    mapPilote.flyTo([55.6761, 12.5683], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Magnussen");
+  });
 
   const Alonso = L.marker([43.3629, -8.4139], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Alonso.on("click", function () {
+    mapPilote.flyTo([43.3629, -8.4139], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Alonso");
+  });
 
   const Schumacher = L.marker([50.1147, 8.6843], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Schumacher.on("click", function () {
+    mapPilote.flyTo([50.1147, 8.6843], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Schumacher");
+  });
 
   const Tsunoda = L.marker([35.6586, 139.7454], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Tsunoda.on("click", function () {
+    mapPilote.flyTo([35.6586, 139.7454], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Tsunoda");
+  });
 
   const Vettel = L.marker([48.7758, 9.1829], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Vettel.on("click", function () {
+    mapPilote.flyTo([48.7758, 9.1829], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Vettel");
+  });
 
   const Bottas = L.marker([60.9518, 25.6667], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Bottas.on("click", function () {
+    mapPilote.flyTo([60.9518, 25.6667], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Bottas");
+  });
 
   const Stroll = L.marker([45.5, -73.5833], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Stroll.on("click", function () {
+    mapPilote.flyTo([45.5, -73.5833], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Stroll");
+  });
 
   const Zhou = L.marker([31.2165, 121.4365], { icon: pneuMaker }).addTo(
     mapPilote
   );
+  Zhou.on("click", function () {
+    mapPilote.flyTo([31.2165, 121.4365], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Zhou");
+  });
 }
 
 function creationCartePilote(namePilote) {
