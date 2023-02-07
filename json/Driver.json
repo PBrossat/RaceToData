@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Max Verstappen",
+    "Name": "Verstappen",
     "Team": "Red Bull Racing",
     "Naissance": "1997-09-30",
     "âge": 25,
@@ -14,11 +14,12 @@
     "Nb meilleurs tours": 21,
     "Nb DNF": 31,
     "Pourcent DNF moyen/GP": 19.02,
-    "Nb GP disputés": 163
+    "Nb GP disputés": 163,
+    "Image": "data/pilotes/VerstappenBackground.jpg"
   },
 
   {
-    "Name": "Lando Norris",
+    "Name": "Norris",
     "Team": "McLaren",
     "Naissance": "1999-11-13",
     "âge": 23,
@@ -32,11 +33,12 @@
     "Nb meilleurs tours": 5,
     "Nb DNF": 10,
     "Pourcent DNF moyen/GP": 12.2,
-    "Nb GP disputés": 82
+    "Nb GP disputés": 82,
+    "Image": "data/pilotes/NorrisBackground.jpeg"
   },
 
   {
-    "Name": "Pierre Gasly",
+    "Name": "Gasly",
     "Team": "Alpine",
     "Naissance": "1996-02-07",
     "âge": 26,
@@ -50,11 +52,12 @@
     "Nb meilleurs tours": 3,
     "Nb DNF": 18,
     "Pourcent DNF moyen/GP": 16.67,
-    "Nb GP disputés": 108
+    "Nb GP disputés": 108,
+    "Image": "data/pilotes/GaslyBackground.jpeg"
   },
 
   {
-    "Name": "Sergio Pérez",
+    "Name": "Pérez",
     "Team": "Red Bull Racing",
     "Naissance": "1990-01-26",
     "âge": 32,
@@ -68,11 +71,12 @@
     "Nb meilleurs tours": 9,
     "Nb DNF": 31,
     "Pourcent DNF moyen/GP": 13.19,
-    "Nb GP disputés": 235
+    "Nb GP disputés": 235,
+    "Image": "data/pilotes/PerezBackground.jpeg"
   },
 
   {
-    "Name": "Fernando Alonso",
+    "Name": "Alonso",
     "Team": "Aston Martin Racing",
     "Naissance": "1981-07-29",
     "âge": 41,
@@ -86,11 +90,12 @@
     "Nb meilleurs tours": 23,
     "Nb DNF": 75,
     "Pourcent DNF moyen/GP": 21.07,
-    "Nb GP disputés": 356
+    "Nb GP disputés": 356,
+    "Image": "data/pilotes/AlonsoBackground.jpg"
   },
 
   {
-    "Name": "Charles Leclerc",
+    "Name": "Leclerc",
     "Team": "Ferrari",
     "Naissance": "1997-10-16",
     "âge": 25,
@@ -104,11 +109,12 @@
     "Nb meilleurs tours": 7,
     "Nb DNF": 17,
     "Pourcent DNF moyen/GP": 16.67,
-    "Nb GP disputés": 102
+    "Nb GP disputés": 102,
+    "Image": "data/pilotes/LeclercBackground.png"
   },
 
   {
-    "Name": "Lance Stroll",
+    "Name": "Stroll",
     "Team": "Aston Martin Racing",
     "Naissance": "1998-10-29",
     "âge": 24,
@@ -122,11 +128,12 @@
     "Nb meilleurs tours": 0,
     "Nb DNF": 22,
     "Pourcent DNF moyen/GP": 18.03,
-    "Nb GP disputés": 122
+    "Nb GP disputés": 122,
+    "Image": "data/pilotes/StrollBackground.jpeg"
   },
 
   {
-    "Name": "Kevin Magnussen",
+    "Name": "Magnussen",
     "Team": "Haas F1 Team",
     "Naissance": "1992-10-05",
     "âge": 30,
@@ -140,11 +147,12 @@
     "Nb meilleurs tours": 2,
     "Nb DNF": 28,
     "Pourcent DNF moyen/GP": 19.86,
-    "Nb GP disputés": 141
+    "Nb GP disputés": 141,
+    "Image": "data/pilotes/MagnussenBackground.png"
   },
 
   {
-    "Name": "Yuki Tsunoda",
+    "Name": "Tsunoda",
     "Team": "AlphaTauri",
     "Naissance": "2000-05-11",
     "âge": 22,
@@ -158,11 +166,12 @@
     "Nb meilleurs tours": 0,
     "Nb DNF": 8,
     "Pourcent DNF moyen/GP": 19.05,
-    "Nb GP disputés": 42
+    "Nb GP disputés": 42,
+    "Image": "data/pilotes/TsunodaBackground.jpg"
   },
 
   {
-    "Name": "Alexander Albon",
+    "Name": "Albon",
     "Team": "Williams",
     "Naissance": "1996-03-23",
     "âge": 26,
@@ -176,11 +185,12 @@
     "Nb meilleurs tours": 0,
     "Nb DNF": 8,
     "Pourcent DNF moyen/GP": 13.56,
-    "Nb GP disputés": 59
+    "Nb GP disputés": 59,
+    "Image": "data/pilotes/AlbonBackground.jpeg"
   },
 
   {
-    "Name": "Zhou Guanyu",
+    "Name": "Zhou",
     "Team": "Alfa Romeo",
     "Naissance": "1999-05-30",
     "âge": 23,
@@ -194,11 +204,12 @@
     "Nb meilleurs tours": 0,
     "Nb DNF": 6,
     "Pourcent DNF moyen/GP": 27.27,
-    "Nb GP disputés": 22
+    "Nb GP disputés": 22,
+    "Image": "data/pilotes/ZhouBackground.jpeg"
   },
 
   {
-    "Name": "Esteban Ocon",
+    "Name": "Ocon",
     "Team": "Alpine",
     "Naissance": "1996-09-17",
     "âge": 26,
@@ -212,11 +223,12 @@
     "Nb meilleurs tours": 0,
     "Nb DNF": 15,
     "Pourcent DNF moyen/GP": 13.51,
-    "Nb GP disputés": 111
+    "Nb GP disputés": 111,
+    "Image": "data/pilotes/OconBackground.jpeg"
   },
 
   {
-    "Name": "Lewis Hamilton",
+    "Name": "Hamilton",
     "Team": "Mercedes",
     "Naissance": "1985-01-07",
     "âge": 38,
@@ -230,11 +242,12 @@
     "Nb meilleurs tours": 61,
     "Nb DNF": 29,
     "Pourcent DNF moyen/GP": 9.35,
-    "Nb GP disputés": 310
+    "Nb GP disputés": 310,
+    "Image": "data/pilotes/HamiltonBackground.jpg"
   },
 
   {
-    "Name": "Carlos Sainz Jr",
+    "Name": "Sainz",
     "Team": "Ferrari",
     "Naissance": "1994-09-01",
     "âge": 28,
@@ -248,11 +261,12 @@
     "Nb meilleurs tours": 3,
     "Nb DNF": 33,
     "Pourcent DNF moyen/GP": 20.37,
-    "Nb GP disputés": 162
+    "Nb GP disputés": 162,
+    "Image": "data/pilotes/SainzBackground.jpeg"
   },
 
   {
-    "Name": "George Russell",
+    "Name": "Russell",
     "Team": "Mercedes",
     "Naissance": "1998-02-15",
     "âge": 24,
@@ -266,11 +280,12 @@
     "Nb meilleurs tours": 5,
     "Nb DNF": 13,
     "Pourcent DNF moyen/GP": 15.85,
-    "Nb GP disputés": 82
+    "Nb GP disputés": 82,
+    "Image": "data/pilotes/RusselBackground.jpeg"
   },
 
   {
-    "Name": "Valtteri Bottas",
+    "Name": "Bottas",
     "Team": "Alfa Romeo",
     "Naissance": "1989-08-28",
     "âge": 33,
@@ -284,11 +299,12 @@
     "Nb meilleurs tours": 19,
     "Nb DNF": 23,
     "Pourcent DNF moyen/GP": 11.5,
-    "Nb GP disputés": 200
+    "Nb GP disputés": 200,
+    "Image": "data/pilotes/BottasBackground.jpeg"
   },
 
   {
-    "Name": "Sebastian Vettel",
+    "Name": "Vettel",
     "Team": "Aston Martin",
     "Naissance": "1987-07-03",
     "âge": 36,
@@ -302,11 +318,12 @@
     "Nb meilleurs tours": 38,
     "Nb DNF": 44,
     "Pourcent DNF moyen/GP": 14.72,
-    "Nb GP disputés": 299
+    "Nb GP disputés": 299,
+    "Image": "data/pilotes/VettelBackground.jpeg"
   },
 
   {
-    "Name": "Kimi Räikkönen",
+    "Name": "Räikkönen",
     "Team": "Alfa Romeo Racing",
     "Naissance": "1979-10-17",
     "âge": 43,
@@ -320,11 +337,12 @@
     "Nb meilleurs tours": 16,
     "Nb DNF": 35,
     "Pourcent DNF moyen/GP": 11.06,
-    "Nb GP disputés": 285
+    "Nb GP disputés": 285,
+    "Image": "No picture"
   },
 
   {
-    "Name": "Daniel Ricciardo",
+    "Name": "Ricciardo",
     "Team": "McLaren",
     "Naissance": "1989-07-01",
     "âge": 33,
@@ -338,11 +356,12 @@
     "Nb meilleurs tours": 16,
     "Nb DNF": 37,
     "Pourcent DNF moyen/GP": 15.95,
-    "Nb GP disputés": 232
+    "Nb GP disputés": 232,
+    "Image": "data/pilotes/RicciardoBackground.jpeg"
   },
 
   {
-    "Name": "Nicholas Latifi",
+    "Name": "Latifi",
     "Team": "Williams",
     "Naissance": "1995-06-29",
     "âge": 27,
@@ -356,11 +375,12 @@
     "Nb meilleurs tours": 0,
     "Nb DNF": 13,
     "Pourcent DNF moyen/GP": 21.31,
-    "Nb GP disputés": 61
+    "Nb GP disputés": 61,
+    "Image": "data/pilotes/LatifiBackground.jpeg"
   },
 
   {
-    "Name": "Mick Schumacher",
+    "Name": "Schumacher",
     "Team": "Haas",
     "Naissance": "1999-03-22",
     "âge": 24,
@@ -374,6 +394,7 @@
     "Nb meilleurs tours": 0,
     "Nb DNF": 5,
     "Pourcent DNF moyen/GP": 11.63,
-    "Nb GP disputés": 43
+    "Nb GP disputés": 43,
+    "Image": "data/pilotes/SchumacherBackground.jpeg"
   }
 ]

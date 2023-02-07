@@ -16,7 +16,7 @@ app.get("/", (_, res) => {
   res.send(indexHTML);
 });
 
-app.get("/infosGP", (_, res) => {
+app.get("/infosGpAPI", (_, res) => {
   request(
     "https://ergast.com/api/f1/2022/circuits.json",
     function (error, response, body) {
@@ -28,6 +28,17 @@ app.get("/infosGP", (_, res) => {
       }
     }
   );
+});
+
+app.get("/infosGpJSON", (_, res) => {
+  fs.readFile("./json/Grands-prix.json", "utf-8", (error, data) => {
+    if (error) {
+      console.log(error);
+      res.send(error);
+    } else {
+      res.send(JSON.parse(data));
+    }
+  });
 });
 
 app.use("/css", express.static("css/"));

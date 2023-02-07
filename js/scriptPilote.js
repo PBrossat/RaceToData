@@ -1,34 +1,15 @@
-//----------------------------Récuperation Infos Pilotes-------------
-async function recupererInfosPilotes() {
-  let response = await fetch("json/Driver.json");
-  response = await response.json();
-  return response;
-}
+//-------------------- Action lorsqu'on clique sur le bouton Pilote ---------------
+const boutonDecouvrirStatsPilotes = document.querySelector(
+  ".btn-decouvrir-stats-pilotes"
+);
+boutonDecouvrirStatsPilotes.addEventListener("click", function () {
+  document.querySelector("#stats").innerHTML = "";
+  afficherStatsPilotes();
+  mapPilote();
+  recupererInfosPilotes();
+});
 
-let tabGlobalDataPilotes;
-
-tabGlobalDataPilotes = recupererInfosPilotes();
-
-const VerstappenInfos = tabGlobalDataPilotes[0];
-const NorrisInfos = tabGlobalDataPilotes[1];
-const GaslyInfos = tabGlobalDataPilotes[2];
-const PerezInfos = tabGlobalDataPilotes[3];
-const AlonsoInfos = tabGlobalDataPilotes[4];
-const LeclercInfos = tabGlobalDataPilotes[5];
-const StrollInfos = tabGlobalDataPilotes[6];
-const MagnussenInfos = tabGlobalDataPilotes[7];
-const TsunodaInfos = tabGlobalDataPilotes[8];
-const AlbonInfos = tabGlobalDataPilotes[9];
-const ZhouInfos = tabGlobalDataPilotes[10];
-const OconInfos = tabGlobalDataPilotes[11];
-const HamiltonInfos = tabGlobalDataPilotes[12];
-const SainzInfos = tabGlobalDataPilotes[13];
-const RussellInfos = tabGlobalDataPilotes[14];
-const BottasInfos = tabGlobalDataPilotes[15];
-const VettelInfos = tabGlobalDataPilotes[16];
-const RicciardoInfos = tabGlobalDataPilotes[18];
-const LatifiInfos = tabGlobalDataPilotes[19];
-const SchumacherInfos = tabGlobalDataPilotes[20];
+//------------------------------ Création des containers ----------------
 
 function afficherStatsPilotes() {
   const StatsPilotes = document.querySelector("#stats");
@@ -46,18 +27,7 @@ function afficherStatsPilotes() {
   // Création de deux div enfants de divMapEtInfosPilotes
   creationDivMapPilotes();
   creationDivInfosPilotes();
-
-  // Création de la div Carte
 }
-
-const boutonDecouvrirStatsPilotes = document.querySelector(
-  ".btn-decouvrir-stats-pilotes"
-);
-boutonDecouvrirStatsPilotes.addEventListener("click", function () {
-  document.querySelector("#stats").innerHTML = "";
-  afficherStatsPilotes();
-  mapPilote();
-});
 
 function creationDivMapPilotes() {
   const MapEtInfos = document.querySelector("#divMapEtInfosPilotes");
@@ -82,9 +52,6 @@ function creationDivCartePilotes() {
 
   const cartePilote = document.createElement("div");
   cartePilote.id = "cardPilote";
-
-  // const imagePilote = document.createElement("img");
-  // imagePilote.id = "imagePilote";
 
   const infosPilote = document.createElement("div");
   infosPilote.id = "infosPiloteDansCarte";
@@ -123,96 +90,44 @@ function creationDivCartePilotes() {
   infosPilote.appendChild(nbPodiums);
 }
 
-//Récuperer les données dans un tableau globalTabData accessible partout dans le script
-let globalTabData;
-fetch("json/Driver.json")
-  .then((response) => response.json())
-  .then((data) => {
-    const piloteData = data;
-    const tabData = piloteData.map((pilote) => {
-      return {
-        Nom: pilote["Name"],
-        Age: pilote["âge"],
-        nbMoyenPointsParGP: pilote["Nb points moyen/GP"],
-        nbVictoires: pilote["Nb Victoires"],
-        nbPodiums: pilote["Nb podiums"],
-        nbDNF: pilote["Nb DNF"],
-        nbDnfMoyenParSaison: pilote["Pourcent DNF moyen/GP"],
-        nbGpDisputes: pilote["NB GP disputés"],
-      };
+//----------------------------Récuperation Infos Pilotes depuis fichier json-------------
+
+let tabGlobalDataPilotes = {};
+function recupererInfosPilotes() {
+  fetch("json/Driver.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const piloteData = data;
+      const tabData = piloteData.map((pilote) => {
+        return {
+          Nom: pilote["Name"],
+          Ecurie: pilote["Team"],
+          Naissance: pilote["Naissance"],
+          Age: pilote["âge"],
+          Nationalité: pilote["Nationalité"],
+          nbPoints: pilote["Nb points"],
+          nbMoyenPointsParGP: pilote["Nb points moyen/GP"],
+          nbVictoires: pilote["Nb Victoires"],
+          nbChampion: pilote["Nb Champion"],
+          nbPodiums: pilote["Nb podiums"],
+          nbPolesPositions: pilote["Nb pôle Position"],
+          nbMeilleursTours: pilote["Nb meilleurs tours"],
+          nbDNF: pilote["Nb DNF"],
+          nbDnfMoyenParSaison: pilote["Pourcent DNF moyen/GP"],
+          nbGpDisputes: pilote["NB GP disputés"],
+          Image: pilote["Image"],
+        };
+      });
+      tabGlobalDataPilotesTemp = tabData;
+      for (pilote in tabGlobalDataPilotesTemp) {
+        objetPilote = tabGlobalDataPilotesTemp[pilote];
+        tabGlobalDataPilotes[objetPilote.Nom] = objetPilote;
+      }
     });
-    globalTabData = tabData;
-    return tabData;
-  });
-
-// Création de fonctions permettants de récuperer (à partir de globalTabData) des informations et de les stockers dans des tableaux
-function getNomPilote() {
-  const nomPilote = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    nomPilote.push(globalTabData[i].Nom);
-  }
-  return nomPilote;
-}
-
-function getAgePilote() {
-  const agePilote = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    agePilote.push(globalTabData[i].Age);
-  }
-  return agePilote;
-}
-
-function getNbMoyenPointsParGP() {
-  const nbMoyenPointsParGP = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    nbMoyenPointsParGP.push(globalTabData[i].nbMoyenPointsParGP);
-  }
-  return nbMoyenPointsParGP;
-}
-
-function getNbVictoires() {
-  const nbVictoires = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    nbVictoires.push(globalTabData[i].nbVictoires);
-  }
-  return nbVictoires;
-}
-
-function getNbPodiums() {
-  const nbPodiums = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    nbPodiums.push(globalTabData[i].nbPodiums);
-  }
-  return nbPodiums;
-}
-
-function getNbDNF() {
-  const nbDNF = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    nbDNF.push(globalTabData[i].nbDNF);
-  }
-  return nbDNF;
-}
-
-function getNbDnfMoyenParSaison() {
-  const nbDnfMoyenParSaison = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    nbDnfMoyenParSaison.push(globalTabData[i].nbDnfMoyenParSaison);
-  }
-  return nbDnfMoyenParSaison;
-}
-
-function getNbGpDisputes() {
-  const nbGpDisputes = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    nbGpDisputes.push(globalTabData[i].nbGpDisputes);
-  }
-  return nbGpDisputes;
 }
 
 //---------------------------------GESTION DES GRAPHES--------------------------------------
 
-// fonction permettant d'afficher un graphe radar
 function grapheDriverPointMoyenParGPRadar() {
   const nomPilote = getNomPilote();
   const nbMoyenPointsParGpParPilote = getNbMoyenPointsParGP();
@@ -344,166 +259,140 @@ function mapPilote() {
 
   const Hamilton = L.marker([51.907266, -0.196862], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Royaume Unis
-
-  Hamilton.bindPopup(`
-  <h1>Lewis Hamilton</h1>
-  <img src="data/pilotes/Hamilton.jpeg" alt="Lewis Hamilton" style="width: 115%">
-  `);
+  );
 
   Hamilton.on("click", function () {
     mapPilote.flyTo([51.907266, -0.196862], mapPilote.getMaxZoom()); //zoom sur l'emplacement
-    // divInfosPilotes.innerHTML = ""; //vide le container () parent
-    // creationDivCartePilotes(); //création du container carte
-    // //si il existe dejà des choses dans la carte => vider la carte sinon rien faire
-    // //! palmaresPilote est remplie SSI la carte est remplie car on remplie tous les champs de la carte en même temps
-    // const palmaresPilote = document.querySelector("#palmaresPilote");
-    // const nomPilote = document.querySelector(".nomPilote");
-    // if (palmaresPilote != null) {
-    //   palmaresPilote.innerHTML = "";
-    //   nomPilote.innerHTML = "";
-    //   imgPilote.innerHTML = "";
-    // }
-    // var cardPilote = document.querySelector("#cardPilote");
-    // cardPilote.style.backgroundImage =
-    //   "url('data/pilotes/HamiltonBackground.jpg')";
-    // cardPilote.style.backgroundSize = "cover";
-    // nomPilote.innerHTML = "Lewis Hamilton";
-    // document.querySelector("#nationalité").innerHTML = "Grande Bretagne";
-    // document.querySelector("#team").innerHTML = "Mercedes";
-    // document.querySelector("#nbVictoires").innerHTML = "103";
-    // document.querySelector("#nbGpDisputes").innerHTML = "310";
-    // document.querySelector("#nbPodiums").innerHTML = "191";
     creationCartePilote("Hamilton");
   });
 
   const Verstappen = L.marker([52.3781, 4.9011], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Pays Bas
-  Verstappen.bindPopup(`
-    <h1>Max Verstappen</h1>
-    <img src="data/pilotes/Verstappen.jpeg" alt="Max Verstappen" style="width: 115%">
-  `);
+  );
+  Verstappen.on("click", function () {
+    mapPilote.flyTo([52.3781, 4.9011], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Verstappen");
+  });
 
   const Perez = L.marker([19.4326, -99.1332], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Mexico
-  Perez.bindPopup(`
-    <h1>Sergio Perez</h1>
-    <img src="data/pilotes/Perez.jpeg" alt="Sergio Perez" style="width: 115%">
-  `);
+  );
+  Perez.on("click", function () {
+    mapPilote.flyTo([19.4326, -99.1332], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Perez");
+  });
 
   const Russell = L.marker([52.6369, -1.1398], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Royaume Uni
-  Russell.bindPopup(`
-    <h1>George Russell</h1>
-    <img src="data/pilotes/Russell.jpeg" alt="George Russell" style="width: 115%">
-  `);
+  );
+  Russell.on("click", function () {
+    mapPilote.flyTo([52.6369, -1.1398], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Russell");
+  });
 
   const Leclerc = L.marker([43.7313, 7.4265], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Monaco
-  Leclerc.bindPopup(`
-    <h1>Charles Leclerc</h1>
-    <img src="data/pilotes/Leclerc.jpeg" alt="Charles Leclerc" style="width: 115%">
-  `);
+  );
+  Leclerc.on("click", function () {
+    mapPilote.flyTo([43.7313, 7.4265], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Leclerc");
+  });
 
   const Sainz = L.marker([43.3667, -5.85], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Espagne
-  Sainz.bindPopup(`
-    <h1>Carlos Sainz</h1>
-    <img src="data/pilotes/Sainz.jpeg" alt="Carlos Sainz" style="width: 115%">
-  `);
+  );
+  Sainz.on("click", function () {
+    mapPilote.flyTo([43.3667, -5.85], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Sainz");
+  });
 
   const Ocon = L.marker([49.0256, 1.2183], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // France
-  Ocon.bindPopup(`
-  <h1>Esteban Ocon</h1>
-  <img src="data/pilotes/Ocon.jpeg" alt="Esteban Ocon" style="width: 115%">
-  `);
+  );
+  Ocon.on("click", function () {
+    mapPilote.flyTo([49.0256, 1.2183], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Ocon");
+  });
 
   const Gasly = L.marker([49.4431, 1.0993], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // France
-  Gasly.bindPopup(`
-  <h1>Pierre Gasly</h1>
-  <img src="data/pilotes/Gasly.jpeg" alt="Pierre Gasly" style="width: 115%">
-  `);
+  );
+  Gasly.on("click", function () {
+    mapPilote.flyTo([49.4431, 1.0993], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Gasly");
+  });
 
   const Albon = L.marker([13.7563, 100.5018], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Royaume Unis
-  Albon.bindPopup(`
-  <h1>Alexander Albon</h1>
-  <img src="data/pilotes/Albon.jpeg" alt="Alexander Albon" style="width: 115%">
-  `);
+  );
+  Albon.on("click", function () {
+    mapPilote.flyTo([13.7563, 100.5018], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Albon");
+  });
 
   const Magnussen = L.marker([55.6761, 12.5683], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Danmark
-  Magnussen.bindPopup(`
-  <h1>Kevin Magnussen</h1>
-  <img src="data/pilotes/Magnussen.jpeg" alt="Kevin Magnussen" style="width: 115%">
-  `);
+  );
+  Magnussen.on("click", function () {
+    mapPilote.flyTo([55.6761, 12.5683], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Magnussen");
+  });
 
   const Alonso = L.marker([43.3629, -8.4139], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Espagne
-  Alonso.bindPopup(`
-  <h1>Fernando Alonso</h1>
-  <img src="data/pilotes/Alonso.jpeg" alt="Fernando Alonso" style="width: 115%">
-  `);
+  );
+  Alonso.on("click", function () {
+    mapPilote.flyTo([43.3629, -8.4139], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Alonso");
+  });
 
   const Schumacher = L.marker([50.1147, 8.6843], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Allemagne
-  Schumacher.bindPopup(`
-  <h1>Mick Schumacher</h1>
-  <img src="data/pilotes/Schumacher.jpeg" alt="Mick Schumacher" style="width: 115%">
-  `);
+  );
+  Schumacher.on("click", function () {
+    mapPilote.flyTo([50.1147, 8.6843], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Schumacher");
+  });
 
   const Tsunoda = L.marker([35.6586, 139.7454], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Japon
-  Tsunoda.bindPopup(`
-  <h1>Yuki Tsunoda</h1>
-  <img src="data/pilotes/Tsunoda.jpeg" alt="Yuki Tsunoda" style="width: 115%">
-  `);
+  );
+  Tsunoda.on("click", function () {
+    mapPilote.flyTo([35.6586, 139.7454], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Tsunoda");
+  });
 
   const Vettel = L.marker([48.7758, 9.1829], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Allemagne
-  Vettel.bindPopup(`
-  <h1>Sebastian Vettel</h1>
-  <img src="data/pilotes/Vettel.jpeg" alt="Sebastian Vettel" style="width: 115%">
-  `);
+  );
+  Vettel.on("click", function () {
+    mapPilote.flyTo([48.7758, 9.1829], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Vettel");
+  });
 
   const Bottas = L.marker([60.9518, 25.6667], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Finland
-  Bottas.bindPopup(`
-  <h1>Valtteri Bottas</h1>
-  <img src="data/pilotes/Bottas.jpeg" alt="Valtteri Bottas" style="width: 115%">
-  `);
+  );
+  Bottas.on("click", function () {
+    mapPilote.flyTo([60.9518, 25.6667], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Bottas");
+  });
 
   const Stroll = L.marker([45.5, -73.5833], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Canada
-  Stroll.bindPopup(`
-  <h1>Lance Stroll</h1>
-  <img src="data/pilotes/Stroll.jpeg" alt="Lance Stroll" style="width: 115%">
-  `);
+  );
+  Stroll.on("click", function () {
+    mapPilote.flyTo([45.5, -73.5833], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Stroll");
+  });
 
   const Zhou = L.marker([31.2165, 121.4365], { icon: pneuMaker }).addTo(
     mapPilote
-  ); // Chine
-  Zhou.bindPopup(`
-  <h1>Guanyu Zhou</h1>
-  <img src="data/pilotes/Zhou.jpeg" alt="Guanyu Zhou" style="width: 115%">
-  `);
+  );
+  Zhou.on("click", function () {
+    mapPilote.flyTo([31.2165, 121.4365], mapPilote.getMaxZoom()); //zoom sur l'emplacement
+    creationCartePilote("Zhou");
+  });
 }
 
 function creationCartePilote(namePilote) {
@@ -520,13 +409,17 @@ function creationCartePilote(namePilote) {
   }
   console.log(tabGlobalDataPilotes);
   var cardPilote = document.querySelector("#cardPilote");
-  cardPilote.style.backgroundImage = `url("data/pilotes/${namePilote}Background.jpg")`;
+  cardPilote.style.backgroundImage = `url("tabGlobalDataPilotes[${namePilote}].Image")`;
   cardPilote.style.backgroundSize = "cover";
   nomPilote.innerHTML = `${namePilote}`;
   document.querySelector("#nationalité").innerHTML =
-    "HamiltonInfos.Nationalité";
-  document.querySelector("#team").innerHTML = "Mercedes";
-  document.querySelector("#nbVictoires").innerHTML = "103";
-  document.querySelector("#nbGpDisputes").innerHTML = "310";
-  document.querySelector("#nbPodiums").innerHTML = "191";
+    tabGlobalDataPilotes[`${namePilote}`].Nationalité;
+  document.querySelector("#team").innerHTML =
+    tabGlobalDataPilotes[`${namePilote}`].Ecurie;
+  document.querySelector("#nbVictoires").innerHTML =
+    tabGlobalDataPilotes[`${namePilote}`].nbVictoires;
+  document.querySelector("#nbGpDisputes").innerHTML =
+    tabGlobalDataPilotes[`${namePilote}`].nbGpDisputes;
+  document.querySelector("#nbPodiums").innerHTML =
+    tabGlobalDataPilotes[`${namePilote}`].nbPodiums;
 }
