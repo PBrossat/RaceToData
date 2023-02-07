@@ -1,40 +1,57 @@
 //Requete API pour avoir des infos sur les GP
-async function recupererInfosGP() {
-  let response = await fetch("http://localhost:3000/infosGP");
+async function recupererInfosGpAPI() {
+  let response = await fetch("http://localhost:3000/infosGpAPI");
   response = await response.json();
   return response["MRData"]["CircuitTable"]["Circuits"];
 }
 
+async function recupererInfosGpJSON() {
+  let response = await fetch("http://localhost:3000/infosGpJSON");
+  response = await response.json();
+  return response["Circuits"];
+}
+
 //! window.localStorage
 
-let tabGlobalDataGP;
+let tabGlobalDataGpAPI;
+let tabGlobalDataGpJSON;
+let tabGlobalDataGP = [];
 
-tabGlobalDataGP = await recupererInfosGP();
+tabGlobalDataGpAPI = await recupererInfosGpAPI();
+tabGlobalDataGpJSON = await recupererInfosGpJSON();
 
-//console.log(tabGlobalDataGP);
+// 0: Melbourne
+// 1: Austin
+// 2: Bahrain
+// 3: Baku
+// 4: Barcelone
+// 5: Hungaroring
+// 6: Imola
+// 7: Bresil
+// 8: Jeddah
+// 9: Singapour
+// 10: Miami
+// 11: Monaco
+// 12: Monza
+// 13: Red Bull Ring
+// 14: Castellet
+// 15: Mexique
+// 16: Silverstone
+// 17: Spa Francorchamps
+// 18: Suzuka
+// 19: Canada
+// 20: Abu Dhabi
+// 21: Zandvoort
 
-const melbourneInfos = tabGlobalDataGP[0];
-const austinInfos = tabGlobalDataGP[1];
-const bahrainInfos = tabGlobalDataGP[2];
-const bakuInfos = tabGlobalDataGP[3];
-const barceloneInfos = tabGlobalDataGP[4];
-const hungaroringInfos = tabGlobalDataGP[5];
-const imolaInfos = tabGlobalDataGP[6];
-const bresilInfos = tabGlobalDataGP[7];
-const jeddahInfos = tabGlobalDataGP[8];
-const singapourInfos = tabGlobalDataGP[9];
-const miamiInfos = tabGlobalDataGP[10];
-const monacoInfos = tabGlobalDataGP[11];
-const monzaInfos = tabGlobalDataGP[12];
-const redBullRingInfos = tabGlobalDataGP[13];
-const castelletInfos = tabGlobalDataGP[14];
-const mexiqueInfos = tabGlobalDataGP[15];
-const silverstoneInfos = tabGlobalDataGP[16];
-const spaFrancorchampsInfos = tabGlobalDataGP[17];
-const suzukaInfos = tabGlobalDataGP[18];
-const canadaInfos = tabGlobalDataGP[19];
-const abuDhabiInfos = tabGlobalDataGP[20];
-const zandvoortInfos = tabGlobalDataGP[21];
+//Fusionner les deux fichiers JSON
+for (let i = 0; i < tabGlobalDataGpAPI.length; i++) {
+  tabGlobalDataGP[i] = Object.assign(
+    {},
+    tabGlobalDataGpAPI[i],
+    tabGlobalDataGpJSON[i]
+  );
+}
+console.log(tabGlobalDataGP);
 
 //---------------------------------GESTION DE LA MAP--------------------------------------
 
@@ -79,262 +96,31 @@ function afficherMapGP() {
 
   //Création des markers
 
-  L.marker([melbourneInfos.Location.lat, melbourneInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [melbourneInfos.Location.lat, melbourneInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([austinInfos.Location.lat, austinInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [austinInfos.Location.lat, austinInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([bahrainInfos.Location.lat, bahrainInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [bahrainInfos.Location.lat, bahrainInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([bakuInfos.Location.lat, bakuInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [bakuInfos.Location.lat, bakuInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([barceloneInfos.Location.lat, barceloneInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [barceloneInfos.Location.lat, barceloneInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([hungaroringInfos.Location.lat, hungaroringInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [hungaroringInfos.Location.lat, hungaroringInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([imolaInfos.Location.lat, imolaInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [imolaInfos.Location.lat, imolaInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([bresilInfos.Location.lat, bresilInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [bresilInfos.Location.lat, bresilInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([jeddahInfos.Location.lat, jeddahInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [jeddahInfos.Location.lat, jeddahInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([singapourInfos.Location.lat, singapourInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [singapourInfos.Location.lat, singapourInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([miamiInfos.Location.lat, miamiInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [miamiInfos.Location.lat, miamiInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([monacoInfos.Location.lat, monacoInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [monacoInfos.Location.lat, monacoInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([monzaInfos.Location.lat, monzaInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [monzaInfos.Location.lat, monzaInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([redBullRingInfos.Location.lat, redBullRingInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [redBullRingInfos.Location.lat, redBullRingInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  const zebi = L.marker(
-    [castelletInfos.Location.lat, castelletInfos.Location.long],
-    {
-      icon: markerGP,
-    }
-  )
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [castelletInfos.Location.lat, castelletInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-      const divInfosGP = document.createElement("div");
-      divInfosGP.id = "divInfosGP";
-      divMapEtInfosGP.appendChild(divInfosGP);
-      const imgGP = document.createElement("img");
-      divInfosGP.appendChild(imgGP);
-      imgGP.src = "data/grands-prix/castellet.png";
-    });
-
-  L.marker([mexiqueInfos.Location.lat, mexiqueInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [mexiqueInfos.Location.lat, mexiqueInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([silverstoneInfos.Location.lat, silverstoneInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [silverstoneInfos.Location.lat, silverstoneInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker(
-    [spaFrancorchampsInfos.Location.lat, spaFrancorchampsInfos.Location.long],
-    {
-      icon: markerGP,
-    }
-  )
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [
-          spaFrancorchampsInfos.Location.lat,
-          spaFrancorchampsInfos.Location.long,
-        ],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([suzukaInfos.Location.lat, suzukaInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [suzukaInfos.Location.lat, suzukaInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([canadaInfos.Location.lat, canadaInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [canadaInfos.Location.lat, canadaInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([abuDhabiInfos.Location.lat, abuDhabiInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [abuDhabiInfos.Location.lat, abuDhabiInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
-
-  L.marker([zandvoortInfos.Location.lat, zandvoortInfos.Location.long], {
-    icon: markerGP,
-  })
-    .addTo(mapGP)
-    .on("click", function () {
-      mapGP.flyTo(
-        [zandvoortInfos.Location.lat, zandvoortInfos.Location.long],
-        mapGP.getMaxZoom()
-      );
-    });
+  for (let i = 0; i < tabGlobalDataGP.length; i++) {
+    L.marker(
+      [tabGlobalDataGP[i].Location.lat, tabGlobalDataGP[i].Location.long],
+      {
+        icon: markerGP,
+      }
+    )
+      .addTo(mapGP)
+      .on("click", function () {
+        mapGP.flyTo(
+          [tabGlobalDataGP[i].Location.lat, tabGlobalDataGP[i].Location.long],
+          mapGP.getMaxZoom()
+        );
+        const existeDivInfosGP = document.querySelector("#divInfosGP");
+        if (existeDivInfosGP) {
+          existeDivInfosGP.remove();
+        }
+        const divInfosGP = document.createElement("div");
+        divInfosGP.id = "divInfosGP";
+        divMapEtInfosGP.appendChild(divInfosGP);
+        const imgGP = document.createElement("img");
+        divInfosGP.appendChild(imgGP);
+        imgGP.src = tabGlobalDataGP[i].Image;
+      });
+  }
 }
 
 //-------------------------------Gestion du click sur le bouton de la carte des grands-prix--------------------------------------------------

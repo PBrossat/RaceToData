@@ -7,7 +7,8 @@
       "Circuit Length": "5.278",
       "Race Distance": "306.124",
       "Lap Record": "1:20.260",
-      "Record Holder": "Charles Leclerc (2022)"
+      "Record Holder": "Charles Leclerc (2022)",
+      "Image": "data/grands-prix/melbourne.png"
     },
     {
       "Name": "Austin",
@@ -16,7 +17,8 @@
       "Circuit Length": "5.513",
       "Race Distance": "308.405",
       "Lap Record": "1:36.169",
-      "Record Holder": "Charles Leclerc (2019)"
+      "Record Holder": "Charles Leclerc (2019)",
+      "Image": "data/grands-prix/austin.png"
     },
     {
       "Name": "Bahrain",
@@ -25,7 +27,8 @@
       "Circuit Length": "5.412",
       "Race Distance": "308.238",
       "Lap Record": "1:31.447",
-      "Record Holder": "Pedro de la Rosa (2005)"
+      "Record Holder": "Pedro de la Rosa (2005)",
+      "Image": "data/grands-prix/bahrain.png"
     },
     {
       "Name": "Baku",
@@ -34,7 +37,8 @@
       "Circuit Length": "6.003",
       "Race Distance": "306.049",
       "Lap Record": "1:43.009",
-      "Record Holder": "Charles Leclerc (2019)"
+      "Record Holder": "Charles Leclerc (2019)",
+      "Image": "data/grands-prix/baku.png"
     },
     {
       "Name": "Circuit de Barcelona-Catalunya",
@@ -43,7 +47,8 @@
       "Circuit Length": "4.675",
       "Race Distance": "308.424",
       "Lap Record": "1:18.149",
-      "Record Holder": "Max Verstappen (2021)"
+      "Record Holder": "Max Verstappen (2021)",
+      "Image": "data/grands-prix/barcelone.png"
     },
     {
       "Name": "Hungaroring",
@@ -52,7 +57,8 @@
       "Circuit Length": "4.381",
       "Race Distance": "306.63",
       "Lap Record": "1:16.627",
-      "Lap Record Holder": "Lewis Hamilton (2020)"
+      "Lap Record Holder": "Lewis Hamilton (2020)",
+      "Image": "data/grands-prix/hungaroring.png"
     },
     {
       "Name": "Imola",
@@ -61,7 +67,8 @@
       "Circuit Length": "4.909",
       "Race Distance": "309.049",
       "Lap Record": "1:15.484",
-      "Record Holder": "Lewis Hamilton (2020)"
+      "Record Holder": "Lewis Hamilton (2020)",
+      "Image": "data/grands-prix/imola.png"
     },
     {
       "Name": "Brésil",
@@ -70,7 +77,8 @@
       "Circuit Length": "4.309",
       "Race Distance": "305.879",
       "Lap Record": "1:10.540",
-      "Record Holder": "Valtteri Bottas (2018)"
+      "Record Holder": "Valtteri Bottas (2018)",
+      "Image": "data/grands-prix/bresil.png"
     },
     {
       "Name": "Jeddah",
@@ -79,7 +87,8 @@
       "Circuit Length": "6.174",
       "Race Distance": "308.45",
       "Lap Record": "1:30.734",
-      "Record Holder": "Lewis Hamilton (2021)"
+      "Record Holder": "Lewis Hamilton (2021)",
+      "Image": "data/grands-prix/jeddah.png"
     },
     {
       "Name": "Singapour",
@@ -88,7 +97,18 @@
       "Circuit Length": "5.063",
       "Race Distance": "308.706",
       "Lap Record": "1:41.905",
-      "Record Holder": "Kevin Magnussen (2018)"
+      "Record Holder": "Kevin Magnussen (2018)",
+      "Image": "data/grands-prix/singapour.png"
+    },
+    {
+      "Name": "Miami",
+      "First Grand Prix": "2022",
+      "Number of Laps": "57",
+      "Circuit Length": "5.412",
+      "Race Distance": "308.326",
+      "Lap Record": "1:31.361",
+      "Record Holder": "Max Verstappen (2022)",
+      "Image": "data/grands-prix/miami.png"
     },
     {
       "Name": "Monaco",
@@ -97,7 +117,8 @@
       "Circuit Length": "3.337",
       "Race Distance": "260.286",
       "Lap Record": "1:12.909",
-      "Record Holder": "Lewis Hamilton (2021)"
+      "Record Holder": "Lewis Hamilton (2021)",
+      "Image": "data/grands-prix/monaco.png"
     },
     {
       "Name": "Monza",
@@ -106,7 +127,8 @@
       "Circuit Length": "5.793",
       "Race Distance": "306.72",
       "Lap Record": "1:21.046",
-      "Record Holder": "Rubens Barrichello (2004)"
+      "Record Holder": "Rubens Barrichello (2004)",
+      "Image": "data/grands-prix/monza.png"
     },
     {
       "Name": "Red Bull Ring",
@@ -115,7 +137,8 @@
       "Circuit Length": "4.318",
       "Race Distance": "306.452",
       "Lap Record": "1:05.619",
-      "Record Holder": "Carlos Sainz (2020)"
+      "Record Holder": "Carlos Sainz (2020)",
+      "Image": "data/grands-prix/redBullRing.png"
     },
     {
       "Name": "Le Castellet",
@@ -124,7 +147,8 @@
       "Circuit Length": "5.842",
       "Race Distance": "309.69",
       "Lap Record": "1:32.740",
-      "Record Holder": "Sebastian Vettel (2019)"
+      "Record Holder": "Sebastian Vettel (2019)",
+      "Image": "data/grands-prix/castellet.png"
     },
     {
       "Name": "Mexique",
@@ -133,7 +157,8 @@
       "Circuit Length": "4.304",
       "Race Distance": "305.354",
       "Lap Record": "1:17.774",
-      "Record Holder": "Valtteri Bottas (2021)"
+      "Record Holder": "Valtteri Bottas (2021)",
+      "Image": "data/grands-prix/mexique.png"
     },
     {
       "Name": "Silverstone",
@@ -142,7 +167,8 @@
       "Circuit Length": "5.891",
       "Race Distance": "306.198",
       "Lap Record": "1.27.097",
-      "Record Holder": "Max Verstappen (2020)"
+      "Record Holder": "Max Verstappen (2020)",
+      "Image": "data/grands-prix/silverstone.png"
     },
     {
       "Name": "Spa-Francorchamps",
@@ -151,7 +177,8 @@
       "Circuit Length": "7.004",
       "Race Distance": "308.052",
       "Lap Record": "1:46.286",
-      "Record Holder": "Valtteri Bottas (2018)"
+      "Record Holder": "Valtteri Bottas (2018)",
+      "Image": "data/grands-prix/spaFrancorchamps.png"
     },
     {
       "Name": "Suzuka",
@@ -160,7 +187,8 @@
       "Circuit Length": "5.807",
       "Race Distance": "307.471",
       "Lap Record": "1:30.983",
-      "Record Holder": "Lewis Hamilton (2019)"
+      "Record Holder": "Lewis Hamilton (2019)",
+      "Image": "data/grands-prix/suzuka.png"
     },
     {
       "Name": "Circuit Gilles-Villeneuve",
@@ -169,7 +197,8 @@
       "Circuit Length": "4.361",
       "Race Distance": "305.27",
       "Lap Record": "1:13.078",
-      "Record Holder": "Valtteri Bottas (2019)"
+      "Record Holder": "Valtteri Bottas (2019)",
+      "Image": "data/grands-prix/canada.png"
     },
     {
       "Name": "Abu Dhabi",
@@ -178,7 +207,8 @@
       "Circuit Length": "5.281",
       "Race Distance": "306.183",
       "lapRecord": "1:26.103",
-      "Record Holder": "Max Verstappen (2021)"
+      "Record Holder": "Max Verstappen (2021)",
+      "Image": "data/grands-prix/abuDhabi.png"
     },
     {
       "Name": "Zandvoort",
@@ -187,7 +217,8 @@
       "Circuit Length": "4.259",
       "Race Distance": "306.587",
       "Lap Record": "1:11.097",
-      "Record Holder": "Lewis Hamilton (2021)"
+      "Record Holder": "Lewis Hamilton (2021)",
+      "Image": "data/grands-prix/zandvoort.png"
     }
   ]
 }
