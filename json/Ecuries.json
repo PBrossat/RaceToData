@@ -5,9 +5,15 @@
     "points": "759",
     "wins": "17",
     "pole": "8",
+    "podium": "28",
+    "points_all": "6388",
+    "wins_all": "92",
+    "podiums_all": "234",
+    "pole_all": "81",
+    "titre_constructeur": "5",
+    "titre_pilote": "6",
     "Constructor": {
       "constructorId": "red_bull",
-      "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
       "name": "Red Bull",
       "nationality": "Austrian"
     }
@@ -18,9 +24,15 @@
     "points": "554",
     "wins": "4",
     "pole": "12",
+    "podium": "20",
+    "points_all": "9015",
+    "wins_all": "242",
+    "podiums_all": "789",
+    "pole_all": "237",
+    "titre_constructeur": "16",
+    "titre_pilote": "15",
     "Constructor": {
       "constructorId": "ferrari",
-      "url": "http://en.wikipedia.org/wiki/Scuderia_Ferrari",
       "name": "Ferrari",
       "nationality": "Italian"
     }
@@ -31,9 +43,15 @@
     "points": "515",
     "wins": "1",
     "pole": "1",
+    "podium": "17",
+    "points_all": "6803",
+    "wins_all": "125",
+    "podiums_all": "281",
+    "pole_all": "136",
+    "titre_constructeur": "8",
+    "titre_pilote": "9",
     "Constructor": {
       "constructorId": "mercedes",
-      "url": "http://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One",
       "name": "Mercedes",
       "nationality": "German"
     }
@@ -44,9 +62,15 @@
     "points": "173",
     "wins": "0",
     "pole": "0",
+    "podium": "0",
+    "points_all": "2105",
+    "wins_all": "36",
+    "podiums_all": "105",
+    "pole_all": "51",
+    "titre_constructeur": "2",
+    "titre_pilote": "2",
     "Constructor": {
       "constructorId": "alpine",
-      "url": "http://en.wikipedia.org/wiki/Alpine_F1_Team",
       "name": "Alpine F1 Team",
       "nationality": "French"
     }
@@ -57,9 +81,15 @@
     "points": "159",
     "wins": "0",
     "pole": "0",
+    "podium": "1",
+    "points_all": "5550",
+    "wins_all": "183",
+    "podiums_all": "490",
+    "pole_all": "155",
+    "titre_constructeur": "8",
+    "titre_pilote": "12",
     "Constructor": {
       "constructorId": "mclaren",
-      "url": "http://en.wikipedia.org/wiki/McLaren",
       "name": "McLaren",
       "nationality": "British"
     }
@@ -70,9 +100,15 @@
     "points": "55",
     "wins": "0",
     "pole": "0",
+    "podium": "0",
+    "points_all": "320",
+    "wins_all": "10",
+    "podiums_all": "26",
+    "pole_all": "12",
+    "titre_constructeur": "0",
+    "titre_pilote": "2",
     "Constructor": {
       "constructorId": "alfa",
-      "url": "http://en.wikipedia.org/wiki/Alfa_Romeo_in_Formula_One",
       "name": "Alfa Romeo",
       "nationality": "Swiss"
     }
@@ -83,9 +119,15 @@
     "points": "55",
     "wins": "0",
     "pole": "0",
+    "podium": "0",
+    "points_all": "132",
+    "wins_all": "0",
+    "podiums_all": "1",
+    "pole_all": "0",
+    "titre_constructeur": "0",
+    "titre_pilote": "0",
     "Constructor": {
       "constructorId": "aston_martin",
-      "url": "http://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One",
       "name": "Aston Martin",
       "nationality": "British"
     }
@@ -96,9 +138,15 @@
     "points": "37",
     "wins": "0",
     "pole": "1",
+    "podium": "0",
+    "points_all": "749",
+    "wins_all": "2",
+    "podiums_all": "5",
+    "pole_all": "1",
+    "titre_constructeur": "0",
+    "titre_pilote": "0",
     "Constructor": {
       "constructorId": "haas",
-      "url": "http://en.wikipedia.org/wiki/Haas_F1_Team",
       "name": "Haas F1 Team",
       "nationality": "American"
     }
@@ -109,9 +157,15 @@
     "points": "35",
     "wins": "0",
     "pole": "0",
+    "podium": "0",
+    "points_all": "749",
+    "wins_all": "2",
+    "podiums_all": "5",
+    "pole_all": "1",
+    "titre_constructeur": "0",
+    "titre_pilote": "0",
     "Constructor": {
       "constructorId": "alphatauri",
-      "url": "http://en.wikipedia.org/wiki/Scuderia_AlphaTauri",
       "name": "AlphaTauri",
       "nationality": "Italian"
     }
@@ -122,9 +176,15 @@
     "points": "8",
     "wins": "0",
     "pole": "0",
+    "podium": "0",
+    "points_all": "3561",
+    "wins_all": "114",
+    "podiums_all": "312",
+    "pole_all": "128",
+    "titre_constructeur": "9",
+    "titre_pilote": "7",
     "Constructor": {
       "constructorId": "williams",
-      "url": "http://en.wikipedia.org/wiki/Williams_Grand_Prix_Engineering",
       "name": "Williams",
       "nationality": "British"
     }
