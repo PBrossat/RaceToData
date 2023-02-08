@@ -277,7 +277,7 @@ header {
 
 #stats {
   background-color: #111;
-  padding-top: 4rem;
+  padding-top: 3rem;
 }
 
 #stats #CanvaIdGauche {
@@ -422,29 +422,49 @@ canvas {
 }
 
 #mapGP {
-  width: 60%;
-  height: 50vh;
+  width: 45%;
+  height: 40vh;
   border-radius: 1em;
   box-shadow: 0px 0px 30px #fff;
+  padding: 5%;
 }
 
 #divInfosGP {
-  margin-top: 5%;
-  width: 60%;
-  height: 50vh;
+  width: 45%;
+  height: 40vh;
   border-radius: 1em;
   box-shadow: 0px 0px 30px #fff;
+  /* background-color: #fff; */
+  display: flex;
+  flex-direction: column;
+  background-image: url("../data/backgroundGP.png");
+  background-size: cover;
 }
 
 #divInfosGP img {
-  width: 50%;
+  width: 100%;
   height: auto;
-  top: 0%;
-  left: 0%;
+  position: relative;
+}
+
+#divInfosGP h2 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #fff;
+  line-height: 2em;
+  text-align: left;
+  padding: 0px;
+  border-style: none;
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 2%;
 }
 
 #map-et-infos-gp {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
 }
