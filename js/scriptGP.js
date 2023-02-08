@@ -116,7 +116,11 @@ function afficherMapGP() {
         const divInfosGP = document.createElement("div");
         divInfosGP.id = "divInfosGP";
         divMapEtInfosGP.appendChild(divInfosGP);
+        const titreGP = document.createElement("h2");
+        divInfosGP.appendChild(titreGP);
+        titreGP.textContent = tabGlobalDataGP[i].circuitName;
         const imgGP = document.createElement("img");
+        const imgBG = document.createElement("img");
         divInfosGP.appendChild(imgGP);
         imgGP.src = tabGlobalDataGP[i].Image;
       });
