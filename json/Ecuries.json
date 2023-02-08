@@ -1,7 +1,6 @@
 [
   {
     "position": "1",
-    "positionText": "1",
     "points": "759",
     "wins": "17",
     "pole": "8",
@@ -12,15 +11,13 @@
     "pole_all": "81",
     "titre_constructeur": "5",
     "titre_pilote": "6",
-    "Constructor": {
-      "constructorId": "red_bull",
-      "name": "Red Bull",
-      "nationality": "Austrian"
-    }
+    "name": "Red Bull",
+    "nationality": "Austrian",
+    "Image": "data/ecuries/RedBull.png"
   },
+
   {
     "position": "2",
-    "positionText": "2",
     "points": "554",
     "wins": "4",
     "pole": "12",
@@ -31,15 +28,12 @@
     "pole_all": "237",
     "titre_constructeur": "16",
     "titre_pilote": "15",
-    "Constructor": {
-      "constructorId": "ferrari",
-      "name": "Ferrari",
-      "nationality": "Italian"
-    }
+    "name": "Ferrari",
+    "nationality": "Italian",
+    "Image": "data/ecuries/Ferrari.png"
   },
   {
     "position": "3",
-    "positionText": "3",
     "points": "515",
     "wins": "1",
     "pole": "1",
@@ -50,15 +44,12 @@
     "pole_all": "136",
     "titre_constructeur": "8",
     "titre_pilote": "9",
-    "Constructor": {
-      "constructorId": "mercedes",
-      "name": "Mercedes",
-      "nationality": "German"
-    }
+    "name": "Mercedes",
+    "nationality": "German",
+    "Image": "data/ecuries/Mercedes.jpg"
   },
   {
     "position": "4",
-    "positionText": "4",
     "points": "173",
     "wins": "0",
     "pole": "0",
@@ -69,15 +60,12 @@
     "pole_all": "51",
     "titre_constructeur": "2",
     "titre_pilote": "2",
-    "Constructor": {
-      "constructorId": "alpine",
-      "name": "Alpine F1 Team",
-      "nationality": "French"
-    }
+    "name": "Alpine",
+    "nationality": "French",
+    "Image": "data/ecuries/Alpine.png"
   },
   {
     "position": "5",
-    "positionText": "5",
     "points": "159",
     "wins": "0",
     "pole": "0",
@@ -88,15 +76,12 @@
     "pole_all": "155",
     "titre_constructeur": "8",
     "titre_pilote": "12",
-    "Constructor": {
-      "constructorId": "mclaren",
-      "name": "McLaren",
-      "nationality": "British"
-    }
+    "name": "McLaren",
+    "nationality": "British",
+    "Image": "data/ecuries/McLaren.png"
   },
   {
     "position": "6",
-    "positionText": "6",
     "points": "55",
     "wins": "0",
     "pole": "0",
@@ -107,15 +92,12 @@
     "pole_all": "12",
     "titre_constructeur": "0",
     "titre_pilote": "2",
-    "Constructor": {
-      "constructorId": "alfa",
-      "name": "Alfa Romeo",
-      "nationality": "Swiss"
-    }
+    "name": "Alfa Romeo",
+    "nationality": "Swiss",
+    "Image": "data/ecuries/AlfaRomeo.png"
   },
   {
     "position": "7",
-    "positionText": "7",
     "points": "55",
     "wins": "0",
     "pole": "0",
@@ -126,15 +108,12 @@
     "pole_all": "0",
     "titre_constructeur": "0",
     "titre_pilote": "0",
-    "Constructor": {
-      "constructorId": "aston_martin",
-      "name": "Aston Martin",
-      "nationality": "British"
-    }
+    "name": "Aston Martin",
+    "nationality": "British",
+    "Image": "data/ecuries/AstonMartin.jpg"
   },
   {
     "position": "8",
-    "positionText": "8",
     "points": "37",
     "wins": "0",
     "pole": "1",
@@ -145,15 +124,13 @@
     "pole_all": "1",
     "titre_constructeur": "0",
     "titre_pilote": "0",
-    "Constructor": {
-      "constructorId": "haas",
-      "name": "Haas F1 Team",
-      "nationality": "American"
-    }
+    "name": "Haas",
+    "nationality": "American",
+    "Image": "data/ecuries/Haas.png"
   },
+
   {
     "position": "9",
-    "positionText": "9",
     "points": "35",
     "wins": "0",
     "pole": "0",
@@ -164,15 +141,13 @@
     "pole_all": "1",
     "titre_constructeur": "0",
     "titre_pilote": "0",
-    "Constructor": {
-      "constructorId": "alphatauri",
-      "name": "AlphaTauri",
-      "nationality": "Italian"
-    }
+    "name": "AlphaTauri",
+    "nationality": "Italian",
+    "Image": "data/ecuries/AlphaTauri.png"
   },
+
   {
     "position": "10",
-    "positionText": "10",
     "points": "8",
     "wins": "0",
     "pole": "0",
@@ -183,10 +158,8 @@
     "pole_all": "128",
     "titre_constructeur": "9",
     "titre_pilote": "7",
-    "Constructor": {
-      "constructorId": "williams",
-      "name": "Williams",
-      "nationality": "British"
-    }
+    "name": "Williams",
+    "nationality": "British",
+    "Image": "data/ecuries/Williams.jpg"
   }
 ]

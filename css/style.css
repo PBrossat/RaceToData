@@ -528,27 +528,87 @@ canvas {
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
 }
 
-#divInfosEcuries {
-  width: 40%;
-  height: 50vh;
-  box-shadow: 0px 0px 30px #fff;
-  background-color: #ffffff;
-}
-
-#divInfosEcuries img {
-  object-fit: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-}
-
-#divInfosEcuries #carteEcuries {
-  width: auto;
-  height: auto;
-  display: flex;
-}
-
 #map-et-infos-Ecuries {
   display: flex;
+}
+
+#stats .cardEcuries {
+  width: 320px;
+  height: 460px;
+  border-radius: 15px;
+  /* permet de centrer la carte   */
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 0px 20px #fff;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  transition: transform 500ms ease-in-out;
+  transform-style: preserve-3d;
+}
+
+#stats .cardEcuries:hover {
+  transform: rotateY(180deg);
+}
+
+#stats .cardEcuries .side {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  position: absolute;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+#stats .cardEcuries .side .front--side {
+  z-index: 0;
+}
+
+#stats .cardEcuries .side .back--side {
+  transform: rotateY(180deg);
+  background-color: red;
+}
+
+#stats .cardEcuries #infosEcuriesDansCarte {
+  width: 40%;
+}
+
+#stats .cardEcuries .nomEcuries {
+  color: lightslategray;
+  text-align: center;
+  margin-block-end: 26px;
+  font-size: xx-large;
+}
+
+#stats .cardEcuries .palmaresEcuries {
+  text-align: center;
+  font-size: smaller;
+  margin-bottom: 26px;
+  font-weight: bold;
+  margin-top: -3%;
+}
+
+#stats .cardEcuries #nationalité:before {
+  content: "Nationalité : ";
+  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
+}
+
+#stats .cardEcuries #nbPoints:before {
+  content: "Points marqués : ";
+  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
+}
+
+#stats .cardEcuries #nbVictoires:before {
+  content: "Nombre de victoires : ";
+  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
+}
+
+#stats .cardEcuries #nbPodiums:before {
+  content: "Nombre de podiums : ";
+  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
+}
+
+#stats .cardEcuries #nbPolesPositions:before {
+  content: "Nombre de poles positions : ";
+  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
 }

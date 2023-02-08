@@ -1,30 +1,71 @@
-//Requete API pour avoir des infos sur les GP
-async function recupererInfosEcuries() {
-  let response = await fetch(
-    "https://ergast.com/api/f1/2022/constructors.json"
-  );
-  response = await response.json();
-  return response["MRData"]["ConstructorTable"]["Constructors"];
+//Requete API pour avoir des infos sur les Ecuries
+let tabGlobalDataEcuries = {};
+let Ecuries = [];
+function recupererInfosEcuries() {
+  fetch("json/Ecuries.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const EcuriesData = data;
+      const tabData = EcuriesData.map((Ecuries) => {
+        return {
+          Nom: Ecuries["name"],
+          Nationalité: Ecuries["nationality"],
+          nbPoints: Ecuries["points"],
+          nbPoints_Totales: Ecuries["points_all"],
+          nbVictoires: Ecuries["wins"],
+          nbVictoiresTotales: Ecuries["wins_all"],
+          nbTitresPilote: Ecuries["titre_pilote"],
+          nbTitresonstructeur: Ecuries["titre_constructeur"],
+          nbPodiums: Ecuries["podium"],
+          nbPodiumsTotales: Ecuries["podium_all"],
+          nbPolesPositions: Ecuries["pole"],
+          nbPolesPositionsTotales: Ecuries["pole_all"],
+          Image: Ecuries["Image"],
+        };
+      });
+      let tabGlobalDataEcuriesTemp = tabData;
+      for (Ecuries in tabGlobalDataEcuriesTemp) {
+        let objetEcuries = tabGlobalDataEcuriesTemp[Ecuries];
+        tabGlobalDataEcuries[objetEcuries.Nom] = objetEcuries;
+      }
+    });
 }
 
-//! window.localStorage
+function afficherStatsEcuries() {
+  const StatsEcuries = document.querySelector("#stats");
 
-let tabGlobalDataEcuries;
+  const sectionStatsEcuries = document.createElement("section");
+  sectionStatsEcuries.innerHTML +=
+    "<h2>Analyse des données relatives aux Ecuries</h2>";
 
-tabGlobalDataEcuries = await recupererInfosEcuries();
+  const divMapEtInfos = document.createElement("div");
+  divMapEtInfos.id = "divMapEtInfosEcuries";
 
-//console.log(tabGlobalDataEcuries);
+  StatsEcuries.appendChild(sectionStatsEcuries);
+  sectionStatsEcuries.appendChild(divMapEtInfos);
 
-const AlfaRomeo = tabGlobalDataEcuries[0];
-const AlphaTauri = tabGlobalDataEcuries[1];
-const Alpine = tabGlobalDataEcuries[2];
-const AstonMartin = tabGlobalDataEcuries[3];
-const Ferrari = tabGlobalDataEcuries[4];
-const Haas = tabGlobalDataEcuries[5];
-const McLaren = tabGlobalDataEcuries[6];
-const Mercedes = tabGlobalDataEcuries[7];
-const RedBull = tabGlobalDataEcuries[8];
-const Williams = tabGlobalDataEcuries[9];
+  // Création de deux div enfants de divMapEtInfosEcuries
+  creationDivMapEcuries();
+  creationDivInfosEcuries();
+}
+
+function creationDivMapEcuries() {
+  const MapEtInfos = document.querySelector("#divMapEtInfosEcuries");
+
+  const divMapEcuries = document.createElement("div");
+  divMapEcuries.id = "divMapEcuries";
+
+  MapEtInfos.appendChild(divMapEcuries);
+}
+
+function creationDivInfosEcuries() {
+  const MapEtInfos = document.querySelector("#divMapEtInfosEcuries");
+
+  const divInfosEcuries = document.createElement("div");
+  divInfosEcuries.id = "divInfosEcuries";
+
+  MapEtInfos.appendChild(divInfosEcuries);
+}
 
 //---------------------------------GESTION DE LA MAP--------------------------------------
 
@@ -43,10 +84,6 @@ function afficherMapEcuries() {
   const divBoutonRetour = document.createElement("div");
   divMapEtInfosEcuries.appendChild(divBoutonRetour);
   divBoutonRetour.id = "boutonEcuries";
-
-  const divCarteEcuries = document.createElement("div");
-  divMapEtInfosEcuries.appendChild(divCarteEcuries);
-  divCarteEcuries.id = "carteEcuries";
 
   const boutonDecouvrirStatsEcuries = document.querySelector("#boutonEcuries");
   boutonDecouvrirStatsEcuries.addEventListener("click", function () {
@@ -98,9 +135,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/Ferrari.png";
+      creationCarteEcuries("Ferrari");
     }); //Ferrari
 
   L.marker([42.907266, 12.96862], {
@@ -116,9 +151,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/AlphaTauri.png";
+      creationCarteEcuries("AlphaTauri");
     }); //AlphaTauri
 
   L.marker([46.807266, 8.6862], {
@@ -134,9 +167,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/AlfaRomeo.png";
+      creationCarteEcuries("Alfa Romeo");
     }); //Alfa Romeo
 
   L.marker([48.07266, 15.196862], {
@@ -152,9 +183,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/RedBull.png";
+      creationCarteEcuries("Red Bull");
     }); //RedBull
 
   L.marker([51.507266, 10.196862], {
@@ -170,9 +199,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/Mercedes.png";
+      creationCarteEcuries("Mercedes");
     }); //Mercedes
 
   L.marker([47.507266, 0.696862], {
@@ -188,9 +215,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/Alpine.png";
+      creationCarteEcuries("Alpine");
     }); //Alpine
 
   L.marker([51.507266, -1.196862], {
@@ -206,9 +231,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/McLaren.png";
+      creationCarteEcuries("McLaren");
     }); //McLaren
 
   L.marker([52.907266, -1.12], {
@@ -224,9 +247,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/AstonMartin.jpg";
+      creationCarteEcuries("Aston Martin");
     }); //Aston Martin
 
   L.marker([51.907266, -2.011324], {
@@ -242,9 +263,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/Williams.jpg";
+      creationCarteEcuries("Williams");
     }); //Williams
 
   L.marker([37.907266, -93.196862], {
@@ -260,9 +279,7 @@ function afficherMapEcuries() {
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
-      const imgEcuries = document.createElement("img");
-      divInfosEcuries.appendChild(imgEcuries);
-      imgEcuries.src = "data/ecuries/Haas.png";
+      creationCarteEcuries("Haas");
     }); //Haas
 }
 
@@ -271,11 +288,14 @@ function afficherMapEcuries() {
 function creationDivCarteEcuries() {
   const divCarteEcuries = document.querySelector("#divInfosEcuries");
 
-  const carteEcuries = document.createElement("div");
-  carteEcuries.id = "cardEcuries";
+  const carteEcuriesRectoVerso = document.createElement("div");
+  carteEcuriesRectoVerso.className = "cardEcuries";
 
-  const infosEcuries = document.createElement("div");
-  infosEcuries.id = "infosEcuriesDansCarte";
+  const carteEcuriesFace = document.createElement("div");
+  carteEcuriesFace.className = "side front--side";
+
+  const carteEcuriesDos = document.createElement("div");
+  carteEcuriesDos.className = "side back--side";
 
   const nomEcuries = document.createElement("h1");
   nomEcuries.className = "nomEcuries";
@@ -284,25 +304,36 @@ function creationDivCarteEcuries() {
   nationalité.className = "palmaresEcuries";
   nationalité.id = "nationalité";
 
-  // const nbVictoires = document.createElement("p");
-  // nbVictoires.className = "palmaresEcuries";
-  // nbVictoires.id = "nbVictoires";
+  const nbPoints = document.createElement("p");
+  nbPoints.className = "palmaresEcuries";
+  nbPoints.id = "nbPoints";
 
-  // const nbPodiums = document.createElement("p");
-  // nbPodiums.className = "palmaresEcuries";
-  // nbPodiums.id = "nbPodiums";
+  const nbVictoires = document.createElement("p");
+  nbVictoires.className = "palmaresEcuries";
+  nbVictoires.id = "nbVictoires";
 
-  divCarteEcuries.appendChild(carteEcuries);
-  carteEcuries.appendChild(infosEcuries);
-  infosEcuries.appendChild(nomEcuries);
-  infosEcuries.appendChild(nationalité);
-  // infosEcuries.appendChild(nbVictoires);
-  // infosEcuries.appendChild(nbPodiums);
+  const nbPodiums = document.createElement("p");
+  nbPodiums.className = "palmaresEcuries";
+  nbPodiums.id = "nbPodiums";
+
+  const nbPolesPositions = document.createElement("p");
+  nbPolesPositions.className = "palmaresEcuries";
+  nbPolesPositions.id = "nbPolesPositions";
+
+  divCarteEcuries.appendChild(carteEcuriesRectoVerso);
+  carteEcuriesRectoVerso.appendChild(carteEcuriesFace);
+  carteEcuriesRectoVerso.appendChild(carteEcuriesDos);
+  carteEcuriesDos.appendChild(nomEcuries);
+  carteEcuriesDos.appendChild(nationalité);
+  carteEcuriesDos.appendChild(nbPoints);
+  carteEcuriesDos.appendChild(nbVictoires);
+  carteEcuriesDos.appendChild(nbPodiums);
+  carteEcuriesDos.appendChild(nbPolesPositions);
 }
 
 function creationCarteEcuries(nameEcuries) {
-  divInfosEcuriess.innerHTML = ""; //vide le container () parent
-  creationDivCarteEcuriess(); //création du container carte
+  divInfosEcuries.innerHTML = ""; //vide le container () parent
+  creationDivCarteEcuries(); //création du container carte
   //si il existe dejà des choses dans la carte => vider la carte sinon rien faire
   //! palmaresEcuries est remplie SSI la carte est remplie car on remplie tous les champs de la carte en même temps
   const palmaresEcuries = document.querySelector("#palmaresEcuries");
@@ -311,17 +342,21 @@ function creationCarteEcuries(nameEcuries) {
     palmaresEcuries.innerHTML = "";
     nomEcuries.innerHTML = "";
   }
-  console.log(tabGlobalDataEcuries);
-  var cardEcuries = document.querySelector("#cardEcuries");
-  cardEcuries.style.backgroundImage = `url("tabGlobalDataEcuriess[${nameEcuries}].Image")`;
-  cardEcuries.style.backgroundSize = "cover";
+  let cardEcuriesFace = document.querySelector(".side.front--side");
+  let cardEcuriesDos = document.querySelector(".side.back--side");
+  cardEcuriesFace.style.backgroundImage = `url(${tabGlobalDataEcuries[nameEcuries].Image})`;
+  cardEcuriesFace.style.backgroundSize = "cover";
   nomEcuries.innerHTML = `${nameEcuries}`;
-  document.querySelector("#nationalité").innerHTML =
+  cardEcuriesDos.querySelector("#nationalité").innerHTML =
     tabGlobalDataEcuries[`${nameEcuries}`].Nationalité;
-  // document.querySelector("#nbVictoires").innerHTML =
-  //   tabGlobalDataEcuries[`${nameEcuries}`].nbVictoires;
-  // document.querySelector("#nbPodiums").innerHTML =
-  //   tabGlobalDataEcuries[`${nameEcuries}`].nbPodiums;
+  cardEcuriesDos.querySelector("#nbPoints").innerHTML =
+    tabGlobalDataEcuries[`${nameEcuries}`].nbPoints;
+  cardEcuriesDos.querySelector("#nbVictoires").innerHTML =
+    tabGlobalDataEcuries[`${nameEcuries}`].nbVictoires;
+  cardEcuriesDos.querySelector("#nbPodiums").innerHTML =
+    tabGlobalDataEcuries[`${nameEcuries}`].nbPodiums;
+  cardEcuriesDos.querySelector("#nbPolesPositions").innerHTML =
+    tabGlobalDataEcuries[`${nameEcuries}`].nbPolesPositions;
 }
 
 //-------------------------------Gestion du click sur le bouton de la carte des ecuries--------------------------------------------------
@@ -331,7 +366,9 @@ const boutonDecouvrirStatsEcuries = document.querySelector(
 );
 boutonDecouvrirStatsEcuries.addEventListener("click", function () {
   document.querySelector("#stats").innerHTML = "";
+  afficherStatsEcuries();
   afficherMapEcuries();
+  recupererInfosEcuries();
 });
 
 //--------------------------------------GET----------------------------------------------------------------
@@ -503,85 +540,3 @@ function grapheEcurieBatonPoints() {
   const graphique = document.getElementById("CanvaId");
   const chart = new Chart(graphique, configuration);
 }
-
-// -----------------------------------------XML-----------------------------------------------------------------
-
-// fetch("https://ergast.com/api/f1/2022/constructorStandings")
-//   .then((response) => response.text())
-//   .then((str) => {
-//     const parser = new DOMParser();
-//     const xml = parser.parseFromString(str, "text/xml");
-//     const json = xmlToJson(xml);
-//     const values = json.map((element) => element.points);
-//     console.log(values);
-//   });
-
-// function xmlToJson(xml) {
-//   let obj = [];
-//   if (xml.nodeType === 1) {
-//     if (xml.attributes.length > 0) {
-//       obj["@attributes"] = {};
-//       for (let j = 0; j < xml.attributes.length; j++) {
-//         const attribute = xml.attributes.item(j);
-//         obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-//       }
-//     }
-//   } else if (xml.nodeType === 3) {
-//     obj = xml.nodeValue;
-//   }
-//   if (xml.hasChildNodes()) {
-//     for (let i = 0; i < xml.childNodes.length; i++) {
-//       const item = xml.childNodes.item(i);
-//       const nodeName = item.nodeName;
-//       if (typeof obj[nodeName] === "undefined") {
-//         obj[nodeName] = xmlToJson(item);
-//       } else {
-//         if (typeof obj[nodeName].push === "undefined") {
-//           const old = obj[nodeName];
-//           obj[nodeName] = [];
-//           obj[nodeName].push(old);
-//         }
-//         obj[nodeName].push(xmlToJson(item));
-//       }
-//     }
-//   }
-//   return obj;
-// }
-
-// let xmlString = "https://ergast.com/api/f1/2022/constructorStandings";
-
-// parse the XML string into an XML document
-// let parser = new DOMParser();
-// let xmlDoc = parser.parseFromString(xmlString, "text/xml");
-
-// extract data from the XML document and convert it to JSON
-// let jsonData = {};
-// let points = xmlDoc.getElementsByTagName("points")[0];
-
-// if (points) {
-//   jsonData.points = points.textContent;
-// }
-
-// const xml2js = require("xml2js");
-// const request = require("request");
-
-// // URL de l'emplacement du fichier XML
-// const url = "https://ergast.com/api/f1/2022/constructorStandings";
-
-// // Récupérer le contenu du fichier XML depuis l'URL
-// request(url, (err, xml) => {
-//   if (err) throw err;
-
-//   // Convertir le contenu XML en objet JSON
-//   xml2js.parseString(xml, (err, result) => {
-//     if (err) throw err;
-
-//     // Le contenu XML est maintenant disponible sous forme d'objet JSON
-//     const json = result;
-
-//     // Extraire les données nécessaires
-//     const donnee =
-//       json.StandingsTable.StandingsLists.ConstructorStandings["points"];
-//     console.log(donnee);
-//   });
-// });
