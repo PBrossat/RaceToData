@@ -31,15 +31,22 @@ const Williams = tabGlobalDataEcuries[9];
 function afficherMapEcuries() {
   //Création des div nécessaires
   const sectionStats = document.querySelector("#stats");
+
   const divMapEtInfosEcuries = document.createElement("div");
   divMapEtInfosEcuries.id = "map-et-infos-Ecuries";
   sectionStats.appendChild(divMapEtInfosEcuries);
+
   const divMapEcuries = document.createElement("div");
   divMapEtInfosEcuries.appendChild(divMapEcuries);
   divMapEcuries.id = "mapEcuries";
+
   const divBoutonRetour = document.createElement("div");
   divMapEtInfosEcuries.appendChild(divBoutonRetour);
   divBoutonRetour.id = "boutonEcuries";
+
+  const divCarteEcuries = document.createElement("div");
+  divMapEtInfosEcuries.appendChild(divCarteEcuries);
+  divCarteEcuries.id = "carteEcuries";
 
   const boutonDecouvrirStatsEcuries = document.querySelector("#boutonEcuries");
   boutonDecouvrirStatsEcuries.addEventListener("click", function () {
@@ -48,14 +55,14 @@ function afficherMapEcuries() {
 
   //Création de la map
   let mapEcuries = L.map("mapEcuries", {
-    center: [48.866667, 2.333333],
-    zoom: 1.5,
+    center: [48.866667, -0.333333],
+    zoom: 4,
   });
   const layerPrincipale = L.tileLayer(
     "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
     {
       maxZoom: 8,
-      minZoom: 1.5,
+      minZoom: 2,
 
       attribution:
         'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
@@ -84,6 +91,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([44.907266, 11.16862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -98,6 +109,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([42.907266, 12.96862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -112,6 +127,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([46.807266, 8.6862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -126,6 +145,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([48.07266, 15.196862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -140,6 +163,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([51.507266, 10.196862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -154,6 +181,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([47.507266, 0.696862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -168,6 +199,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([51.507266, -1.196862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -182,6 +217,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([52.907266, -1.12], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -196,6 +235,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([51.907266, -2.011324], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -210,6 +253,10 @@ function afficherMapEcuries() {
     .addTo(mapEcuries)
     .on("click", function () {
       mapEcuries.flyTo([37.907266, -93.196862], mapEcuries.getMaxZoom());
+      const existeDivInfosEcuries = document.querySelector("#divInfosEcuries");
+      if (existeDivInfosEcuries) {
+        existeDivInfosEcuries.remove();
+      }
       const divInfosEcuries = document.createElement("div");
       divInfosEcuries.id = "divInfosEcuries";
       divMapEtInfosEcuries.appendChild(divInfosEcuries);
@@ -217,6 +264,64 @@ function afficherMapEcuries() {
       divInfosEcuries.appendChild(imgEcuries);
       imgEcuries.src = "data/ecuries/Haas.png";
     }); //Haas
+}
+
+//-----------------------------Cartes---------------------------------------------------------------------------------------------
+
+function creationDivCarteEcuries() {
+  const divCarteEcuries = document.querySelector("#divInfosEcuries");
+
+  const carteEcuries = document.createElement("div");
+  carteEcuries.id = "cardEcuries";
+
+  const infosEcuries = document.createElement("div");
+  infosEcuries.id = "infosEcuriesDansCarte";
+
+  const nomEcuries = document.createElement("h1");
+  nomEcuries.className = "nomEcuries";
+
+  const nationalité = document.createElement("p");
+  nationalité.className = "palmaresEcuries";
+  nationalité.id = "nationalité";
+
+  // const nbVictoires = document.createElement("p");
+  // nbVictoires.className = "palmaresEcuries";
+  // nbVictoires.id = "nbVictoires";
+
+  // const nbPodiums = document.createElement("p");
+  // nbPodiums.className = "palmaresEcuries";
+  // nbPodiums.id = "nbPodiums";
+
+  divCarteEcuries.appendChild(carteEcuries);
+  carteEcuries.appendChild(infosEcuries);
+  infosEcuries.appendChild(nomEcuries);
+  infosEcuries.appendChild(nationalité);
+  // infosEcuries.appendChild(nbVictoires);
+  // infosEcuries.appendChild(nbPodiums);
+}
+
+function creationCarteEcuries(nameEcuries) {
+  divInfosEcuriess.innerHTML = ""; //vide le container () parent
+  creationDivCarteEcuriess(); //création du container carte
+  //si il existe dejà des choses dans la carte => vider la carte sinon rien faire
+  //! palmaresEcuries est remplie SSI la carte est remplie car on remplie tous les champs de la carte en même temps
+  const palmaresEcuries = document.querySelector("#palmaresEcuries");
+  const nomEcuries = document.querySelector(".nomEcuries");
+  if (palmaresEcuries != null) {
+    palmaresEcuries.innerHTML = "";
+    nomEcuries.innerHTML = "";
+  }
+  console.log(tabGlobalDataEcuries);
+  var cardEcuries = document.querySelector("#cardEcuries");
+  cardEcuries.style.backgroundImage = `url("tabGlobalDataEcuriess[${nameEcuries}].Image")`;
+  cardEcuries.style.backgroundSize = "cover";
+  nomEcuries.innerHTML = `${nameEcuries}`;
+  document.querySelector("#nationalité").innerHTML =
+    tabGlobalDataEcuries[`${nameEcuries}`].Nationalité;
+  // document.querySelector("#nbVictoires").innerHTML =
+  //   tabGlobalDataEcuries[`${nameEcuries}`].nbVictoires;
+  // document.querySelector("#nbPodiums").innerHTML =
+  //   tabGlobalDataEcuries[`${nameEcuries}`].nbPodiums;
 }
 
 //-------------------------------Gestion du click sur le bouton de la carte des ecuries--------------------------------------------------

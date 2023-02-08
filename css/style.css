@@ -482,7 +482,7 @@ canvas {
   padding: 0.7em 1.7em;
   font-size: 18px;
   border-radius: 0.5em;
-  background: #e8e8e8;
+  background: #111;
   border: 1px solid #e8e8e8;
   transition: all 0.3s;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
@@ -509,6 +509,12 @@ canvas {
   align-items: center;
   justify-content: center;
   width: 50%;
+}
+
+#divInfosEcuries #carteEcuries {
+  width: auto;
+  height: auto;
+  display: flex;
 }
 
 #map-et-infos-Ecuries {
