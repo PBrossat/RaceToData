@@ -50,11 +50,17 @@ function creationDivInfosPilotes() {
 function creationDivCartePilotes() {
   const divCartePilotes = document.querySelector("#divInfosPilotes");
 
-  const cartePilote = document.createElement("div");
-  cartePilote.id = "cardPilote";
+  const cartePiloteRectoVerso = document.createElement("div");
+  cartePiloteRectoVerso.className = "cardPilote";
 
-  const infosPilote = document.createElement("div");
-  infosPilote.id = "infosPiloteDansCarte";
+  const cartePiloteFace = document.createElement("div");
+  cartePiloteFace.className = "side front--side";
+
+  const cartePiloteDos = document.createElement("div");
+  cartePiloteDos.className = "side back--side";
+
+  // const infosPilote = document.createElement("div");
+  // infosPilote.id = "infosPiloteDansCarte";
 
   const nomPilote = document.createElement("h1");
   nomPilote.className = "nomPilote";
@@ -79,15 +85,16 @@ function creationDivCartePilotes() {
   nbPodiums.className = "palmaresPilote";
   nbPodiums.id = "nbPodiums";
 
-  divCartePilotes.appendChild(cartePilote);
-  // cartePilote.appendChild(imagePilote);
-  cartePilote.appendChild(infosPilote);
-  infosPilote.appendChild(nomPilote);
-  infosPilote.appendChild(nationalité);
-  infosPilote.appendChild(team);
-  infosPilote.appendChild(nbVictoires);
-  infosPilote.appendChild(nbGpDisputes);
-  infosPilote.appendChild(nbPodiums);
+  divCartePilotes.appendChild(cartePiloteRectoVerso);
+  cartePiloteRectoVerso.appendChild(cartePiloteFace);
+  cartePiloteRectoVerso.appendChild(cartePiloteDos);
+  // cartePiloteDos.appendChild(infosPilote);
+  cartePiloteDos.appendChild(nomPilote);
+  cartePiloteDos.appendChild(nationalité);
+  cartePiloteDos.appendChild(team);
+  cartePiloteDos.appendChild(nbVictoires);
+  cartePiloteDos.appendChild(nbGpDisputes);
+  cartePiloteDos.appendChild(nbPodiums);
 }
 
 //----------------------------Récuperation Infos Pilotes depuis fichier json-------------
@@ -419,20 +426,22 @@ function creationCartePilote(namePilote) {
   if (palmaresPilote != null) {
     palmaresPilote.innerHTML = "";
     nomPilote.innerHTML = "";
-    imgPilote.innerHTML = "";
   }
-  var cardPilote = document.querySelector("#cardPilote");
-  cardPilote.style.backgroundImage = `url(${tabGlobalDataPilotes[namePilote].Image})`;
-  cardPilote.style.backgroundSize = "cover";
+  var cardPiloteFace = document.querySelector(".side.front--side");
+  var cardPiloteDos = document.querySelector(".side.back--side");
+  cardPiloteFace.style.backgroundImage = `url(${tabGlobalDataPilotes[namePilote].Image})`;
+  cardPiloteFace.style.backgroundSize = "cover";
   nomPilote.innerHTML = `${namePilote}`;
-  document.querySelector("#nationalité").innerHTML =
+  cardPiloteDos.querySelector("#nationalité").innerHTML =
     tabGlobalDataPilotes[`${namePilote}`].Nationalité;
-  document.querySelector("#team").innerHTML =
+  cardPiloteDos.querySelector("#team").innerHTML =
     tabGlobalDataPilotes[`${namePilote}`].Ecurie;
-  document.querySelector("#nbVictoires").innerHTML =
+  cardPiloteDos.querySelector("#nbVictoires").innerHTML =
     tabGlobalDataPilotes[`${namePilote}`].nbVictoires;
-  document.querySelector("#nbGpDisputes").innerHTML =
+  cardPiloteDos.querySelector("#nbGpDisputes").innerHTML =
     tabGlobalDataPilotes[`${namePilote}`].nbGpDisputes;
-  document.querySelector("#nbPodiums").innerHTML =
+  cardPiloteDos.querySelector("#nbPodiums").innerHTML =
     tabGlobalDataPilotes[`${namePilote}`].nbPodiums;
 }
+
+function creationCartePiloteVerso() {}
