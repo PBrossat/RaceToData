@@ -512,6 +512,7 @@ canvas {
   width: 100%;
   max-height: 10%;
   height: auto;
+  text-shadow: 5px 5px #111;
 }
 
 #divInfosGPContent p {
