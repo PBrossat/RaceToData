@@ -57,7 +57,7 @@
       "CircuitLength": "4.381",
       "RaceDistance": "306.63",
       "LapRecord": "1:16.627",
-      "Lap Reord Holder": "Lewis Hamilton (2020)",
+      "RecordHolder": "Lewis Hamilton (2020)",
       "Image": "data/grands-prix/hungaroring.png"
     },
     {
@@ -206,7 +206,7 @@
       "NumberLaps": "58",
       "CircuitLength": "5.281",
       "RaceDistance": "306.183",
-      "lapecord": "1:26.103",
+      "lapRecord": "1:26.103",
       "RecordHolder": "Max Verstappen (2021)",
       "Image": "data/grands-prix/abuDhabi.png"
     },
