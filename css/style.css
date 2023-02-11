@@ -104,6 +104,9 @@ header {
   .banner-txt h3 {
     font-size: 0.7em;
   }
+  #map-et-infos-gp #divInfosGPFront h1 {
+    font-size: 1.5em;
+  }
   /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
 }
 
@@ -138,15 +141,17 @@ header {
   #map-et-infos-gp #mapGP {
     width: 90%;
     height: 40vh;
+    margin-bottom: 10%;
   }
 
   #map-et-infos-gp #divInfosGP {
     width: 90%;
-    height: 60vh;
+    height: 40vh;
   }
 
   #map-et-infos-gp {
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
   }
   /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
@@ -421,6 +426,14 @@ canvas {
   display: block;
 }
 
+#map-et-infos-gp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 #mapGP {
   width: 45%;
   height: 40vh;
@@ -433,38 +446,71 @@ canvas {
   width: 45%;
   height: 40vh;
   border-radius: 1em;
-  box-shadow: 0px 0px 30px #fff;
-  /* background-color: #fff; */
+  perspective: 1000px;
+  background-color: transparent;
+}
+
+#divInfosGPContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+#divInfosGP:hover #divInfosGPContent {
+  transform: rotateY(180deg);
+}
+
+#divInfosGPContent img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 85%;
+  position: relative;
+  margin: auto;
+}
+
+#divInfosGPContent h1 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+  border-style: none;
+  width: 100%;
+  max-height: 10%;
+  height: auto;
+}
+
+#divInfosGPContent p {
+  letter-spacing: 1px;
+  font-size: 1em;
+  margin-top: 0px;
+  color: #fff;
+  line-height: 2em;
+}
+
+#divInfosGPFront,
+#divInfosGPBack {
+  box-shadow: 0px 0px 20px rgb(255, 255, 255);
+  position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+#divInfosGPFront {
   background-image: url("../data/backgroundGP.png");
   background-size: cover;
 }
 
-#divInfosGP img {
-  width: 100%;
-  height: auto;
-  position: relative;
-}
-
-#divInfosGP h2 {
-  font-size: 2em;
-  font-weight: 700;
-  color: #fff;
-  line-height: 2em;
-  text-align: left;
-  padding: 0px;
-  border-style: none;
-  width: fit-content;
-  margin: auto;
-  margin-bottom: 2%;
-}
-
-#map-et-infos-gp {
-  display: flex;
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 5%;
-  margin-right: 5%;
+#divInfosGPBack {
+  background-image: url("../data/backgroundGP.png");
+  background-size: cover;
+  transform: rotateY(180deg);
 }

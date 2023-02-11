@@ -116,13 +116,49 @@ function afficherMapGP() {
         const divInfosGP = document.createElement("div");
         divInfosGP.id = "divInfosGP";
         divMapEtInfosGP.appendChild(divInfosGP);
-        const titreGP = document.createElement("h2");
-        divInfosGP.appendChild(titreGP);
-        titreGP.textContent = tabGlobalDataGP[i].circuitName;
+        const divInfosGPContent = document.createElement("div");
+        divInfosGPContent.id = "divInfosGPContent";
+        divInfosGP.appendChild(divInfosGPContent);
+
+        //PARTIE FRONT
+        const divInfosGPFront = document.createElement("div");
+        divInfosGPFront.id = "divInfosGPFront";
+        divInfosGPContent.appendChild(divInfosGPFront);
+        const titreGP = document.createElement("h1");
         const imgGP = document.createElement("img");
-        const imgBG = document.createElement("img");
-        divInfosGP.appendChild(imgGP);
+        divInfosGPFront.appendChild(titreGP);
+        divInfosGPFront.appendChild(imgGP);
+        titreGP.textContent = tabGlobalDataGP[i].circuitName;
         imgGP.src = tabGlobalDataGP[i].Image;
+
+        //PARTIE BACK
+        const divInfosGPBack = document.createElement("div");
+        divInfosGPBack.id = "divInfosGPBack";
+        divInfosGPContent.appendChild(divInfosGPBack);
+        const firstGP = document.createElement("p");
+        const numberLaps = document.createElement("p");
+        const circuitLength = document.createElement("p");
+        const raceDistance = document.createElement("p");
+        const lapRecord = document.createElement("p");
+        const recordHolder = document.createElement("p");
+        divInfosGPBack.appendChild(firstGP);
+        divInfosGPBack.appendChild(numberLaps);
+        divInfosGPBack.appendChild(circuitLength);
+        divInfosGPBack.appendChild(raceDistance);
+        divInfosGPBack.appendChild(lapRecord);
+        divInfosGPBack.appendChild(recordHolder);
+        firstGP.textContent =
+          "Premier Grand Prix : " + tabGlobalDataGP[i].FirstGP;
+        numberLaps.textContent =
+          "Nombre de tours : " + tabGlobalDataGP[i].NumberLaps;
+        circuitLength.textContent =
+          "Longueur du circuit : " + tabGlobalDataGP[i].CircuitLength + " km";
+        raceDistance.textContent =
+          "Distance de la course : " + tabGlobalDataGP[i].RaceDistance + " km";
+        lapRecord.textContent =
+          "Record du tour : " + tabGlobalDataGP[i].LapRecord;
+        recordHolder.textContent =
+          "Recordman : " + tabGlobalDataGP[i].RecordHolder;
       });
   }
 }
