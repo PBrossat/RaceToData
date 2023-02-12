@@ -4,7 +4,7 @@ async function recupererInfosGpAPI() {
   response = await response.json();
   return response["MRData"]["CircuitTable"]["Circuits"];
 }
-
+//Requete pour avoir les infos sur les GP contenues dans notre fichier json
 async function recupererInfosGpJSON() {
   let response = await fetch("http://localhost:3000/infosGpJSON");
   response = await response.json();
@@ -51,7 +51,7 @@ for (let i = 0; i < tabGlobalDataGpAPI.length; i++) {
     tabGlobalDataGpJSON[i]
   );
 }
-console.log(tabGlobalDataGP);
+//console.log(tabGlobalDataGP);
 
 //---------------------------------GESTION DE LA MAP--------------------------------------
 
@@ -64,8 +64,17 @@ function afficherMapGP() {
   const divMapGP = document.createElement("div");
   divMapEtInfosGP.appendChild(divMapGP);
   divMapGP.id = "mapGP";
+  //Création du texte d'introduction pour dire à l'utilisateur comment voir les infos gràace à la carte
+  const divInfosGP = document.createElement("div");
+  divInfosGP.id = "divInfosGP";
+  divMapEtInfosGP.appendChild(divInfosGP);
+  const textIntro = document.createElement("h3");
+  divInfosGP.appendChild(textIntro);
+  textIntro.innerHTML =
+    " Cliquez sur un circuit pour avoir son tracé, et survolez sa carte pour avoir encore plus d'informations !";
+
   //Création de la map
-  var mapGP = L.map("mapGP", {
+  let mapGP = L.map("mapGP", {
     center: [48.866667, 2.333333],
     zoom: 1.5,
   });
@@ -95,7 +104,6 @@ function afficherMapGP() {
   });
 
   //Création des markers
-
   for (let i = 0; i < tabGlobalDataGP.length; i++) {
     L.marker(
       [tabGlobalDataGP[i].Location.lat, tabGlobalDataGP[i].Location.long],

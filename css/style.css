@@ -149,6 +149,10 @@ header {
     height: 40vh;
   }
 
+  #map-et-infos-gp #divInfosGP h3 {
+    padding-top: 0%;
+  }
+
   #map-et-infos-gp {
     flex-direction: column;
     justify-content: space-between;
@@ -480,6 +484,13 @@ canvas {
   border-radius: 1em;
   perspective: 1000px;
   background-color: transparent;
+}
+
+#divInfosGP h3 {
+  color: #fff;
+  text-align: center;
+  font-size: 1em;
+  padding-top: 30%;
 }
 
 #divInfosGPContent {
