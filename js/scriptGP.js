@@ -63,10 +63,10 @@ function afficherMapGP() {
   sectionStats.appendChild(divMapEtInfosGP);
   const divMapGP = document.createElement("div");
   divMapEtInfosGP.appendChild(divMapGP);
-  divMapGP.id = "mapGP";
+  divMapGP.id = "map";
   //Création du texte d'introduction pour dire à l'utilisateur comment voir les infos gràace à la carte
   const divInfosGP = document.createElement("div");
-  divInfosGP.id = "divInfosGP";
+  divInfosGP.id = "divInfos";
   divMapEtInfosGP.appendChild(divInfosGP);
   const textIntro = document.createElement("h3");
   divInfosGP.appendChild(textIntro);
@@ -74,7 +74,7 @@ function afficherMapGP() {
     " Cliquez sur un circuit pour avoir son tracé, et survolez sa carte pour avoir encore plus d'informations !";
 
   //Création de la map
-  let mapGP = L.map("mapGP", {
+  let mapGP = L.map("map", {
     center: [48.866667, 2.333333],
     zoom: 1.5,
   });
@@ -117,20 +117,20 @@ function afficherMapGP() {
           [tabGlobalDataGP[i].Location.lat, tabGlobalDataGP[i].Location.long],
           mapGP.getMaxZoom()
         );
-        const existeDivInfosGP = document.querySelector("#divInfosGP");
+        const existeDivInfosGP = document.querySelector("#divInfos");
         if (existeDivInfosGP) {
           existeDivInfosGP.remove();
         }
         const divInfosGP = document.createElement("div");
-        divInfosGP.id = "divInfosGP";
+        divInfosGP.id = "divInfos";
         divMapEtInfosGP.appendChild(divInfosGP);
         const divInfosGPContent = document.createElement("div");
-        divInfosGPContent.id = "divInfosGPContent";
+        divInfosGPContent.id = "divInfosContent";
         divInfosGP.appendChild(divInfosGPContent);
 
         //PARTIE FRONT
         const divInfosGPFront = document.createElement("div");
-        divInfosGPFront.id = "divInfosGPFront";
+        divInfosGPFront.id = "divInfosFront";
         divInfosGPContent.appendChild(divInfosGPFront);
         const titreGP = document.createElement("h1");
         const imgGP = document.createElement("img");
@@ -141,7 +141,7 @@ function afficherMapGP() {
 
         //PARTIE BACK
         const divInfosGPBack = document.createElement("div");
-        divInfosGPBack.id = "divInfosGPBack";
+        divInfosGPBack.id = "divInfosBack";
         divInfosGPContent.appendChild(divInfosGPBack);
         const firstGP = document.createElement("p");
         const numberLaps = document.createElement("p");

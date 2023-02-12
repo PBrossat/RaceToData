@@ -104,7 +104,7 @@ header {
   .banner-txt h3 {
     font-size: 0.7em;
   }
-  #map-et-infos-gp #divInfosGPFront h1 {
+  #map-et-infos-gp #divInfosFront h1 {
     font-size: 1.5em;
   }
   /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
@@ -138,18 +138,18 @@ header {
     font-size: 0.7em;
   }
 
-  #map-et-infos-gp #mapGP {
+  #map-et-infos-gp #map {
     width: 90%;
     height: 40vh;
     margin-bottom: 10%;
   }
 
-  #map-et-infos-gp #divInfosGP {
+  #map-et-infos-gp #divInfos {
     width: 90%;
     height: 40vh;
   }
 
-  #map-et-infos-gp #divInfosGP h3 {
+  #map-et-infos-gp #divInfos h3 {
     padding-top: 0%;
   }
 
@@ -470,7 +470,7 @@ canvas {
   margin-right: 5%;
 }
 
-#mapGP {
+#map {
   width: 45%;
   height: 40vh;
   border-radius: 1em;
@@ -478,22 +478,25 @@ canvas {
   padding: 5%;
 }
 
-#divInfosGP {
-  width: 45%;
+#divInfos {
   height: 40vh;
   border-radius: 1em;
   perspective: 1000px;
   background-color: transparent;
 }
 
-#divInfosGP h3 {
+#map-et-infos-gp #divInfos {
+  width: 45%;
+}
+
+#divInfos h3 {
   color: #fff;
   text-align: center;
   font-size: 1em;
   padding-top: 30%;
 }
 
-#divInfosGPContent {
+#divInfosContent {
   position: relative;
   width: 100%;
   height: 100%;
@@ -502,20 +505,23 @@ canvas {
   transform-style: preserve-3d;
 }
 
-#divInfosGP:hover #divInfosGPContent {
+#divInfos:hover #divInfosContent {
   transform: rotateY(180deg);
 }
 
-#divInfosGPContent img {
+#divInfosContent img {
   width: auto;
   height: auto;
-  max-width: 100%;
-  max-height: 85%;
   position: relative;
   margin: auto;
 }
 
-#divInfosGPContent h1 {
+#map-et-infos-gp #divInfosContent img {
+  max-width: 100%;
+  max-height: 85%;
+}
+
+#divInfosContent h1 {
   font-size: 2em;
   color: #fff;
   text-align: center;
@@ -526,7 +532,7 @@ canvas {
   text-shadow: 5px 5px #111;
 }
 
-#divInfosGPContent p {
+#divInfosContent p {
   letter-spacing: 1px;
   font-size: 1em;
   margin-top: 0px;
@@ -534,8 +540,8 @@ canvas {
   line-height: 2em;
 }
 
-#divInfosGPFront,
-#divInfosGPBack {
+#divInfosFront,
+#divInfosBack {
   box-shadow: 0px 0px 20px rgb(255, 255, 255);
   position: absolute;
   display: flex;
@@ -548,14 +554,13 @@ canvas {
   border-radius: 1rem;
 }
 
-#divInfosGPFront {
+#map-et-infos-gp #divInfosFront,
+#map-et-infos-gp #divInfosBack {
   background-image: url("../data/backgroundGP.png");
   background-size: cover;
 }
 
-#divInfosGPBack {
-  background-image: url("../data/backgroundGP.png");
-  background-size: cover;
+#divInfosBack {
   transform: rotateY(180deg);
 }
 
