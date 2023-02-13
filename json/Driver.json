@@ -15,7 +15,9 @@
     "Nb DNF": 31,
     "Pourcent DNF moyen/GP": 19.02,
     "Nb GP disputés": 163,
-    "Image": "data/pilotes/VerstappenBackground.jpg"
+    "Image": "data/pilotes/VerstappenBackground.jpg",
+    "Lat": 52.3781,
+    "Long": 4.9011
   },
 
   {
@@ -34,7 +36,9 @@
     "Nb DNF": 10,
     "Pourcent DNF moyen/GP": 12.2,
     "Nb GP disputés": 82,
-    "Image": "data/pilotes/NorrisBackground.jpeg"
+    "Image": "data/pilotes/NorrisBackground.jpeg",
+    "Lat": 51.4545,
+    "Long": 2.5879
   },
 
   {
@@ -53,7 +57,9 @@
     "Nb DNF": 18,
     "Pourcent DNF moyen/GP": 16.67,
     "Nb GP disputés": 108,
-    "Image": "data/pilotes/GaslyBackground.jpg"
+    "Image": "data/pilotes/GaslyBackground.jpg",
+    "Lat": 49.4431,
+    "Long": 1.0993
   },
 
   {
@@ -72,7 +78,9 @@
     "Nb DNF": 31,
     "Pourcent DNF moyen/GP": 13.19,
     "Nb GP disputés": 235,
-    "Image": "data/pilotes/PerezBackground.jpg"
+    "Image": "data/pilotes/PerezBackground.jpg",
+    "Lat": 19.4326,
+    "Long": -99.1332
   },
 
   {
@@ -91,7 +99,9 @@
     "Nb DNF": 75,
     "Pourcent DNF moyen/GP": 21.07,
     "Nb GP disputés": 356,
-    "Image": "data/pilotes/AlonsoBackground.jpg"
+    "Image": "data/pilotes/AlonsoBackground.jpg",
+    "Lat": 49.3629,
+    "Long": -8.4139
   },
 
   {
@@ -110,7 +120,9 @@
     "Nb DNF": 17,
     "Pourcent DNF moyen/GP": 16.67,
     "Nb GP disputés": 102,
-    "Image": "data/pilotes/LeclercBackground.png"
+    "Image": "data/pilotes/LeclercBackground.png",
+    "Lat": 43.7313,
+    "Long": 7.4265
   },
 
   {
@@ -129,7 +141,9 @@
     "Nb DNF": 22,
     "Pourcent DNF moyen/GP": 18.03,
     "Nb GP disputés": 122,
-    "Image": "data/pilotes/StrollBackground.jpg"
+    "Image": "data/pilotes/StrollBackground.jpg",
+    "Lat": 45.5,
+    "Long": -73.5833
   },
 
   {
@@ -148,7 +162,9 @@
     "Nb DNF": 28,
     "Pourcent DNF moyen/GP": 19.86,
     "Nb GP disputés": 141,
-    "Image": "data/pilotes/MagnussenBackground.png"
+    "Image": "data/pilotes/MagnussenBackground.png",
+    "Lat": 55.6761,
+    "Long": 12.5683
   },
 
   {
@@ -167,7 +183,9 @@
     "Nb DNF": 8,
     "Pourcent DNF moyen/GP": 19.05,
     "Nb GP disputés": 42,
-    "Image": "data/pilotes/TsunodaBackground.jpg"
+    "Image": "data/pilotes/TsunodaBackground.jpg",
+    "Lat": 35.6586,
+    "Long": 139.7454
   },
 
   {
@@ -186,7 +204,9 @@
     "Nb DNF": 8,
     "Pourcent DNF moyen/GP": 13.56,
     "Nb GP disputés": 59,
-    "Image": "data/pilotes/AlbonBackground.jpeg"
+    "Image": "data/pilotes/AlbonBackground.jpeg",
+    "Lat": 13.7563,
+    "Long": 100.5018
   },
 
   {
@@ -205,7 +225,9 @@
     "Nb DNF": 6,
     "Pourcent DNF moyen/GP": 27.27,
     "Nb GP disputés": 22,
-    "Image": "data/pilotes/ZhouBackground.jpg"
+    "Image": "data/pilotes/ZhouBackground.jpg",
+    "Lat": 31.2165,
+    "Long": 121.4365
   },
 
   {
@@ -224,7 +246,9 @@
     "Nb DNF": 15,
     "Pourcent DNF moyen/GP": 13.51,
     "Nb GP disputés": 111,
-    "Image": "data/pilotes/OconBackground.jpg"
+    "Image": "data/pilotes/OconBackground.jpg",
+    "Lat": 49.0256,
+    "Long": 1.2183
   },
 
   {
@@ -243,7 +267,9 @@
     "Nb DNF": 29,
     "Pourcent DNF moyen/GP": 9.35,
     "Nb GP disputés": 310,
-    "Image": "data/pilotes/HamiltonBackground.jpg"
+    "Image": "data/pilotes/HamiltonBackground.jpg",
+    "Lat": 51.907266,
+    "Long": -0.196862
   },
 
   {
@@ -262,7 +288,9 @@
     "Nb DNF": 33,
     "Pourcent DNF moyen/GP": 20.37,
     "Nb GP disputés": 162,
-    "Image": "data/pilotes/SainzBackground.jpg"
+    "Image": "data/pilotes/SainzBackground.jpg",
+    "Lat": 43.3667,
+    "Long": -5.85
   },
 
   {
@@ -281,7 +309,9 @@
     "Nb DNF": 13,
     "Pourcent DNF moyen/GP": 15.85,
     "Nb GP disputés": 82,
-    "Image": "data/pilotes/RusselBackground.jpg"
+    "Image": "data/pilotes/RusselBackground.jpg",
+    "Lat": 52.6369,
+    "Long": -1.1398
   },
 
   {
@@ -300,7 +330,9 @@
     "Nb DNF": 23,
     "Pourcent DNF moyen/GP": 11.5,
     "Nb GP disputés": 200,
-    "Image": "data/pilotes/BottasBackground.jpg"
+    "Image": "data/pilotes/BottasBackground.jpg",
+    "Lat": 60.9518,
+    "Long": 25.6667
   },
 
   {
@@ -319,26 +351,9 @@
     "Nb DNF": 44,
     "Pourcent DNF moyen/GP": 14.72,
     "Nb GP disputés": 299,
-    "Image": "data/pilotes/VettelBackground.webp"
-  },
-
-  {
-    "Name": "Räikkönen",
-    "Team": "Alfa Romeo Racing",
-    "Naissance": "1979-10-17",
-    "âge": 43,
-    "Nationalité": "Finlande",
-    "Nb points": 2107,
-    "Nb points moyen/GP": 7.4,
-    "Nb Victoires": 21,
-    "Nb Champion": 1,
-    "Nb podiums": 103,
-    "Nb pôle Position": 18,
-    "Nb meilleurs tours": 16,
-    "Nb DNF": 35,
-    "Pourcent DNF moyen/GP": 11.06,
-    "Nb GP disputés": 285,
-    "Image": "No picture"
+    "Image": "data/pilotes/VettelBackground.webp",
+    "Lat": 48.7758,
+    "Long": 9.1829
   },
 
   {
@@ -357,7 +372,9 @@
     "Nb DNF": 37,
     "Pourcent DNF moyen/GP": 15.95,
     "Nb GP disputés": 232,
-    "Image": "data/pilotes/RicciardoBackground.jpg"
+    "Image": "data/pilotes/RicciardoBackground.jpg",
+    "Lat": -31.935,
+    "Long": 115.8111
   },
 
   {
@@ -376,7 +393,9 @@
     "Nb DNF": 13,
     "Pourcent DNF moyen/GP": 21.31,
     "Nb GP disputés": 61,
-    "Image": "data/pilotes/LatifiBackground.jpeg"
+    "Image": "data/pilotes/LatifiBackground.jpeg",
+    "Lat": 43.7,
+    "Long": -79.4
   },
 
   {
@@ -395,6 +414,8 @@
     "Nb DNF": 5,
     "Pourcent DNF moyen/GP": 11.63,
     "Nb GP disputés": 43,
-    "Image": "data/pilotes/SchumacherBackground.jpg"
+    "Image": "data/pilotes/SchumacherBackground.jpg",
+    "Lat": 50.1147,
+    "Long": 8.6843
   }
 ]
