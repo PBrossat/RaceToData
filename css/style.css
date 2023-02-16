@@ -158,26 +158,6 @@ header {
     justify-content: space-between;
     align-items: center;
   }
-
-  #map-et-infos-Ecuries #boutonEcuries {
-    width: 90%;
-    height: 40vh;
-  }
-
-  #map-et-infos-Ecuries #mapEcuries {
-    width: 90%;
-    height: 40vh;
-  }
-
-  #map-et-infos-Ecuries #divInfosEcuries {
-    width: 90%;
-    height: 60vh;
-  }
-
-  #map-et-infos-Ecuries {
-    flex-direction: column;
-    align-items: center;
-  }
   /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
 }
 
@@ -566,38 +546,60 @@ canvas {
   transform: rotateY(180deg);
 }
 
-#mapEcuries {
-  width: 50%;
-  height: 50vh;
-  border-radius: 1em;
-  box-shadow: 0px 0px 30px #fff;
+#stats #divMapEtInfosEcuries {
+  display: flex;
+  align-items: center;
 }
 
-#boutonEcuries {
+#stats #divMapEcuries {
+  width: 50%;
+  height: 500px;
+  border-radius: 1em;
+  float: left;
+  left: 15px;
+}
+
+#stats #divInfosEcuries {
+  width: 700px;
+  height: 500px;
+  padding-top: 18px;
+  border-radius: 1em;
+  float: right;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+#stats #divBoutonRetour {
   color: #090909;
-  width: 10%;
   padding: 0.7em 1.7em;
   font-size: 18px;
   border-radius: 0.5em;
-  background: #111;
+  background: #e8e8e8;
   border: 1px solid #e8e8e8;
   transition: all 0.3s;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 }
 
-#boutonEcuries:hover {
+#divBoutonRetour:hover {
   border: 1px solid white;
+  cursor: pointer;
 }
 
-#boutonEcuries:active {
+#divBoutonRetour:active {
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
 }
 
-#map-et-infos-Ecuries {
-  display: flex;
+#divInfosEcuries h3 {
+  color: white;
+  text-align: center;
+  font-size: 1em;
+  padding-top: 30%;
+  padding-left: 5%;
 }
 
-#stats .cardEcuries {
+#stats #cardEcuries {
   width: 320px;
   height: 460px;
   border-radius: 15px;
@@ -608,72 +610,27 @@ canvas {
   display: flex;
   flex-direction: column;
   color: #fff;
-  transition: transform 500ms ease-in-out;
+  transition: transform 0.65s ease-in-out;
   transform-style: preserve-3d;
 }
 
-#stats .cardEcuries:hover {
-  transform: rotateY(180deg);
+#cardEcuries:hover {
+  transform: rotateY(-180deg);
 }
 
-#stats .cardEcuries .side {
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  position: absolute;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+#cardEcuries #divInfosBack {
+  background-image: url("../data/backgroundGP.png");
+  background-size: cover;
+  background-position: center top -25px;
 }
 
-#stats .cardEcuries .side .front--side {
-  z-index: 0;
-}
-
-#stats .cardEcuries .side .back--side {
-  transform: rotateY(180deg);
-  background-color: red;
-}
-
-#stats .cardEcuries #infosEcuriesDansCarte {
-  width: 40%;
-}
-
-#stats .cardEcuries .nomEcuries {
-  color: lightslategray;
+#stats #cardEcuries h1 {
+  color: red;
   text-align: center;
-  margin-block-end: 26px;
   font-size: xx-large;
 }
 
-#stats .cardEcuries .palmaresEcuries {
-  text-align: center;
-  font-size: smaller;
-  margin-bottom: 26px;
-  font-weight: bold;
-  margin-top: -3%;
-}
-
-#stats .cardEcuries #nationalité:before {
-  content: "Nationalité : ";
-  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
-}
-
-#stats .cardEcuries #nbPoints:before {
-  content: "Points marqués : ";
-  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
-}
-
-#stats .cardEcuries #nbVictoires:before {
-  content: "Nombre de victoires : ";
-  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
-}
-
-#stats .cardEcuries #nbPodiums:before {
-  content: "Nombre de podiums : ";
-  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
-}
-
-#stats .cardEcuries #nbPolesPositions:before {
-  content: "Nombre de poles positions : ";
-  box-shadow: 4px 4px 12px #020000, -4px -4px 12px #880404;
+#stats #cardEcuries p {
+  font-size: large;
+  color: rgb(249, 242, 242);
 }
