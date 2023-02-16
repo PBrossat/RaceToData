@@ -106,8 +106,24 @@ function grapheDriverPointMoyenParGPBaton() {
 
 function mapPilote() {
   //création des div Map et Infos
-  //--Map
   const MapEtInfos = document.querySelector("#divMapEtInfosPilotes");
+  const SelecteurPilote = document.createElement("select");
+  SelecteurPilote.className = "select";
+  MapEtInfos.appendChild(SelecteurPilote);
+  //--Selecteur Pilote
+  const tabNomPilote = [];
+  for (var i = 0; i < tabGlobalDataPilotes.length; i++) {
+    tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
+  }
+
+  tabNomPilote.forEach((pilote) => {
+    const option = document.createElement("option");
+    option.value = pilote;
+    option.text = pilote;
+    SelecteurPilote.appendChild(option);
+  });
+
+  //--Map
 
   const divMapPilotes = document.createElement("div");
   divMapPilotes.id = "divMapPilotes";

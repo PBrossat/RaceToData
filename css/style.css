@@ -350,6 +350,7 @@ header {
 #stats #divMapEtInfosPilotes {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 #stats #divMapPilotes {
@@ -416,18 +417,47 @@ header {
   color: black;
 }
 
-#stats select {
-  margin-left: 15px;
-  padding: 0.6rem;
-  outline: none;
-  border-width: 2px;
-  border-color: red;
-  border-radius: 10px;
-  background: black;
-  color: red;
-  font-weight: bold;
+:root {
+  --gray: #34495e;
+  --darkgray: #2c3e50;
+}
+
+.select {
+  display: flex;
+  width: 14em;
+  height: 3em;
+  border-radius: 0.25em;
+  /* overflow: hidden; */
+  flex: 1;
+  padding: 0 3em;
+  color: white;
+  background-color: var(--darkgray);
   cursor: pointer;
-  transition: 0.4s ease;
+  position: absolute;
+  top: -5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.select::after {
+  content: "\25B6";
+  /* float: left; */
+  left: 20px;
+  border-radius: 0.25em;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1em;
+  background-color: var(--gray);
+  transition: 0.25s all ease;
+  pointer-events: none;
+  color: white;
+}
+
+/* Transition */
+.select:hover::after {
+  color: #ef2a02;
+  transform: rotate(90deg);
 }
 
 canvas {
