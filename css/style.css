@@ -356,7 +356,8 @@ header {
   bottom: 0;
   right: 100%;
   left: 0;
-  background: rgb(20, 20, 20);
+  /* background: rgb(207, 58, 58); */
+  background-image: linear-gradient(to left, #ebec10, #f73535);
   opacity: 0;
   z-index: -1;
   transition: all 0.5s;

@@ -262,14 +262,17 @@ function mapPilote() {
   }
 
   boutonDezoom.addEventListener("click", function () {
-    //récupère le centrage actuel du zoom
-    var currentCenter = mapPilote.getCenter();
+    const maxDezoome = 3;
+    if (mapPilote.getZoom() >= maxDezoome) {
+      //récupère le centrage actuel du zoom
+      var currentCenter = mapPilote.getCenter();
 
-    //récupère les coordonnées du centre du zoom
-    var currentLng = currentCenter.lng;
-    var currentLat = currentCenter.lat;
+      //récupère les coordonnées du centre du zoom
+      var currentLng = currentCenter.lng;
+      var currentLat = currentCenter.lat;
 
-    //dézoume à partir du zoom actuel
-    mapPilote.flyTo([currentLat, currentLng], 3);
+      //dézoume à partir du zoom actuel
+      mapPilote.flyTo([currentLat, currentLng], maxDezoome);
+    }
   });
 }
