@@ -107,6 +107,10 @@ function grapheDriverPointMoyenParGPBaton() {
 function mapPilote() {
   //création des div Map et Infos
   const MapEtInfos = document.querySelector("#divMapEtInfosPilotes");
+  const boutonDezoom = document.createElement("button");
+  boutonDezoom.className = "bouton";
+  MapEtInfos.appendChild(boutonDezoom);
+  boutonDezoom.textContent = "DeZoom";
   const SelecteurPilote = document.createElement("select");
   SelecteurPilote.className = "select";
   MapEtInfos.appendChild(SelecteurPilote);
@@ -256,4 +260,16 @@ function mapPilote() {
           "Nombre de podiums : " + tabGlobalDataPilotes[i]["Nb podiums"];
       });
   }
+
+  boutonDezoom.addEventListener("click", function () {
+    //récupère le centrage actuel du zoom
+    var currentCenter = mapPilote.getCenter();
+
+    //récupère les coordonnées du centre du zoom
+    var currentLng = currentCenter.lng;
+    var currentLat = currentCenter.lat;
+
+    //dézoume à partir du zoom actuel
+    mapPilote.flyTo([currentLat, currentLng], 3);
+  });
 }
