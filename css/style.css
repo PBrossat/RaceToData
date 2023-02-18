@@ -611,8 +611,7 @@ canvas {
   text-align: center;
 }
 
-#stats #divBoutonRetour {
-  color: #090909;
+#stats #divBoutonDezoom {
   padding: 0.7em 1.7em;
   font-size: 18px;
   border-radius: 0.5em;
@@ -620,14 +619,15 @@ canvas {
   border: 1px solid #e8e8e8;
   transition: all 0.3s;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  position: absolute;
+  bottom: center;
 }
 
-#divBoutonRetour:hover {
-  border: 1px solid white;
+#divBoutonDeZoom:hover {
   cursor: pointer;
 }
 
-#divBoutonRetour:active {
+#divBoutonDeZoom:active {
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
 }
 
@@ -673,4 +673,43 @@ canvas {
 #stats #cardEcuries p {
   font-size: large;
   color: rgb(249, 242, 242);
+}
+
+.boutonEcuries {
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  width: 120px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: skew(-21deg);
+  bottom: -10%;
+  left: 20%;
+}
+
+.boutonEcuries::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  left: 0;
+  /* background: rgb(207, 58, 58); */
+  background-image: linear-gradient(to left, #ebec10, #f73535);
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.5s;
+}
+
+.boutonEcuries:hover {
+  color: #fff;
+}
+
+.boutonEcuries:hover::before {
+  left: 0;
+  right: 0;
+  opacity: 1;
 }

@@ -51,12 +51,14 @@ function mapEcuries() {
   divInfosEcuries.id = "divInfosEcuries";
   MapEtInfos.appendChild(divInfosEcuries);
 
-  const divBoutonRetour = document.createElement("div");
-  divBoutonRetour.id = "divBoutonRetour";
-  MapEtInfos.appendChild(divBoutonRetour);
+  const divBoutonDeZoom = document.createElement("div");
+  divBoutonDeZoom.id = "divBoutonDeZoom";
+  MapEtInfos.appendChild(divBoutonDeZoom);
 
-  const boutonDezoom = document.querySelector("#divBoutonRetour");
-  boutonDezoom.innerHTML = "Dézoom de la carte";
+  const boutonDezoom = document.createElement("button");
+  boutonDezoom.className = "boutonEcuries";
+  divBoutonDeZoom.appendChild(boutonDezoom);
+  boutonDezoom.innerHTML = "DeZoom";
   boutonDezoom.addEventListener("click", function () {
     mapEcuries.flyTo([48.866667, -18.333333], mapEcuries.getMinZoom());
   });
@@ -173,13 +175,13 @@ function mapEcuries() {
         divInfosEcuriesBack.appendChild(Position);
         nomEcuries.textContent = tabGlobalDataEcuries[i]["name"];
         nationalité.textContent =
-          "Nationalité : " + tabGlobalDataEcuries[i]["nationality"];
+          "Pays d'origine : " + tabGlobalDataEcuries[i]["nationality"];
         nbVictoires.textContent =
-          "Nombre de Victoires : " + tabGlobalDataEcuries[i]["wins"];
+          "Nombre de Victoires : " + tabGlobalDataEcuries[i]["wins_all"];
         nbPoles.textContent =
-          "Nombre de Poles Positions : " + tabGlobalDataEcuries[i]["pole"];
+          "Nombre de Poles Positions : " + tabGlobalDataEcuries[i]["pole_all"];
         nbPodiums.textContent =
-          "Nombre de podiums : " + tabGlobalDataEcuries[i]["podium"];
+          "Nombre de podiums : " + tabGlobalDataEcuries[i]["podiums_all"];
         nbPoints.textContent =
           "Nombre de points : " + tabGlobalDataEcuries[i]["points"];
         Position.textContent =
