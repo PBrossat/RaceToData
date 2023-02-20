@@ -51,13 +51,9 @@ function mapEcuries() {
   divInfosEcuries.id = "divInfosEcuries";
   MapEtInfos.appendChild(divInfosEcuries);
 
-  const divBoutonDeZoom = document.createElement("div");
-  divBoutonDeZoom.id = "divBoutonDeZoom";
-  MapEtInfos.appendChild(divBoutonDeZoom);
-
   const boutonDezoom = document.createElement("button");
   boutonDezoom.className = "boutonEcuries";
-  divBoutonDeZoom.appendChild(boutonDezoom);
+  MapEtInfos.appendChild(boutonDezoom);
   boutonDezoom.innerHTML = "DeZoom";
   boutonDezoom.addEventListener("click", function () {
     mapEcuries.flyTo([48.866667, -18.333333], mapEcuries.getMinZoom());
@@ -87,7 +83,7 @@ function mapEcuries() {
     "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
     {
       maxZoom: 8,
-      minZoom: 2.5,
+      minZoom: 3,
 
       //crédit de la map
       attribution:
@@ -166,6 +162,8 @@ function mapEcuries() {
         const nbPodiums = document.createElement("p");
         const nbPoints = document.createElement("p");
         const Position = document.createElement("p");
+        const constructeur = document.createElement("p");
+        const pilote = document.createElement("p");
         divInfosEcuriesBack.appendChild(nomEcuries);
         divInfosEcuriesBack.appendChild(nationalité);
         divInfosEcuriesBack.appendChild(nbVictoires);
@@ -173,6 +171,8 @@ function mapEcuries() {
         divInfosEcuriesBack.appendChild(nbPodiums);
         divInfosEcuriesBack.appendChild(nbPoints);
         divInfosEcuriesBack.appendChild(Position);
+        divInfosEcuriesBack.appendChild(constructeur);
+        divInfosEcuriesBack.appendChild(pilote);
         nomEcuries.textContent = tabGlobalDataEcuries[i]["name"];
         nationalité.textContent =
           "Pays d'origine : " + tabGlobalDataEcuries[i]["nationality"];
@@ -183,9 +183,11 @@ function mapEcuries() {
         nbPodiums.textContent =
           "Nombre de podiums : " + tabGlobalDataEcuries[i]["podiums_all"];
         nbPoints.textContent =
-          "Nombre de points : " + tabGlobalDataEcuries[i]["points"];
-        Position.textContent =
-          "Position : " + tabGlobalDataEcuries[i]["position"];
+          "Nombre de points : " + tabGlobalDataEcuries[i]["points_all"];
+        pilote.textContent =
+          "Titres pilote : " + tabGlobalDataEcuries[i]["titre_pilote"];
+        constructeur.textContent =
+          "Titres constructeur : " + tabGlobalDataEcuries[i]["titre_ecurie"];
       });
   }
 }
