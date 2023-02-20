@@ -23,15 +23,10 @@ boutonDecouvrirStatsPilotes.addEventListener("click", function () {
 function afficherStatsPilotes() {
   const StatsPilotes = document.querySelector("#stats");
 
-  const sectionStatsPilotes = document.createElement("section");
-  sectionStatsPilotes.innerHTML +=
-    "<h2>Analyse des données relatives aux Pilotes</h2>";
-
   const divMapEtInfos = document.createElement("div");
-  divMapEtInfos.id = "divMapEtInfosPilotes";
+  divMapEtInfos.id = "divMapEtInfos";
 
-  StatsPilotes.appendChild(sectionStatsPilotes);
-  sectionStatsPilotes.appendChild(divMapEtInfos);
+  StatsPilotes.appendChild(divMapEtInfos);
 }
 
 //---------------------------------GESTION DES GRAPHES--------------------------------------
@@ -106,37 +101,38 @@ function grapheDriverPointMoyenParGPBaton() {
 
 function mapPilote() {
   //création des div Map et Infos
-  const MapEtInfos = document.querySelector("#divMapEtInfosPilotes");
+  const MapEtInfos = document.querySelector("#divMapEtInfos");
   const boutonDezoom = document.createElement("button");
   boutonDezoom.className = "bouton";
   MapEtInfos.appendChild(boutonDezoom);
   boutonDezoom.textContent = "DeZoom";
-  const SelecteurPilote = document.createElement("select");
-  SelecteurPilote.className = "select";
-  MapEtInfos.appendChild(SelecteurPilote);
-  //--Selecteur Pilote
-  const tabNomPilote = [];
-  for (var i = 0; i < tabGlobalDataPilotes.length; i++) {
-    tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
-  }
 
-  tabNomPilote.forEach((pilote) => {
-    const option = document.createElement("option");
-    option.value = pilote;
-    option.text = pilote;
-    SelecteurPilote.appendChild(option);
-  });
+  //--Selecteur Pilote
+  // const SelecteurPilote = document.createElement("select");
+  // SelecteurPilote.className = "select";
+  // MapEtInfos.appendChild(SelecteurPilote);
+  // const tabNomPilote = [];
+  // for (var i = 0; i < tabGlobalDataPilotes.length; i++) {
+  //   tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
+  // }
+
+  // tabNomPilote.forEach((pilote) => {
+  //   const option = document.createElement("option");
+  //   option.value = pilote;
+  //   option.text = pilote;
+  //   SelecteurPilote.appendChild(option);
+  // });
 
   //--Map
 
   const divMapPilotes = document.createElement("div");
-  divMapPilotes.id = "divMapPilotes";
+  divMapPilotes.id = "map";
 
   MapEtInfos.appendChild(divMapPilotes);
 
   //--Infos
   const divInfosPilotes = document.createElement("div");
-  divInfosPilotes.id = "divInfosPilotes";
+  divInfosPilotes.id = "divInfos";
 
   MapEtInfos.appendChild(divInfosPilotes);
   const textIntro = document.createElement("h3");
@@ -153,7 +149,7 @@ function mapPilote() {
   const zoomInitial = 1.5;
 
   //création de la map
-  const mapPilote = L.map("divMapPilotes").setView(
+  const mapPilote = L.map("map").setView(
     [centreMap.lat, centreMap.lng],
     zoomInitial
   );
@@ -212,16 +208,15 @@ function mapPilote() {
           mapPilote.getMaxZoom()
         );
         //   const divInfosPilote = document.querySelector("#divInfosPilotes");
-        const existeDivInfosPilotes =
-          document.querySelector("#divInfosPilotes");
+        const existeDivInfosPilotes = document.querySelector("#divInfos");
         if (existeDivInfosPilotes) {
           existeDivInfosPilotes.remove();
         }
         const divInfosPilotes = document.createElement("div");
-        divInfosPilotes.id = "divInfosPilotes";
+        divInfosPilotes.id = "divInfos";
         MapEtInfos.appendChild(divInfosPilotes);
         const cartePiloteContent = document.createElement("div");
-        cartePiloteContent.id = "cardPilote";
+        cartePiloteContent.id = "divInfosContent";
         divInfosPilotes.appendChild(cartePiloteContent);
 
         //PARTIE FRONT
@@ -231,6 +226,7 @@ function mapPilote() {
         divInfosPiloteFront.style.backgroundImage =
           "url(" + tabGlobalDataPilotes[i].Image + ")";
         divInfosPiloteFront.style.backgroundSize = "cover";
+        divInfosPiloteFront.style.backgroundPosition = "center";
 
         //PARTIE BACK
         const divInfosPiloteBack = document.createElement("div");
