@@ -754,20 +754,27 @@ canvas {
 }
 
 #cardEcuries #divInfosBack {
-  background-image: url("../data/backgroundGP.png");
+  background-image: url("../data/backgroundEcuries.png");
   background-size: cover;
-  background-position: center top -25px;
+  background-position: center top -90px;
+}
+
+#cardEcuries #divInfosFront {
+  background-position: center;
+  background-size: cover;
 }
 
 #stats #cardEcuries h1 {
-  color: red;
+  color: rgb(196, 16, 16);
   text-align: center;
   font-size: xx-large;
+  margin-top: 60px;
 }
 
 #stats #cardEcuries p {
   font-size: large;
   color: rgb(249, 242, 242);
+  margin-top: 10px;
 }
 
 .boutonEcuries {
