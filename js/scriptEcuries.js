@@ -17,6 +17,8 @@ boutonDecouvrirStatsEcuries.addEventListener("click", function () {
   afficherStatsEcuries();
   mapEcuries();
   recupererInfosEcuries();
+  grapheEcurieRadarWinsPoles();
+  grapheEcurieRadarWinsPosition();
 });
 
 //------------------------------ Création des containers ----------------
@@ -25,14 +27,27 @@ function afficherStatsEcuries() {
   const StatsEcuries = document.querySelector("#stats");
 
   const sectionStatsEcuries = document.createElement("section");
+  StatsEcuries.appendChild(sectionStatsEcuries);
   sectionStatsEcuries.innerHTML +=
     "<h2>Analyse des données relatives aux Ecuries</h2>";
 
   const divMapEtInfos = document.createElement("div");
   divMapEtInfos.id = "divMapEtInfosEcuries";
-
-  StatsEcuries.appendChild(sectionStatsEcuries);
   sectionStatsEcuries.appendChild(divMapEtInfos);
+
+  const divStatsPilotes1 = document.createElement("div");
+  divStatsPilotes1.id = "divId1";
+
+  const divStatsPilotes2 = document.createElement("div");
+  divStatsPilotes2.id = "divId2";
+
+  const divGrapheEcuriesGauche = document.createElement("canvas");
+  divGrapheEcuriesGauche.id = "CanvaIdGauche";
+  sectionStatsEcuries.appendChild(divGrapheEcuriesGauche);
+
+  const divGrapheEcuriesDroite = document.createElement("canvas");
+  divGrapheEcuriesDroite.id = "CanvaIdDroite";
+  sectionStatsEcuries.appendChild(divGrapheEcuriesDroite);
 }
 
 //---------------------------------GESTION DE LA MAP--------------------------------------
@@ -121,7 +136,7 @@ function mapEcuries() {
 
   //Placement des markers représentant les Ecuries sur la map
 
-  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
+  for (let i = 0; i < 10; i++) {
     L.marker([tabGlobalDataEcuries[i].Lat, tabGlobalDataEcuries[i].Long], {
       icon: pneuMaker,
     })
@@ -192,13 +207,52 @@ function mapEcuries() {
   }
 }
 
+function getEcuries() {
+  const nameEcurie = [];
+  for (let i = 0; i < 10; i++) {
+    nameEcurie.push(tabGlobalDataEcuries[i]["name"]);
+  }
+  return nameEcurie;
+}
+
+function getNbPolesEcuries() {
+  const poleEcurie = [];
+  for (let i = 0; i < 10; i++) {
+    poleEcurie.push(tabGlobalDataEcuries[i]["pole_all"]);
+  }
+  return poleEcurie;
+}
+
+function getNbVictoireAllEcuries() {
+  const victoireAllEcurie = [];
+  for (let i = 0; i < 10; i++) {
+    victoireAllEcurie.push(tabGlobalDataEcuries[i]["wins_all"]);
+  }
+  return victoireAllEcurie;
+}
+
+function getNbVictoireEcuries() {
+  const victoireEcurie = [];
+  for (let i = 0; i < 10; i++) {
+    victoireEcurie.push(tabGlobalDataEcuries[i]["wins"]);
+  }
+  return victoireEcurie;
+}
+
+function getNbPositionsEcuries() {
+  const positionEcurie = [];
+  for (let i = 0; i < 10; i++) {
+    positionEcurie.push(tabGlobalDataEcuries[i]["position"]);
+  }
+  return positionEcurie;
+}
+
 //---------------------------------GRAPHES--------------------------------------------------------------
 
 function grapheEcurieRadarWinsPoles() {
   const nomEcurie = getEcuries();
-  const nbVictoiresEcuries = getNbVictoiresEcuries();
+  const nbVictoiresEcuries = getNbVictoireAllEcuries();
   const nbPolesEcuries = getNbPolesEcuries();
-
   const configuration = {
     type: "radar",
     data: {
@@ -231,14 +285,14 @@ function grapheEcurieRadarWinsPoles() {
     },
   };
 
-  const graphique = document.getElementById("CanvaId");
+  const graphique = document.getElementById("CanvaIdGauche");
   const chart = new Chart(graphique, configuration);
 }
 
 function grapheEcurieRadarWinsPosition() {
   const nomEcurie = getEcuries();
-  const nbVictoiresEcuries = getNbVictoiresEcuries();
-  const positionEcuries = getPositionEcuries();
+  const nbVictoiresEcuries = getNbVictoireEcuries();
+  const positionEcuries = getNbPositionsEcuries();
 
   const configuration = {
     type: "radar",
@@ -272,7 +326,7 @@ function grapheEcurieRadarWinsPosition() {
     },
   };
 
-  const graphique = document.getElementById("CanvaId");
+  const graphique = document.getElementById("CanvaIdDroite");
   const chart = new Chart(graphique, configuration);
 }
 

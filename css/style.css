@@ -292,7 +292,6 @@ header {
 #stats #CanvaIdGauche {
   width: 50%;
   background-color: white;
-  /* background-color: white; */
   border-radius: 1em;
   float: left;
 }
@@ -300,15 +299,12 @@ header {
 #stats #CanvaIdDroite {
   width: 50%;
   background-color: white;
-  /* background-color: white; */
   border-radius: 1em;
   float: right;
 }
 
 #stats #CanvaId {
-  width: 50%;
   background-color: white;
-  /* background-color: white; */
   border-radius: 1em;
   float: left;
 }
