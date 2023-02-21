@@ -104,7 +104,7 @@ header {
   .banner-txt h3 {
     font-size: 0.7em;
   }
-  #map-et-infos-gp #divInfosFront h1 {
+  #stats #map-et-infos-gp #divInfosFront h1 {
     font-size: 1.5em;
   }
 
@@ -124,7 +124,7 @@ header {
     height: 40vh;
   }
 
-  #map-et-infos-gp #divInfos h3 {
+  #stats #map-et-infos-gp #divInfos h3 {
     padding-top: 0%;
   }
 
@@ -187,7 +187,7 @@ header {
     font-size: 0.7em;
   }
 
-  #map-et-infos-gp #map {
+  #stats #map-et-infos-gp #map {
     width: 90%;
     height: 40vh;
     margin-bottom: 10%;
@@ -209,7 +209,7 @@ header {
     height: 40vh;
   }
 
-  #map-et-infos-gp #divInfos h3 {
+  #stats #map-et-infos-gp #divInfos h3 {
     padding-top: 0%;
   }
 
@@ -229,9 +229,14 @@ header {
     bottom: auto;
   }
 
-  #map-et-infos-gp {
+  #stats #map-et-infos-gp .bouton {
+    left: 43%;
+    bottom: 48%;
+  }
+
+  #stats #map-et-infos-gp {
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
   }
 
@@ -252,6 +257,14 @@ header {
   #stats #divMapEtInfos #divInfosBack p {
     font-size: 12px;
   }
+
+  #stats #map-et-infos-gp .bouton {
+    left: 40%;
+  }
+
+  #stats #map-et-infos-gp #map {
+    margin-bottom: 20%;
+  }
 }
 
 @media (max-width: 500px) {
@@ -267,8 +280,12 @@ header {
     width: 80%;
   }
 
+  #stats #map-et-infos-gp .bouton {
+    left: 35%;
+  }
+
   #stats #divMapEtInfos #map {
-    margin-bottom: 15%;
+    margin-bottom: 20%;
   }
 
   #stats #divMapEtInfos #divInfos {
@@ -459,6 +476,11 @@ header {
   padding-top: 50%;
 }
 
+#map-et-infos-gp .bouton {
+  left: 18%;
+  bottom: -15%;
+}
+
 .bouton {
   background: #fff;
   border: none;
@@ -580,6 +602,7 @@ canvas {
   justify-content: space-between;
   margin-left: 5%;
   margin-right: 5%;
+  position: relative;
 }
 
 #map {
@@ -675,6 +698,7 @@ canvas {
 #map-et-infos-gp #divInfosBack {
   background-image: url("../data/backgroundGP.png");
   background-size: cover;
+  background-position: center;
 }
 
 #divInfosBack {

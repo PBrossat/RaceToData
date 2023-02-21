@@ -73,6 +73,11 @@ function afficherMapGP() {
   textIntro.innerHTML =
     " Cliquez sur un circuit pour avoir son tracé, et survolez sa carte pour avoir encore plus d'informations !";
 
+  const boutonDezoom = document.createElement("button");
+  boutonDezoom.className = "bouton";
+  divMapEtInfosGP.appendChild(boutonDezoom);
+  boutonDezoom.textContent = "DeZoom";
+
   //Création de la map
   let mapGP = L.map("map", {
     center: [48.866667, 2.333333],
@@ -169,6 +174,21 @@ function afficherMapGP() {
           "Recordman : " + tabGlobalDataGP[i].RecordHolder;
       });
   }
+  //Gestion du bouton dezoom
+  boutonDezoom.addEventListener("click", function () {
+    const maxDezoome = 3;
+    if (mapGP.getZoom() >= maxDezoome) {
+      //récupère le centrage actuel du zoom
+      var currentCenter = mapGP.getCenter();
+
+      //récupère les coordonnées du centre du zoom
+      var currentLng = currentCenter.lng;
+      var currentLat = currentCenter.lat;
+
+      //dézoume à partir du zoom actuel
+      mapGP.flyTo([currentLat, currentLng], maxDezoome);
+    }
+  });
 }
 
 //-------------------------------Gestion du click sur le bouton de la carte des grands-prix--------------------------------------------------
