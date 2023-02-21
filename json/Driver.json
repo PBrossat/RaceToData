@@ -37,8 +37,8 @@
     "Pourcent DNF moyen/GP": 12.2,
     "Nb GP disputés": 82,
     "Image": "data/pilotes/NorrisBackground.jpeg",
-    "Lat": 51.4545,
-    "Long": 2.5879
+    "Lat": 51.4485,
+    "Long": -0.4286
   },
 
   {
@@ -100,8 +100,8 @@
     "Pourcent DNF moyen/GP": 21.07,
     "Nb GP disputés": 356,
     "Image": "data/pilotes/AlonsoBackground.jpg",
-    "Lat": 49.3629,
-    "Long": -8.4139
+    "Lat": 43.3603,
+    "Long": -5.8448
   },
 
   {
@@ -289,8 +289,8 @@
     "Pourcent DNF moyen/GP": 20.37,
     "Nb GP disputés": 162,
     "Image": "data/pilotes/SainzBackground.jpg",
-    "Lat": 43.3667,
-    "Long": -5.85
+    "Lat": 40.4168,
+    "Long": -3.7038
   },
 
   {

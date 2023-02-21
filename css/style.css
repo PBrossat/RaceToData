@@ -107,7 +107,56 @@ header {
   #map-et-infos-gp #divInfosFront h1 {
     font-size: 1.5em;
   }
+
+  #stats #divMapEtInfos #map {
+    width: 80%;
+    height: 40vh;
+    margin-bottom: 10%;
+  }
+
+  #stats #map-et-infos-gp #divInfos {
+    width: 90%;
+    height: 40vh;
+  }
+
+  #stats #divMapEtInfos #divInfos {
+    width: 90%;
+    height: 40vh;
+  }
+
+  #map-et-infos-gp #divInfos h3 {
+    padding-top: 0%;
+  }
+
+  #stats #divMapEtInfos #divInfos h3 {
+    padding-top: 0%;
+    width: 80%;
+  }
+
   /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
+}
+
+@media (max-width: 1200px) {
+  #stats #divMapEtInfos #divInfosBack h1 {
+    position: relative;
+    top: -15%;
+  }
+
+  #stats #divMapEtInfos #divInfosBack p {
+    position: relative;
+    top: -15%;
+    font-size: unset;
+  }
+
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1079px) {
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    width: 110%;
+  }
 }
 
 @media (max-width: 991px) {
@@ -144,8 +193,19 @@ header {
     margin-bottom: 10%;
   }
 
-  #map-et-infos-gp #divInfos {
+  #stats #divMapEtInfos #map {
+    width: 80%;
+    height: 40vh;
+    margin-bottom: 10%;
+  }
+
+  #stats #map-et-infos-gp #divInfos {
     width: 90%;
+    height: 40vh;
+  }
+
+  #stats #divMapEtInfos #divInfos {
+    width: 40%;
     height: 40vh;
   }
 
@@ -153,12 +213,67 @@ header {
     padding-top: 0%;
   }
 
+  #stats #divMapEtInfos #divInfos h3 {
+    padding-top: 0%;
+    width: 100%;
+  }
+
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    padding-top: 0%;
+    width: 80%;
+    left: 30px;
+  }
+
+  #stats #divMapEtInfos .bouton {
+    left: 45%;
+    bottom: auto;
+  }
+
   #map-et-infos-gp {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
   }
+
+  #divMapEtInfos {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   /*! ATTENTION gérer les cards quand on a un écran petit (telephone/tablette) car hover impossible -> active */
+}
+
+@media (max-width: 690px) {
+  #stats #divMapEtInfos #divInfosBack h1 {
+    font-size: unset;
+  }
+
+  #stats #divMapEtInfos #divInfosBack p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  #stats #divMapEtInfos .bouton {
+    left: 35%;
+    bottom: auto;
+  }
+}
+
+@media (max-width: 390px) {
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    left: 30px;
+    width: 80%;
+  }
+
+  #stats #divMapEtInfos #map {
+    margin-bottom: 15%;
+  }
+
+  #stats #divMapEtInfos #divInfos {
+    width: 90%;
+  }
 }
 
 .presentation {
@@ -323,10 +438,21 @@ header {
   width: 100%;
 }
 
-#stats #divMapEtInfosPilotes {
+#divMapEtInfos {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   position: relative;
+}
+
+#divMapEtInfos #map {
+  width: 50%;
+  height: 55vh;
+  margin-bottom: 1%;
+}
+
+#divMapEtInfos #divInfos h3 {
+  padding-top: 50%;
 }
 
 .bouton {
@@ -342,7 +468,7 @@ header {
   transform: skew(-21deg);
   position: absolute;
   bottom: -10%;
-  left: 20%;
+  left: 25%;
 }
 
 .bouton::before {
@@ -352,8 +478,8 @@ header {
   bottom: 0;
   right: 100%;
   left: 0;
-  /* background: rgb(207, 58, 58); */
-  background-image: linear-gradient(to left, #ebec10, #f73535);
+  background: rgba(255, 0, 0);
+  /* background-image: linear-gradient(to left, #ebec10, #f73535); */
   opacity: 0;
   z-index: -1;
   transition: all 0.5s;
@@ -369,68 +495,32 @@ header {
   opacity: 1;
 }
 
-#stats #divMapPilotes {
-  width: 50%;
-  height: 500px;
-  border-radius: 1em;
-  float: left;
-  left: 15px;
+#divMapEtInfos #divInfosContent {
+  width: 89%;
 }
 
-#stats #divInfosPilotes {
-  width: 700px;
-  height: 500px;
-  padding-top: 18px;
-  border-radius: 1em;
-  float: right;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-}
-
-#divInfosPilotes h3 {
-  color: white;
-  text-align: center;
-  font-size: 1em;
-  padding-top: 30%;
-  padding-left: 5%;
-}
-
-#stats #cardPilote {
-  width: 320px;
-  height: 460px;
-  border-radius: 15px;
-  /* permet de centrer la carte   */
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0px 0px 20px #fff;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  transition: transform 0.65s ease-in-out;
-  transform-style: preserve-3d;
-}
-
-#cardPilote:hover {
-  transform: rotateY(-180deg);
-}
-
-#cardPilote #divInfosBack {
+#divMapEtInfos #divInfosBack {
   background-image: url("../data/pilotes/BackgroundBackPilotCard.jpeg");
   background-size: cover;
-  background-position: center top -25px;
+  background-position: center;
+  /* background-position: center top -25px; */
 }
 
-#stats #cardPilote h1 {
+#divMapEtInfos #divInfosContent h1 {
   color: red;
   text-align: center;
   font-size: xx-large;
+  text-shadow: none;
+  position: relative;
+  top: -15%;
 }
 
-#stats #cardPilote p {
+#divMapEtInfos #divInfosContent p {
   font-size: large;
   color: black;
+  line-height: none;
+  position: relative;
+  top: -10%;
 }
 
 :root {
@@ -501,6 +591,11 @@ canvas {
   border-radius: 1em;
   perspective: 1000px;
   background-color: transparent;
+}
+
+#divMapEtInfos #divInfos {
+  width: 25%;
+  height: 55vh;
 }
 
 #map-et-infos-gp #divInfos {
