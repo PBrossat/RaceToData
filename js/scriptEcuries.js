@@ -445,8 +445,8 @@ function grapheEcurieDoughnutPoints() {
 function grapheTest() {
   const nomEcurie = getEcuries();
   const victoireEcurie = getNbVictoireEcuries();
-
-  Highcharts.chart("divTest", {
+  const divTest = document.querySelector("#test");
+  Highcharts.chart(divTest, {
     chart: {
       type: "column",
     },

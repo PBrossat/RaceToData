@@ -279,6 +279,7 @@ async function grapheDriverPoint(annee) {
     tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
   }
 
+  //permet de créer chaque lignes RPZ points/pilote
   let series = [];
   let period = 500;
   for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
@@ -286,7 +287,8 @@ async function grapheDriverPoint(annee) {
       name: tabNomPilote[i],
       data: tabDataPointsPilote[i],
       animation: {
-        defer: period * i,
+        defer: period * i, //les lignes apparaissent une par une toute les 500ms
+        duration: 12000, //en ms
       },
     });
   }
