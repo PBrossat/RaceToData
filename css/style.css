@@ -465,6 +465,7 @@ header {
   align-items: center;
   justify-content: space-around;
   position: relative;
+  margin-bottom: 6%;
 }
 
 #divMapEtInfos #map {
