@@ -14,8 +14,10 @@ const boutonDecouvrirStatsPilotes = document.querySelector(
 boutonDecouvrirStatsPilotes.addEventListener("click", function () {
   document.querySelector("#stats").innerHTML = "";
   afficherStatsPilotes();
-  mapPilote();
   recupererInfosPilotes();
+  mapPilote();
+  creationNouvelleDiv();
+  grapheDriverPoint(2022);
 });
 
 //------------------------------ Création des containers ----------------
@@ -29,72 +31,13 @@ function afficherStatsPilotes() {
   StatsPilotes.appendChild(divMapEtInfos);
 }
 
-//---------------------------------GESTION DES GRAPHES--------------------------------------
+function creationNouvelleDiv() {
+  const StatsPilotes = document.querySelector("#stats");
 
-function grapheDriverPointMoyenParGPRadar() {
-  const nomPilote = getNomPilote();
-  const nbMoyenPointsParGpParPilote = getNbMoyenPointsParGP();
+  const nouvelleDiv = document.createElement("div");
+  nouvelleDiv.className = "divGraphique";
 
-  const configuration = {
-    type: "radar",
-    data: {
-      labels: nomPilote,
-
-      datasets: [
-        {
-          label: "Points moyen par Grand Prix ",
-          data: nbMoyenPointsParGpParPilote,
-          fill: true,
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          borderColor: "rgb(0, 0, 0)",
-          pointBackgroundColor: "rgb(255,0,0)",
-          pointHoverBorderColor: "rgb(255, 99, 132)",
-        },
-      ],
-    },
-    options: {
-      responsive: false,
-    },
-  };
-
-  const graphique = document.getElementById("CanvaIdGauche");
-  const chart = new Chart(graphique, configuration);
-}
-
-// fonction permettant d'afficher un graphe bâton
-function grapheDriverPointMoyenParGPBaton() {
-  //création d'un tableau de couleurs aléatoires
-  var tabCouleurs = [];
-  for (var i = 0; i < globalTabData.length; i++) {
-    var r = Math.floor(Math.random() * 256);
-    var g = Math.floor(Math.random() * 256);
-    var b = Math.floor(Math.random() * 256);
-    tabCouleurs.push(`rgba(${r}, ${g}, ${b}, 0.9)`);
-  }
-
-  const nomPilote = getNomPilote();
-  const nbMoyenPointsParGpParPilote = getNbMoyenPointsParGP();
-
-  const configuration = {
-    type: "bar",
-    data: {
-      labels: nomPilote,
-      datasets: [
-        {
-          label: "Points moyen par Grand Prix ",
-          data: nbMoyenPointsParGpParPilote,
-          backgroundColor: tabCouleurs,
-          borderColor: "rgb(0, 0, 0)",
-        },
-      ],
-    },
-    options: {
-      responsive: false,
-    },
-  };
-
-  const graphique = document.getElementById("CanvaIdDroite");
-  const chart = new Chart(graphique, configuration);
+  StatsPilotes.appendChild(nouvelleDiv);
 }
 
 //---------------------------------GESTION DE LA MAP--------------------------------------
@@ -270,5 +213,160 @@ function mapPilote() {
       //dézoume à partir du zoom actuel
       mapPilote.flyTo([currentLat, currentLng], maxDezoome);
     }
+  });
+}
+
+//---------------------------------GESTION DES GRAPHES--------------------------------------
+
+async function recuperationPointsPilotePendantLaSaison(nomPilote, annee) {
+  let nomPiloteMinuscule = nomPilote.toLowerCase();
+  //cas particulier pour verstappen
+  if (nomPiloteMinuscule == "verstappen") {
+    nomPiloteMinuscule = "max_verstappen";
+  }
+  const response = await fetch(
+    `https://ergast.com/api/f1/${annee}/drivers/${nomPiloteMinuscule}/results.json`
+  );
+  const data = await response.json();
+
+  // Créez un tableau vide pour stocker les points de chaque course
+  let pointsParCourse = [];
+  let totalPoints = 0;
+
+  // Parcourez le tableau de résultats et extrayez les points du pilote à chaque course
+  data.MRData.RaceTable.Races.forEach((race) => {
+    let result = race.Results.find(
+      (result) => result.Driver.driverId === nomPiloteMinuscule
+    );
+
+    if (result && result.points) {
+      let points = parseInt(result.points);
+      totalPoints += points;
+      pointsParCourse.push(totalPoints);
+    }
+  });
+  return pointsParCourse;
+}
+
+async function recuperationGPsaison(annee) {
+  const url = `https://cors-anywhere.herokuapp.com/https://ergast.com/api/f1/${annee}/races.json`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const grandPrix = data.MRData.RaceTable.Races.map((race) => race.raceName);
+
+  return grandPrix;
+}
+
+async function grapheDriverPoint(annee) {
+  const divParent = document.querySelector(".divGraphique");
+  const divGraphique = document.createElement("div");
+  divGraphique.id = "divGraphique";
+  divParent.appendChild(divGraphique);
+
+  //permet de creer un tableau de tableau de points selon le nom des pilote et l'année passée en paramatre
+  const tabDataPointsPilote = [];
+  for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
+    tabDataPointsPilote[i] = await recuperationPointsPilotePendantLaSaison(
+      tabGlobalDataPilotes[i].Name,
+      annee
+    );
+  }
+
+  //permet de creer un tableau avec les noms des pilotes
+  const tabNomPilote = [];
+  for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
+    tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
+  }
+
+  let series = [];
+  let period = 500;
+  for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
+    series.push({
+      name: tabNomPilote[i],
+      data: tabDataPointsPilote[i],
+      animation: {
+        defer: period * i,
+      },
+    });
+  }
+
+  const graphique = document.getElementById("divGraphique");
+
+  const styleText = { color: "#FFFFFF", fontWeight: "bold" };
+
+  Highcharts.chart(graphique, {
+    chart: {
+      type: "spline",
+      backgroundColor: "#1b1b1b",
+      marginBottom: 40,
+    },
+    title: {
+      text: "Evolution des points des pilotes de F1 durant la saison 2022 ",
+      style: {
+        color: "#FFFFFF",
+        fontWeight: "bold",
+      },
+    },
+
+    yAxis: {
+      gridLineWidth: 0,
+      tickInterval: 1,
+      startOnTick: false,
+      endOnTick: false,
+      labels: {
+        style: styleText,
+      },
+      title: {
+        text: null,
+      },
+    },
+
+    xAxis: {
+      offset: 10,
+      labels: {
+        style: styleText,
+      },
+    },
+
+    legend: {
+      align: "right",
+      layout: "proximate",
+      itemStyle: styleText,
+      style: {
+        fontSize: "2", // Taille de la police en pixels
+      },
+    },
+
+    plotOptions: {
+      series: {
+        label: {
+          connectorAllowed: false,
+        },
+        marker: {
+          enabled: false,
+          symbol: "diamond",
+        },
+      },
+    },
+
+    series: series,
+
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 500,
+          },
+          chartOptions: {
+            legend: {
+              layout: "horizontal",
+              align: "center",
+              verticalAlign: "bottom",
+            },
+          },
+        },
+      ],
+    },
   });
 }
