@@ -17,37 +17,53 @@ boutonDecouvrirStatsEcuries.addEventListener("click", function () {
   afficherStatsEcuries();
   mapEcuries();
   recupererInfosEcuries();
-  grapheEcurieRadarWinsPoles();
-  grapheEcurieRadarWinsPosition();
+  grapheTest();
+  // grapheEcurieRadarWinsPoles();
+  // grapheEcurieBarPosition();
+  // grapheEcurieDoughnutPoints();
 });
 
 //------------------------------ Création des containers ----------------
 
 function afficherStatsEcuries() {
   const StatsEcuries = document.querySelector("#stats");
-
-  const sectionStatsEcuries = document.createElement("section");
-  StatsEcuries.appendChild(sectionStatsEcuries);
-  sectionStatsEcuries.innerHTML +=
+  StatsEcuries.innerHTML +=
     "<h2>Analyse des données relatives aux Ecuries</h2>";
 
   const divMapEtInfos = document.createElement("div");
-  divMapEtInfos.id = "divMapEtInfosEcuries";
-  sectionStatsEcuries.appendChild(divMapEtInfos);
+  divMapEtInfos.id = "divMapEtInfos";
+  StatsEcuries.appendChild(divMapEtInfos);
 
-  const divStatsPilotes1 = document.createElement("div");
-  divStatsPilotes1.id = "divId1";
+  const divTest = document.createElement("div");
+  divTest.id = "test";
+  StatsEcuries.appendChild(divTest);
 
-  const divStatsPilotes2 = document.createElement("div");
-  divStatsPilotes2.id = "divId2";
+  // const divStatsPilotes1 = document.createElement("div");
+  // divStatsPilotes1.id = "divId";
+  // divStatsPilotes1.innerHTML +=
+  //   "<h3>Graphe montrant que le nombre de victoires d'une écurie est souvent dû au nombre de poles positions.</h3>";
+  // StatsEcuries.appendChild(divStatsPilotes1);
+  // const GrapheEcuries1 = document.createElement("canvas");
+  // GrapheEcuries1.id = "CanvaIdGauche";
+  // divStatsPilotes1.appendChild(GrapheEcuries1);
 
-  const divGrapheEcuriesGauche = document.createElement("canvas");
-  divGrapheEcuriesGauche.id = "CanvaIdGauche";
-  sectionStatsEcuries.appendChild(divGrapheEcuriesGauche);
+  // const divStatsPilotes2 = document.createElement("div");
+  // divStatsPilotes2.id = "divId";
+  // divStatsPilotes2.innerHTML +=
+  //   "<h3>Graphe des positions des écuries au championnat du monde de Formule 1 2022 .</h3>";
+  // StatsEcuries.appendChild(divStatsPilotes2);
+  // const GrapheEcuries2 = document.createElement("canvas");
+  // GrapheEcuries2.id = "CanvaIdDroite";
+  // divStatsPilotes2.appendChild(GrapheEcuries2);
 
-  const divGrapheEcuriesDroite = document.createElement("canvas");
-  divGrapheEcuriesDroite.id = "CanvaIdDroite";
-  sectionStatsEcuries.appendChild(divGrapheEcuriesDroite);
+  // const divStatsPilotes3 = document.createElement("div");
+  // divStatsPilotes3.id = "divId";
+  // divStatsPilotes3.innerHTML +=
+  //   "<h3>Graphe du nombre de points inscris par chaque écuries.</h3>";
+  // StatsEcuries.appendChild(divStatsPilotes3);
+  // const GrapheEcuries3 = document.createElement("canvas");
+  // GrapheEcuries3.id = "CanvaId";
+  // divStatsPilotes3.appendChild(GrapheEcuries3);
 }
 
 //---------------------------------GESTION DE LA MAP--------------------------------------
@@ -55,19 +71,19 @@ function afficherStatsEcuries() {
 function mapEcuries() {
   //création des div Map et Infos
   //--Map
-  const MapEtInfos = document.querySelector("#divMapEtInfosEcuries");
+  const MapEtInfos = document.querySelector("#divMapEtInfos");
 
   const divMapEcuries = document.createElement("div");
-  divMapEcuries.id = "divMapEcuries";
+  divMapEcuries.id = "map";
   MapEtInfos.appendChild(divMapEcuries);
 
   //--Infos
   const divInfosEcuries = document.createElement("div");
-  divInfosEcuries.id = "divInfosEcuries";
+  divInfosEcuries.id = "divInfos";
   MapEtInfos.appendChild(divInfosEcuries);
 
   const boutonDezoom = document.createElement("button");
-  boutonDezoom.className = "boutonEcuries";
+  boutonDezoom.className = "bouton";
   MapEtInfos.appendChild(boutonDezoom);
   boutonDezoom.innerHTML = "DeZoom";
   boutonDezoom.addEventListener("click", function () {
@@ -88,7 +104,7 @@ function mapEcuries() {
   const zoomInitial = 2.5;
 
   //création de la map
-  const mapEcuries = L.map("divMapEcuries").setView(
+  const mapEcuries = L.map("map").setView(
     [centreMap.lat, centreMap.lng],
     zoomInitial
   );
@@ -146,16 +162,15 @@ function mapEcuries() {
           [tabGlobalDataEcuries[i].Lat, tabGlobalDataEcuries[i].Long],
           mapEcuries.getMaxZoom()
         );
-        const existeDivInfosEcuries =
-          document.querySelector("#divInfosEcuries");
+        const existeDivInfosEcuries = document.querySelector("#divInfos");
         if (existeDivInfosEcuries) {
           existeDivInfosEcuries.remove();
         }
         const divInfosEcuries = document.createElement("div");
-        divInfosEcuries.id = "divInfosEcuries";
+        divInfosEcuries.id = "divInfos";
         MapEtInfos.appendChild(divInfosEcuries);
         const carteEcuriesContent = document.createElement("div");
-        carteEcuriesContent.id = "cardEcuries";
+        carteEcuriesContent.id = "divInfosContent";
         divInfosEcuries.appendChild(carteEcuriesContent);
 
         //PARTIE FRONT
@@ -163,13 +178,19 @@ function mapEcuries() {
         divInfosEcuriesFront.id = "divInfosFront";
         carteEcuriesContent.appendChild(divInfosEcuriesFront);
         divInfosEcuriesFront.style.backgroundImage =
-          "url(" + tabGlobalDataEcuries[i].Image + ")";
+          "url(" + tabGlobalDataEcuries[i].ImageFront + ")";
         divInfosEcuriesFront.style.backgroundSize = "cover";
+        divInfosEcuriesFront.style.backgroundPosition = "center";
 
         //PARTIE BACK
         const divInfosEcuriesBack = document.createElement("div");
         divInfosEcuriesBack.id = "divInfosBack";
         carteEcuriesContent.appendChild(divInfosEcuriesBack);
+        // divInfosEcuriesBack.style.backgroundImage =
+        //   "url(" + tabGlobalDataEcuries[i].ImageBack + ")";
+        // divInfosEcuriesBack.style.backgroundSize = "cover";
+        // divInfosEcuriesBack.style.backgroundPosition = "center";
+        divInfosEcuriesBack.style.opacity = "0.7";
         const nomEcuries = document.createElement("h1");
         const nationalité = document.createElement("p");
         const nbVictoires = document.createElement("p");
@@ -192,13 +213,13 @@ function mapEcuries() {
         nationalité.textContent =
           "Pays d'origine : " + tabGlobalDataEcuries[i]["nationality"];
         nbVictoires.textContent =
-          "Nombre de Victoires : " + tabGlobalDataEcuries[i]["wins_all"];
+          "Victoires : " + tabGlobalDataEcuries[i]["wins_all"];
         nbPoles.textContent =
-          "Nombre de Poles Positions : " + tabGlobalDataEcuries[i]["pole_all"];
+          "Poles Positions : " + tabGlobalDataEcuries[i]["pole_all"];
         nbPodiums.textContent =
-          "Nombre de podiums : " + tabGlobalDataEcuries[i]["podiums_all"];
+          "Podiums : " + tabGlobalDataEcuries[i]["podiums_all"];
         nbPoints.textContent =
-          "Nombre de points : " + tabGlobalDataEcuries[i]["points_all"];
+          "Points : " + tabGlobalDataEcuries[i]["points_all"];
         pilote.textContent =
           "Titres pilote : " + tabGlobalDataEcuries[i]["titre_pilote"];
         constructeur.textContent =
@@ -247,17 +268,25 @@ function getNbPositionsEcuries() {
   return positionEcurie;
 }
 
+function getNbPointsEcuries() {
+  const pointsEcurie = [];
+  for (let i = 0; i < 10; i++) {
+    pointsEcurie.push(tabGlobalDataEcuries[i]["points"]);
+  }
+  return pointsEcurie;
+}
+
 //---------------------------------GRAPHES--------------------------------------------------------------
 
 function grapheEcurieRadarWinsPoles() {
   const nomEcurie = getEcuries();
   const nbVictoiresEcuries = getNbVictoireAllEcuries();
   const nbPolesEcuries = getNbPolesEcuries();
+
   const configuration = {
     type: "radar",
     data: {
       labels: nomEcurie,
-
       datasets: [
         {
           label: "Nombre de poles positions par écurie",
@@ -283,46 +312,87 @@ function grapheEcurieRadarWinsPoles() {
         },
       ],
     },
+    options: {
+      scales: {
+        r: {
+          grid: {
+            color: "red",
+          },
+          angleLines: {
+            color: "red",
+            lineWidth: 8,
+          },
+          pointLabels: {
+            color: "red",
+          },
+          ticks: {
+            color: "red",
+          },
+        },
+      },
+    },
   };
 
   const graphique = document.getElementById("CanvaIdGauche");
   const chart = new Chart(graphique, configuration);
 }
 
-function grapheEcurieRadarWinsPosition() {
+function grapheEcurieBarPosition() {
   const nomEcurie = getEcuries();
-  const nbVictoiresEcuries = getNbVictoireEcuries();
   const positionEcuries = getNbPositionsEcuries();
 
   const configuration = {
-    type: "radar",
+    type: "bar",
     data: {
       labels: nomEcurie,
-
       datasets: [
         {
           label: "Position au championnat par écurie",
           data: positionEcuries,
-          fill: true,
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          borderColor: "rgb(255, 99, 132)",
-          pointBackgroundColor: "rgb(255, 99, 132)",
-          pointBorderColor: "#fff",
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgb(255, 99, 132)",
-        },
-        {
-          label: "Nombre de victoires par écurie",
-          data: nbVictoiresEcuries,
-          fill: true,
-          backgroundColor: "rgba(54, 162, 235, 0.2)",
-          borderColor: "rgb(54, 162, 235)",
-          pointBackgroundColor: "rgb(54, 162, 235)",
-          pointBorderColor: "#fff",
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgb(54, 162, 235)",
+          backgroundColor: [
+            "rgba(9, 9, 255,0.2)",
+            "rgba(255, 9, 6,0.2)",
+            "rgba(28, 25, 20,0.2)",
+            "rgba(255, 12, 192,0.2)",
+            "rgba(255, 155, 18,0.2)",
+            "rgba(253, 102, 105,0.2)",
+            "rgba(7, 54, 28,0.2)",
+            "rgba(91, 93, 97,0.2)",
+            "rgba(21, 203, 247,0.2)",
+            "rgba(204, 205, 206,0.2)",
+          ],
+          borderColor: [
+            "rgb(9, 9, 255)",
+            "rgb(255, 9, 6)",
+            "rgb(28, 25, 20)",
+            "rgb(255, 12, 192)",
+            "rgb(255, 155, 18)",
+            "rgb(253, 102, 105)",
+            "rgb(7, 54, 28)",
+            "rgb(91, 93, 97)",
+            "rgb(21, 203, 247)",
+            "rgb(204, 205, 206)",
+          ],
+          borderWidth: 1,
         },
       ],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              position: "bottom",
+              reverse: true,
+            },
+          },
+        ],
+        elements: {
+          bar: {
+            reverse: true,
+          },
+        },
+      },
     },
   };
 
@@ -330,20 +400,12 @@ function grapheEcurieRadarWinsPosition() {
   const chart = new Chart(graphique, configuration);
 }
 
-function grapheEcurieBatonPoints() {
-  let tabCouleurs = [];
-  for (let i = 0; i < dataGlobalTab.length; i++) {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    tabCouleurs.push(`rgba(${r}, ${g}, ${b}, 0.9)`);
-  }
-
+function grapheEcurieDoughnutPoints() {
   const nomEcurie = getEcuries();
   const nbPointsEcuries = getNbPointsEcuries();
 
   const configuration = {
-    type: "bar",
+    type: "doughnut",
     data: {
       labels: nomEcurie,
 
@@ -352,8 +414,20 @@ function grapheEcurieBatonPoints() {
           label: "Nombre de points par écurie",
           data: nbPointsEcuries,
           fill: true,
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: [
+            "rgb(9, 9, 255)",
+            "rgb(255, 9, 6)",
+            "rgb(28, 25, 20)",
+            "rgb(255, 12, 192)",
+            "rgb(255, 155, 18)",
+            "rgb(253, 102, 105)",
+            "rgb(7, 54, 28)",
+            "rgb(91, 93, 97)",
+            "rgb(21, 203, 247)",
+            "rgb(204, 205, 206)",
+          ],
+          hoverOffset: 4,
+          borderColor: "rgb(255, 255, 255)",
           pointBackgroundColor: "rgb(255, 99, 132)",
           pointBorderColor: "#fff",
           pointHoverBackgroundColor: "#fff",
@@ -364,4 +438,54 @@ function grapheEcurieBatonPoints() {
   };
   const graphique = document.getElementById("CanvaId");
   const chart = new Chart(graphique, configuration);
+}
+
+//--------------------------------Tests_Highcharts---------------------------------------------
+
+function grapheTest() {
+  const nomEcurie = getEcuries();
+  const victoireEcurie = getNbVictoireEcuries();
+
+  Highcharts.chart("divTest", {
+    chart: {
+      type: "column",
+    },
+    title: {
+      text: "Victoires par écuries",
+    },
+    subtitle: {
+      text: "Source: tqt",
+    },
+    xAxis: {
+      categories: nomEcurie,
+      crosshair: true,
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: "Nombre de victoires",
+      },
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat:
+        '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+      footerFormat: "</table>",
+      shared: true,
+      useHTML: true,
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0,
+      },
+    },
+    series: [
+      {
+        name: "nomEcurie",
+        data: victoireEcurie,
+      },
+    ],
+  });
 }

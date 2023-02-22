@@ -404,38 +404,43 @@ header {
   padding-top: 3rem;
 }
 
-#stats #CanvaIdGauche {
+#divId h3 {
+  font-size: 1em;
+  font-weight: 700;
+  color: white;
+  line-height: 1em;
+  text-align: center;
+  padding: 20px 20px 20px;
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
+#stats #divId {
+  margin-top: 20%;
+  margin-left: 25%;
   width: 50%;
-  background-color: white;
+}
+
+#stats #divId #CanvaId {
+  background-color: mediumseagreen;
   border-radius: 1em;
-  float: left;
+  margin-bottom: 8%;
+  padding: 50px;
 }
 
-#stats #CanvaIdDroite {
-  width: 50%;
-  background-color: white;
+#stats #divId #CanvaIdDroite {
+  background-color: whitesmoke;
   border-radius: 1em;
-  float: right;
+  margin-bottom: 8%;
+  padding: 50px;
 }
 
-#stats #CanvaId {
-  background-color: white;
+#stats #divId #CanvaIdGauche {
+  background-color: whitesmoke;
   border-radius: 1em;
-  float: left;
-}
-
-/* #stats #divID {
-  display: block;
-} */
-
-#divId1 {
-  float: left;
-  width: 100%;
-}
-
-#divId2 {
-  clear: both;
-  width: 100%;
+  margin-bottom: 8%;
+  padding: 50px;
 }
 
 #divMapEtInfos {
@@ -503,7 +508,6 @@ header {
   background-image: url("../data/pilotes/BackgroundBackPilotCard.jpeg");
   background-size: cover;
   background-position: center;
-  /* background-position: center top -25px; */
 }
 
 #divMapEtInfos #divInfosContent h1 {
@@ -730,84 +734,55 @@ canvas {
   padding-left: 5%;
 }
 
-#stats #cardEcuries {
-  width: 320px;
-  height: 460px;
-  border-radius: 15px;
-  /* permet de centrer la carte   */
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0px 0px 20px #fff;
+/* Tests Highchart */
+
+#divTest {
   display: flex;
-  flex-direction: column;
-  color: #fff;
-  transition: transform 0.65s ease-in-out;
-  transform-style: preserve-3d;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  height: 400px;
 }
 
-#cardEcuries:hover {
-  transform: rotateY(-180deg);
+.highcharts-figure,
+.highcharts-data-table table {
+  min-width: 310px;
+  max-width: 800px;
+  margin: 1em auto;
 }
 
-#cardEcuries #divInfosBack {
-  background-image: url("../data/backgroundEcuries.png");
-  background-size: cover;
-  background-position: center top -90px;
-}
-
-#cardEcuries #divInfosFront {
-  background-position: center;
-  background-size: cover;
-}
-
-#stats #cardEcuries h1 {
-  color: rgb(196, 16, 16);
+.highcharts-data-table table {
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #ebebeb;
+  margin: 10px auto;
   text-align: center;
-  font-size: xx-large;
-  margin-top: 60px;
+  width: 100%;
+  max-width: 500px;
 }
 
-#stats #cardEcuries p {
-  font-size: large;
-  color: rgb(249, 242, 242);
-  margin-top: 10px;
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
 }
 
-.boutonEcuries {
-  background: #fff;
-  border: none;
-  padding: 10px 20px;
-  display: inline-block;
-  font-size: 15px;
+.highcharts-data-table th {
   font-weight: 600;
-  width: 120px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transform: skew(-21deg);
-  bottom: -10%;
-  left: 20%;
+  padding: 0.5em;
 }
 
-.boutonEcuries::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 100%;
-  left: 0;
-  /* background: rgb(207, 58, 58); */
-  background-image: linear-gradient(to left, #ebec10, #f73535);
-  opacity: 0;
-  z-index: -1;
-  transition: all 0.5s;
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+  padding: 0.5em;
 }
 
-.boutonEcuries:hover {
-  color: #fff;
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
 }
 
-.boutonEcuries:hover::before {
-  left: 0;
-  right: 0;
-  opacity: 1;
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
 }
