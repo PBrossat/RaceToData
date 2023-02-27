@@ -17,7 +17,8 @@
     "Nb GP disputés": 163,
     "Image": "data/pilotes/VerstappenBackground.jpg",
     "Lat": 52.3781,
-    "Long": 4.9011
+    "Long": 4.9011,
+    "Color": "#0600EF"
   },
 
   {
@@ -38,7 +39,8 @@
     "Nb GP disputés": 82,
     "Image": "data/pilotes/NorrisBackground.jpeg",
     "Lat": 51.4485,
-    "Long": -0.4286
+    "Long": -0.4286,
+    "Color": "#FF8700"
   },
 
   {
@@ -59,7 +61,8 @@
     "Nb GP disputés": 108,
     "Image": "data/pilotes/GaslyBackground.jpg",
     "Lat": 49.4431,
-    "Long": 1.0993
+    "Long": 1.0993,
+    "Color": "#2B4562"
   },
 
   {
@@ -80,7 +83,8 @@
     "Nb GP disputés": 235,
     "Image": "data/pilotes/PerezBackground.jpg",
     "Lat": 19.4326,
-    "Long": -99.1332
+    "Long": -99.1332,
+    "Color": "#0600EF"
   },
 
   {
@@ -101,7 +105,8 @@
     "Nb GP disputés": 356,
     "Image": "data/pilotes/AlonsoBackground.jpg",
     "Lat": 43.3603,
-    "Long": -5.8448
+    "Long": -5.8448,
+    "Color": "#0090FF"
   },
 
   {
@@ -122,7 +127,8 @@
     "Nb GP disputés": 102,
     "Image": "data/pilotes/LeclercBackground.png",
     "Lat": 43.7313,
-    "Long": 7.4265
+    "Long": 7.4265,
+    "Color": "#DC0000"
   },
 
   {
@@ -143,7 +149,8 @@
     "Nb GP disputés": 122,
     "Image": "data/pilotes/StrollBackground.jpg",
     "Lat": 45.5,
-    "Long": -73.5833
+    "Long": -73.5833,
+    "Color": "#006F62"
   },
 
   {
@@ -164,7 +171,8 @@
     "Nb GP disputés": 141,
     "Image": "data/pilotes/MagnussenBackground.png",
     "Lat": 55.6761,
-    "Long": 12.5683
+    "Long": 12.5683,
+    "Color": "#FFFFFF"
   },
 
   {
@@ -185,7 +193,8 @@
     "Nb GP disputés": 42,
     "Image": "data/pilotes/TsunodaBackground.jpg",
     "Lat": 35.6586,
-    "Long": 139.7454
+    "Long": 139.7454,
+    "Color": "#2B4562"
   },
 
   {
@@ -206,7 +215,8 @@
     "Nb GP disputés": 59,
     "Image": "data/pilotes/AlbonBackground.jpeg",
     "Lat": 13.7563,
-    "Long": 100.5018
+    "Long": 100.5018,
+    "Color": "#005AFF"
   },
 
   {
@@ -227,7 +237,8 @@
     "Nb GP disputés": 22,
     "Image": "data/pilotes/ZhouBackground.jpg",
     "Lat": 31.2165,
-    "Long": 121.4365
+    "Long": 121.4365,
+    "Color": "#900000"
   },
 
   {
@@ -248,7 +259,8 @@
     "Nb GP disputés": 111,
     "Image": "data/pilotes/OconBackground.jpg",
     "Lat": 49.0256,
-    "Long": 1.2183
+    "Long": 1.2183,
+    "Color": "#0090FF"
   },
 
   {
@@ -269,7 +281,8 @@
     "Nb GP disputés": 310,
     "Image": "data/pilotes/HamiltonBackground.jpg",
     "Lat": 51.907266,
-    "Long": -0.196862
+    "Long": -0.196862,
+    "Color": "#00D2BE"
   },
 
   {
@@ -290,7 +303,8 @@
     "Nb GP disputés": 162,
     "Image": "data/pilotes/SainzBackground.jpg",
     "Lat": 40.4168,
-    "Long": -3.7038
+    "Long": -3.7038,
+    "Color": "#DC0000"
   },
 
   {
@@ -311,7 +325,8 @@
     "Nb GP disputés": 82,
     "Image": "data/pilotes/RusselBackground.jpg",
     "Lat": 52.6369,
-    "Long": -1.1398
+    "Long": -1.1398,
+    "Color": "#00D2BE"
   },
 
   {
@@ -332,7 +347,8 @@
     "Nb GP disputés": 200,
     "Image": "data/pilotes/BottasBackground.jpg",
     "Lat": 60.9518,
-    "Long": 25.6667
+    "Long": 25.6667,
+    "Color": "#900000"
   },
 
   {
@@ -353,7 +369,8 @@
     "Nb GP disputés": 299,
     "Image": "data/pilotes/VettelBackground.webp",
     "Lat": 48.7758,
-    "Long": 9.1829
+    "Long": 9.1829,
+    "Color": "#006F62"
   },
 
   {
@@ -374,7 +391,8 @@
     "Nb GP disputés": 232,
     "Image": "data/pilotes/RicciardoBackground.jpg",
     "Lat": -31.935,
-    "Long": 115.8111
+    "Long": 115.8111,
+    "Color": "#FF8700"
   },
 
   {
@@ -395,7 +413,8 @@
     "Nb GP disputés": 61,
     "Image": "data/pilotes/LatifiBackground.jpeg",
     "Lat": 43.7,
-    "Long": -79.4
+    "Long": -79.4,
+    "Color": "#005AFF"
   },
 
   {
@@ -416,6 +435,7 @@
     "Nb GP disputés": 43,
     "Image": "data/pilotes/SchumacherBackground.jpg",
     "Lat": 50.1147,
-    "Long": 8.6843
+    "Long": 8.6843,
+    "Color": "#FFFFFF"
   }
 ]

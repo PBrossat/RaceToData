@@ -297,6 +297,7 @@ async function grapheDriverPoint(annee) {
     series.push({
       name: tabNomPilote[i],
       data: tabDataPointsPilote[i],
+      color: tabGlobalDataPilotes[i].Color,
       animation: {
         duration: 8000, //en ms
       },
@@ -312,7 +313,10 @@ async function grapheDriverPoint(annee) {
       type: "spline",
       backgroundColor: "#1b1b1b",
       marginBottom: 110,
-      height: "50%",
+      height: "60%",
+      zoomType: "xy",
+      panning: true,
+      panKey: "shift",
     },
     title: {
       text: "Evolution des points des pilotes de F1 durant la saison 2022 ",
