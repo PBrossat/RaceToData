@@ -17,8 +17,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", function () {
   recupererInfosPilotes();
   mapPilote();
   creationNouvelleDiv();
-  grapheDriverPoint(2022);
-  // barChartRace(2022);
+  grapheDriverPoint(2018);
 });
 
 //------------------------------ Création des containers ----------------
@@ -201,6 +200,7 @@ function mapPilote() {
 
 //---------------------------------GESTION DES GRAPHES--------------------------------------
 
+//Permet de récuperer les points du pilote au fil de la saison passée en paramaetre
 async function recuperationPointsPilotePendantLaSaison(nomPilote, annee) {
   let nomPiloteMinuscule = nomPilote.toLowerCase();
   //cas particulier pour verstappen
@@ -246,7 +246,8 @@ async function recuperationGPsaison(annee) {
   return grandPrix;
 }
 
-//Permet de récuperer les noms des pilotes de l'année passée en parametre
+// Permet de récuperer les noms des pilotes de l'année passée en parametre grâce
+//  à l'API Ergast (utilisée uniquement quand annee!=2022 )
 async function recuperationPilotesSaison(annee) {
   const url = `https://ergast.com/api/f1/${annee}/drivers.json`;
   const response = await fetch(url);
@@ -259,6 +260,7 @@ async function recuperationPilotesSaison(annee) {
   return pilotes;
 }
 
+//Création d'une nouvelle div contenant le graphique et les informations complementaires de celui-ci
 function creationDivGraphique() {
   const divParent = document.querySelector(".divGraphique");
   const divGraphique = document.createElement("div");
@@ -267,41 +269,60 @@ function creationDivGraphique() {
 }
 
 async function grapheDriverPoint(annee) {
+  //Création container
   creationDivGraphique();
 
-  // const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
-  // console.log(tabNomPiloteSaison);
+  const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
 
   //permet de creer un tableau de tableau de points selon le nom des pilote et l'année passée en paramatre
   const tabDataPointsPilote = [];
   for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
-    tabDataPointsPilote[i] = await recuperationPointsPilotePendantLaSaison(
-      tabGlobalDataPilotes[i].Name,
-      annee
-    );
+    //cas particulier pour l'année 2022 pour avoir accès aux couleurs des écuries (data dans Driver.json)
+    if (annee == 2022) {
+      tabDataPointsPilote[i] = await recuperationPointsPilotePendantLaSaison(
+        tabGlobalDataPilotes[i].Name,
+        annee
+      );
+    }
+    //sinon on utilise tabNomPiloteSaison crée plus tôt
+    else {
+      tabDataPointsPilote[i] = await recuperationPointsPilotePendantLaSaison(
+        tabNomPiloteSaison[i],
+        annee
+      );
+    }
   }
-  console.log(tabDataPointsPilote);
 
-  // permet de creer un tableau avec les noms des pilotes
-  const tabNomPilote = [];
-  for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
-    tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
-  }
-
-  // correspond au tableau avec le nopm des GP de l'année
-  const pays = await recuperationGPsaison(2022);
+  // correspond au tableau avec le noms des GP de l'année
+  const pays = await recuperationGPsaison(annee);
 
   //permet de créer chaque lignes RPZ points/pilote
   let series = [];
-  for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
-    series.push({
-      name: tabNomPilote[i],
-      data: tabDataPointsPilote[i],
-      color: tabGlobalDataPilotes[i].Color,
-      animation: {
-        duration: 8000, //en ms
-      },
-    });
+
+  //cas particulier pour l'année 2022
+  if (annee == 2022) {
+    for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
+      series.push({
+        name: tabGlobalDataPilotes[i].Name,
+        data: tabDataPointsPilote[i],
+        color: tabGlobalDataPilotes[i].Color,
+        animation: {
+          duration: 8000, //en ms
+        },
+      });
+    }
+  }
+  //sinon on utilise les données de l'API (couleur non cohérentes)
+  else {
+    for (let i = 0; i < tabNomPiloteSaison.length; i++) {
+      series.push({
+        name: tabNomPiloteSaison[i],
+        data: tabDataPointsPilote[i],
+        animation: {
+          duration: 8000, //en ms
+        },
+      });
+    }
   }
 
   const graphique = document.getElementById("divGraphique");
@@ -319,7 +340,7 @@ async function grapheDriverPoint(annee) {
       panKey: "shift",
     },
     title: {
-      text: "Evolution des points des pilotes de F1 durant la saison 2022 ",
+      text: "Evolution des points des pilotes de F1 durant la saison " + annee,
       style: {
         color: "#FF0000",
         fontWeight: "bold",
