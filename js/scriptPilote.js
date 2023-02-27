@@ -18,6 +18,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", function () {
   mapPilote();
   creationNouvelleDiv();
   grapheDriverPoint(2022);
+  // barChartRace(2022);
 });
 
 //------------------------------ Création des containers ----------------
@@ -49,24 +50,6 @@ function mapPilote() {
   boutonDezoom.className = "bouton";
   MapEtInfos.appendChild(boutonDezoom);
   boutonDezoom.textContent = "DeZoom";
-
-  //--Selecteur Pilote
-  // const SelecteurPilote = document.createElement("select");
-  // SelecteurPilote.className = "select";
-  // MapEtInfos.appendChild(SelecteurPilote);
-  // const tabNomPilote = [];
-  // for (var i = 0; i < tabGlobalDataPilotes.length; i++) {
-  //   tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
-  // }
-
-  // tabNomPilote.forEach((pilote) => {
-  //   const option = document.createElement("option");
-  //   option.value = pilote;
-  //   option.text = pilote;
-  //   SelecteurPilote.appendChild(option);
-  // });
-
-  //--Map
 
   const divMapPilotes = document.createElement("div");
   divMapPilotes.id = "map";
@@ -248,21 +231,46 @@ async function recuperationPointsPilotePendantLaSaison(nomPilote, annee) {
   return pointsParCourse;
 }
 
+//Permet de récuperer les noms des Gp de l'année passée en parametre
 async function recuperationGPsaison(annee) {
-  const url = `https://cors-anywhere.herokuapp.com/https://ergast.com/api/f1/${annee}/races.json`;
+  const url = `https://ergast.com/api/f1/${annee}/races.json`;
   const response = await fetch(url);
   const data = await response.json();
 
   const grandPrix = data.MRData.RaceTable.Races.map((race) => race.raceName);
 
+  //remplace "Grand Prix" par "GP"
+  for (let i = 0; i < grandPrix.length; i++) {
+    grandPrix[i] = grandPrix[i].replace("Grand Prix", "GP");
+  }
   return grandPrix;
 }
 
-async function grapheDriverPoint(annee) {
+//Permet de récuperer les noms des pilotes de l'année passée en parametre
+async function recuperationPilotesSaison(annee) {
+  const url = `https://ergast.com/api/f1/${annee}/drivers.json`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const pilotes = data.MRData.DriverTable.Drivers.map(
+    (driver) => driver.familyName
+  );
+
+  return pilotes;
+}
+
+function creationDivGraphique() {
   const divParent = document.querySelector(".divGraphique");
   const divGraphique = document.createElement("div");
   divGraphique.id = "divGraphique";
   divParent.appendChild(divGraphique);
+}
+
+async function grapheDriverPoint(annee) {
+  creationDivGraphique();
+
+  // const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
+  // console.log(tabNomPiloteSaison);
 
   //permet de creer un tableau de tableau de points selon le nom des pilote et l'année passée en paramatre
   const tabDataPointsPilote = [];
@@ -272,23 +280,25 @@ async function grapheDriverPoint(annee) {
       annee
     );
   }
+  console.log(tabDataPointsPilote);
 
-  //permet de creer un tableau avec les noms des pilotes
+  // permet de creer un tableau avec les noms des pilotes
   const tabNomPilote = [];
   for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
     tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
   }
 
+  // correspond au tableau avec le nopm des GP de l'année
+  const pays = await recuperationGPsaison(2022);
+
   //permet de créer chaque lignes RPZ points/pilote
   let series = [];
-  let period = 500;
   for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
     series.push({
       name: tabNomPilote[i],
       data: tabDataPointsPilote[i],
       animation: {
-        defer: period * i, //les lignes apparaissent une par une toute les 500ms
-        duration: 12000, //en ms
+        duration: 8000, //en ms
       },
     });
   }
@@ -301,19 +311,21 @@ async function grapheDriverPoint(annee) {
     chart: {
       type: "spline",
       backgroundColor: "#1b1b1b",
-      marginBottom: 40,
+      marginBottom: 110,
+      height: "50%",
     },
     title: {
       text: "Evolution des points des pilotes de F1 durant la saison 2022 ",
       style: {
-        color: "#FFFFFF",
+        color: "#FF0000",
         fontWeight: "bold",
+        fontSize: "30px",
       },
     },
 
     yAxis: {
       gridLineWidth: 0,
-      tickInterval: 1,
+      tickInterval: 20,
       startOnTick: false,
       endOnTick: false,
       labels: {
@@ -328,15 +340,18 @@ async function grapheDriverPoint(annee) {
       offset: 10,
       labels: {
         style: styleText,
+        rotation: -45,
       },
+      categories: pays,
     },
 
     legend: {
       align: "right",
       layout: "proximate",
-      itemStyle: styleText,
-      style: {
-        fontSize: "2", // Taille de la police en pixels
+      itemStyle: {
+        color: "#FFFFFF",
+        fontWeight: "bold",
+        fontSize: "16px",
       },
     },
 
@@ -353,22 +368,5 @@ async function grapheDriverPoint(annee) {
     },
 
     series: series,
-
-    responsive: {
-      rules: [
-        {
-          condition: {
-            maxWidth: 500,
-          },
-          chartOptions: {
-            legend: {
-              layout: "horizontal",
-              align: "center",
-              verticalAlign: "bottom",
-            },
-          },
-        },
-      ],
-    },
   });
 }
