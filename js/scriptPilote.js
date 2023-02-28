@@ -17,7 +17,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", function () {
   recupererInfosPilotes();
   mapPilote();
   creationNouvelleDiv();
-  grapheDriverPoint(2018);
+  grapheDriverPoint(2022);
 });
 
 //------------------------------ Création des containers ----------------
@@ -263,9 +263,12 @@ async function recuperationPilotesSaison(annee) {
 //Création d'une nouvelle div contenant le graphique et les informations complementaires de celui-ci
 function creationDivGraphique() {
   const divParent = document.querySelector(".divGraphique");
+  const Titre = document.createElement("h1");
   const divGraphique = document.createElement("div");
-  divGraphique.id = "divGraphique";
+  divGraphique.id = "Graphique";
+  divParent.appendChild(Titre);
   divParent.appendChild(divGraphique);
+  Titre.innerHTML = "Graphique ";
 }
 
 async function grapheDriverPoint(annee) {
@@ -284,6 +287,7 @@ async function grapheDriverPoint(annee) {
         annee
       );
     }
+
     //sinon on utilise tabNomPiloteSaison crée plus tôt
     else {
       tabDataPointsPilote[i] = await recuperationPointsPilotePendantLaSaison(
@@ -325,7 +329,7 @@ async function grapheDriverPoint(annee) {
     }
   }
 
-  const graphique = document.getElementById("divGraphique");
+  const graphique = document.getElementById("Graphique");
 
   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
 
@@ -334,13 +338,14 @@ async function grapheDriverPoint(annee) {
       type: "spline",
       backgroundColor: "#1b1b1b",
       marginBottom: 110,
-      height: "60%",
+      height: "55%",
       zoomType: "xy",
       panning: true,
       panKey: "shift",
     },
     title: {
       text: "Evolution des points des pilotes de F1 durant la saison " + annee,
+
       style: {
         color: "#FF0000",
         fontWeight: "bold",
@@ -378,6 +383,7 @@ async function grapheDriverPoint(annee) {
         fontWeight: "bold",
         fontSize: "16px",
       },
+      width: "12%",
     },
 
     plotOptions: {

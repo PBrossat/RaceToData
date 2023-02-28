@@ -465,7 +465,7 @@ header {
   align-items: center;
   justify-content: space-around;
   position: relative;
-  margin-bottom: 6%;
+  margin-bottom: 10%;
 }
 
 #divMapEtInfos #map {
@@ -810,4 +810,23 @@ canvas {
 
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
+}
+
+.divGraphique {
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-bottom: 2%;
+}
+
+.divGraphique h1 {
+  text-align: center;
+  color: white;
+  text-shadow: 5px 5px #463636;
+  font-size: xxx-large;
+  margin-bottom: 3%;
+}
+
+.divGraphique #Graphique {
+  border-radius: 1em;
+  box-shadow: 0px 0px 20px rgb(255, 255, 255);
 }
