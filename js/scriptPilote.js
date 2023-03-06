@@ -16,8 +16,8 @@ boutonDecouvrirStatsPilotes.addEventListener("click", function () {
   afficherStatsPilotes();
   recupererInfosPilotes();
   mapPilote();
-  creationNouvelleDiv();
   grapheDriverPoint(2022);
+  graphePointsMoyenDriver();
 });
 
 //------------------------------ Création des containers ----------------
@@ -203,9 +203,26 @@ function mapPilote() {
 //Permet de récuperer les points du pilote au fil de la saison passée en paramaetre
 async function recuperationPointsPilotePendantLaSaison(nomPilote, annee) {
   let nomPiloteMinuscule = nomPilote.toLowerCase();
-  //cas particulier pour verstappen
+  //cas particuliers
   if (nomPiloteMinuscule == "verstappen") {
     nomPiloteMinuscule = "max_verstappen";
+  }
+
+  switch (nomPiloteMinuscule) {
+    case "verstappen":
+      nomPiloteMinuscule = "max_verstappen";
+      break;
+
+    case "magnussen":
+      nomPiloteMinuscule = "kevin_magnussen";
+      break;
+
+    case "schumacher":
+      nomPiloteMinuscule = "mick_schumacher";
+      break;
+
+    default:
+      break;
   }
   const response = await fetch(
     `https://ergast.com/api/f1/${annee}/drivers/${nomPiloteMinuscule}/results.json`
@@ -260,20 +277,46 @@ async function recuperationPilotesSaison(annee) {
   return pilotes;
 }
 
-//Création d'une nouvelle div contenant le graphique et les informations complementaires de celui-ci
-function creationDivGraphique() {
+//Création des boutons pour choisir l'années pour le graphique 1
+async function creationBoutonChoixSaison() {
   const divParent = document.querySelector(".divGraphique");
-  const Titre = document.createElement("h1");
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "Graphique";
-  divParent.appendChild(Titre);
-  divParent.appendChild(divGraphique);
-  Titre.innerHTML = "Graphique ";
+  const divBouton = document.createElement("div");
+  divBouton.id = "divBoutonChoix";
+  divParent.appendChild(divBouton);
+
+  const bouton2021 = document.createElement("button");
+  bouton2021.id = "bouton2021";
+  const bouton2022 = document.createElement("button");
+  bouton2022.id = "bouton2022";
+  bouton2021.className = "bouton";
+  bouton2022.className = "bouton";
+  bouton2021.textContent = "2021";
+  bouton2022.textContent = "2022";
+  divBouton.appendChild(bouton2021);
+  divBouton.appendChild(bouton2022);
 }
 
+//Création d'un graphe
 async function grapheDriverPoint(annee) {
+  creationNouvelleDiv();
   //Création container
-  creationDivGraphique();
+  const divParent = document.querySelector(".divGraphique");
+  divParent.innerHTML = "";
+
+  //Création Titre
+  const Titre = document.createElement("h1");
+  divParent.appendChild(Titre);
+  Titre.innerHTML = "Graphique Points Pilotes ";
+
+  //Creation div où se trouve le graphique
+  const divGraphique = document.createElement("div");
+  divGraphique.id = "Graphique";
+  divParent.appendChild(divGraphique);
+
+  //création loader
+  const chargement = document.createElement("img");
+  chargement.src = "../data/white_loader.svg";
+  divParent.appendChild(chargement);
 
   const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
 
@@ -287,7 +330,6 @@ async function grapheDriverPoint(annee) {
         annee
       );
     }
-
     //sinon on utilise tabNomPiloteSaison crée plus tôt
     else {
       tabDataPointsPilote[i] = await recuperationPointsPilotePendantLaSaison(
@@ -297,7 +339,10 @@ async function grapheDriverPoint(annee) {
     }
   }
 
-  // correspond au tableau avec le noms des GP de l'année
+  //Suppression du loader
+  chargement.parentNode.removeChild(chargement);
+
+  //Tableau avec le noms des GP de l'année
   const pays = await recuperationGPsaison(annee);
 
   //permet de créer chaque lignes RPZ points/pilote
@@ -333,6 +378,15 @@ async function grapheDriverPoint(annee) {
 
   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
 
+  var screenWidth = window.innerWidth;
+  var legendFontSize = "16px";
+
+  if (screenWidth <= 600) {
+    legendFontSize = "12px"; //Taille de la police pour les écrans de 600px ou moins
+  } else if (screenWidth <= 1024) {
+    legendFontSize = "14px"; //Taille de la police pour les écrans de 1024px ou moins
+  }
+
   Highcharts.chart(graphique, {
     chart: {
       type: "spline",
@@ -347,7 +401,8 @@ async function grapheDriverPoint(annee) {
       text: "Evolution des points des pilotes de F1 durant la saison " + annee,
 
       style: {
-        color: "#FF0000",
+        color: "#FF2A2A",
+        textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
         fontWeight: "bold",
         fontSize: "30px",
       },
@@ -381,7 +436,7 @@ async function grapheDriverPoint(annee) {
       itemStyle: {
         color: "#FFFFFF",
         fontWeight: "bold",
-        fontSize: "16px",
+        fontSize: legendFontSize,
       },
       width: "12%",
     },
@@ -400,4 +455,19 @@ async function grapheDriverPoint(annee) {
 
     series: series,
   });
+
+  creationBoutonChoixSaison();
+
+  //Event sur les boutons
+  document.querySelector("#bouton2021").addEventListener("click", function () {
+    grapheDriverPoint(2021);
+  });
+
+  document.querySelector("#bouton2022").addEventListener("click", function () {
+    grapheDriverPoint(2022);
+  });
+}
+
+function graphePointsMoyenDriver() {
+  creationNouvelleDiv();
 }
