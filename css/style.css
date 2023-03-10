@@ -819,12 +819,6 @@ canvas {
   text-align: center;
 }
 
-.divGraphique .bouton {
-  position: relative;
-  left: auto;
-  margin-top: 1%;
-}
-
 .divGraphique h1 {
   text-align: center;
   color: white;
@@ -839,17 +833,31 @@ canvas {
   font-size: unset;
 }
 
-.divGraphique #divBoutonChoix {
-  display: flex;
-  justify-content: space-around;
-}
-
-.divGraphique #Graphique {
+.divGraphique .Graphique {
   border-radius: 1em;
   box-shadow: 0px 0px 20px rgb(255, 255, 255);
+}
+
+.divGraphique #divAnalysePointsPilotes {
+  margin-bottom: 8%;
+}
+
+.divGraphique #divAnalysePointsPilotes .bouton {
+  position: relative;
+  left: auto;
+  margin-top: 1%;
+}
+
+.divGraphique #divAnalysePointsPilotes #divBoutonChoix {
+  display: flex;
+  justify-content: space-around;
 }
 
 .divGraphique img {
   display: block;
   margin: 0 auto;
 }
+
+/* .divGraphique #divAnalysePointsMoyenPilotes {
+  width: 50%;
+} */
