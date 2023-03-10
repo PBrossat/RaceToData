@@ -320,7 +320,6 @@ function graphePointsMoyenDriver() {
       color: tabGlobalDataPilotes[i].Color,
     });
   }
-  console.log(tabNomPilote);
 
   const graphique = document.getElementById("GraphiquePtMoyen");
 
