@@ -41,7 +41,8 @@ app.get("/infosGpJSON", (_, res) => {
   });
 });
 
-// à reprendre
+//TODO A reprendre
+
 app.get("/f1/:annee/:nomPiloteMinuscule", async (req, res) => {
   const annee = req.params.annee;
   const nomPiloteMinuscule = req.params.nomPiloteMinuscule;
