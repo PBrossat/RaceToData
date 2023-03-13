@@ -100,6 +100,7 @@ function creationBoutonChoixSaison() {
 
     bouton2021.textContent = "2021";
     bouton2022.textContent = "2022";
+
     divBouton.appendChild(bouton2021);
     divBouton.appendChild(bouton2022);
   }
@@ -110,27 +111,29 @@ function creationBoutonChoixSaison() {
 async function grapheDriverPoint(annee) {
   //Création container
   const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
+  //Si la div n'existe pas => creéation div + création titre + création div graphique
+  if (document.querySelector("#divAnalysePointsPilotes") == null) {
+    const divAnalyse = document.createElement("div");
+    divAnalyse.id = "divAnalysePointsPilotes";
+    divParent.appendChild(divAnalyse);
+    divAnalyse.innerHTML = "";
 
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Points Pilotes ";
+    //Création Titre
+    const Titre = document.createElement("h1");
+    divAnalyse.appendChild(Titre);
+    Titre.innerHTML = "Graphique Points Pilotes ";
 
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiquePtPilotes";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
+    //Creation div où se trouve le graphique
+    const divGraphique = document.createElement("div");
+    divGraphique.id = "GraphiquePtPilotes";
+    divGraphique.className = "Graphique";
+    divAnalyse.appendChild(divGraphique);
 
-  //création loader
-  const chargement = document.createElement("img");
-  chargement.src = "../data/white_loader.svg";
-  divAnalyse.appendChild(chargement);
-
+    //création loader
+    const chargement = document.createElement("img");
+    chargement.src = "../data/white_loader.svg";
+    divAnalyse.appendChild(chargement);
+  }
   const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
 
   //permet de creer un tableau de tableau de points selon le nom des pilote et l'année passée en paramatre
@@ -152,8 +155,10 @@ async function grapheDriverPoint(annee) {
     }
   }
 
-  //Suppression du loader
-  chargement.parentNode.removeChild(chargement);
+  //suppression de l'image chargement si elle existe déjà
+  if (document.querySelector("#divAnalysePointsPilotes img") != null) {
+    document.querySelector("#divAnalysePointsPilotes img").remove();
+  }
 
   //Tableau avec le noms des GP de l'année
   const pays = await recuperationGPsaison(annee);
@@ -174,6 +179,7 @@ async function grapheDriverPoint(annee) {
       });
     }
   }
+
   //sinon on utilise les données de l'API (couleur non cohérentes)
   else {
     for (let i = 0; i < tabNomPiloteSaison.length; i++) {
@@ -312,15 +318,6 @@ function graphePointsMoyenDriver() {
     tabNomPilote[i] = tabGlobalDataPilotes[i].Name;
   }
 
-  const series = [];
-  for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
-    series.push({
-      name: [tabGlobalDataPilotes[i].Name],
-      data: [tabGlobalDataPilotes[i]["Nb points moyen/GP"]],
-      color: tabGlobalDataPilotes[i].Color,
-    });
-  }
-
   const graphique = document.getElementById("GraphiquePtMoyen");
 
   Highcharts.chart(graphique, {
@@ -328,6 +325,7 @@ function graphePointsMoyenDriver() {
       polar: true,
       type: "line",
       backgroundColor: "#1b1b1b",
+      height: "55%",
     },
     title: {
       text: "Points moyens des pilotes de F1 marqués par GP",
@@ -340,7 +338,7 @@ function graphePointsMoyenDriver() {
     },
 
     pane: {
-      size: "100%",
+      size: "90%",
     },
 
     xAxis: {
@@ -364,14 +362,29 @@ function graphePointsMoyenDriver() {
       {
         name: "Points moyens par GP",
         type: "area",
-        data: tabGlobalDataPilotes.map(function (pilote) {
-          return pilote["Nb points moyen/GP"];
-        }),
-        pointPlacement: "on",
+        color: "#DC0000", //couleur de l'area
+        marker: {
+          fillColor: "#FFFFFF",
+        },
+        data: tabGlobalDataPilotes.map(
+          (pilote) => pilote["Nb points moyen/GP"]
+        ),
+        lineWidth: 1,
+        lineColor: "#FFFFFF",
+        pointPlacement: "on", // permet de centrer les points
       },
     ],
+
+    legend: {
+      itemStyle: {
+        color: "white",
+        fontWeight: "bold",
+      },
+    },
   });
 }
 
+//------------------------------- Graphique 3 -----------------------------
+function grapheNbDnf() {}
 //------------------------------- Export des données -----------------------------
 export { creationGraphePointPilote, graphePointsMoyenDriver };
