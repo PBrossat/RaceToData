@@ -164,6 +164,29 @@ app.get("/infosGpDriver2", (req, res) => {
       res.status(500).send("Internal server error");
     });
 });
+// à reprendre
+app.get("/f1/:annee/:nomPiloteMinuscule", async (req, res) => {
+  const annee = req.params.annee;
+  const nomPiloteMinuscule = req.params.nomPiloteMinuscule;
+  request(
+    `https://ergast.com/api/f1/${annee}/drivers/${nomPiloteMinuscule}/results.json`,
+    function (error, response, body) {
+      if (error) {
+        console.log(error);
+        res.send(error);
+      } else {
+        res.send(body);
+      }
+    }
+  );
+});
+
+// const annee = req.params.annee;
+// const nomPiloteMinuscule = req.params.nomPiloteMinuscule;
+// const url = `https://ergast.com/api/f1/${annee}/drivers/${nomPiloteMinuscule}/results.json`;
+// const response = await fetch(url);
+// const data = await response.json();
+// res.send(data);
 
 app.use("/css", express.static("css/"));
 app.use("/js", express.static("js/"));
