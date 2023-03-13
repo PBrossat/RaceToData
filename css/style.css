@@ -997,7 +997,7 @@ main {
 }
 
 /* have the svg horizontally centered and occupying a fraction of the available width */
-svg {
+#stats .simulation svg {
   width: 80%;
   height: auto;
   align-self: center;
