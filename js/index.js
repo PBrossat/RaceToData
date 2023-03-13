@@ -41,8 +41,130 @@ app.get("/infosGpJSON", (_, res) => {
   });
 });
 
-//TODO A reprendre
+app.get("/infosGpDriver1", (req, res) => {
+  const positionXFile = "./json/Driver1/coordX.json";
+  const positionYFile = "./json/Driver1/coordY.json";
+  const timeFile = "./json/Driver1/time.json";
+  const speedFile = "./json/Driver1/speed.json";
+  const brakeFile = "./json/Driver1/brake.json";
+  const rpmFile = "./json/Driver1/rpm.json";
+  const gearFile = "./json/Driver1/gear.json";
+  const throttleFile = "./json/Driver1/throttle.json";
+  const drsFile = "./json/Driver1/drs.json";
 
+  const readJSONFile = (file) => {
+    return new Promise((resolve, reject) => {
+      fs.readFile(file, "utf8", (err, data) => {
+        if (err) reject(err);
+        resolve(JSON.parse(data));
+      });
+    });
+  };
+
+  Promise.all([
+    readJSONFile(positionXFile),
+    readJSONFile(positionYFile),
+    readJSONFile(timeFile),
+    readJSONFile(speedFile),
+    readJSONFile(brakeFile),
+    readJSONFile(rpmFile),
+    readJSONFile(gearFile),
+    readJSONFile(throttleFile),
+    readJSONFile(drsFile),
+  ])
+    .then((data) => {
+      const donnees = [];
+      data[0].forEach((posX, i) => {
+        const posY = data[1][i];
+        const time = data[2][i];
+        const speed = data[3][i];
+        const brake = data[4][i];
+        const rpm = data[5][i];
+        const gear = data[6][i];
+        const throttle = data[7][i];
+        const drs = data[8][i];
+        donnees.push({
+          positionX: posX,
+          positionY: posY,
+          time: time,
+          speed: speed,
+          brake: brake,
+          rpm: rpm,
+          gear: gear,
+          throttle: throttle / 100,
+          drs: drs,
+        });
+      });
+      res.json(donnees);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    });
+});
+
+app.get("/infosGpDriver2", (req, res) => {
+  const positionXFile = "./json/Driver2/coordX.json";
+  const positionYFile = "./json/Driver2/coordY.json";
+  const timeFile = "./json/Driver2/time.json";
+  const speedFile = "./json/Driver2/speed.json";
+  const brakeFile = "./json/Driver2/brake.json";
+  const rpmFile = "./json/Driver2/rpm.json";
+  const gearFile = "./json/Driver2/gear.json";
+  const throttleFile = "./json/Driver2/throttle.json";
+  const drsFile = "./json/Driver2/drs.json";
+
+  const readJSONFile = (file) => {
+    return new Promise((resolve, reject) => {
+      fs.readFile(file, "utf8", (err, data) => {
+        if (err) reject(err);
+        resolve(JSON.parse(data));
+      });
+    });
+  };
+
+  Promise.all([
+    readJSONFile(positionXFile),
+    readJSONFile(positionYFile),
+    readJSONFile(timeFile),
+    readJSONFile(speedFile),
+    readJSONFile(brakeFile),
+    readJSONFile(rpmFile),
+    readJSONFile(gearFile),
+    readJSONFile(throttleFile),
+    readJSONFile(drsFile),
+  ])
+    .then((data) => {
+      const donnees = [];
+      data[0].forEach((posX, i) => {
+        const posY = data[1][i];
+        const time = data[2][i];
+        const speed = data[3][i];
+        const brake = data[4][i];
+        const rpm = data[5][i];
+        const gear = data[6][i];
+        const throttle = data[7][i];
+        const drs = data[8][i];
+        donnees.push({
+          positionX: posX,
+          positionY: posY,
+          time: time,
+          speed: speed,
+          brake: brake,
+          rpm: rpm,
+          gear: gear,
+          throttle: throttle / 100,
+          drs: drs,
+        });
+      });
+      res.json(donnees);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    });
+});
+// à reprendre
 app.get("/f1/:annee/:nomPiloteMinuscule", async (req, res) => {
   const annee = req.params.annee;
   const nomPiloteMinuscule = req.params.nomPiloteMinuscule;
