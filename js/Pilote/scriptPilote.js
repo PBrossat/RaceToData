@@ -24,7 +24,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   recupererInfosPilotes();
   mapPilote();
   creationNouvelleDiv();
-  await creationGraphePointPilote(2022);
+  creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
 });
 

@@ -192,5 +192,7 @@ app.use("/css", express.static("css/"));
 app.use("/js", express.static("js/"));
 app.use("/data", express.static("data/"));
 app.use("/json", express.static("json/"));
+app.use("/py", express.static("py/"));
+app.use("/static", express.static("static/"));
 
 app.listen(PORT, () => console.log(`Le serveur est sur le port ${PORT}`));

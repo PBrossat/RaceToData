@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>RaceToData</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <!-- include highchart  -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script
@@ -14,10 +19,13 @@
       integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
       crossorigin=""
     ></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <!-- include pyscript -->
+    <!-- fastf1-2.3.1-py3-none-any.whl -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <py-config>
+      packages = [ "./static/freedom-0.0.1-py2.py3-none-any.whl"]
+    </py-config>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -107,6 +115,7 @@
     <section id="stats"></section>
     <script type="module" src="js/scriptEcuries.js"></script>
     <script type="module" src="js/Pilote/scriptPilote.js"></script>
+    <py-script src="py/test.py"></py-script>
     <script type="module" src="js/Grands-Prix/scriptGP.js"></script>
   </body>
   <!-- <footer>
