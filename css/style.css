@@ -812,6 +812,11 @@ canvas {
   background: #f1f7ff;
 }
 
+/* style s'appliquant à toute les div fils de divGraphique (espace entre chaque div) */
+.divGraphique .composantDivGraphique {
+  padding-bottom: 3%;
+}
+
 .divGraphique {
   margin-left: 4%;
   margin-right: 4%;
@@ -1016,3 +1021,86 @@ main {
 }
 
 /*------------------------------------- FIN Styles relatifs aux visuels du GP et des compteurs -------------------------------------------*/
+
+/*---------------- Style relatif à la div Formulaire Pilote -------------*/
+
+.divGraphique #divFormulairePilote {
+  width: 20%;
+  margin-bottom: 2%;
+  position: relative;
+  border-radius: 0.5em;
+  float: left;
+  padding-top: 10%;
+  height: 100%;
+  text-align: center;
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.3),
+    0 -8px 6px -6px rgba(0, 0, 0, 0.3), 8px 0 6px -6px rgba(0, 0, 0, 0.3),
+    -8px 0 6px -6px rgba(0, 0, 0, 0.3), 0 0 16px rgba(255, 255, 255, 0.1);
+}
+
+.divGraphique #divFormulairePilote::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 50%;
+  border-right: 1px solid rgb(255, 255, 255);
+  transform: translate(0, -50%);
+}
+
+@import "compass/css3";
+
+.divGraphique #boutonValider,
+.divGraphique select {
+  padding-bottom: 3%;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  @include appearance(none);
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 10px;
+  width: 70%;
+  color: black;
+  font-weight: 550;
+  text-shadow: 2.5px 2px 2px rgba(1, 1, 1, 0.3);
+}
+
+.divGraphique select,
+.divGraphique .selecteur select + select {
+  margin-bottom: 7%;
+}
+
+.divGraphique #selecteurGrandPrix {
+  width: 80%;
+}
+
+.divGraphique #boutonValider {
+  width: 50%;
+  height: 30px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divGraphique #divFormulairePilote h2 {
+  font-size: 1.1em;
+  color: white;
+  line-height: 1.2;
+  position: absolute;
+  top: 0;
+  padding: 10px;
+}
+
+.divGraphique #divFormulairePilote hr {
+  position: absolute;
+  bottom: 0;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 1px;
+  background-color: white;
+  border: none;
+}
