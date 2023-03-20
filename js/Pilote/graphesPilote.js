@@ -115,6 +115,7 @@ async function grapheDriverPoint(annee) {
   if (document.querySelector("#divAnalysePointsPilotes") == null) {
     const divAnalyse = document.createElement("div");
     divAnalyse.id = "divAnalysePointsPilotes";
+    divAnalyse.className = "composantDivGraphique";
     divParent.appendChild(divAnalyse);
     divAnalyse.innerHTML = "";
 
@@ -299,6 +300,7 @@ function graphePointsMoyenDriver() {
   const divParent = document.querySelector(".divGraphique");
   const divAnalyse = document.createElement("div");
   divAnalyse.id = "divAnalysePointsMoyenPilotes";
+  divAnalyse.className = "composantDivGraphique";
   divParent.appendChild(divAnalyse);
   divAnalyse.innerHTML = "";
 

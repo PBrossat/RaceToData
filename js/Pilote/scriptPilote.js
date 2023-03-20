@@ -4,6 +4,7 @@ import {
   graphePointsMoyenDriver,
 } from "./graphesPilote.js";
 import { mapPilote } from "./mapPilote.js";
+import { creationDivFormulaire } from "./comparaisonPilotes.js";
 
 //----------------------------Récuperation Infos Pilotes depuis fichier json-------------
 async function recupererInfosPilotes() {
@@ -26,6 +27,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   creationNouvelleDiv();
   creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
+  creationDivFormulaire();
 });
 
 //------------------------------ Création des containers ----------------
