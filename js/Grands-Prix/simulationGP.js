@@ -1,3 +1,7 @@
+export { creationDivFormulaire };
+import { tabGlobalDataPilotes } from "../Pilote/scriptPilote.js";
+import { tabGlobalDataGP } from "./scriptGP.js";
+
 //Creation de scale pour afficher le tracé du circuit
 var xScale = d3.scaleLinear().domain([-20000, 20000]).range([-800, 1400]);
 var yScale = d3.scaleLinear().domain([-20000, 20000]).range([-800, 1200]);
@@ -23,18 +27,8 @@ class Driver {
   }
 }
 
-//Création du tableau de données relatives aux pilotes
-const tabGlobalDataPilotes = [
-  { Name: "Charles Leclerc", Valeur: "LEC" },
-  { Name: "Kevin Magnussen", Valeur: "MAG" },
-];
-
-//Création du tableau de données relatives aux grands prix
-const grandsPrix = [{ Name: "Canada", Valeur: "Canada" }];
-
 //------------------------------------Création du formulaire de simulation
-function creationDivFormulaire() {
-  const divParent = document.querySelector("#stats");
+function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
   const divFormulaire = document.createElement("div");
   divFormulaire.id = "divFormulaire";
   divParent.appendChild(divFormulaire);
@@ -83,33 +77,38 @@ function creationDivFormulaire() {
   boutonSubmit.id = "boutonSubmit";
   boutonSubmit.type = "submit";
   boutonSubmit.name = "boutonSubmit";
-  boutonSubmit.textContent = "Lancer l'animation";
+  boutonSubmit.textContent = nomSubmit;
   formulaire.appendChild(boutonSubmit);
 
   //remplissage des selecteur avec les noms des pilotes
-  for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
+  for (let i = 0; i < tabPilote.length; i++) {
     const selecteurPilote1 = document.querySelector("#selecteurPilote1");
     const selecteurPilote2 = document.querySelector("#selecteurPilote2");
     const optionPilote = document.createElement("option");
-    optionPilote.value = tabGlobalDataPilotes[i].Valeur;
-    optionPilote.textContent = tabGlobalDataPilotes[i].Name;
+    optionPilote.value = tabPilote[i].Abbrieviation;
+    optionPilote.textContent = tabPilote[i].Name;
     selecteurPilote1.appendChild(optionPilote);
     selecteurPilote2.appendChild(optionPilote.cloneNode(true));
   }
 
   //remplissage du selecteur avec les noms des Grand Prix
-  for (let i = 0; i < grandsPrix.length; i++) {
+  for (let i = 0; i < tabGrandPrix.length; i++) {
     const selecteurGrandPrix = document.querySelector("#selecteurGrandPrix");
     const optionGrandPrix = document.createElement("option");
-    optionGrandPrix.value = grandsPrix[i].Valeur;
-    optionGrandPrix.textContent = grandsPrix[i].Name;
+    optionGrandPrix.value = tabGrandPrix[i].Localisation;
+    optionGrandPrix.textContent = tabGrandPrix[i].Localisation;
     selecteurGrandPrix.appendChild(optionGrandPrix);
   }
 }
 
 //--------------------------------------------Gestion du formulaire
 function gestionFormulaireGP() {
-  creationDivFormulaire();
+  creationDivFormulaire(
+    document.querySelector("#stats"),
+    tabGlobalDataPilotes,
+    tabGlobalDataGP,
+    "Lancer la simulation"
+  );
   const formulaire = document.getElementById("formulaire");
   formulaire.addEventListener("submit", (e) => {
     console.log("submit");
