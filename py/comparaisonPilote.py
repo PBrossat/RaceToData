@@ -8,6 +8,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import json
+import sys
+
+sysArgv = sys.argv
+nameGP = sysArgv[1]
+saison=2022
+nomPilote1 = sysArgv[2]
+nomPilote2 = sysArgv[3]
 
 
 #TODO Je veux pourvoir récuperer :
@@ -183,6 +190,7 @@ def get_speed(session, driver):
 
 #fonction de comparaison entre 2 pilotes
 def comparaison(grandPrix, saison, pilote1, pilote2):
+    print("azzzzzzzzzzzzzzzzzzz")
     session = fastf1.get_session(saison, grandPrix, 'R')
     #on load la session et les tours avec les telemetries
     session.load()
@@ -243,8 +251,8 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
             json.dump([objetPilote1, objetPilote2], f, indent=4)
 
         
-#comparaison(tabNomGP[21],2022, "verstappen", "hamilton")
-print (tabNomGP)
+comparaison(nameGP, saison, nomPilote1, nomPilote2)
+
 
 
 
