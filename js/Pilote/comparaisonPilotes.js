@@ -3,7 +3,21 @@ import { tabGlobalDataPilotes } from "./scriptPilote.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
 import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
 
-function gestionFormulairePilote() {
+async function recupererInfosPilotesComparaison(pilote1, pilote2, gp) {
+  let response = await fetch(
+    "../json/comparaisonPilote/comparaison" +
+      pilote1 +
+      "_" +
+      pilote2 +
+      "_" +
+      gp +
+      ".json"
+  );
+  response = await response.json();
+  return response;
+}
+
+async function gestionFormulairePilote() {
   //fonction récupérée dans js/Grands-Prix/simulationGP.js
   creationDivFormulaire(
     document.querySelector(".divGraphique"),
@@ -12,7 +26,7 @@ function gestionFormulairePilote() {
     "Comparaison !"
   );
   const formulaire = document.getElementById("formulaire");
-  formulaire.addEventListener("submit", (e) => {
+  formulaire.addEventListener("submit", async (e) => {
     console.log("submit");
     e.preventDefault(); //permet de ne pas recharger la page dès qu'on appuie sur le bouton
     const pilote1 = document.getElementById("selecteurPilote1").value;
@@ -29,12 +43,17 @@ function gestionFormulairePilote() {
         pilote1 +
         "&nomPilote2=" +
         pilote2
-    );
+    ).then(async (response) => {
+      const data = await response.json();
+      const tabComparaisonPilote = await recupererInfosPilotesComparaison(
+        pilote1,
+        pilote2,
+        gp
+      );
+      resolve(tabComparaisonPilote);
+      //console.log(tabComparaisonPilote);
+    });
   });
 }
-
-// fetch(
-//   "http://localhost:3001/comparaisonPilote?nomGP=${valeurSelecteurGrandPrix}&saison=2022&nomPilote1=${valeuSelecteurPilote1}&nomPilote2=${valeuSelecteurPilote1}"
-// );
 
 export { creationDivFormulaire, gestionFormulairePilote };
