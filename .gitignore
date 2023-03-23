@@ -3,4 +3,4 @@ node_modules
 prettier
 .husky
 py/cache/*
-py/compararaisonPilote.json
+py/comparaisonPilote.json
