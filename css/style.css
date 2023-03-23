@@ -1094,6 +1094,11 @@ main {
   text-shadow: 2.5px 2px 2px rgba(1, 1, 1, 0.3);
 }
 
+#formulaire select,
+#formulaire .selecteur select + select {
+  margin-bottom: 7%;
+}
+
 #selecteurGrandPrix {
   width: 80%;
 }
@@ -1108,7 +1113,7 @@ main {
   background-color: white;
 }
 
-/* .divGraphique #divFormulairePilote h2 {
+.divGraphique #formulaire h2 {
   font-size: 1.1em;
   color: white;
   line-height: 1.2;
@@ -1117,7 +1122,7 @@ main {
   padding: 10px;
 }
 
-.divGraphique #divFormulairePilote hr {
+#formulaire hr {
   position: absolute;
   bottom: 0;
   top: 20%;
@@ -1127,4 +1132,4 @@ main {
   height: 1px;
   background-color: white;
   border: none;
-} */
+}
