@@ -69,14 +69,14 @@ app.get("/dataPython", (req, res) => {
 //fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2021&nomPilote1=LEC&nomPilote2=VER")
 app.get("/comparaisonPilote", (req, res) => {
   const nomGP = req.query.nomGP;
-  const saison = req.query.saison;
   const nomPilote1 = req.query.nomPilote1;
   const nomPilote2 = req.query.nomPilote2;
   options = {
-    scriptPath: "../py",
-    args: [nomGP, saison, nomPilote1, nomPilote2],
+    scriptPath: "py",
+    args: [nomGP, nomPilote1, nomPilote2],
   };
   PythonShell.run("comparaisonPilote.py", options);
+  res.sendStatus(200); //envoie de la réponse au client
 });
 
 //fetch("http://localhost:3001/dataDriver?namePilote=LEC&nameGP=Monaco")
