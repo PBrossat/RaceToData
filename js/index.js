@@ -2,7 +2,6 @@ const { PythonShell } = require("python-shell");
 const express = require("express");
 const fs = require("fs");
 const request = require("request");
-const { PythonShell } = require("python-shell");
 //const { spawn } = require("child_process");
 const app = express();
 const PORT = 3000;
@@ -68,8 +67,8 @@ app.get("/dataPython", (req, res) => {
 });
 
 //run du script python dans py/comparaisonPilote.py
-//fetch("http://localhost:3001/comparaisonPilote?nomGP=Monaco&saison=2021&nomPilote1=LEC&nomPilote2=VER")
-app.get("/comparaisonPilote", async (req, res) => {
+//fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2021&nomPilote1=LEC&nomPilote2=VER")
+app.get("/comparaisonPilote", (req, res) => {
   const nomGP = req.query.nomGP;
   const saison = req.query.saison;
   const nomPilote1 = req.query.nomPilote1;
