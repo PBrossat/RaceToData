@@ -16,14 +16,12 @@ function gestionFormulairePilote() {
     console.log("submit");
     e.preventDefault(); //permet de ne pas recharger la page dès qu'on appuie sur le bouton
     const pilote1 = document.getElementById("selecteurPilote1").value;
-    console.log(pilote1);
     const pilote2 = document.getElementById("selecteurPilote2").value;
-    console.log(pilote2);
     const gp = document.getElementById("selecteurGrandPrix").value;
-    console.log(gp);
+
     //désactiver la soumission du formulaire
     document.getElementById("boutonSubmit").disabled = true;
-    // fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2021&nomPilote1=LEC&nomPilote2=VER")
+    // fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2022&nomPilote1=LEC&nomPilote2=VER")
     fetch(
       "http://localhost:3000/comparaisonPilote?nomGP=" +
         gp +
@@ -31,11 +29,7 @@ function gestionFormulairePilote() {
         pilote1 +
         "&nomPilote2=" +
         pilote2
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
+    );
   });
 }
 
