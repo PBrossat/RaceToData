@@ -26,9 +26,9 @@ nomPilote2 = sysArgv[3]
 # - la vitesse moyenne du pilote durant le gp
 
 
-if not os.path.exists("cache"):
- os.makedirs("cache")
-fastf1.Cache.enable_cache("cache")
+if not os.path.exists("py/cache"):
+ os.makedirs("py/cache")
+fastf1.Cache.enable_cache("py/cache")
 tabNomGP=[]
 
 
@@ -253,7 +253,7 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
         }
     
 
-    with open('comparaisonPilote.json', 'w') as f:
+    with open('json/comparaisonPilote/comparaison'+pilote1+'_'+pilote2+'_'+grandPrix+'.json', 'w') as f:
             json.dump([objetPilote1, objetPilote2], f, indent=4)
 
         
