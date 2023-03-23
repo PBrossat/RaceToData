@@ -13,9 +13,9 @@ import os
 
 sysArgv = sys.argv
 nameGP = sysArgv[1]
-saison=2022
 nomPilote1 = sysArgv[2]
 nomPilote2 = sysArgv[3]
+saison=2022
 
 
 #TODO Je veux pourvoir récuperer :
@@ -25,11 +25,13 @@ nomPilote2 = sysArgv[3]
 # - les differents pneus utilisés par le pilote et leur durée de vie
 # - la vitesse moyenne du pilote durant le gp
 
-
+print ("je suis avant la creation du cache")
 if not os.path.exists("py/cache"):
  os.makedirs("py/cache")
 fastf1.Cache.enable_cache("py/cache")
+print ("je suis apres la creation du cache")
 tabNomGP=[]
+
 
 
 saisonProgrammation = fastf1.get_event_schedule(2022)
