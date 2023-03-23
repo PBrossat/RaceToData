@@ -1,0 +1,50 @@
+/* style s'appliquant à toute les div fils de divGraphique (espace entre chaque div) */
+.divGraphique .composantDivGraphique {
+  padding-bottom: 3%;
+}
+
+.divGraphique {
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+.divGraphique h1 {
+  text-align: center;
+  color: white;
+  text-shadow: 5px 5px #463636;
+  font-size: xxx-large;
+  margin-bottom: 3%;
+}
+
+.divGraphique p {
+  color: white;
+  text-shadow: 5px 5px #463636;
+  font-size: unset;
+}
+
+.divGraphique .Graphique {
+  border-radius: 1em;
+  box-shadow: 0px 0px 20px rgb(255, 255, 255);
+}
+
+.divGraphique #divAnalysePointsPilotes {
+  margin-bottom: 8%;
+}
+
+.divGraphique #divAnalysePointsPilotes .bouton {
+  position: relative;
+  left: auto;
+  margin-top: 1%;
+}
+
+.divGraphique #divAnalysePointsPilotes #divBoutonChoix {
+  display: flex;
+  justify-content: space-around;
+}
+
+.divGraphique img {
+  display: block;
+  margin: 0 auto;
+}
