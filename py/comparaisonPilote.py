@@ -17,7 +17,7 @@ import json
 # - les differents pneus utilisés par le pilote et leur durée de vie
 # - la vitesse moyenne du pilote durant le gp
 
-fastf1.Cache.enable_cache("py/cache")
+fastf1.Cache.enable_cache("cache")
 saison=2022
 tabNomGP=[]
 
