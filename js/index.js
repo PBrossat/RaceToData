@@ -1,3 +1,4 @@
+const { PythonShell } = require("python-shell");
 const express = require("express");
 const fs = require("fs");
 const request = require("request");
@@ -41,14 +42,14 @@ app.get("/infosGpJSON", (_, res) => {
   });
 });
 
-//fetch("http://localhost:3001/dataPython?namePilote=LEC&nameGP=Monaco&nameData=coordX")
+//fetch("http://localhost:3000/dataPython?namePilote=LEC&nameGP=Monaco&nameData=coordX")
 app.get("/dataPython", (req, res) => {
   //récupération des données du formulaire
   const namePilote = req.query.namePilote;
   const nameGP = req.query.nameGP;
   const nameData = req.query.nameData;
   argv = [namePilote, nameGP, nameData];
-  let pyshell = new PythonShell("./app.py", { args: argv });
+  let pyshell = new PythonShell("./py/simulationGP.py", { args: argv });
   pyshell.on("message", function (message) {
     // received a message sent from the Python script (a simple "print" statement)
     // console.log(message);
@@ -64,7 +65,7 @@ app.get("/dataPython", (req, res) => {
   });
 });
 
-//fetch("http://localhost:3001/dataDriver?namePilote=LEC&nameGP=Monaco")
+//fetch("http://localhost:3000/dataDriver?namePilote=LEC&nameGP=Monaco")
 app.get("/dataDriver", async (req, res) => {
   //récupération des données du formulaire
   const namePilote = req.query.namePilote;
@@ -73,7 +74,7 @@ app.get("/dataDriver", async (req, res) => {
   try {
     //coordX
     let coordX = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -82,7 +83,7 @@ app.get("/dataDriver", async (req, res) => {
     coordX = await coordX.json();
     //coordY
     let coordY = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -91,7 +92,7 @@ app.get("/dataDriver", async (req, res) => {
     coordY = await coordY.json();
     //time
     let time = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -100,7 +101,7 @@ app.get("/dataDriver", async (req, res) => {
     time = await time.json();
     //speed
     let speed = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -109,7 +110,7 @@ app.get("/dataDriver", async (req, res) => {
     speed = await speed.json();
     //brake
     let brake = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -118,7 +119,7 @@ app.get("/dataDriver", async (req, res) => {
     brake = await brake.json();
     //rpm
     let rpm = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -127,7 +128,7 @@ app.get("/dataDriver", async (req, res) => {
     rpm = await rpm.json();
     //gear
     let gear = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -136,7 +137,7 @@ app.get("/dataDriver", async (req, res) => {
     gear = await gear.json();
     //throttle
     let throttle = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +
@@ -145,7 +146,7 @@ app.get("/dataDriver", async (req, res) => {
     throttle = await throttle.json();
     //drs
     let drs = await fetch(
-      "http://localhost:3001/dataPython?namePilote=" +
+      "http://localhost:3000/dataPython?namePilote=" +
         namePilote +
         "&nameGP=" +
         nameGP +

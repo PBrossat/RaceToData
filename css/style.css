@@ -1053,7 +1053,7 @@ main {
 
 /*---------------- Style relatif à la div Formulaire Pilote -------------*/
 
-.divGraphique #divFormulairePilote {
+#formulaire {
   width: 20%;
   margin-bottom: 2%;
   position: relative;
@@ -1067,7 +1067,7 @@ main {
     -8px 0 6px -6px rgba(0, 0, 0, 0.3), 0 0 16px rgba(255, 255, 255, 0.1);
 }
 
-.divGraphique #divFormulairePilote::after {
+#formulaire::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -1079,12 +1079,11 @@ main {
 
 @import "compass/css3";
 
-.divGraphique #boutonValider,
-.divGraphique select {
+.selecteur,
+#submit {
   padding-bottom: 3%;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  @include appearance(none);
   cursor: pointer;
   display: inline-block;
   margin: 0 auto;
@@ -1095,16 +1094,11 @@ main {
   text-shadow: 2.5px 2px 2px rgba(1, 1, 1, 0.3);
 }
 
-.divGraphique select,
-.divGraphique .selecteur select + select {
-  margin-bottom: 7%;
-}
-
-.divGraphique #selecteurGrandPrix {
+#selecteurGrandPrix {
   width: 80%;
 }
 
-.divGraphique #boutonValider {
+#submit {
   width: 50%;
   height: 30px;
   margin-bottom: 10px;
@@ -1113,7 +1107,7 @@ main {
   align-items: center;
 }
 
-.divGraphique #divFormulairePilote h2 {
+/* .divGraphique #divFormulairePilote h2 {
   font-size: 1.1em;
   color: white;
   line-height: 1.2;
@@ -1132,4 +1126,4 @@ main {
   height: 1px;
   background-color: white;
   border: none;
-}
+} */
