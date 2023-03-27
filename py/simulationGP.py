@@ -1,13 +1,16 @@
 import fastf1
 import json
 import sys
+import os
 
 sysArgv = sys.argv
 namePilote = sysArgv[1]
 nameGP = sysArgv[2]
 nameData = sysArgv[3]
 
-fastf1.Cache.enable_cache("./cache/")
+# if not os.path.exists("cache"):
+#  os.makedirs("cache")
+fastf1.Cache.enable_cache("cache")
 session = fastf1.get_session(2019, nameGP, 'R')
 session.load()
 fast_leclerc = session.laps.pick_driver(namePilote).pick_fastest()
