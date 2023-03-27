@@ -8,8 +8,8 @@ namePilote = sysArgv[1]
 nameGP = sysArgv[2]
 nameData = sysArgv[3]
 
-# if not os.path.exists("cache"):
-#  os.makedirs("cache")
+if not os.path.exists("cache"):
+ os.makedirs("cache")
 fastf1.Cache.enable_cache("cache")
 session = fastf1.get_session(2019, nameGP, 'R')
 session.load()
