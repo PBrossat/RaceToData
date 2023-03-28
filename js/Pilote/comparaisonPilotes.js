@@ -4,26 +4,31 @@ import { tabGlobalDataPilotes } from "./scriptPilote.js";
 // Créer un tableau avec les noms des grands prix de 2020
 //! tableau INUTILE pour la suite du projet mais utile pour tester le fonctionnement du selecteur
 var grandsPrix = [
-  "GP d'Autriche",
-  "GP de Styrie",
-  "GP de Hongrie",
-  "GP de Grande-Bretagne",
-  "GP du 70ème anniversaire",
-  "GP d'Espagne",
-  "GP de Belgique",
-  "GP d'Italie",
-  "GP de Toscane",
-  "GP de Russie",
-  "GP de l'Eifel",
-  "GP du Portugal",
-  "GP d'Émilie-Romagne",
-  "GP de Turquie",
-  "GP de Bahreïn",
-  "GP de Sakhir",
-  "GP d'Abou Dhabi",
+  "Sakhir",
+  "Jeddah",
+  "Melbourne",
+  "Imola",
+  "Miami",
+  "Barcelona",
+  "Monaco",
+  "Baku",
+  "Montréal",
+  "Silverstone",
+  "Spielberg",
+  "Le Castellet",
+  "Budapest",
+  "Spa-Francorchamps",
+  "Zandvoort",
+  "Monza",
+  "Marina Bay",
+  "Suzuka",
+  "Austin",
+  "Mexico City",
+  "São Paulo",
+  "Yas Island",
 ];
 
-function creationDivFormulaire() {
+async function creationDivFormulaire() {
   const divParent = document.querySelector(".divGraphique");
   const divFormulaire = document.createElement("div");
   divFormulaire.id = "divFormulairePilote";
@@ -66,8 +71,8 @@ function creationDivFormulaire() {
   selecteurGrandPrix.appendChild(optionGrandPrix);
   divFormulaire.appendChild(selecteurGrandPrix);
 
-  //creation d'un bouton pour valider le choix
-  const boutonValider = document.createElement("button");
+  //creation d'un bouton de soumission du formulaire pour valider les choix
+  const boutonValider = document.createElement("submit");
   boutonValider.id = "boutonValider";
   boutonValider.textContent = "Valider";
   divFormulaire.appendChild(boutonValider);
@@ -91,6 +96,28 @@ function creationDivFormulaire() {
     optionGrandPrix.textContent = grandsPrix[i];
     selecteurGrandPrix.appendChild(optionGrandPrix);
   }
+
+  //appel de la fonction qui récupère les valeurs des selecteurs
+  recuperationValeursSelecteurs();
 }
+
+//quand le formulaire est créee, on récupère les valeurs des selecteurs
+async function recuperationValeursSelecteurs() {
+  var boutonValider = document.querySelector("#boutonValider");
+
+  boutonValider.addEventListener("click", function () {
+    const valeurSelecteurGrandPrix = document.querySelector(
+      "#selecteurGrandPrix"
+    ).value;
+    const valeuSelecteurPilote1 =
+      document.querySelector("#selecteurPilote1").value;
+    const valeuSelecteurPilote2 =
+      document.querySelector("#selecteurPilote2").value;
+  });
+}
+
+fetch(
+  "http://localhost:3001/comparaisonPilote?nomGP=${valeurSelecteurGrandPrix}&saison=2022&nomPilote1=${valeuSelecteurPilote1}&nomPilote2=${valeuSelecteurPilote1}"
+);
 
 export { creationDivFormulaire };

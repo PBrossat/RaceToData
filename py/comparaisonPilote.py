@@ -22,10 +22,10 @@ saison=2022
 tabNomGP=[]
 
 
-saisonProgrammation = fastf1.get_event_schedule(2021)
+saisonProgrammation = fastf1.get_event_schedule(2022)
 
 #Rempli le tableau des noms des GP de la saison 2022
-for i in range (1,22):
+for i in range (1,23):
     tabNomGP.append(saisonProgrammation.get_event_by_round(i)['Location'])
 
 
@@ -243,7 +243,8 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
             json.dump([objetPilote1, objetPilote2], f, indent=4)
 
         
-comparaison(tabNomGP[1],2022, "hamilton", "verstappen")
+#comparaison(tabNomGP[21],2022, "verstappen", "hamilton")
+print (tabNomGP)
 
 
 
