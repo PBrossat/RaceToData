@@ -2,8 +2,6 @@ const { PythonShell } = require("python-shell");
 const express = require("express");
 const fs = require("fs");
 const request = require("request");
-const { PythonShell } = require("python-shell");
-//const { spawn } = require("child_process");
 const app = express();
 const PORT = 3000;
 
