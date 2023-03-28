@@ -33,6 +33,12 @@ function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
   divFormulaire.id = "divFormulaire";
   divParent.appendChild(divFormulaire);
 
+  //creation du titre du formulaire
+  const titreFormulaire = document.createElement("h2");
+  titreFormulaire.textContent =
+    "Comparez les meilleurs tours de vos pilotes préférés !";
+  divFormulaire.appendChild(titreFormulaire);
+
   //création de la balise form
   const formulaire = document.createElement("form");
   formulaire.id = "formulaire";
@@ -102,7 +108,7 @@ function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
 }
 
 //--------------------------------------------Gestion du formulaire
-function gestionFormulaireGP() {
+export function gestionFormulaireGP() {
   creationDivFormulaire(
     document.querySelector("#stats"),
     tabGlobalDataPilotes,
@@ -120,6 +126,7 @@ function gestionFormulaireGP() {
     const gp = document.getElementById("selecteurGrandPrix").value;
     //désactiver la soumission du formulaire
     document.getElementById("boutonSubmit").disabled = true;
+    afficherSimulationGP();
     fetch("/dataDriver?namePilote=" + driver1 + "&nameGP=" + gp)
       .then((response) => response.json())
       .then((data) => {
@@ -456,7 +463,7 @@ function animateRace(data, idCar, idCompteur, driver) {
 }
 
 //----------------------Gestion de l'affichage de la simulation du GP------------
-export function afficherSimulationGP() {
+function afficherSimulationGP() {
   //Création des conteneurs
   const sectionStats = document.querySelector("#stats");
   const divSimulation = document.createElement("div");
@@ -494,8 +501,8 @@ export function afficherSimulationGP() {
   divCompteur2.classList.add("compteur");
   divCompteur2.id = "compteur2";
   main.appendChild(divCompteur2);
-  //Gestion du formulaire : création et soumission
-  gestionFormulaireGP();
+  // //Gestion du formulaire : création et soumission
+  // gestionFormulaireGP();
 
   // const boutonAnimation = document.createElement("button");
   // boutonAnimation.id = "boutonAnimation";

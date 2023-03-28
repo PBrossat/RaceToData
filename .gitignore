@@ -4,3 +4,4 @@ prettier
 .husky
 py/cache/*
 py/comparaisonPilote.json
+cache/fastf1_http_cache.sqlite

@@ -55,7 +55,7 @@
   background-color: white;
 }
 
-#divFormulairePilote h2 {
+#divFormulaire h2 {
   font-size: 1.1em;
   color: white;
   line-height: 1.2;
@@ -64,7 +64,7 @@
   padding: 10px;
 }
 
-.divGraphique #divFormulairePilote hr {
+.divGraphique #divFormulaire hr {
   position: absolute;
   bottom: 0;
   top: 20%;
