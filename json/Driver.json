@@ -1,6 +1,7 @@
 [
   {
     "Name": "Verstappen",
+    "Abbrieviation": "VER",
     "Team": "Red Bull Racing",
     "Naissance": "1997-09-30",
     "âge": 25,
@@ -23,6 +24,7 @@
 
   {
     "Name": "Norris",
+    "Abbrieviation": "NOR",
     "Team": "McLaren",
     "Naissance": "1999-11-13",
     "âge": 23,
@@ -45,6 +47,7 @@
 
   {
     "Name": "Gasly",
+    "Abbrieviation": "GAS",
     "Team": "Alpine",
     "Naissance": "1996-02-07",
     "âge": 26,
@@ -67,6 +70,7 @@
 
   {
     "Name": "Perez",
+    "Abbrieviation": "PER",
     "Team": "Red Bull Racing",
     "Naissance": "1990-01-26",
     "âge": 32,
@@ -89,6 +93,7 @@
 
   {
     "Name": "Alonso",
+    "Abbrieviation": "ALO",
     "Team": "Aston Martin Racing",
     "Naissance": "1981-07-29",
     "âge": 41,
@@ -111,6 +116,7 @@
 
   {
     "Name": "Leclerc",
+    "Abbrieviation": "LEC",
     "Team": "Ferrari",
     "Naissance": "1997-10-16",
     "âge": 25,
@@ -133,6 +139,7 @@
 
   {
     "Name": "Stroll",
+    "Abbrieviation": "STR",
     "Team": "Aston Martin Racing",
     "Naissance": "1998-10-29",
     "âge": 24,
@@ -155,6 +162,7 @@
 
   {
     "Name": "Magnussen",
+    "Abbrieviation": "MAG",
     "Team": "Haas F1 Team",
     "Naissance": "1992-10-05",
     "âge": 30,
@@ -177,6 +185,7 @@
 
   {
     "Name": "Tsunoda",
+    "Abbrieviation": "TSU",
     "Team": "AlphaTauri",
     "Naissance": "2000-05-11",
     "âge": 22,
@@ -199,6 +208,7 @@
 
   {
     "Name": "Albon",
+    "Abbrieviation": "ALB",
     "Team": "Williams",
     "Naissance": "1996-03-23",
     "âge": 26,
@@ -221,6 +231,7 @@
 
   {
     "Name": "Zhou",
+    "Abbrieviation": "ZHO",
     "Team": "Alfa Romeo",
     "Naissance": "1999-05-30",
     "âge": 23,
@@ -243,6 +254,7 @@
 
   {
     "Name": "Ocon",
+    "Abbrieviation": "OCO",
     "Team": "Alpine",
     "Naissance": "1996-09-17",
     "âge": 26,
@@ -265,6 +277,7 @@
 
   {
     "Name": "Hamilton",
+    "Abbrieviation": "HAM",
     "Team": "Mercedes",
     "Naissance": "1985-01-07",
     "âge": 38,
@@ -287,6 +300,7 @@
 
   {
     "Name": "Sainz",
+    "Abbrieviation": "SAI",
     "Team": "Ferrari",
     "Naissance": "1994-09-01",
     "âge": 28,
@@ -309,6 +323,7 @@
 
   {
     "Name": "Russell",
+    "Abbrieviation": "RUS",
     "Team": "Mercedes",
     "Naissance": "1998-02-15",
     "âge": 24,
@@ -331,6 +346,7 @@
 
   {
     "Name": "Bottas",
+    "Abbrieviation": "BOT",
     "Team": "Alfa Romeo",
     "Naissance": "1989-08-28",
     "âge": 33,
@@ -353,6 +369,7 @@
 
   {
     "Name": "Vettel",
+    "Abbrieviation": "VET",
     "Team": "Aston Martin",
     "Naissance": "1987-07-03",
     "âge": 36,
@@ -375,6 +392,7 @@
 
   {
     "Name": "Ricciardo",
+    "Abbrieviation": "RIC",
     "Team": "McLaren",
     "Naissance": "1989-07-01",
     "âge": 33,
@@ -397,6 +415,7 @@
 
   {
     "Name": "Latifi",
+    "Abbrieviation": "LAT",
     "Team": "Williams",
     "Naissance": "1995-06-29",
     "âge": 27,
@@ -419,6 +438,7 @@
 
   {
     "Name": "Schumacher",
+    "Abbrieviation": "SCU",
     "Team": "Haas",
     "Naissance": "1999-03-22",
     "âge": 24,

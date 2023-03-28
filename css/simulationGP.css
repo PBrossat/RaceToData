@@ -1,0 +1,158 @@
+/*------------------------------------- Styles relatifs aux visuels du GP et des compteurs -------------------------------------------*/
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Quantico:700i|Montserrat:500");
+
+/*---------------- Style relatif aux voitures -------------*/
+
+.car {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  color: #111;
+}
+
+#car1 {
+  background-color: red;
+  position: absolute;
+}
+
+#car2 {
+  background-color: blue;
+  position: absolute;
+}
+
+/*---------------- Style relatif aux conteneurs de la page (div, main) -------------*/
+.simulation {
+  display: flex;
+  font-family: "Open Sans", sans-serif;
+  flex-direction: row;
+  padding: 3%;
+  box-shadow: 0px 0px 30px #fff;
+  margin-top: 15%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 1em;
+}
+
+.circuit-container {
+  position: relative;
+  width: 70%;
+  height: 90%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+/*-------------------------- Style relatif au compteur -----------------------*/
+
+.compteur {
+  height: 500px;
+
+  margin: 2rem auto 5rem;
+  max-width: 500px;
+  width: 90vw;
+  border: 4px solid #e60012;
+  /* include stripes atop a dark background */
+  background: repeating-linear-gradient(
+      -42deg,
+      hsla(0, 0%, 0%, 0.3) 0,
+      hsla(0, 0%, 0%, 0.3) 4px,
+      transparent 0,
+      transparent 8px
+    ),
+    #111;
+  color: #fff;
+  border-radius: 5px;
+  /* position the header and visualization in a flex column */
+  display: flex;
+  flex-direction: column;
+}
+
+/* VISUALIZATION */
+/* container describing a few information regarding the driver
+    display the content in a grid with specific positions for the name, last lap and other relevant information*/
+.overview {
+  margin: 1rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "lastName lastLap" "team tyre";
+}
+#stats .overview h2 {
+  grid-area: lastName;
+  /* include a border and padding to the left of the heading
+        ! this needs to match the sub-heading to give the impression of a continuous border
+         */
+  padding: 0.5rem;
+  padding-top: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+#stats #compteur1 .overview h2 {
+  border-left: 4px solid red;
+}
+
+#stats #compteur2 .overview h2 {
+  border-left: 4px solid blue;
+}
+
+.overview span {
+  grid-area: lastLap;
+  /* include a semi transparent background to highlight the last lap */
+  padding: 0.1rem 0.75rem;
+  background: #34343477;
+  color: #059801;
+  font-weight: bold;
+  border-radius: 30px;
+  /* vertically centered, to avoid mishaps given the different size with respect to the previous heading */
+  align-self: center;
+  text-align: right;
+}
+#stats .overview h3 {
+  grid-area: team;
+  padding-left: 0.5rem;
+  font-weight: 300;
+  padding-left: 0.5rem;
+}
+
+#stats #compteur1 .overview h3 {
+  border-left: 4px solid red;
+}
+
+#stats #compteur2 .overview h3 {
+  border-left: 4px solid blue;
+}
+
+/* position the character identifying the tyre type at the very right of the grid */
+.overview strong {
+  grid-area: tyre;
+  justify-self: end;
+  align-self: center;
+  margin-right: 0.3rem;
+  font-size: 0.9rem;
+  border-radius: 50%;
+}
+
+/* have the svg horizontally centered and occupying a fraction of the available width */
+#stats .simulation svg {
+  width: 80%;
+  height: auto;
+  align-self: center;
+  margin: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+/*---------------- Style relatif au bouton lançant l'animation -------------*/
+
+#boutonAnimation {
+  position: absolute;
+  left: 40%;
+  background-color: #e60012;
+  color: #fff;
+  padding: 2%;
+}
+
+/*------------------------------------- FIN Styles relatifs aux visuels du GP et des compteurs -------------------------------------------*/

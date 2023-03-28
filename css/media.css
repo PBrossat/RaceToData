@@ -1,0 +1,205 @@
+/* -------------------------------------1200px------------------------------------------ */
+
+@media (max-width: 1200px) {
+  #stats #divMapEtInfos #divInfosBack h1 {
+    position: relative;
+    top: -15%;
+  }
+
+  #stats #divMapEtInfos #divInfosBack p {
+    position: relative;
+    top: -15%;
+    font-size: unset;
+  }
+
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    width: 100%;
+  }
+}
+
+/* ---------------------------------------1079px------------------------------------- */
+
+@media (max-width: 1079px) {
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    width: 110%;
+  }
+}
+
+/* -------------------------------------991px---------------------------------------- */
+
+@media (max-width: 991px) {
+  .showcase {
+    padding: 30px;
+  }
+
+  .banner-txt h3 {
+    font-size: 1em;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wrapper .card {
+    margin: 6%;
+    width: 40vh;
+    height: 40vh;
+  }
+
+  .overlay {
+    margin-bottom: 0%;
+  }
+
+  .presentation p {
+    font-size: 0.7em;
+  }
+
+  #stats #map-et-infos-gp #map {
+    width: 90%;
+    height: 40vh;
+    margin-bottom: 10%;
+  }
+
+  #stats #divMapEtInfos #map {
+    width: 80%;
+    height: 40vh;
+    margin-bottom: 10%;
+  }
+
+  #stats #map-et-infos-gp #divInfos {
+    width: 90%;
+    height: 40vh;
+  }
+
+  #stats #divMapEtInfos #divInfos {
+    width: 40%;
+    height: 40vh;
+  }
+
+  #stats #map-et-infos-gp #divInfos h3 {
+    padding-top: 0%;
+  }
+
+  #stats #divMapEtInfos #divInfos h3 {
+    padding-top: 0%;
+    width: 100%;
+  }
+
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    padding-top: 0%;
+    width: 80%;
+    left: 30px;
+  }
+
+  #stats #divMapEtInfos .bouton {
+    left: 45%;
+    bottom: auto;
+  }
+
+  #stats #map-et-infos-gp .bouton {
+    left: 43%;
+    bottom: 48%;
+  }
+
+  #stats #map-et-infos-gp {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  #divMapEtInfos {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* ----------------------------------------820px------------------------------------ */
+@media (max-width: 820px) {
+  .banner-txt h2 {
+    font-size: 2em;
+    margin-bottom: 10%;
+  }
+  .banner-txt h3 {
+    font-size: 0.7em;
+  }
+  #stats #map-et-infos-gp #divInfosFront h1 {
+    font-size: 1.5em;
+  }
+
+  #stats #divMapEtInfos #map {
+    width: 80%;
+    height: 40vh;
+    margin-bottom: 10%;
+  }
+
+  #stats #map-et-infos-gp #divInfos {
+    width: 90%;
+    height: 40vh;
+  }
+
+  #stats #divMapEtInfos #divInfos {
+    width: 90%;
+    height: 40vh;
+  }
+
+  #stats #map-et-infos-gp #divInfos h3 {
+    padding-top: 0%;
+  }
+
+  #stats #divMapEtInfos #divInfos h3 {
+    padding-top: 0%;
+    width: 80%;
+  }
+}
+
+/* -----------------------------------------690px----------------------------------- */
+
+@media (max-width: 690px) {
+  #stats #divMapEtInfos #divInfosBack h1 {
+    font-size: unset;
+  }
+
+  #stats #divMapEtInfos #divInfosBack p {
+    font-size: 12px;
+  }
+
+  #stats #map-et-infos-gp .bouton {
+    left: 40%;
+  }
+
+  #stats #map-et-infos-gp #map {
+    margin-bottom: 20%;
+  }
+}
+
+/* --------------------------------------500px---------------------------- */
+
+@media (max-width: 500px) {
+  #stats #divMapEtInfos .bouton {
+    left: 35%;
+    bottom: auto;
+  }
+}
+
+/* ---------------------------------------390px-------------------------- */
+
+@media (max-width: 390px) {
+  #stats #divMapEtInfos #divInfos #divInfosContent {
+    left: 30px;
+    width: 80%;
+  }
+
+  #stats #map-et-infos-gp .bouton {
+    left: 35%;
+  }
+
+  #stats #divMapEtInfos #map {
+    margin-bottom: 20%;
+  }
+
+  #stats #divMapEtInfos #divInfos {
+    width: 90%;
+  }
+}

@@ -2,6 +2,7 @@
   "Circuits": [
     {
       "Name": "Circuit de l'Albert Park",
+      "Localisation": "Australie",
       "FirstGP": "1996",
       "NumberLaps": "58",
       "CircuitLength": "5.278",
@@ -12,6 +13,7 @@
     },
     {
       "Name": "Austin",
+      "Localisation": "États-Unis",
       "FirstGP": "2012",
       "NumberLaps": "56",
       "CircuitLength": "5.513",
@@ -22,6 +24,7 @@
     },
     {
       "Name": "Bahrain",
+      "Localisation": "Bahrein",
       "FirstGP": "2004",
       "NumberLaps": "57",
       "CircuitLength": "5.412",
@@ -32,6 +35,7 @@
     },
     {
       "Name": "Baku",
+      "Localisation": "Azerbaïdjan",
       "FirstGP": "2016",
       "NumberLaps": "51",
       "CircuitLength": "6.003",
@@ -42,6 +46,7 @@
     },
     {
       "Name": "Circuit de Barcelona-Catalunya",
+      "Localisation": "Espagne",
       "FirstGP": "1991",
       "NumberLaps": "66",
       "CircuitLength": "4.675",
@@ -52,6 +57,7 @@
     },
     {
       "Name": "Hungaroring",
+      "Localisation": "Hongrie",
       "FirstGP": "1986",
       "NumberLaps": "70",
       "CircuitLength": "4.381",
@@ -62,6 +68,7 @@
     },
     {
       "Name": "Imola",
+      "Localisation": "Italie",
       "FirstGP": "1980",
       "NumberLaps": "63",
       "CircuitLength": "4.909",
@@ -72,6 +79,7 @@
     },
     {
       "Name": "Brésil",
+      "Localisation": "Brésil",
       "FirstGP": "1973",
       "NumberLaps": "71",
       "CircuitLength": "4.309",
@@ -82,6 +90,7 @@
     },
     {
       "Name": "Jeddah",
+      "Localisation": "Arabie Saoudite",
       "FirstGP": "2021",
       "NumberLaps": "50",
       "CircuitLength": "6.174",
@@ -92,6 +101,7 @@
     },
     {
       "Name": "Singapour",
+      "Localisation": "Singapour",
       "FirstGP": "2008",
       "NumberLaps": "61",
       "CircuitLength": "5.063",
@@ -102,6 +112,7 @@
     },
     {
       "Name": "Miami",
+      "Localisation": "Miami",
       "FirstGP": "2022",
       "NumberLaps": "57",
       "CircuitLength": "5.412",
@@ -112,6 +123,7 @@
     },
     {
       "Name": "Monaco",
+      "Localisation": "Monaco",
       "FirstGP": "1950",
       "NumberLaps": "78",
       "CircuitLength": "3.337",
@@ -122,6 +134,7 @@
     },
     {
       "Name": "Monza",
+      "Localisation": "Italie",
       "FirstGP": "1950",
       "NumberLaps": "53",
       "CircuitLength": "5.793",
@@ -132,6 +145,7 @@
     },
     {
       "Name": "Red Bull Ring",
+      "Localisation": "Autriche",
       "FirstGP": "1970",
       "NumberLaps": "71",
       "CircuitLength": "4.318",
@@ -142,6 +156,7 @@
     },
     {
       "Name": "Le Castellet",
+      "Localisation": "France",
       "FirstGP": "1971",
       "NumberLaps": "53",
       "CircuitLength": "5.842",
@@ -152,6 +167,7 @@
     },
     {
       "Name": "Mexique",
+      "Localisation": "Mexique",
       "FirstGP": "1963",
       "NumberLaps": "71",
       "CircuitLength": "4.304",
@@ -162,6 +178,7 @@
     },
     {
       "Name": "Silverstone",
+      "Localisation": "Angleterre",
       "FirstGP": "1950",
       "NumberLaps": "52",
       "CircuitLength": "5.891",
@@ -172,6 +189,7 @@
     },
     {
       "Name": "Spa-Francorchamps",
+      "Localisation": "Belgique",
       "FirstGP": "1950",
       "NumberLaps": "44",
       "CircuitLength": "7.004",
@@ -182,6 +200,7 @@
     },
     {
       "Name": "Suzuka",
+      "Localisation": "Japon",
       "FirstGP": "1987",
       "NumberLaps": "53",
       "CircuitLength": "5.807",
@@ -192,6 +211,7 @@
     },
     {
       "Name": "Circuit Gilles-Villeneuve",
+      "Localisation": "Canada",
       "FirstGP": "1978",
       "NumberLaps": "70",
       "CircuitLength": "4.361",
@@ -202,6 +222,7 @@
     },
     {
       "Name": "Abu Dhabi",
+      "Localisation": "Abu Dhabi",
       "FirstGP": "2009",
       "NumberLaps": "58",
       "CircuitLength": "5.281",
@@ -212,6 +233,7 @@
     },
     {
       "Name": "Zandvoort",
+      "Localisation": "Pays-Bas",
       "FirstGP": "1952",
       "NumberLaps": "72",
       "CircuitLength": "4.259",

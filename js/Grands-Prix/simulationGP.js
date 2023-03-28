@@ -1,40 +1,169 @@
-import { dataDriver1 } from "./scriptGP.js";
-import { dataDriver2 } from "./scriptGP.js";
+export { creationDivFormulaire };
+import { tabGlobalDataPilotes } from "../Pilote/scriptPilote.js";
+import { tabGlobalDataGP } from "./scriptGP.js";
+
+//Creation de scale pour afficher le tracé du circuit
+var xScale = d3.scaleLinear().domain([-20000, 20000]).range([-800, 1400]);
+var yScale = d3.scaleLinear().domain([-20000, 20000]).range([-800, 1200]);
 
 //-------------------------------Gestion de la simulation du GP----------------------------------------------------------------------------
 
-//------------------Création des pilotes------------------
+//Class driver
+class Driver {
+  constructor(firstName, lastName, threeLetterName, team) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.threeLetterName = threeLetterName;
+    this.team = team;
 
-//Création du driver1
-let driver1 = {
-  firstName: "Charles",
-  lastName: "Leclerc",
-  threeLetterName: "LER",
-  team: "Ferrari",
-  telemetry: {
-    speed: 0, // value in the [0-360] range, measured in km/h
-    rpm: 0,
-    drs: false, // boolean, highlighting the DRS string if true
-    throttle: 0, // value in the [0-1] range, highlighted in the green band of the inner circle
-    brake: false, // boolean, highlighting the red band next to the throttle area
-    gear: 0,
-  },
-};
-//Création du driver2
-let driver2 = {
-  firstName: "Kevin",
-  lastName: "Magnussen",
-  threeLetterName: "MAG",
-  team: "Haas",
-  telemetry: {
-    speed: 0, // value in the [0-360] range, measured in km/h
-    rpm: 0,
-    drs: false, // boolean, highlighting the DRS string if true
-    throttle: 0, // value in the [0-1] range, highlighted in the green band of the inner circle
-    brake: false, // boolean, highlighting the red band next to the throttle area
-    gear: 0,
-  },
-};
+    this.telemetry = {
+      speed: 0, // value in the [0-360] range, measured in km/h
+      rpm: 0, // measured in rpm
+      drs: false, // boolean, highlighting the DRS string if true
+      throttle: 0, // value in the [0-1] range, highlighted in the green band of the inner circle
+      brake: false, // boolean, highlighting the red band next to the throttle area
+      gear: 0,
+    };
+  }
+}
+
+//------------------------------------Création du formulaire de simulation
+function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
+  const divFormulaire = document.createElement("div");
+  divFormulaire.id = "divFormulaire";
+  divParent.appendChild(divFormulaire);
+
+  //creation du titre du formulaire
+  const titreFormulaire = document.createElement("h2");
+  titreFormulaire.textContent =
+    "Comparez les meilleurs tours de vos pilotes préférés !";
+  divFormulaire.appendChild(titreFormulaire);
+
+  //création de la balise form
+  const formulaire = document.createElement("form");
+  formulaire.id = "formulaire";
+  divFormulaire.appendChild(formulaire);
+
+  //creation de deux selecteurs pour choisir un pilote
+  for (let i = 1; i <= 2; i++) {
+    const selecteurPilote = document.createElement("select");
+    selecteurPilote.id = "selecteurPilote" + i;
+    selecteurPilote.className = "selecteur";
+    selecteurPilote.required = true;
+    selecteurPilote.name = "selecteurPilote" + i;
+    //valeur de base du selecteur : "Pilote 1" ou "Pilote 2"
+    const optionPilote = document.createElement("option");
+    optionPilote.selected = true;
+    optionPilote.value = "";
+    optionPilote.disabled = true;
+    optionPilote.hidden = true;
+    optionPilote.textContent = "Pilote " + i;
+    selecteurPilote.appendChild(optionPilote);
+    formulaire.appendChild(selecteurPilote);
+  }
+
+  //creation d'un selecteur pour choisir le Grand Prix
+  const selecteurGrandPrix = document.createElement("select");
+  selecteurGrandPrix.id = "selecteurGrandPrix";
+  selecteurGrandPrix.className = "selecteur";
+  selecteurGrandPrix.required = true;
+  selecteurGrandPrix.name = "selecteurGrandPrix";
+  //valeur de base du selecteur : "Grand Prix"
+  const optionGrandPrix = document.createElement("option");
+  optionGrandPrix.selected = true;
+  optionGrandPrix.value = "";
+  optionGrandPrix.disabled = true;
+  optionGrandPrix.hidden = true;
+  optionGrandPrix.textContent = "Grand Prix";
+  selecteurGrandPrix.appendChild(optionGrandPrix);
+  formulaire.appendChild(selecteurGrandPrix);
+
+  //creation d'un bouton pour valider le choix
+  const boutonSubmit = document.createElement("button");
+  boutonSubmit.id = "boutonSubmit";
+  boutonSubmit.type = "submit";
+  boutonSubmit.name = "boutonSubmit";
+  boutonSubmit.textContent = nomSubmit;
+  formulaire.appendChild(boutonSubmit);
+
+  //remplissage des selecteur avec les noms des pilotes
+  for (let i = 0; i < tabPilote.length; i++) {
+    const selecteurPilote1 = document.querySelector("#selecteurPilote1");
+    const selecteurPilote2 = document.querySelector("#selecteurPilote2");
+    const optionPilote = document.createElement("option");
+    optionPilote.value = tabPilote[i].Abbrieviation;
+    optionPilote.textContent = tabPilote[i].Name;
+    selecteurPilote1.appendChild(optionPilote);
+    selecteurPilote2.appendChild(optionPilote.cloneNode(true));
+  }
+
+  //remplissage du selecteur avec les noms des Grand Prix
+  for (let i = 0; i < tabGrandPrix.length; i++) {
+    const selecteurGrandPrix = document.querySelector("#selecteurGrandPrix");
+    const optionGrandPrix = document.createElement("option");
+    optionGrandPrix.value = tabGrandPrix[i].Localisation;
+    optionGrandPrix.textContent = tabGrandPrix[i].Localisation;
+    selecteurGrandPrix.appendChild(optionGrandPrix);
+  }
+}
+
+//--------------------------------------------Gestion du formulaire
+export function gestionFormulaireGP() {
+  creationDivFormulaire(
+    document.querySelector("#stats"),
+    tabGlobalDataPilotes,
+    tabGlobalDataGP,
+    "Lancer la simulation"
+  );
+  const formulaire = document.getElementById("formulaire");
+  formulaire.addEventListener("submit", (e) => {
+    console.log("submit");
+    //pour éviter le rechargement de la page
+    e.preventDefault();
+    //récupération des données du formulaire
+    const driver1 = document.getElementById("selecteurPilote1").value;
+    const driver2 = document.getElementById("selecteurPilote2").value;
+    const gp = document.getElementById("selecteurGrandPrix").value;
+    //désactiver la soumission du formulaire
+    document.getElementById("boutonSubmit").disabled = true;
+    afficherSimulationGP();
+    fetch("/dataDriver?namePilote=" + driver1 + "&nameGP=" + gp)
+      .then((response) => response.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].positionX = xScale(data[i].positionX);
+          data[i].positionY = yScale(data[i].positionY);
+        }
+        let Driver1 = new Driver("Charles", "Leclerc", "LEC", "Ferrari"); //TODO recup ces données via le formulaire / tableau de pilotes
+        animateRace(data, "car1", "compteur1", Driver1);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    fetch("/dataDriver?namePilote=" + driver2 + "&nameGP=" + gp)
+      .then((response) => response.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].positionX = xScale(data[i].positionX);
+          data[i].positionY = yScale(data[i].positionY);
+        }
+        let Driver2 = new Driver("Kevin", "Magnussen", "MAG", "Haas"); //TODO recup ces données via le formulaire / tableau de pilotes
+        animateRace(data, "car2", "compteur2", Driver2);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    console.log("fin submit");
+    //Attendre que l'animation soit terminée pour en relancer une autre -> temps mis à la zeub
+    setTimeout(() => {
+      //désactiver la soumission du formulaire
+      document.getElementById("boutonSubmit").disabled = false;
+    }, 25000); //valeur à redéfinir suite au chargement des données avec python et fastF1
+  });
+
+  //! problème : si on choisit le même pilote
+}
 
 //-------------------Gestion du compteur----------------
 
@@ -334,7 +463,7 @@ function animateRace(data, idCar, idCompteur, driver) {
 }
 
 //----------------------Gestion de l'affichage de la simulation du GP------------
-export function afficherSimulationGP() {
+function afficherSimulationGP() {
   //Création des conteneurs
   const sectionStats = document.querySelector("#stats");
   const divSimulation = document.createElement("div");
@@ -372,17 +501,20 @@ export function afficherSimulationGP() {
   divCompteur2.classList.add("compteur");
   divCompteur2.id = "compteur2";
   main.appendChild(divCompteur2);
-  const boutonAnimation = document.createElement("button");
-  boutonAnimation.id = "boutonAnimation";
-  boutonAnimation.textContent = "Lancer la simulation";
-  sectionStats.appendChild(boutonAnimation);
-  boutonAnimation.addEventListener("click", () => {
-    boutonAnimation.disabled = true;
-    animateRace(dataDriver1, "car1", "compteur1", driver1);
-    animateRace(dataDriver2, "car2", "compteur2", driver2);
-    //Attendre que l'animation soit terminée pour en relancer une autre -> temps mis à la zeub
-    setTimeout(() => {
-      boutonAnimation.disabled = false;
-    }, 25000);
-  });
+  // //Gestion du formulaire : création et soumission
+  // gestionFormulaireGP();
+
+  // const boutonAnimation = document.createElement("button");
+  // boutonAnimation.id = "boutonAnimation";
+  // boutonAnimation.textContent = "Lancer la simulation";
+  // sectionStats.appendChild(boutonAnimation);
+  // boutonAnimation.addEventListener("click", () => {
+  //   boutonAnimation.disabled = true;
+  //   animateRace(dataDriver1, "car1", "compteur1", driver1);
+  //   animateRace(dataDriver2, "car2", "compteur2", driver2);
+  //   //Attendre que l'animation soit terminée pour en relancer une autre -> temps mis à la zeub
+  //   setTimeout(() => {
+  //     boutonAnimation.disabled = false;
+  //   }, 25000);
+  // });
 }
