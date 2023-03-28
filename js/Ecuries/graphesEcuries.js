@@ -25,6 +25,7 @@ async function recuperationPointsEcuriesPendantLaSaison(nomEcuries) {
 
   let cpt = 0;
 
+  // fonction qui permet de récuperer les points de chaque écuries
   data.MRData.RaceTable.Races.forEach((race) => {
     race.Results.forEach((result) => {
       const constructorId = result.Constructor.constructorId;
@@ -217,25 +218,7 @@ async function grapheEcuriesPoint() {
 
 //------------------------------G2---------------------------------------
 
-async function graphePie() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Titres Ecuries ";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiquePtEcuries";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
+async function graphePie(typeDonnées) {
   const colors = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     colors.push(tabGlobalDataEcuries[i].color);
@@ -248,13 +231,13 @@ async function graphePie() {
       type: "pie",
       backgroundColor: "#1b1b1b",
       marginBottom: 110,
-      height: "55%",
+      height: "40%",
       zoomType: "xy",
       panning: true,
       panKey: "shift",
     },
     title: {
-      text: "Nombre de titres constructeurs par écuries",
+      text: "Nombre de titres par écuries",
       style: {
         color: "#FF2A2A",
         textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
@@ -272,18 +255,7 @@ async function graphePie() {
     series: [
       {
         name: "Titres écuries",
-        data: [
-          ["Ferrari", 16],
-          ["RedBull", 5],
-          ["Mercedes", 8],
-          ["Alpine", 2],
-          ["McLaren", 8],
-          ["Alfa Romeo", 0],
-          ["Aston Martin", 0],
-          ["Haas", 0],
-          ["AlphaTauri", 0],
-          ["Williams", 9],
-        ],
+        data: typeDonnées,
       },
     ],
   });
@@ -291,40 +263,10 @@ async function graphePie() {
 
 //---------------------------------G3-----------------------------------
 
-async function grapheTest() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Statistiques écuries";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiqueVictoires";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
+async function grapheTest(typeDonnées) {
   const colors = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     colors.push(tabGlobalDataEcuries[i].color);
-  }
-
-  const series = [];
-  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
-    series.push({
-      name: tabGlobalDataEcuries[i].nom,
-      data: [
-        tabGlobalDataEcuries[i].wins_all,
-        tabGlobalDataEcuries[i].pole_all,
-        tabGlobalDataEcuries[i].podiums_all,
-      ],
-    });
   }
 
   const divTest = document.getElementById("GraphiqueVictoires");
@@ -335,7 +277,7 @@ async function grapheTest() {
       backgroundColor: "#1b1b1b",
     },
     title: {
-      text: "Statistiques des écuries de F1 depuis 1950",
+      text: "Statistiques des écuries de F1",
 
       style: {
         color: "#FF2A2A",
@@ -387,55 +329,9 @@ async function grapheTest() {
         borderWidth: 0,
       },
     },
-    series: series,
+    series: typeDonnées,
     colors: colors,
   });
-}
-
-//-----------------------------------JSON-----------------------------------------------------
-
-async function tabPointsEcuriesAllTime(startYear, endYear) {
-  const newJson = {};
-
-  // Parcourir chaque année de startYear à endYear
-  for (let year = startYear; year <= endYear; year++) {
-    // Obtenir les données JSON pour l'année en cours
-    const response = await fetch(
-      `https://ergast.com/api/f1/${year}/constructorStandings.json`
-    );
-    const data = await response.json();
-
-    let cpt = 0;
-
-    // Ajouter une nouvelle entrée au nouveau JSON pour chaque écurie pour chaque année
-    data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings.forEach(
-      (cs) => {
-        const constructorId = cs.Constructor.constructorId;
-        const points = parseInt(cs.points);
-
-        if (!newJson[constructorId]) {
-          newJson[constructorId] = {};
-        }
-
-        // Si c'est la première année, initialiser le total des points de l'écurie
-        if (!newJson[constructorId].totalPoints) {
-          newJson[constructorId].totalPoints = 0;
-        }
-
-        // Ajouter les points de l'écurie pour l'année en cours
-        if (!newJson[constructorId][year]) {
-          newJson[constructorId][year] = 0;
-        }
-        // Ajouter les points de l'écurie pour toutes les années précédentes
-        newJson[constructorId].totalPoints += points;
-        cpt = newJson[constructorId].totalPoints;
-
-        newJson[constructorId][year] += cpt;
-      }
-    );
-  }
-
-  return newJson;
 }
 
 //--------------------------------------G4------------------------------------------------------------
@@ -450,7 +346,7 @@ async function grapheCourse() {
   //Création Titre
   const Titre = document.createElement("h1");
   divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique points all time écuries";
+  Titre.innerHTML = "Graphique points/victoires all time écuries 2022";
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
@@ -481,7 +377,8 @@ async function grapheCourse() {
   const startYear = 1958,
     endYear = 2022,
     btn = document.getElementById("play-pause-button"),
-    nbr = 10;
+    nbr = 10,
+    variable = "Points";
 
   let dataset, chart;
 
@@ -495,7 +392,7 @@ async function grapheCourse() {
   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
 
   var screenWidth = window.innerWidth;
-  var legendFontSize = "16px";
+  var legendFontSize;
 
   if (screenWidth <= 600) {
     legendFontSize = "12px"; //Taille de la police pour les écrans de 600px ou moins
@@ -597,7 +494,7 @@ async function grapheCourse() {
   }
 
   (async () => {
-    dataset = await fetch("json/Ecuries/PointsLast.json").then((response) =>
+    dataset = await fetch(`json/Ecuries/Points.json`).then((response) =>
       response.json()
     );
 
@@ -777,11 +674,11 @@ async function grapheCourse() {
     update();
   });
 }
+
 //------------------------------- Export des données -----------------------------
 export {
-  grapheEcuriesPoint,
+  // grapheEcuriesPoint,
   graphePie,
   grapheTest,
-  tabPointsEcuriesAllTime,
   grapheCourse,
 };
