@@ -75,3 +75,20 @@
   background-color: white;
   border: none;
 }
+
+.divGraphique select,
+.divGraphique .selecteur select + select {
+  margin-bottom: 7%;
+}
+
+.divGraphique #boutonSubmit {
+  width: 60%;
+  height: 3em;
+  margin-bottom: 10px;
+  color: black;
+  font-weight: 550;
+  border-radius: 0.5em;
+  text-shadow: 2.5px 2px 2px rgba(1, 1, 1, 0.3);
+  justify-content: center;
+  align-items: center;
+}
