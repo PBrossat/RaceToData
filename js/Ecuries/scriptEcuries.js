@@ -3,9 +3,9 @@ import {
   // grapheEcuriesPoint,
   graphePie,
   grapheTest,
-  grapheCourse,
-  //main,
+  grapheRace,
 } from "./graphesEcuries.js";
+// import { main } from "./creationJson.js";
 import { mapEcuries } from "./mapEcuries.js";
 
 //----------------------------Récuperation Infos Ecuries depuis fichier json-------------
@@ -28,14 +28,14 @@ boutonDecouvrirStatsEcuries.addEventListener("click", async function () {
   recupererInfosEcuries();
   mapEcuries();
   creationNouvelleDiv();
-  // await grapheEcuriesPoint();
-  creationBoutonPie();
-  creationBoutonTest();
-  grapheCourse();
+  creationDivPie();
+  creationDivMultipleBars();
+  creationDivRace();
 });
 
 //------------------------------ Création des containers ----------------
 
+//création d'une div pour la map
 function afficherStatsEcuries() {
   const StatsEcuries = document.querySelector("#stats");
 
@@ -45,6 +45,7 @@ function afficherStatsEcuries() {
   StatsEcuries.appendChild(divMapEtInfos);
 }
 
+//création d'une div pour les graphiques
 function creationNouvelleDiv() {
   const StatsPilotes = document.querySelector("#stats");
 
@@ -54,7 +55,9 @@ function creationNouvelleDiv() {
   StatsPilotes.appendChild(nouvelleDiv);
 }
 
-function creationBoutonTest() {
+//------------------- Création de la div pour le graphique de stats -------------------
+
+function creationDivMultipleBars() {
   //Création container
   const divParent = document.querySelector(".divGraphique");
   const divAnalyse = document.createElement("div");
@@ -73,28 +76,31 @@ function creationBoutonTest() {
   divGraphique.className = "Graphique";
   divAnalyse.appendChild(divGraphique);
 
-  const Stats = document.createElement("input");
-  Stats.type = "radio";
-  Stats.name = "option";
-  Stats.value = "base";
-  divAnalyse.appendChild(Stats);
-
-  const labelStats = document.createElement("label");
-  labelStats.innerHTML = "Satistiques saison 2022 par écuries";
-  divAnalyse.appendChild(labelStats);
-
   const StatsAll = document.createElement("input");
+  StatsAll.id = "inputChoix";
   StatsAll.type = "radio";
   StatsAll.name = "option";
-  StatsAll.value = "All";
   StatsAll.checked = true;
   divAnalyse.appendChild(StatsAll);
 
   const labelStatsAll = document.createElement("label");
+  labelStatsAll.id = "labelChoix";
   labelStatsAll.innerHTML = "Statistiques depuis 1958 par écuries";
   divAnalyse.appendChild(labelStatsAll);
 
+  const Stats = document.createElement("input");
+  Stats.id = "inputChoix";
+  Stats.type = "radio";
+  Stats.name = "option";
+  divAnalyse.appendChild(Stats);
+
+  const labelStats = document.createElement("label");
+  labelStats.id = "labelChoix";
+  labelStats.innerHTML = "Satistiques saison 2022 par écuries";
+  divAnalyse.appendChild(labelStats);
+
   const buttonMettreAJour = document.createElement("button");
+  buttonMettreAJour.className = "buttonMettreAJour";
   buttonMettreAJour.innerHTML = "Mettre à jour";
   divAnalyse.appendChild(buttonMettreAJour);
 
@@ -123,22 +129,24 @@ function creationBoutonTest() {
   }
 
   let data = seriesAll;
+  let annee = 1958;
 
-  grapheTest(data);
+  grapheTest(data, annee);
 
   buttonMettreAJour.addEventListener("click", function () {
-    const titreSeries = document.querySelector('input[value="base"]');
-    const titreSeriesAll = document.querySelector('input[value="All"]');
-    if (titreSeriesAll.checked) {
+    if (StatsAll.checked) {
       data = seriesAll;
-    } else if (titreSeries.checked) {
+      annee = 1958;
+    } else if (Stats.checked) {
       data = series;
+      annee = 2022;
     }
-    grapheTest(data);
+    grapheTest(data, annee);
   });
 }
 
-function creationBoutonPie() {
+//------------------- Création de la div pour le graphique de titres -------------------
+function creationDivPie() {
   //Création container
   const divParent = document.querySelector(".divGraphique");
   const divAnalyse = document.createElement("div");
@@ -158,28 +166,31 @@ function creationBoutonPie() {
   divAnalyse.appendChild(divGraphique);
 
   const titreConstructeurs = document.createElement("input");
+  titreConstructeurs.id = "inputChoix";
   titreConstructeurs.type = "radio";
   titreConstructeurs.name = "option";
-  titreConstructeurs.value = "constructeurs";
   titreConstructeurs.checked = true;
   divAnalyse.appendChild(titreConstructeurs);
 
   const labelTitreConstructeurs = document.createElement("label");
+  labelTitreConstructeurs.id = "labelChoix";
   labelTitreConstructeurs.innerHTML =
     "Nombre de titres constructeurs par écuries";
   divAnalyse.appendChild(labelTitreConstructeurs);
 
   const titrePilotes = document.createElement("input");
+  titrePilotes.id = "inputChoix";
   titrePilotes.type = "radio";
   titrePilotes.name = "option";
-  titrePilotes.value = "pilotes";
   divAnalyse.appendChild(titrePilotes);
 
   const labelTitrePilotes = document.createElement("label");
+  labelTitrePilotes.id = "labelChoix";
   labelTitrePilotes.innerHTML = "Nombre de titres pilotes par écuries";
   divAnalyse.appendChild(labelTitrePilotes);
 
   const buttonMettreAJour = document.createElement("button");
+  buttonMettreAJour.className = "buttonMettreAJour";
   buttonMettreAJour.innerHTML = "Mettre à jour";
   divAnalyse.appendChild(buttonMettreAJour);
 
@@ -200,18 +211,104 @@ function creationBoutonPie() {
   }
 
   let data = Ecuries;
+  let type = "constructeurs";
 
-  graphePie(data);
+  graphePie(data, type);
 
   buttonMettreAJour.addEventListener("click", function () {
-    const titreEcuries = document.querySelector('input[value="constructeurs"]');
-    const titrePilotes = document.querySelector('input[value="pilotes"]');
-    if (titreEcuries.checked) {
+    if (titreConstructeurs.checked) {
       data = Ecuries;
+      type = "constructeurs";
     } else if (titrePilotes.checked) {
       data = Pilotes;
+      type = "pilotes";
     }
-    graphePie(data);
+    graphePie(data, type);
+  });
+}
+
+//------------------- Création de la div pour le graphique race -------------------
+
+function creationDivRace() {
+  //Création container
+  const divParent = document.querySelector(".divGraphique");
+  const divAnalyse = document.createElement("div");
+  divAnalyse.id = "divAnalysePointsPilotes";
+  divParent.appendChild(divAnalyse);
+  divAnalyse.innerHTML = "";
+
+  let data = "Points";
+
+  //Création Titre
+  const Titre = document.createElement("h1");
+  divAnalyse.appendChild(Titre);
+  Titre.innerHTML = "Graphique données all time écuries 2022";
+
+  //Creation div où se trouve le graphique
+  const divGraphique = document.createElement("div");
+  divGraphique.id = "GraphiqueWinsAllTime";
+  divGraphique.className = "Graphique";
+  divAnalyse.appendChild(divGraphique);
+
+  //Creation Bouton
+  const divPlay = document.createElement("div");
+  divPlay.id = "play-controls";
+  divAnalyse.appendChild(divPlay);
+
+  const Btn = document.createElement("button");
+  Btn.id = "play-pause-button";
+  Btn.className = "fa fa_play";
+  Btn.title = "play";
+  Btn.innerHTML = "PLAY";
+  divPlay.appendChild(Btn);
+
+  const year = document.createElement("input");
+  year.id = "play-range";
+  year.value = 1958;
+  year.min = 1958;
+  year.max = 2022;
+  year.type = "range";
+  divPlay.appendChild(year);
+
+  const Points = document.createElement("input");
+  Points.id = "inputChoix";
+  Points.type = "radio";
+  Points.name = "option";
+  Points.checked = true;
+  divAnalyse.appendChild(Points);
+
+  const labelPoints = document.createElement("label");
+  labelPoints.id = "labelChoix";
+  labelPoints.innerHTML = "Evolution du nombre de points par écuries";
+  divAnalyse.appendChild(labelPoints);
+
+  const Victoires = document.createElement("input");
+  Victoires.id = "inputChoix";
+  Victoires.type = "radio";
+  Victoires.name = "option";
+  divAnalyse.appendChild(Victoires);
+
+  const labelVictoires = document.createElement("label");
+  labelVictoires.id = "labelChoix";
+  labelVictoires.innerHTML = "Evolution du nombre de victoires par écuries";
+  divAnalyse.appendChild(labelVictoires);
+
+  const buttonMettreAJour = document.createElement("button");
+  buttonMettreAJour.className = "buttonMettreAJour";
+  buttonMettreAJour.innerHTML = "Mettre à jour";
+  divAnalyse.appendChild(buttonMettreAJour);
+
+  grapheRace(data, year);
+
+  buttonMettreAJour.addEventListener("click", function () {
+    if (Points.checked) {
+      data = "Points";
+      year.value = 1958;
+    } else if (Victoires.checked) {
+      data = "Victoires";
+      year.value = 1958;
+    }
+    grapheRace(data, year);
   });
 }
 
