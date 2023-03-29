@@ -218,7 +218,7 @@ async function grapheEcuriesPoint() {
 
 //------------------------------G2---------------------------------------
 
-async function graphePie(typeDonnées) {
+async function graphePie(données, type) {
   const colors = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     colors.push(tabGlobalDataEcuries[i].color);
@@ -237,7 +237,7 @@ async function graphePie(typeDonnées) {
       panKey: "shift",
     },
     title: {
-      text: "Nombre de titres par écuries",
+      text: "Nombre de titres " + type + " par écuries",
       style: {
         color: "#FF2A2A",
         textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
@@ -255,7 +255,7 @@ async function graphePie(typeDonnées) {
     series: [
       {
         name: "Titres écuries",
-        data: typeDonnées,
+        data: données,
       },
     ],
   });
@@ -263,7 +263,7 @@ async function graphePie(typeDonnées) {
 
 //---------------------------------G3-----------------------------------
 
-async function grapheTest(typeDonnées) {
+async function grapheTest(données, annee) {
   const colors = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     colors.push(tabGlobalDataEcuries[i].color);
@@ -277,7 +277,7 @@ async function grapheTest(typeDonnées) {
       backgroundColor: "#1b1b1b",
     },
     title: {
-      text: "Statistiques des écuries de F1",
+      text: "Statistiques des écuries de F1 depuis " + annee,
 
       style: {
         color: "#FF2A2A",
@@ -329,56 +329,18 @@ async function grapheTest(typeDonnées) {
         borderWidth: 0,
       },
     },
-    series: typeDonnées,
+    series: données,
     colors: colors,
   });
 }
 
 //--------------------------------------G4------------------------------------------------------------
-async function grapheCourse() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
 
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique points/victoires all time écuries 2022";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiqueWinsAllTime";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
-  //Creation Bouton
-  const divPlay = document.createElement("div");
-  divPlay.id = "play-controls";
-  divAnalyse.appendChild(divPlay);
-
-  const Btn = document.createElement("button");
-  Btn.id = "play-pause-button";
-  Btn.className = "fa fa_play";
-  Btn.title = "play";
-  Btn.innerHTML = "PLAY";
-  divPlay.appendChild(Btn);
-
-  const year = document.createElement("input");
-  year.id = "play-range";
-  year.value = 1958;
-  year.min = 1958;
-  year.max = 2022;
-  year.type = "range";
-  divPlay.appendChild(year);
-
+async function grapheRace(données, year) {
   const startYear = 1958,
     endYear = 2022,
     btn = document.getElementById("play-pause-button"),
-    nbr = 10,
-    variable = "Points";
+    nbr = 10;
 
   let dataset, chart;
 
@@ -392,7 +354,7 @@ async function grapheCourse() {
   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
 
   var screenWidth = window.innerWidth;
-  var legendFontSize;
+  var legendFontSize = "14px";
 
   if (screenWidth <= 600) {
     legendFontSize = "12px"; //Taille de la police pour les écrans de 600px ou moins
@@ -468,17 +430,9 @@ async function grapheCourse() {
     });
   })(Highcharts);
 
-  // renvoie un tableau qui contient deux éléments :
-  // Le premier élément est un tableau contenant le nom du pays ayant la plus grande valeur de données
-  // pour l'année donnée et cette valeur.
-  // Le deuxième élément est un tableau contenant des tableaux pour les n-1 pays ayant les valeurs
-  // de données les plus élevées pour l'année donnée.
-  // Le nombre de pays à inclure est défini par la variable "nbr".
-  // La fonction utilise les méthodes "Object.entries", "map" et "sort" pour traiter l'objet "dataset".
+  // Le nombre de pays à inclure est défini par la variable "nbr" et 0 pour commencer à la premiere valeur.
   // "Object.entries" renvoie un tableau contenant des paires clé-valeur de l'objet "dataset".
-  // "Map" permet de transformer chaque élément de ce tableau en un tableau contenant le nom du pays
-  // et sa valeur de données pour l'année donnée.
-  // Enfin, "sort" trie ce tableau en fonction de la valeur de données et renvoie le tableau trié.
+  // "sort" trie ce tableau en fonction de la valeur de données et renvoie le tableau trié.
   function getData(year) {
     const output = Object.entries(dataset)
       .map((team) => {
@@ -494,8 +448,8 @@ async function grapheCourse() {
   }
 
   (async () => {
-    dataset = await fetch(`json/Ecuries/Points.json`).then((response) =>
-      response.json()
+    dataset = await fetch(`json/Ecuries/` + données + `.json`).then(
+      (response) => response.json()
     );
 
     chart = Highcharts.chart(graphique, {
@@ -508,7 +462,7 @@ async function grapheCourse() {
         backgroundColor: "#1b1b1b",
       },
       title: {
-        text: "Statistiques des écuries de F1 depuis 1958",
+        text: "Evolution des " + données + " des écuries de F1 depuis 1958",
         style: {
           color: "#FF2A2A",
           textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
@@ -680,5 +634,5 @@ export {
   // grapheEcuriesPoint,
   graphePie,
   grapheTest,
-  grapheCourse,
+  grapheRace,
 };
