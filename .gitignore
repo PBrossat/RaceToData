@@ -3,5 +3,5 @@ node_modules
 prettier
 .husky
 py/cache/*
-py/comparaisonPilote.json
-cache/fastf1_http_cache.sqlite
+json/comparaisonPilote/*
+

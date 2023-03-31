@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import json
 import sys
+import os
 
 sysArgv = sys.argv
 nameGP = sysArgv[1]
@@ -24,8 +25,10 @@ nomPilote2 = sysArgv[3]
 # - les differents pneus utilisés par le pilote et leur durée de vie
 # - la vitesse moyenne du pilote durant le gp
 
-fastf1.Cache.enable_cache("cache")
-saison=2022
+
+if not os.path.exists("py/cache"):
+ os.makedirs("py/cache")
+fastf1.Cache.enable_cache("py/cache")
 tabNomGP=[]
 
 
@@ -190,7 +193,10 @@ def get_speed(session, driver):
 
 #fonction de comparaison entre 2 pilotes
 def comparaison(grandPrix, saison, pilote1, pilote2):
-    print("azzzzzzzzzzzzzzzzzzz")
+    #si le fichier json existe deja on sort de la fonction (on ne fait rien)
+    if os.path.exists('json/comparaisonPilote/comparaison'+pilote1+'_'+pilote2+'_'+grandPrix+'.json'):
+        return
+    
     session = fastf1.get_session(saison, grandPrix, 'R')
     #on load la session et les tours avec les telemetries
     session.load()
@@ -247,7 +253,7 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
         }
     
 
-    with open('comparaisonPilote.json', 'w') as f:
+    with open('json/comparaisonPilote/comparaison'+pilote1+'_'+pilote2+'_'+grandPrix+'.json', 'w') as f:
             json.dump([objetPilote1, objetPilote2], f, indent=4)
 
         

@@ -25,6 +25,7 @@ async function recuperationPointsEcuriesPendantLaSaison(nomEcuries) {
 
   let cpt = 0;
 
+  // fonction qui permet de récuperer les points de chaque écuries
   data.MRData.RaceTable.Races.forEach((race) => {
     race.Results.forEach((result) => {
       const constructorId = result.Constructor.constructorId;
@@ -217,25 +218,7 @@ async function grapheEcuriesPoint() {
 
 //------------------------------G2---------------------------------------
 
-async function graphePie() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Titres Ecuries ";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiquePtEcuries";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
+async function graphePie(données, type) {
   const colors = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     colors.push(tabGlobalDataEcuries[i].color);
@@ -248,13 +231,13 @@ async function graphePie() {
       type: "pie",
       backgroundColor: "#1b1b1b",
       marginBottom: 110,
-      height: "55%",
+      height: "40%",
       zoomType: "xy",
       panning: true,
       panKey: "shift",
     },
     title: {
-      text: "Nombre de titres constructeurs par écuries",
+      text: "Nombre de titres " + type + " par écuries",
       style: {
         color: "#FF2A2A",
         textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
@@ -272,18 +255,7 @@ async function graphePie() {
     series: [
       {
         name: "Titres écuries",
-        data: [
-          ["Ferrari", 16],
-          ["RedBull", 5],
-          ["Mercedes", 8],
-          ["Alpine", 2],
-          ["McLaren", 8],
-          ["Alfa Romeo", 0],
-          ["Aston Martin", 0],
-          ["Haas", 0],
-          ["AlphaTauri", 0],
-          ["Williams", 9],
-        ],
+        data: données,
       },
     ],
   });
@@ -291,40 +263,10 @@ async function graphePie() {
 
 //---------------------------------G3-----------------------------------
 
-async function grapheTest() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Statistiques écuries";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiqueVictoires";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
+async function grapheTest(données, annee) {
   const colors = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     colors.push(tabGlobalDataEcuries[i].color);
-  }
-
-  const series = [];
-  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
-    series.push({
-      name: tabGlobalDataEcuries[i].nom,
-      data: [
-        tabGlobalDataEcuries[i].wins_all,
-        tabGlobalDataEcuries[i].pole_all,
-        tabGlobalDataEcuries[i].podiums_all,
-      ],
-    });
   }
 
   const divTest = document.getElementById("GraphiqueVictoires");
@@ -335,7 +277,7 @@ async function grapheTest() {
       backgroundColor: "#1b1b1b",
     },
     title: {
-      text: "Statistiques des écuries de F1 depuis 1950",
+      text: "Statistiques des écuries de F1 depuis " + annee,
 
       style: {
         color: "#FF2A2A",
@@ -387,97 +329,14 @@ async function grapheTest() {
         borderWidth: 0,
       },
     },
-    series: series,
+    series: données,
     colors: colors,
   });
 }
 
-//-----------------------------------JSON-----------------------------------------------------
-
-async function tabPointsEcuriesAllTime(startYear, endYear) {
-  const newJson = {};
-
-  // Parcourir chaque année de startYear à endYear
-  for (let year = startYear; year <= endYear; year++) {
-    // Obtenir les données JSON pour l'année en cours
-    const response = await fetch(
-      `https://ergast.com/api/f1/${year}/constructorStandings.json`
-    );
-    const data = await response.json();
-
-    let cpt = 0;
-
-    // Ajouter une nouvelle entrée au nouveau JSON pour chaque écurie pour chaque année
-    data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings.forEach(
-      (cs) => {
-        const constructorId = cs.Constructor.constructorId;
-        const points = parseInt(cs.points);
-
-        if (!newJson[constructorId]) {
-          newJson[constructorId] = {};
-        }
-
-        // Si c'est la première année, initialiser le total des points de l'écurie
-        if (!newJson[constructorId].totalPoints) {
-          newJson[constructorId].totalPoints = 0;
-        }
-
-        // Ajouter les points de l'écurie pour l'année en cours
-        if (!newJson[constructorId][year]) {
-          newJson[constructorId][year] = 0;
-        }
-        // Ajouter les points de l'écurie pour toutes les années précédentes
-        newJson[constructorId].totalPoints += points;
-        cpt = newJson[constructorId].totalPoints;
-
-        newJson[constructorId][year] += cpt;
-      }
-    );
-  }
-
-  return newJson;
-}
-
 //--------------------------------------G4------------------------------------------------------------
-async function grapheCourse() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
 
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique points all time écuries";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiqueWinsAllTime";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
-  //Creation Bouton
-  const divPlay = document.createElement("div");
-  divPlay.id = "play-controls";
-  divAnalyse.appendChild(divPlay);
-
-  const Btn = document.createElement("button");
-  Btn.id = "play-pause-button";
-  Btn.className = "fa fa_play";
-  Btn.title = "play";
-  Btn.innerHTML = "PLAY";
-  divPlay.appendChild(Btn);
-
-  const year = document.createElement("input");
-  year.id = "play-range";
-  year.value = 1958;
-  year.min = 1958;
-  year.max = 2022;
-  year.type = "range";
-  divPlay.appendChild(year);
-
+async function grapheRace(données, year) {
   const startYear = 1958,
     endYear = 2022,
     btn = document.getElementById("play-pause-button"),
@@ -495,7 +354,7 @@ async function grapheCourse() {
   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
 
   var screenWidth = window.innerWidth;
-  var legendFontSize = "16px";
+  var legendFontSize = "14px";
 
   if (screenWidth <= 600) {
     legendFontSize = "12px"; //Taille de la police pour les écrans de 600px ou moins
@@ -571,17 +430,9 @@ async function grapheCourse() {
     });
   })(Highcharts);
 
-  // renvoie un tableau qui contient deux éléments :
-  // Le premier élément est un tableau contenant le nom du pays ayant la plus grande valeur de données
-  // pour l'année donnée et cette valeur.
-  // Le deuxième élément est un tableau contenant des tableaux pour les n-1 pays ayant les valeurs
-  // de données les plus élevées pour l'année donnée.
-  // Le nombre de pays à inclure est défini par la variable "nbr".
-  // La fonction utilise les méthodes "Object.entries", "map" et "sort" pour traiter l'objet "dataset".
+  // Le nombre de pays à inclure est défini par la variable "nbr" et 0 pour commencer à la premiere valeur.
   // "Object.entries" renvoie un tableau contenant des paires clé-valeur de l'objet "dataset".
-  // "Map" permet de transformer chaque élément de ce tableau en un tableau contenant le nom du pays
-  // et sa valeur de données pour l'année donnée.
-  // Enfin, "sort" trie ce tableau en fonction de la valeur de données et renvoie le tableau trié.
+  // "sort" trie ce tableau en fonction de la valeur de données et renvoie le tableau trié.
   function getData(year) {
     const output = Object.entries(dataset)
       .map((team) => {
@@ -597,8 +448,8 @@ async function grapheCourse() {
   }
 
   (async () => {
-    dataset = await fetch("json/Ecuries/PointsLast.json").then((response) =>
-      response.json()
+    dataset = await fetch(`json/Ecuries/` + données + `.json`).then(
+      (response) => response.json()
     );
 
     chart = Highcharts.chart(graphique, {
@@ -611,7 +462,7 @@ async function grapheCourse() {
         backgroundColor: "#1b1b1b",
       },
       title: {
-        text: "Statistiques des écuries de F1 depuis 1958",
+        text: "Evolution des " + données + " des écuries de F1 depuis 1958",
         style: {
           color: "#FF2A2A",
           textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
@@ -777,11 +628,11 @@ async function grapheCourse() {
     update();
   });
 }
+
 //------------------------------- Export des données -----------------------------
 export {
-  grapheEcuriesPoint,
+  // grapheEcuriesPoint,
   graphePie,
   grapheTest,
-  tabPointsEcuriesAllTime,
-  grapheCourse,
+  grapheRace,
 };
