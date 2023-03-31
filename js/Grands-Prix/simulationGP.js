@@ -33,11 +33,11 @@ function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
   divFormulaire.id = "divFormulaire";
   divParent.appendChild(divFormulaire);
 
-  //creation du titre du formulaire
-  const titreFormulaire = document.createElement("h2");
-  titreFormulaire.textContent =
-    "Comparez les meilleurs tours de vos pilotes préférés !";
-  divFormulaire.appendChild(titreFormulaire);
+  // //creation du titre du formulaire
+  // const titreFormulaire = document.createElement("h2");
+  // titreFormulaire.textContent =
+  //   "Comparez les meilleurs tours de vos pilotes préférés !";
+  // divFormulaire.appendChild(titreFormulaire);
 
   //création de la balise form
   const formulaire = document.createElement("form");

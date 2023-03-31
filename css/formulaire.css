@@ -1,17 +1,24 @@
 /*---------------- Style relatif au formulaire -------------*/
 
 #formulaire {
-  width: 20%;
+  width: 40%;
   margin-bottom: 2%;
   position: relative;
   border-radius: 0.5em;
-  float: left;
   padding-top: 10%;
   height: 100%;
   text-align: center;
+}
+
+#divFormulaire {
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.3),
     0 -8px 6px -6px rgba(0, 0, 0, 0.3), 8px 0 6px -6px rgba(0, 0, 0, 0.3),
     -8px 0 6px -6px rgba(0, 0, 0, 0.3), 0 0 16px rgba(255, 255, 255, 0.1);
+}
+
+.divGraphique #formulaire {
+  float: left;
+  width: 20%;
 }
 
 #formulaire::after {
@@ -59,13 +66,13 @@
   font-size: 1.1em;
   color: white;
   line-height: 1.2;
-  position: absolute;
+  position: relative;
   top: 0;
   padding: 10px;
 }
 
-.divGraphique #divFormulaire hr {
-  position: absolute;
+#divFormulaire hr {
+  position: relative;
   bottom: 0;
   top: 20%;
   left: 50%;
@@ -76,12 +83,12 @@
   border: none;
 }
 
-.divGraphique select,
-.divGraphique .selecteur select + select {
+select,
+.selecteur select + select {
   margin-bottom: 7%;
 }
 
-.divGraphique #boutonSubmit {
+#boutonSubmit {
   width: 60%;
   height: 3em;
   margin-bottom: 10px;
