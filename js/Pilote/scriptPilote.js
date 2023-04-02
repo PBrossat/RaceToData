@@ -7,6 +7,7 @@ import { mapPilote } from "./mapPilote.js";
 import {
   creationDivFormulaire,
   gestionFormulairePilote,
+  creationSlider,
 } from "./comparaisonPilotes.js";
 // import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
 
@@ -32,6 +33,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
   gestionFormulairePilote();
+  creationSlider();
 });
 
 //------------------------------ Création des containers ----------------
