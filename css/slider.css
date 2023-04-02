@@ -1,0 +1,66 @@
+#slider {
+  height: 500px;
+  width: 70%;
+  float: right;
+  position: relative;
+}
+
+.sliderNav {
+  position: absolute;
+}
+
+.sliderNav__button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  top: 50%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.sliderNav__button:hover {
+  transform: scale(1.1);
+}
+
+.sliderNav__button svg {
+  width: 50px;
+  height: 50px;
+}
+
+#boutonDroite {
+  right: 0px;
+}
+#boutonGauche {
+  left: 0px;
+}
+
+.sliderNav__button svg path {
+  stroke: #fff;
+}
+
+.sliderContent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  border-radius: 1em;
+}
+
+.slider__item {
+  height: 100%;
+  min-width: 100%;
+}
+
+#timeSlider {
+  background-color: red;
+  height: 100%;
+}
+
+#positionSlider {
+  background-color: green;
+  height: 100%;
+}
+#pneuSlider {
+  background-color: yellow;
+  height: 100%;
+}
