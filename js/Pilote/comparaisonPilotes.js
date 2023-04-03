@@ -1,7 +1,7 @@
 //import des données des pilotes
 import { tabGlobalDataPilotes } from "./scriptPilote.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
-import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
+//import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
 
 async function recupererInfosPilotesComparaison(pilote1, pilote2, gp) {
   let response = await fetch(
@@ -19,12 +19,12 @@ async function recupererInfosPilotesComparaison(pilote1, pilote2, gp) {
 
 async function gestionFormulairePilote() {
   //fonction récupérée dans js/Grands-Prix/simulationGP.js
-  creationDivFormulaire(
-    document.querySelector(".divGraphique"),
-    tabGlobalDataPilotes,
-    tabGlobalDataGP,
-    "Comparaison !"
-  );
+  // creationDivFormulaire(
+  //   document.querySelector(".divGraphique"),
+  //   tabGlobalDataPilotes,
+  //   tabGlobalDataGP,
+  //   "Comparaison !"
+  // );
   const formulaire = document.getElementById("formulaire");
   formulaire.addEventListener("submit", async (e) => {
     console.log("submit");
@@ -36,14 +36,14 @@ async function gestionFormulairePilote() {
     //désactiver la soumission du formulaire
     document.getElementById("boutonSubmit").disabled = true;
     // fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2022&nomPilote1=LEC&nomPilote2=VER")
-    fetch(
-      "http://localhost:3000/comparaisonPilote?nomGP=" +
-        gp +
-        "&saison=2022&nomPilote1=" +
-        pilote1 +
-        "&nomPilote2=" +
-        pilote2
+    console.log("je suis là");
+    const response = await fetch(
+      `http://localhost:3000/comparaisonPilote?nomGP=${gp}&saison=2022&nomPilote1=${pilote1}&nomPilote2=${pilote2}`
     );
+
+    const data = await response.json();
+    console.log(data);
+    return data;
   });
 }
 
@@ -158,4 +158,4 @@ function previous() {
   }
 }
 
-export { creationDivFormulaire, gestionFormulairePilote, creationSlider };
+export { gestionFormulairePilote, creationSlider };
