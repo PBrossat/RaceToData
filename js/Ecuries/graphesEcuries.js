@@ -3,220 +3,7 @@ import { tabGlobalDataEcuries } from "./scriptEcuries.js";
 
 //--------------------------------GRAPHES_Highcharts---------------------------------------------
 
-async function recuperationPointsEcuriesPendantLaSaison(nomEcuries) {
-  let nomEcuriesMinuscule = nomEcuries.toLowerCase();
-  // Cas particuliers
-  if (nomEcuriesMinuscule === "redbull") {
-    nomEcuriesMinuscule = "red_bull";
-  }
-  if (nomEcuriesMinuscule === "aston martin") {
-    nomEcuriesMinuscule = "aston_martin";
-  }
-  if (nomEcuriesMinuscule === "alfa romeo") {
-    nomEcuriesMinuscule = "alfa";
-  }
-
-  const pointsEcuries = [];
-
-  const response = await fetch(
-    `https://ergast.com/api/f1/2022/Constructors/${nomEcuriesMinuscule}/results.json?limit=100`
-  );
-  const data = await response.json();
-
-  let cpt = 0;
-
-  // fonction qui permet de récuperer les points de chaque écuries
-  data.MRData.RaceTable.Races.forEach((race) => {
-    race.Results.forEach((result) => {
-      const constructorId = result.Constructor.constructorId;
-      const points = parseInt(result.points);
-      const round = race.round;
-      // console.log("pts vide: ", pointsEcuries[constructorId]);
-
-      if (!pointsEcuries[constructorId]) {
-        pointsEcuries[constructorId] = [];
-      }
-
-      if (!pointsEcuries[constructorId][round]) {
-        pointsEcuries[constructorId][round] = cpt;
-      }
-
-      pointsEcuries[constructorId][round] += points;
-      cpt = pointsEcuries[constructorId][round];
-
-      // console.log("test");
-      // console.log("round: ", round);
-      // console.log("points: ", points);
-      // console.log("team: ", constructorId);
-      // console.log("pts team: ", pointsEcuries[constructorId][round]);
-      // ça marche mais impossible de l'afficher
-    });
-  });
-  // console.log(pointsEcuries);
-
-  return pointsEcuries;
-}
-
-//Permet de récuperer les noms des Gp
-async function recuperationGPsaison() {
-  const url = `https://ergast.com/api/f1/2022/races.json`;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const grandPrix = data.MRData.RaceTable.Races.map((race) => race.raceName);
-
-  //remplace "Grand Prix" par "GP"
-  for (let i = 0; i < grandPrix.length; i++) {
-    grandPrix[i] = grandPrix[i].replace("Grand Prix", "GP");
-  }
-  return grandPrix;
-}
-
-//------------------------------G1--------------------------------------
-
-//Création d'un graphe
-async function grapheEcuriesPoint() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Points Moyens écuries par GP ";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiquePtMoyen";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
-  //création loader
-  const chargement = document.createElement("img");
-  chargement.src = "../data/white_loader.svg";
-  divParent.appendChild(chargement);
-
-  // permet de creer un tableau de tableau de points selon le nom des pilote et l'année passée en paramatre
-  const tabDataPointsEcuries = [];
-  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
-    tabDataPointsEcuries[i] = await recuperationPointsEcuriesPendantLaSaison(
-      tabGlobalDataEcuries[i].nom
-    );
-  }
-
-  //Suppression du loader
-  chargement.parentNode.removeChild(chargement);
-
-  //Tableau avec le noms des GP de l'année
-  const pays = await recuperationGPsaison();
-
-  //permet de créer chaque lignes RPZ points/pilote
-  let serie = [];
-  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
-    serie.push({
-      name: tabGlobalDataEcuries[i].nom,
-      data: tabDataPointsEcuries[i],
-      color: tabGlobalDataEcuries[i].color,
-      animation: {
-        duration: 8000, //en ms
-      },
-    });
-    console.log(serie);
-  }
-  // series: [
-  //   {
-  //     name: "Tokyo",
-  //     data: [5.2, 5.7, 8.7, 13.9, 18.2, 21.4, 25.0, 22.8, 17.5, 12.1, 7.6],
-  //   },
-  //   {
-  //     name: "Bergen",
-  //     data: [1.6, 3.3, 5.9, 10.5, 13.5, 14.5, 14.4, 11.5, 8.7, 4.7, 2.6],
-  //   },
-  // ];
-
-  const graphique = document.getElementById("GraphiquePtMoyen");
-
-  const styleText = { color: "#FFFFFF", fontWeight: "bold" };
-
-  var screenWidth = window.innerWidth;
-  var legendFontSize = "16px";
-
-  if (screenWidth <= 600) {
-    legendFontSize = "12px"; //Taille de la police pour les écrans de 600px ou moins
-  } else if (screenWidth <= 1024) {
-    legendFontSize = "14px"; //Taille de la police pour les écrans de 1024px ou moins
-  }
-
-  Highcharts.chart(graphique, {
-    chart: {
-      type: "spline",
-      backgroundColor: "#1b1b1b",
-      marginBottom: 110,
-      height: "55%",
-      zoomType: "xy",
-      panning: true,
-      panKey: "shift",
-    },
-    title: {
-      text: "Evolution des points des pilotes de F1 durant la saison 2022",
-
-      style: {
-        color: "#FF2A2A",
-        textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
-        fontWeight: "bold",
-        fontSize: "30px",
-      },
-    },
-    yAxis: {
-      gridLineWidth: 0,
-      tickInterval: 20,
-      startOnTick: false,
-      endOnTick: false,
-      labels: {
-        style: styleText,
-      },
-      title: {
-        text: null,
-      },
-    },
-    xAxis: {
-      offset: 10,
-      labels: {
-        style: styleText,
-        rotation: -45,
-      },
-      categories: pays,
-    },
-    legend: {
-      align: "right",
-      layout: "proximate",
-      itemStyle: {
-        color: "#FFFFFF",
-        fontWeight: "bold",
-        fontSize: legendFontSize,
-      },
-      width: "12%",
-    },
-    plotOptions: {
-      series: {
-        label: {
-          connectorAllowed: false,
-        },
-        marker: {
-          enabled: false,
-          symbol: "diamond",
-        },
-      },
-    },
-    series: serie,
-  });
-}
-// tous marche mais ça s'affiche pas j'vais péter mon crâne
-
-//------------------------------G2---------------------------------------
+//------------------------------G1---------------------------------------
 
 async function graphePie(données, type) {
   const colors = [];
@@ -261,20 +48,21 @@ async function graphePie(données, type) {
   });
 }
 
-//---------------------------------G3-----------------------------------
+//---------------------------------G2-----------------------------------
 
-async function grapheTest(données, annee) {
+async function grapheMultipleBars(données, annee) {
   const colors = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     colors.push(tabGlobalDataEcuries[i].color);
   }
 
-  const divTest = document.getElementById("GraphiqueVictoires");
+  const graphique = document.getElementById("GraphiqueVictoires");
 
-  Highcharts.chart(divTest, {
+  Highcharts.chart(graphique, {
     chart: {
       type: "column",
       backgroundColor: "#1b1b1b",
+      height: "35%",
     },
     title: {
       text: "Statistiques des écuries de F1 depuis " + annee,
@@ -334,7 +122,7 @@ async function grapheTest(données, annee) {
   });
 }
 
-//--------------------------------------G4------------------------------------------------------------
+//--------------------------------------G3------------------------------------------------------------
 
 async function grapheRace(données, year) {
   const startYear = 1958,
@@ -354,7 +142,7 @@ async function grapheRace(données, year) {
   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
 
   var screenWidth = window.innerWidth;
-  var legendFontSize = "14px";
+  var legendFontSize;
 
   if (screenWidth <= 600) {
     legendFontSize = "12px"; //Taille de la police pour les écrans de 600px ou moins
@@ -457,7 +245,7 @@ async function grapheRace(données, year) {
         animation: {
           duration: 500,
         },
-        height: "35%",
+        height: "40%",
         marginRight: 50,
         backgroundColor: "#1b1b1b",
       },
@@ -630,9 +418,205 @@ async function grapheRace(données, year) {
 }
 
 //------------------------------- Export des données -----------------------------
-export {
-  // grapheEcuriesPoint,
-  graphePie,
-  grapheTest,
-  grapheRace,
-};
+export { graphePie, grapheMultipleBars, grapheRace };
+
+//------------------------------- Fonctions faites mais non utilisées -----------------------------
+
+// async function recuperationPointsEcuriesPendantLaSaison(nomEcuries) {
+//   let nomEcuriesMinuscule = nomEcuries.toLowerCase();
+//   Cas particuliers
+//   if (nomEcuriesMinuscule === "redbull") {
+//     nomEcuriesMinuscule = "red_bull";
+//   }
+//   if (nomEcuriesMinuscule === "aston martin") {
+//     nomEcuriesMinuscule = "aston_martin";
+//   }
+//   if (nomEcuriesMinuscule === "alfa romeo") {
+//     nomEcuriesMinuscule = "alfa";
+//   }
+
+//   const pointsEcuries = [];
+
+//   const response = await fetch(
+//     `https://ergast.com/api/f1/2022/Constructors/${nomEcuriesMinuscule}/results.json?limit=100`
+//   );
+//   const data = await response.json();
+
+//   let cpt = 0;
+
+//   fonction qui permet de récuperer les points de chaque écuries
+//   data.MRData.RaceTable.Races.forEach((race) => {
+//     race.Results.forEach((result) => {
+//       const constructorId = result.Constructor.constructorId;
+//       const points = parseInt(result.points);
+//       const round = race.round;
+//       console.log("pts vide: ", pointsEcuries[constructorId]);
+
+//       if (!pointsEcuries[constructorId]) {
+//         pointsEcuries[constructorId] = [];
+//       }
+
+//       if (!pointsEcuries[constructorId][round]) {
+//         pointsEcuries[constructorId][round] = cpt;
+//       }
+
+//       pointsEcuries[constructorId][round] += points;
+//       cpt = pointsEcuries[constructorId][round];
+
+//       console.log("test");
+//       console.log("round: ", round);
+//       console.log("points: ", points);
+//       console.log("team: ", constructorId);
+//       console.log("pts team: ", pointsEcuries[constructorId][round]);
+//     });
+//   });
+//   console.log(pointsEcuries);
+
+//   return pointsEcuries;
+// }
+
+// Permet de récuperer les noms des Gp
+// async function recuperationGPsaison() {
+//   const url = `https://ergast.com/api/f1/2022/races.json`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+
+//   const grandPrix = data.MRData.RaceTable.Races.map((race) => race.raceName);
+
+//   remplace "Grand Prix" par "GP"
+//   for (let i = 0; i < grandPrix.length; i++) {
+//     grandPrix[i] = grandPrix[i].replace("Grand Prix", "GP");
+//   }
+//   return grandPrix;
+// }
+
+//Création d'un graphe
+// async function grapheEcuriesPoint() {
+//Création container
+//   const divParent = document.querySelector(".divGraphique");
+//   const divAnalyse = document.createElement("div");
+//   divAnalyse.id = "divAnalysePointsPilotes";
+//   divParent.appendChild(divAnalyse);
+//   divAnalyse.innerHTML = "";
+
+//Création Titre
+//   const Titre = document.createElement("h1");
+//   divAnalyse.appendChild(Titre);
+//   Titre.innerHTML = "Graphique Points Moyens écuries par GP ";
+
+//Creation div où se trouve le graphique
+//   const divGraphique = document.createElement("div");
+//   divGraphique.id = "GraphiquePtMoyen";
+//   divGraphique.className = "Graphique";
+//   divAnalyse.appendChild(divGraphique);
+
+//création loader
+//   const chargement = document.createElement("img");
+//   chargement.src = "../data/white_loader.svg";
+//   divParent.appendChild(chargement);
+
+// permet de creer un tableau de tableau de points selon le nom des pilote et l'année passée en paramatre
+//   const tabDataPointsEcuries = [];
+//   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
+//     tabDataPointsEcuries[i] = await recuperationPointsEcuriesPendantLaSaison(
+//       tabGlobalDataEcuries[i].nom
+//     );
+//   }
+
+//Suppression du loader
+//   chargement.parentNode.removeChild(chargement);
+
+//Tableau avec le noms des GP de l'année
+//   const pays = await recuperationGPsaison();
+
+//permet de créer chaque lignes RPZ points/pilote
+//   let serie = [];
+//   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
+//     serie.push({
+//       name: tabGlobalDataEcuries[i].nom,
+//       data: tabDataPointsEcuries[i],
+//       color: tabGlobalDataEcuries[i].color,
+//       animation: {
+//         duration: 8000, //en ms
+//       },
+//     });
+//     console.log(serie);
+//   }
+
+//   const graphique = document.getElementById("GraphiquePtMoyen");
+
+//   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
+
+//   var screenWidth = window.innerWidth;
+//   var legendFontSize = "16px";
+
+//   if (screenWidth <= 600) {
+//     legendFontSize = "12px"; //Taille de la police pour les écrans de 600px ou moins
+//   } else if (screenWidth <= 1024) {
+//     legendFontSize = "14px"; //Taille de la police pour les écrans de 1024px ou moins
+//   }
+
+//   Highcharts.chart(graphique, {
+//     chart: {
+//       type: "spline",
+//       backgroundColor: "#1b1b1b",
+//       marginBottom: 110,
+//       height: "55%",
+//       zoomType: "xy",
+//       panning: true,
+//       panKey: "shift",
+//     },
+//     title: {
+//       text: "Evolution des points des pilotes de F1 durant la saison 2022",
+
+//       style: {
+//         color: "#FF2A2A",
+//         textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
+//         fontWeight: "bold",
+//         fontSize: "30px",
+//       },
+//     },
+//     yAxis: {
+//       gridLineWidth: 0,
+//       tickInterval: 20,
+//       startOnTick: false,
+//       endOnTick: false,
+//       labels: {
+//         style: styleText,
+//       },
+//       title: {
+//         text: null,
+//       },
+//     },
+//     xAxis: {
+//       offset: 10,
+//       labels: {
+//         style: styleText,
+//         rotation: -45,
+//       },
+//       categories: pays,
+//     },
+//     legend: {
+//       align: "right",
+//       layout: "proximate",
+//       itemStyle: {
+//         color: "#FFFFFF",
+//         fontWeight: "bold",
+//         fontSize: legendFontSize,
+//       },
+//       width: "12%",
+//     },
+//     plotOptions: {
+//       series: {
+//         label: {
+//           connectorAllowed: false,
+//         },
+//         marker: {
+//           enabled: false,
+//           symbol: "diamond",
+//         },
+//       },
+//     },
+//     series: serie,
+//   });
+// }

@@ -1,10 +1,5 @@
 //----------------------------- Import des fonctions ----------------------------
-import {
-  // grapheEcuriesPoint,
-  graphePie,
-  grapheTest,
-  grapheRace,
-} from "./graphesEcuries.js";
+import { graphePie, grapheMultipleBars, grapheRace } from "./graphesEcuries.js";
 // import { main } from "./creationJson.js";
 import { mapEcuries } from "./mapEcuries.js";
 
@@ -55,96 +50,6 @@ function creationNouvelleDiv() {
   StatsPilotes.appendChild(nouvelleDiv);
 }
 
-//------------------- Création de la div pour le graphique de stats -------------------
-
-function creationDivMultipleBars() {
-  //Création container
-  const divParent = document.querySelector(".divGraphique");
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Statistiques écuries";
-
-  //Creation div où se trouve le graphique
-  const divGraphique = document.createElement("div");
-  divGraphique.id = "GraphiqueVictoires";
-  divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
-
-  const StatsAll = document.createElement("input");
-  StatsAll.id = "inputChoix";
-  StatsAll.type = "radio";
-  StatsAll.name = "option";
-  StatsAll.checked = true;
-  divAnalyse.appendChild(StatsAll);
-
-  const labelStatsAll = document.createElement("label");
-  labelStatsAll.id = "labelChoix";
-  labelStatsAll.innerHTML = "Statistiques depuis 1958 par écuries";
-  divAnalyse.appendChild(labelStatsAll);
-
-  const Stats = document.createElement("input");
-  Stats.id = "inputChoix";
-  Stats.type = "radio";
-  Stats.name = "option";
-  divAnalyse.appendChild(Stats);
-
-  const labelStats = document.createElement("label");
-  labelStats.id = "labelChoix";
-  labelStats.innerHTML = "Satistiques saison 2022 par écuries";
-  divAnalyse.appendChild(labelStats);
-
-  const buttonMettreAJour = document.createElement("button");
-  buttonMettreAJour.className = "buttonMettreAJour";
-  buttonMettreAJour.innerHTML = "Mettre à jour";
-  divAnalyse.appendChild(buttonMettreAJour);
-
-  const seriesAll = [];
-  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
-    seriesAll.push({
-      name: tabGlobalDataEcuries[i].nom,
-      data: [
-        tabGlobalDataEcuries[i].wins_all,
-        tabGlobalDataEcuries[i].pole_all,
-        tabGlobalDataEcuries[i].podiums_all,
-      ],
-    });
-  }
-
-  const series = [];
-  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
-    series.push({
-      name: tabGlobalDataEcuries[i].nom,
-      data: [
-        tabGlobalDataEcuries[i].wins,
-        tabGlobalDataEcuries[i].pole,
-        tabGlobalDataEcuries[i].podium,
-      ],
-    });
-  }
-
-  let data = seriesAll;
-  let annee = 1958;
-
-  grapheTest(data, annee);
-
-  buttonMettreAJour.addEventListener("click", function () {
-    if (StatsAll.checked) {
-      data = seriesAll;
-      annee = 1958;
-    } else if (Stats.checked) {
-      data = series;
-      annee = 2022;
-    }
-    grapheTest(data, annee);
-  });
-}
-
 //------------------- Création de la div pour le graphique de titres -------------------
 function creationDivPie() {
   //Création container
@@ -153,6 +58,13 @@ function creationDivPie() {
   divAnalyse.id = "divAnalysePointsPilotes";
   divParent.appendChild(divAnalyse);
   divAnalyse.innerHTML = "";
+
+  //Création Texte Explicatif
+  const texteExplicatif = document.createElement("div");
+  divAnalyse.appendChild(texteExplicatif);
+  texteExplicatif.className = "presentation";
+  texteExplicatif.innerHTML =
+    "La Formule 1 est une compétition de course automobile de haut niveau où les équipes construisent des voitures de course pour concourir. Les titres de pilote et de constructeur sont décernés à la fin de chaque saison pour récompenser les performances des pilotes et des équipes. Le titre de champion du monde des pilotes est attribué au pilote ayant remporté le plus grand nombre de points lors de la saison, tandis que le titre de champion du monde des constructeurs est décerné à l'équipe ayant accumulé le plus de points. C'est pour cela que j'ai voulu illustré cela avec un graphique donut pour illustrer le prestige des différentes équipes.";
 
   //Création Titre
   const Titre = document.createElement("h1");
@@ -227,6 +139,103 @@ function creationDivPie() {
   });
 }
 
+//------------------- Création de la div pour le graphique de stats -------------------
+
+function creationDivMultipleBars() {
+  //Création container
+  const divParent = document.querySelector(".divGraphique");
+  const divAnalyse = document.createElement("div");
+  divAnalyse.id = "divAnalysePointsPilotes";
+  divParent.appendChild(divAnalyse);
+  divAnalyse.innerHTML = "";
+
+  //Création Texte Explicatif
+  const texteExplicatif = document.createElement("div");
+  divAnalyse.appendChild(texteExplicatif);
+  texteExplicatif.className = "presentation";
+  texteExplicatif.innerHTML =
+    "Les victoires, les poles positions et les podiums sont des éléments clés de la compétition en Formule 1. Les victoires récompensent la performance du pilote lors d'une course, tandis que les poles positions récompensent la performance lors des qualifications. Les podiums récompensent les pilotes qui ont terminé parmi les trois premiers à la fin d'une course. Un graphique barre peut être utilisé pour comparer le nombre de victoires, de poles positions et de podiums entre les différentes équipes, permettant ainsi de visualiser leur performance au fil des saisons.";
+
+  //Création Titre
+  const Titre = document.createElement("h1");
+  divAnalyse.appendChild(Titre);
+  Titre.innerHTML = "Graphique Statistiques écuries";
+
+  //Creation div où se trouve le graphique
+  const divGraphique = document.createElement("div");
+  divGraphique.id = "GraphiqueVictoires";
+  divGraphique.className = "Graphique";
+  divAnalyse.appendChild(divGraphique);
+
+  const StatsAll = document.createElement("input");
+  StatsAll.id = "inputChoix";
+  StatsAll.type = "radio";
+  StatsAll.name = "option";
+  StatsAll.checked = true;
+  divAnalyse.appendChild(StatsAll);
+
+  const labelStatsAll = document.createElement("label");
+  labelStatsAll.id = "labelChoix";
+  labelStatsAll.innerHTML = "Statistiques depuis 1958 par écuries";
+  divAnalyse.appendChild(labelStatsAll);
+
+  const Stats = document.createElement("input");
+  Stats.id = "inputChoix";
+  Stats.type = "radio";
+  Stats.name = "option";
+  divAnalyse.appendChild(Stats);
+
+  const labelStats = document.createElement("label");
+  labelStats.id = "labelChoix";
+  labelStats.innerHTML = "Satistiques saison 2022 par écuries";
+  divAnalyse.appendChild(labelStats);
+
+  const buttonMettreAJour = document.createElement("button");
+  buttonMettreAJour.className = "buttonMettreAJour";
+  buttonMettreAJour.innerHTML = "Mettre à jour";
+  divAnalyse.appendChild(buttonMettreAJour);
+
+  const seriesAll = [];
+  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
+    seriesAll.push({
+      name: tabGlobalDataEcuries[i].nom,
+      data: [
+        tabGlobalDataEcuries[i].wins_all,
+        tabGlobalDataEcuries[i].pole_all,
+        tabGlobalDataEcuries[i].podiums_all,
+      ],
+    });
+  }
+
+  const series = [];
+  for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
+    series.push({
+      name: tabGlobalDataEcuries[i].nom,
+      data: [
+        tabGlobalDataEcuries[i].wins,
+        tabGlobalDataEcuries[i].pole,
+        tabGlobalDataEcuries[i].podium,
+      ],
+    });
+  }
+
+  let data = seriesAll;
+  let annee = 1958;
+
+  grapheMultipleBars(data, annee);
+
+  buttonMettreAJour.addEventListener("click", function () {
+    if (StatsAll.checked) {
+      data = seriesAll;
+      annee = 1958;
+    } else if (Stats.checked) {
+      data = series;
+      annee = 2022;
+    }
+    grapheMultipleBars(data, annee);
+  });
+}
+
 //------------------- Création de la div pour le graphique race -------------------
 
 function creationDivRace() {
@@ -238,6 +247,13 @@ function creationDivRace() {
   divAnalyse.innerHTML = "";
 
   let data = "Points";
+
+  //Création Texte Explicatif
+  const texteExplicatif = document.createElement("div");
+  divAnalyse.appendChild(texteExplicatif);
+  texteExplicatif.className = "presentation";
+  texteExplicatif.innerHTML =
+    "Les points sont la monnaie de la Formule 1 et chaque écurie cherchent à en accumuler le plus possible au cours de la saison. Les points sont attribués en fonction de la position de chaque pilote à la fin de chaque course, avec des points supplémentaires accordés pour la pole position et le meilleur tour en course. Ce graphique permet de visualiser le nombre de points accumulés par chaque écurie tout au long des saisons depuis leur création, permettant ainsi de suivre leur progression et leur performance relative par rapport à leurs concurrents.";
 
   //Création Titre
   const Titre = document.createElement("h1");
