@@ -5,11 +5,11 @@ import {
 } from "./graphesPilote.js";
 import { mapPilote } from "./mapPilote.js";
 import {
-  creationDivFormulaire,
   gestionFormulairePilote,
   creationSlider,
 } from "./comparaisonPilotes.js";
-// import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
+import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
+import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
 
 //----------------------------Récuperation Infos Pilotes depuis fichier json-------------
 async function recupererInfosPilotes() {
@@ -32,6 +32,12 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   creationNouvelleDiv();
   creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
+  creationDivFormulaire(
+    document.querySelector(".divGraphique"),
+    tabGlobalDataPilotes,
+    tabGlobalDataGP,
+    "Comparaison !"
+  );
   gestionFormulairePilote();
   creationSlider();
 });

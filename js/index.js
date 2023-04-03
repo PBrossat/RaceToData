@@ -43,7 +43,7 @@ app.get("/infosGpJSON", (_, res) => {
 });
 
 //fetch("http://localhost:3000/dataPython?namePilote=LEC&nameGP=Monaco&nameData=coordX")
-app.get("/dataPython", (req, res) => {
+app.get("/dataPython", async (req, res) => {
   //récupération des données du formulaire
   const namePilote = req.query.namePilote;
   const nameGP = req.query.nameGP;
@@ -67,7 +67,7 @@ app.get("/dataPython", (req, res) => {
 
 //run du script python dans py/comparaisonPilote.py
 //fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2021&nomPilote1=LEC&nomPilote2=VER")
-app.get("/comparaisonPilote", (req, res) => {
+app.get("/comparaisonPilote", async (req, res) => {
   const nomGP = req.query.nomGP;
   const nomPilote1 = req.query.nomPilote1;
   const nomPilote2 = req.query.nomPilote2;
@@ -75,8 +75,82 @@ app.get("/comparaisonPilote", (req, res) => {
     scriptPath: "py",
     args: [nomGP, nomPilote1, nomPilote2],
   };
-  PythonShell.run("comparaisonPilote.py", options);
-  res.sendStatus(200); //envoie de la réponse au client
+  const pyshell = new PythonShell("comparaisonPilote.py", options);
+
+  pyshell.on("message", (message) => {
+    console.log(message);
+  });
+
+  pyshell.end((err) => {
+    if (err) {
+      console.log("erreur python");
+      res.send(err);
+    } else {
+      fs.readFile(
+        "./json/comparaisonPilote/comparaison" +
+          nomPilote1 +
+          "_" +
+          nomPilote2 +
+          "_" +
+          nomGP +
+          ".json",
+        "utf-8",
+        (error, data) => {
+          if (error) {
+            console.log("erreur json");
+            res.send(error);
+          } else {
+            res.send(JSON.parse(data));
+          }
+        }
+      );
+    }
+  });
+});
+
+app.get("/dataDriverComparaison", (req, res) => {
+  const nomGP = req.query.nomGP;
+  const nomPilote1 = req.query.nomPilote1;
+  const nomPilote2 = req.query.nomPilote2;
+
+  //tant que ./json/comparaisonPilote/comparaison" +
+  // nomPilote1 +
+  // "_" +
+  // nomPilote2 +
+  // "_" +
+  // nomGP +
+  // ".json n'est pas créé, on attend
+  while (
+    !fs.existsSync(
+      "./json/comparaisonPilote/comparaison" +
+        nomPilote1 +
+        "_" +
+        nomPilote2 +
+        "_" +
+        nomGP +
+        ".json"
+    )
+  ) {
+    console.log("wait");
+  }
+  fs.readFile(
+    "./json/comparaisonPilote/comparaison" +
+      nomPilote1 +
+      "_" +
+      nomPilote2 +
+      "_" +
+      nomGP +
+      ".json",
+    "utf-8",
+    (error, data) => {
+      if (error) {
+        console.log(error);
+        res.send(error);
+      } else {
+        res.send(JSON.parse(data));
+      }
+    }
+  );
 });
 
 //fetch("http://localhost:3001/dataDriver?namePilote=LEC&nameGP=Monaco")
