@@ -10,6 +10,8 @@ import pandas as pd
 import json
 import sys
 import os
+import time
+
 
 sysArgv = sys.argv
 nameGP = sysArgv[1]
@@ -257,6 +259,8 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
 
     with open('json/comparaisonPilote/comparaison'+pilote1+'_'+pilote2+'_'+grandPrix+'.json', 'w') as f:
             json.dump([objetPilote1, objetPilote2], f, indent=4)
+
+    
 
         
 comparaison(nameGP, saison, nomPilote1, nomPilote2)
