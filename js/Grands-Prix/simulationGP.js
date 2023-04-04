@@ -26,8 +26,21 @@ class Driver {
     };
   }
 }
+//------------------------------------Récupération des données des pilotes et des Grand Prix------------------------------------------------------------
+async function recupererInfosSimulationGP(driver1, driver2, gp) {
+  const data = await fetch(
+    "/dataSimulationGP?namePilote1=" +
+      driver1 +
+      "&namePilote2=" +
+      driver2 +
+      "&nameGP=" +
+      gp
+  );
+  const dataJSON = await data.json();
+  return dataJSON;
+}
 
-//------------------------------------Création du formulaire de simulation
+//------------------------------------Création du formulaire de simulation------------------------------------------------------------
 function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
   const divFormulaire = document.createElement("div");
   divFormulaire.id = "divFormulaire";
@@ -107,7 +120,7 @@ function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
   }
 }
 
-//--------------------------------------------Gestion du formulaire
+//--------------------------------------------Gestion du formulaire------------------------------------------------------------
 export function gestionFormulaireGP() {
   creationDivFormulaire(
     document.querySelector("#stats"),
@@ -127,39 +140,69 @@ export function gestionFormulaireGP() {
     //désactiver la soumission du formulaire
     document.getElementById("boutonSubmit").disabled = true;
     afficherSimulationGP();
-    fetch("/dataDriver?namePilote=" + driver1 + "&nameGP=" + gp)
-      .then((response) => response.json())
-      .then((data) => {
-        for (let i = 0; i < data.length; i++) {
-          data[i].positionX = xScale(data[i].positionX);
-          data[i].positionY = yScale(data[i].positionY);
-        }
-        let Driver1 = new Driver("Charles", "Leclerc", "LEC", "Ferrari"); //TODO recup ces données via le formulaire / tableau de pilotes
-        animateRace(data, "car1", "compteur1", Driver1);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // fetch("/dataDriver?namePilote=" + driver1 + "&nameGP=" + gp)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     for (let i = 0; i < data.length; i++) {
+    //       data[i].positionX = xScale(data[i].positionX);
+    //       data[i].positionY = yScale(data[i].positionY);
+    //     }
+    //     let Driver1 = new Driver("Charles", "Leclerc", "LEC", "Ferrari"); //TODO recup ces données via le formulaire / tableau de pilotes
+    //     animateRace(data, "car1", "compteur1", Driver1);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
 
-    fetch("/dataDriver?namePilote=" + driver2 + "&nameGP=" + gp)
-      .then((response) => response.json())
-      .then((data) => {
-        for (let i = 0; i < data.length; i++) {
-          data[i].positionX = xScale(data[i].positionX);
-          data[i].positionY = yScale(data[i].positionY);
+    // fetch("/dataDriver?namePilote=" + driver2 + "&nameGP=" + gp)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     for (let i = 0; i < data.length; i++) {
+    //       data[i].positionX = xScale(data[i].positionX);
+    //       data[i].positionY = yScale(data[i].positionY);
+    //     }
+    //     let Driver2 = new Driver("Kevin", "Magnussen", "MAG", "Haas"); //TODO recup ces données via le formulaire / tableau de pilotes
+    //     animateRace(data, "car2", "compteur2", Driver2);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+    recupererInfosSimulationGP(driver1, driver2, gp).then(
+      (tabInfosSimulationGP) => {
+        console.log(tabInfosSimulationGP[0]["coordX"]);
+        //Mettre à l'échelle les coordonnées des pilotes
+        for (let i = 0; i < tabInfosSimulationGP[0]["coordX"].length; i++) {
+          tabInfosSimulationGP[0]["coordX"][i] = xScale(
+            tabInfosSimulationGP[0]["coordX"][i]
+          );
+          tabInfosSimulationGP[0]["coordY"][i] = yScale(
+            tabInfosSimulationGP[0]["coordY"][i]
+          );
         }
-        let Driver2 = new Driver("Kevin", "Magnussen", "MAG", "Haas"); //TODO recup ces données via le formulaire / tableau de pilotes
-        animateRace(data, "car2", "compteur2", Driver2);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+        //Les deux pilotes n'ont pas forcément la même longueur de tableau
+        for (let i = 0; i < tabInfosSimulationGP[1]["coordX"].length; i++) {
+          tabInfosSimulationGP[1]["coordX"][i] = xScale(
+            tabInfosSimulationGP[1]["coordX"][i]
+          );
+          tabInfosSimulationGP[1]["coordY"][i] = yScale(
+            tabInfosSimulationGP[1]["coordY"][i]
+          );
+        }
+
+        let Driver1 = new Driver("Kevin", "Magnussen", "MAG", "Haas");
+        let Driver2 = new Driver("Charles", "Leclerc", "LEC", "Ferrari");
+
+        animateRace(tabInfosSimulationGP[0], "car1", "compteur1", Driver1);
+        animateRace(tabInfosSimulationGP[1], "car2", "compteur2", Driver2);
+      }
+    );
+
     console.log("fin submit");
     //Attendre que l'animation soit terminée pour en relancer une autre -> temps mis à la zeub
     setTimeout(() => {
       //désactiver la soumission du formulaire
       document.getElementById("boutonSubmit").disabled = false;
-    }, 25000); //valeur à redéfinir suite au chargement des données avec python et fastF1
+    }, 2500); //valeur à redéfinir suite au chargement des données avec python et fastF1
   });
 
   //! problème : si on choisit le même pilote
@@ -414,11 +457,11 @@ function animateRace(data, idCar, idCompteur, driver) {
   const car = document.getElementById(idCar);
   let position = 0;
 
-  const drawTrack = (coordinates) => {
+  const drawTrack = (coordinatesX, coordinatesY) => {
     context.beginPath();
-    context.moveTo(coordinates[0].positionX, coordinates[0].positionY);
-    for (let i = 1; i < coordinates.length; i++) {
-      context.lineTo(coordinates[i].positionX, coordinates[i].positionY);
+    context.moveTo(coordinatesX[0], coordinatesY[0]);
+    for (let i = 1; i < coordinatesX.length; i++) {
+      context.lineTo(coordinatesX[i], coordinatesY[i]);
     }
     context.strokeStyle = "white";
     context.stroke();
@@ -426,38 +469,39 @@ function animateRace(data, idCar, idCompteur, driver) {
 
   const moveCar = () => {
     let timeDiff = 0;
-    if (position < data.length) {
-      const x = data[position].positionX;
-      const y = data[position].positionY;
+    if (position < data["coordX"].length) {
+      const x = data["coordX"][position];
+      const y = data["coordY"][position];
       car.style.left = `${x - 8}px`; //12 environ moitié de la largeur de la voiture => centrage
       car.style.top = `${y}px`;
       //! ATTENTION PRBLM INDICE => position + 1 pose pbrlm car dernier élément du tableau + 1 = undefined
-      if (position < data.length - 1) {
-        timeDiff = data[position + 1].time - data[position].time / 1000; //en secondes
+      if (position < data["coordX"].length - 1) {
+        timeDiff = data["time"][position + 1] - data["time"][position] / 1000; //en secondes
       } else {
         timeDiff = 0;
       }
       //TODO MAJ des infos pilotes compteurs
-      driver.telemetry.speed = data[position].speed;
-      driver.telemetry.gear = data[position].gear;
-      driver.telemetry.rpm = data[position].rpm;
-      driver.telemetry.throttle = data[position].throttle;
-      driver.telemetry.brake = data[position].brake;
+      driver.telemetry.speed = data["speed"][position];
+      driver.telemetry.gear = data["nGear"][position];
+      driver.telemetry.rpm = data["rpm"][position];
+      driver.telemetry.throttle = data["throttle"][position] / 100;
+      driver.telemetry.brake = data["brake"][position];
       driver.telemetry.drs =
-        data[position].drs === 10 ||
-        data[position].drs === 12 ||
-        data[position].drs === 14
+        data["drs"][position] === 10 ||
+        data["drs"][position] === 12 ||
+        data["drs"][position] === 14
           ? true
           : false;
 
       updateCompteur(idCompteur, driver);
       position++;
-      setTimeout(moveCar, timeDiff / 1000);
+      setTimeout(moveCar, timeDiff / 1200);
     }
   };
   // Dessiner le tracé du circuit
-  const trackCoordinates = data;
-  drawTrack(trackCoordinates);
+  const trackCoordinatesX = data["coordX"];
+  const trackCoordinatesY = data["coordY"];
+  drawTrack(trackCoordinatesX, trackCoordinatesY);
   // Déplacer la voiture
   moveCar();
 }
