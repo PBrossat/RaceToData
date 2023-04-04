@@ -49,6 +49,12 @@
 .slider__item {
   height: 100%;
   min-width: 100%;
+  padding-top: 5%;
+  /* permet de centre les element verticalement et horizontalement */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #timeSlider {
@@ -57,7 +63,7 @@
 }
 
 #positionSlider {
-  background-color: green;
+  background-color: black;
   height: 100%;
 }
 #pneuSlider {
