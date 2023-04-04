@@ -3,8 +3,8 @@ import { tabGlobalDataPilotes } from "../Pilote/scriptPilote.js";
 import { tabGlobalDataGP } from "./scriptGP.js";
 
 //Creation de scale pour afficher le tracé du circuit
-var xScale = d3.scaleLinear().domain([-20000, 20000]).range([-800, 1400]);
-var yScale = d3.scaleLinear().domain([-20000, 20000]).range([-800, 1200]);
+var xScale = d3.scaleLinear().domain([-25000, 25000]).range([0, 1600]);
+var yScale = d3.scaleLinear().domain([-25000, 25000]).range([0, 1600]);
 
 //-------------------------------Gestion de la simulation du GP----------------------------------------------------------------------------
 
@@ -169,7 +169,6 @@ export function gestionFormulaireGP() {
     //   });
     recupererInfosSimulationGP(driver1, driver2, gp).then(
       (tabInfosSimulationGP) => {
-        console.log(tabInfosSimulationGP[0]["coordX"]);
         //Mettre à l'échelle les coordonnées des pilotes
         for (let i = 0; i < tabInfosSimulationGP[0]["coordX"].length; i++) {
           tabInfosSimulationGP[0]["coordX"][i] = xScale(
@@ -531,8 +530,8 @@ function afficherSimulationGP() {
   divCircuitContainer.appendChild(divCircuit);
   const canvas = document.createElement("canvas");
   canvas.id = "canvas";
-  canvas.width = 1200;
-  canvas.height = 1200;
+  canvas.width = 1600;
+  canvas.height = 1600;
   divCircuit.appendChild(canvas);
   //Création des compteurs
   const main = document.createElement("main");
