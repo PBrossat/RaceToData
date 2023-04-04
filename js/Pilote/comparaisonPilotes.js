@@ -17,14 +17,8 @@ async function recupererInfosPilotesComparaison(pilote1, pilote2, gp) {
   return response;
 }
 
+let tabGlobalDataPilotesComparaison = [];
 async function gestionFormulairePilote() {
-  //fonction récupérée dans js/Grands-Prix/simulationGP.js
-  // creationDivFormulaire(
-  //   document.querySelector(".divGraphique"),
-  //   tabGlobalDataPilotes,
-  //   tabGlobalDataGP,
-  //   "Comparaison !"
-  // );
   const formulaire = document.getElementById("formulaire");
   formulaire.addEventListener("submit", async (e) => {
     console.log("submit");
@@ -33,17 +27,15 @@ async function gestionFormulairePilote() {
     const pilote2 = document.getElementById("selecteurPilote2").value;
     const gp = document.getElementById("selecteurGrandPrix").value;
 
-    //désactiver la soumission du formulaire
+    //desactivation de la soumission du formulaire
     document.getElementById("boutonSubmit").disabled = true;
     // fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2022&nomPilote1=LEC&nomPilote2=VER")
-    console.log("je suis là");
     const response = await fetch(
       `http://localhost:3000/comparaisonPilote?nomGP=${gp}&saison=2022&nomPilote1=${pilote1}&nomPilote2=${pilote2}`
     );
 
     const data = await response.json();
-    console.log(data);
-    return data;
+    grahiquePositionComparaison(data);
   });
 }
 
@@ -158,4 +150,114 @@ function previous() {
   }
 }
 
-export { gestionFormulairePilote, creationSlider };
+async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
+  console.log(tabGlobalDataPilotesComparaison);
+  //récuperation de la div parent
+  const divParent = document.querySelector("#positionSlider");
+
+  //creation du titre
+  const titre = document.createElement("h2");
+  titre.innerHTML =
+    "Position de " +
+    tabGlobalDataPilotesComparaison[0]["nomPilote"] +
+    " et de " +
+    tabGlobalDataPilotesComparaison[1]["nomPilote"] +
+    " au départ et à l'arrivée";
+  const sousTitre = document.createElement("h3");
+  sousTitre.innerHTML =
+    "Grand-Prix : " + tabGlobalDataPilotesComparaison[0]["GrandPrix"] + ".";
+  divParent.appendChild(titre);
+  divParent.appendChild(sousTitre);
+
+  //Creation div où se trouve le graphique
+  const divGraphique = document.createElement("div");
+  divGraphique.id = "graphiquePositionGP";
+  divParent.appendChild(divGraphique);
+
+  let tabPositionPilote1 = [2];
+  let tabPositionPilote2 = [2];
+  tabPositionPilote1[0] = tabGlobalDataPilotesComparaison[0]["positionDepart"];
+  tabPositionPilote1[1] = tabGlobalDataPilotesComparaison[0]["positionArrivee"];
+  tabPositionPilote2[0] = tabGlobalDataPilotesComparaison[1]["positionDepart"];
+  tabPositionPilote2[1] = tabGlobalDataPilotesComparaison[1]["positionArrivee"];
+
+  const graphique = document.getElementById("graphiquePositionGP");
+
+  const styleText = { color: "#FFFFFF", fontWeight: "bold" };
+
+  //creation du graphique
+  Highcharts.chart(graphique, {
+    chart: {
+      backgroundColor: "#1b1b1b",
+      marginBottom: 110,
+      height: "70%",
+      zoomType: "xy",
+      panning: true,
+      panKey: "shift",
+      events: {
+        load: function () {
+          this.setSize(this.container.offsetWidth * 0.8);
+        },
+      },
+    },
+
+    title: {
+      text: "Position des pilotes au départ et à l'arrivé",
+      style: {
+        color: "#FF2A2A",
+        textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
+        fontWeight: "bold",
+        fontSize: "20px",
+      },
+    },
+
+    yAxis: {
+      title: {
+        text: "Position",
+        itemStyle: {
+          fontWeight: "bold",
+        },
+      },
+      min: 1,
+      max: 20,
+      gridLineWidth: 0.5,
+      tickInterval: 1,
+      startOnTick: false,
+      endOnTick: false,
+      labels: {
+        style: styleText,
+      },
+      //inversion de l'axe des ordonnées
+      reversed: true,
+    },
+
+    xAxis: {
+      categories: ["Départ", "Arrivé"],
+      labels: {
+        style: styleText,
+        rotation: -45,
+      },
+    },
+
+    legend: {
+      itemStyle: {
+        fontWeight: "bold",
+      },
+    },
+
+    series: [
+      {
+        name: tabGlobalDataPilotesComparaison[0]["nomPilote"],
+        data: tabPositionPilote1,
+        color: "#FF0000",
+      },
+      {
+        name: tabGlobalDataPilotesComparaison[1]["nomPilote"], // nom de la série de données pour le pilote 2
+        data: tabPositionPilote2, // les données du pilote 2 à afficher
+        color: "#FFD700",
+      },
+    ],
+  });
+}
+
+export { gestionFormulairePilote, creationSlider, grahiquePositionComparaison };
