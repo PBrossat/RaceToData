@@ -7,6 +7,7 @@ import { mapPilote } from "./mapPilote.js";
 import {
   gestionFormulairePilote,
   creationSlider,
+  grahiquePositionComparaison,
 } from "./comparaisonPilotes.js";
 import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
