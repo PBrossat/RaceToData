@@ -1,0 +1,21 @@
+#slider #graphiquePositionGP {
+  height: 100%;
+  display: flex;
+}
+
+#positionSlider h2 {
+  color: white;
+  text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
+  padding-top: 1%;
+}
+
+#positionSlider h3 {
+  color: white;
+  text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
+  padding-top: 1%;
+  padding-bottom: 5%;
+}
+
+#graphiquePositionGP {
+  border-radius: 0.5em;
+}
