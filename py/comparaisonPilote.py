@@ -41,6 +41,8 @@ saisonProgrammation = fastf1.get_event_schedule(2022)
 #Rempli le tableau des noms des GP de la saison 2022
 for i in range (1,23):
     tabNomGP.append(saisonProgrammation.get_event_by_round(i)['Location'])
+# print(tabNomGP)
+
 
 
 #! A appeler une unique fois pour load les datas des GP de 2022 dans le cache
@@ -56,6 +58,12 @@ def loadAllSessionLaps(saison, tabNomGP):
     for i in range(0, len(tabNomGP)):
         session = fastf1.get_session(saison, tabNomGP[i], 'R')
         session.load_laps()
+
+def getColor(pilote):
+    #recuperation de la couleur du pilote
+    driverColor = fastf1.plotting.driver_colors(pilote)
+    return driverColor
+
 
 
 def getInitials(nomPilote):
