@@ -1,6 +1,7 @@
 const { PythonShell } = require("python-shell");
 const express = require("express");
 const fs = require("fs");
+const { spawn } = require("child_process");
 const request = require("request");
 const app = express();
 const PORT = 3000;
@@ -280,6 +281,55 @@ app.get("/dataDriver", async (req, res) => {
     console.log(err);
     res.status(500).send("Internal server error");
   }
+});
+
+//fetch("http://localhost:3000/dataSimulationGP?namePilote1=LEC&namePilote2=VER&nameGP=Monaco")
+app.get("/dataSimulationGP", (req, res) => {
+  //récupération des données du formulaire
+  const namePilote1 = req.query.namePilote1;
+  const namePilote2 = req.query.namePilote2;
+  const nameGP = req.query.nameGP;
+  const argv = [namePilote1, namePilote2, nameGP];
+
+  // Chemin vers votre script Python
+  const cheminScriptPython = "./py/simulationGP.py";
+
+  // Exécuter le script Python en utilisant child_process.spawn
+  const executionScriptPython = spawn("python3", [cheminScriptPython, ...argv]);
+
+  // Gérer la sortie standard (stdout) du script Python
+  executionScriptPython.stdout.on("data", (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  // Gérer la sortie d'erreur (stderr) du script Python
+  executionScriptPython.stderr.on("data", (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  // Gérer la fin de l'exécution du script Python
+  executionScriptPython.on("close", (code) => {
+    console.log(`child process exited with code ${code}`);
+
+    fs.readFile(
+      "./json/simulationGP/" +
+        namePilote1 +
+        "_" +
+        namePilote2 +
+        "_" +
+        nameGP +
+        ".json",
+      "utf-8",
+      (error, data) => {
+        if (error) {
+          console.log(error);
+          res.send(error);
+        } else {
+          res.send(JSON.parse(data));
+        }
+      }
+    );
+  });
 });
 
 // à reprendre
