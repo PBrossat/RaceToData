@@ -14,6 +14,7 @@ import time
 
 
 sysArgv = sys.argv
+print (sysArgv)
 nameGP = sysArgv[1]
 nomPilote1 = sysArgv[2]
 nomPilote2 = sysArgv[3]
@@ -27,11 +28,10 @@ saison=2022
 # - les differents pneus utilisés par le pilote et leur durée de vie
 # - la vitesse moyenne du pilote durant le gp
 
-print ("je suis avant la creation du cache")
+
 if not os.path.exists("py/cache"):
  os.makedirs("py/cache")
 fastf1.Cache.enable_cache("py/cache")
-print ("je suis apres la creation du cache")
 tabNomGP=[]
 
 
