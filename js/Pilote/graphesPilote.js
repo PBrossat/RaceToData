@@ -111,6 +111,8 @@ async function grapheDriverPoint(annee) {
   const divParent = document.querySelector(".divGraphique");
   //Si la div n'existe pas => creéation div + création titre + création div graphique
   if (document.querySelector("#divAnalysePointsPilotes") == null) {
+    const grapheEtExplication = document.createElement("div");
+
     const divAnalyse = document.createElement("div");
     divAnalyse.id = "divAnalysePointsPilotes";
     divAnalyse.className = "composantDivGraphique";
@@ -126,7 +128,13 @@ async function grapheDriverPoint(annee) {
     const divGraphique = document.createElement("div");
     divGraphique.id = "GraphiquePtPilotes";
     divGraphique.className = "Graphique";
-    divAnalyse.appendChild(divGraphique);
+    grapheEtExplication.appendChild(divGraphique);
+
+    //creation div où se trouve l'explication
+    const divExplication = document.createElement("div");
+    divExplication.id = "divExplication";
+    divExplication.className = "divExplication";
+    grapheEtExplication.appendChild(divExplication);
 
     //création loader
     const chargement = document.createElement("img");
@@ -210,12 +218,28 @@ async function grapheDriverPoint(annee) {
     chart: {
       type: "spline",
       backgroundColor: "#1b1b1b",
+      height: "60%",
       marginBottom: 110,
-      height: "55%",
       zoomType: "xy",
       panning: true,
       panKey: "shift",
+      events: {
+        load: function () {
+          if (window.innerWidth >= 1340) {
+            this.setSize(this.container.offsetWidth * 0.8, null);
+          } else if (window.innerWidth >= 1024) {
+            this.setSize(this.container.offsetWidth * 0.75, null);
+          } else if (window.innerWidth >= 600) {
+            this.setSize(this.container.offsetWidth * 0.7, "120%");
+          } else {
+            this.setSize(this.container.offsetWidth, "130%");
+          }
+        },
+      },
     },
+
+    //s'adapte à la taille de l'ecran lorsqu'on redimensionne avec la souris (addEventlistener resize)
+
     title: {
       text: "Evolution des points des pilotes de F1 durant la saison " + annee,
 
@@ -274,6 +298,28 @@ async function grapheDriverPoint(annee) {
 
     series: series,
   });
+
+  const GraphiquePtPilotes = document.querySelector("#GraphiquePtPilotes");
+  //création d'une zone de texte pour expliquer le graphique à droite de la div du graphique
+  const divExplication = document.createElement("div");
+  divExplication.id = "divExplication";
+  if (window.innerWidth >= 1340) {
+    divExplication.style.width = "20%";
+    divExplication.style.float = "right";
+  } else if (window.innerWidth >= 1024) {
+    divExplication.style.width = "25%";
+    divExplication.style.float = "right";
+  } else if (window.innerWidth >= 600) {
+    divExplication.style.width = "30%";
+    divExplication.style.float = "right";
+  } else {
+    //à voir
+  }
+  //ecrire dans la div le texte d'explication
+  divExplication.innerHTML =
+    "Ce graphique représente l'évolution des points des pilotes de F1 durant la saison. Un pilote gragne des points en fonction de sa position finale durant le grand prix";
+
+  GraphiquePtPilotes.appendChild(divExplication);
 }
 
 //fonction permettant de créer le graphique puis les boutons
