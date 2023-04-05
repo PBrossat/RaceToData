@@ -2,6 +2,8 @@ import fastf1
 import json
 import sys
 import os
+from matplotlib import pyplot as plt
+from fastf1 import plotting
 
 sysArgv = sys.argv
 namePilote1 = sysArgv[1]
@@ -9,6 +11,10 @@ namePilote2 = sysArgv[2]
 nameGP = sysArgv[3]
 
 saison = 2022
+
+if os.path.exists('json/simulationGP/'+namePilote1+'_'+namePilote2+'_'+nameGP+'.json'):
+    print("Le fichier json existe déjà")
+    exit()
 
 if not os.path.exists("py/cache/"):
     os.makedirs("py/cache/")
@@ -131,3 +137,22 @@ pilote2 = {
 
 with open('json/simulationGP/'+namePilote1+'_'+namePilote2+'_'+nameGP+'.json', 'w') as f:
     json.dump([pilote1, pilote2], f, indent=4)
+
+
+# Graphe comparatif des télémétries
+
+plotting.setup_mpl()
+data = ['rpm', 'speed', 'throttle', 'brake', 'nGear', 'drs']
+fig, ax = plt.subplots(len(data), figsize=(8, 8))
+fig.suptitle("Fastest Race Lap Telemetry Comparison - " + nameGP)
+for i in range(len(data)):
+    ax[i].plot(pilote1['time'], pilote1[data[i]], label=namePilote1)
+    ax[i].plot(pilote2['time'], pilote2[data[i]], label=namePilote2)
+    ax[i].set(ylabel=data[i].upper())
+for a in ax.flat:
+    a.label_outer()
+ax[0].legend()
+fig.subplots_adjust(left=0.095, bottom=0.04, right=1, top=0.96, wspace=None, hspace=None)
+
+# save the figure
+fig.savefig('data/simulationGP/'+namePilote1+'_'+namePilote2+'_'+nameGP+'.png', dpi=300)

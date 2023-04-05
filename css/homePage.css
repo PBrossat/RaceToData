@@ -91,6 +91,12 @@ header {
   text-align: justify;
 }
 
+.presentation p {
+  padding: 1.5rem;
+  box-shadow: 0px 0px 30px #fff;
+  border-radius: 15px;
+}
+
 .wrapper {
   display: flex;
   width: 100%;

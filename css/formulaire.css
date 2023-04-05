@@ -1,18 +1,20 @@
 /*---------------- Style relatif au formulaire -------------*/
 
 #formulaire {
+  display: flex;
+  flex-direction: column;
+}
+
+.divGraphique #formulaire {
+  height: 100%;
   width: 40%;
   margin-bottom: 2%;
   position: relative;
   border-radius: 0.5em;
   padding-top: 10%;
-  height: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
 }
 
-#divFormulaire {
+.divGraphique #divFormulaire {
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.3),
     0 -8px 6px -6px rgba(0, 0, 0, 0.3), 8px 0 6px -6px rgba(0, 0, 0, 0.3),
     -8px 0 6px -6px rgba(0, 0, 0, 0.3), 0 0 16px rgba(255, 255, 255, 0.1);
@@ -36,20 +38,23 @@
 @import "compass/css3";
 
 .selecteur {
-  padding-bottom: 3%;
-  border: 1px solid #ccc;
   border-radius: 0.5em;
   cursor: pointer;
-  display: inline-block;
-  margin: 0 auto;
-  padding: 10px;
-  width: 70%;
   color: black;
   font-weight: 550;
   text-shadow: 2.5px 2px 2px rgba(1, 1, 1, 0.3);
 }
 
-#selecteurGrandPrix {
+.divGraphique .selecteur {
+  padding-bottom: 3%;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin: 0 auto;
+  width: 70%;
+  padding: 10px;
+}
+
+.divGraphique #selecteurGrandPrix {
   width: 80%;
 }
 
@@ -63,7 +68,7 @@
   background-color: white;
 }
 
-#divFormulaire h2 {
+.divGraphique #divFormulaire h2 {
   font-size: 1.1em;
   color: white;
   line-height: 1.2;
@@ -72,7 +77,7 @@
   padding: 10px;
 }
 
-#divFormulaire hr {
+.divGraphique #divFormulaire hr {
   position: relative;
   bottom: 0;
   top: 20%;
@@ -90,35 +95,60 @@ select,
 }
 
 #boutonSubmit {
-  width: 60%;
   height: 3em;
-  margin-bottom: 10px;
-  color: black;
   font-weight: 550;
   border-radius: 0.5em;
+}
+
+.divGraphique #boutonSubmit {
+  width: 60%;
+  margin-bottom: 10px;
+  color: black;
   text-shadow: 2.5px 2px 2px rgba(1, 1, 1, 0.3);
   justify-content: center;
   align-items: center;
 }
 
-/* responsive part  */
-@media screen and (max-width: 950px) {
-  .divGraphique #formulaire {
-    flex-direction: row;
-    width: 90%;
-  }
-  #formulaire::after {
-    display: none;
-  }
+/* ---------------------Simulation GP---------------- */
 
-  .selecteur {
-    margin-right: 1%;
-  }
+.intro-formulaire #divFormulaire {
+  width: 30%;
+  box-shadow: 0px 0px 30px #fff;
+  border-radius: 1em;
 }
 
-@media screen and (max-width: 635px) {
-  /* diminution de la taille de la police */
-  #divFormulaire h2 {
-    font-size: 0.8em;
-  }
+.intro-formulaire #formulaire {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+}
+
+.intro-formulaire .selecteur {
+  border: 0.2rem solid #e60012;
+  padding: 2%;
+}
+
+.intro-formulaire #boutonSubmit {
+  background-color: #e60012;
+  border: 0.2rem solid #fff;
+  color: white;
+  text-shadow: 2.5px 2px 2px rgba(1, 1, 1, 0.3);
+  padding: 2%;
+  margin-bottom: 2%;
+  cursor: pointer;
+}
+
+.intro-formulaire #divFormulaire h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 5%;
+  padding: 2%;
+  font-size: 1.5em;
+  text-shadow: 2px 2px #9a9a9a;
+}
+
+.intro-formulaire select,
+.intro-formulaire .selecteur select + select {
+  margin-bottom: 3%;
 }
