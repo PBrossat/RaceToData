@@ -14,7 +14,6 @@ import time
 
 
 sysArgv = sys.argv
-print (sysArgv)
 nameGP = sysArgv[1]
 nomPilote1 = sysArgv[2]
 nomPilote2 = sysArgv[3]
@@ -101,20 +100,19 @@ def get_finishing_position(session, driver):
 def get_tyre(session, driver):
     driver=session.laps.pick_driver(driver)
     tyre= driver['Compound']
-    #cration d'un fichier json avec les infos des pneus
-    result = tyre.to_json(orient="records")
-    parsed = json.loads(result)
-    #mettre chaque valeur de tyre dans un tableau
-    tyre= tyre.to_numpy()
+    tyreLife= driver['TyreLife']
+    tyre=tyre.to_numpy()
+    tyreLife=tyreLife.to_numpy()
+    
 
     #création d'un tableau vide avec les types de pneus dans l'ordre 
     tabTyre=[]
     #initialisation du tableau avec le premier type de pneu
     tabTyre.append(tyre[0])
     #parcours du tableau tyre
-    for i in range(1, len(tyre)):
+    for i in range(1, len(tyreLife)):
         #si la valeur précédente est différente de la valeur actuelle on l'ajoute au tableau
-        if tyre[i-1] != tyre[i]:
+        if tyreLife[i]==1.0:
             tabTyre.append(tyre[i])
     
     return tabTyre
@@ -124,25 +122,17 @@ def get_tyre(session, driver):
 def get_tyreLife(session, driver):
     driver=session.laps.pick_driver(driver)
     tyreLife= driver['TyreLife']
-    #cration d'un fichier json avec les infos des pneus (création dans le terminal)
-    result = tyreLife.to_json(orient="records")
-    parsed = json.loads(result)
-    #mettre chaque valeur de tyreLife dans un tableau
-    tyreLife= tyreLife.to_numpy()
+    tyreLife=tyreLife.to_numpy()
 
     #création d'un tableau vide avec les types de pneus dans l'ordre
     tabTyreLife=[]
     #initialisation du tableau avec le premier type de pneu
-    tabTyreLife.append(tyreLife[0])
+    tabTyreLife.append(1)
     #parcours du tableau tyreLife
     for i in range(1, len(tyreLife)):
         #si la valeur actuel est égal à 1 on ajoute la valeur précédente au tableau
         if tyreLife[i] ==1.0:
-            tabTyreLife.append(tyreLife[i-1])
-    
-    #float to int
-    for i in range(0, len(tabTyreLife)):
-        tabTyreLife[i]=int(tabTyreLife[i])
+            tabTyreLife.append(i+1)
     return tabTyreLife
 
 
@@ -270,12 +260,7 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
 
     
 
-        
 comparaison(nameGP, saison, nomPilote1, nomPilote2)
-
-
-
-
 
 #recuperation des meilleurs tours de chaque pilote
 # hamilton_lap=get_best_lap(session, 'HAM')
