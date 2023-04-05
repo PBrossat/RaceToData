@@ -28,7 +28,7 @@ async function recuperationPointsPilotePendantLaSaison(nomPilote, annee) {
       break;
   }
   const response = await fetch(
-    `https://ergast.com/api/f1/${annee}/drivers/${nomPiloteMinuscule}/results.json`
+    "/pointsPiloteSaison/" + annee + "/" + nomPiloteMinuscule + ""
   );
   const data = await response.json();
 
@@ -53,8 +53,7 @@ async function recuperationPointsPilotePendantLaSaison(nomPilote, annee) {
 
 //Permet de récuperer les noms des Gp de l'année passée en parametre
 async function recuperationGPsaison(annee) {
-  const url = `https://ergast.com/api/f1/${annee}/races.json`;
-  const response = await fetch(url);
+  const response = await fetch("/GPAnnee/" + annee + "");
   const data = await response.json();
 
   const grandPrix = data.MRData.RaceTable.Races.map((race) => race.raceName);
@@ -69,8 +68,7 @@ async function recuperationGPsaison(annee) {
 // Permet de récuperer les noms des pilotes de l'année passée en parametre grâce
 //  à l'API Ergast (utilisée uniquement quand annee!=2022 )
 async function recuperationPilotesSaison(annee) {
-  const url = `https://ergast.com/api/f1/${annee}/drivers.json`;
-  const response = await fetch(url);
+  const response = await fetch("/pilotesSaison/" + annee + "");
   const data = await response.json();
 
   const pilotes = data.MRData.DriverTable.Drivers.map(
