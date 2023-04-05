@@ -1,27 +1,10 @@
 //import des données des pilotes
 import { tabGlobalDataPilotes } from "./scriptPilote.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
-//import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
 
-async function recupererInfosPilotesComparaison(pilote1, pilote2, gp) {
-  let response = await fetch(
-    "../json/comparaisonPilote/comparaison" +
-      pilote1 +
-      "_" +
-      pilote2 +
-      "_" +
-      gp +
-      ".json"
-  );
-  response = await response.json();
-  return response;
-}
-
-let tabGlobalDataPilotesComparaison = [];
 async function gestionFormulairePilote() {
   const formulaire = document.getElementById("formulaire");
   formulaire.addEventListener("submit", async (e) => {
-    console.log("submit");
     e.preventDefault(); //permet de ne pas recharger la page dès qu'on appuie sur le bouton
     const pilote1 = document.getElementById("selecteurPilote1").value;
     const pilote2 = document.getElementById("selecteurPilote2").value;
@@ -31,7 +14,7 @@ async function gestionFormulairePilote() {
     document.getElementById("boutonSubmit").disabled = true;
     // fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2022&nomPilote1=LEC&nomPilote2=VER")
     const response = await fetch(
-      `http://localhost:3000/comparaisonPilote?nomGP=${gp}&saison=2022&nomPilote1=${pilote1}&nomPilote2=${pilote2}`
+      `/dataComparaison?nomGP=${gp}&nomPilote1=${pilote1}&nomPilote2=${pilote2}`
     );
 
     const data = await response.json();
@@ -55,6 +38,7 @@ function creationSlider() {
   boutonGauche.id = "boutonGauche";
   boutonGauche.onclick = function () {
     previous();
+    desactiverBoutons();
   };
   sliderNav.appendChild(boutonGauche);
 
@@ -64,6 +48,7 @@ function creationSlider() {
   boutonDroite.id = "boutonDroite";
   boutonDroite.onclick = function () {
     next();
+    desactiverBoutons();
   };
   sliderNav.appendChild(boutonDroite);
 
@@ -148,6 +133,16 @@ function previous() {
   if (scrollLeft == sliderContent * (itemSlider.length - 1)) {
     document.querySelector("#boutonGauche").style.display = "none";
   }
+}
+
+function desactiverBoutons() {
+  //désactiver les boutons pendant 1sec
+  document.getElementById("boutonGauche").disabled = true;
+  document.getElementById("boutonDroite").disabled = true;
+  setTimeout(function () {
+    document.getElementById("boutonGauche").disabled = false;
+    document.getElementById("boutonDroite").disabled = false;
+  }, 1000);
 }
 
 async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
