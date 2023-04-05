@@ -3,6 +3,7 @@
   width: 70%;
   float: right;
   position: relative;
+  padding-bottom: 3%;
 }
 
 .sliderNav {
@@ -69,4 +70,11 @@
 #pneuSlider {
   background-color: yellow;
   height: 100%;
+}
+
+/* responsive part  */
+@media screen and (max-width: 950px) {
+  #slider {
+    width: 100%;
+  }
 }

@@ -7,6 +7,7 @@
   color: white;
   text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
   padding-top: 1%;
+  font-size: 1.85em;
 }
 
 #positionSlider h3 {
@@ -14,8 +15,66 @@
   text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
   padding-top: 1%;
   padding-bottom: 5%;
+  font-size: 1.4em;
 }
 
 #graphiquePositionGP {
   border-radius: 0.5em;
+}
+
+/* responsive part */
+
+@media screen and (max-width: 1040px) {
+  #positionSlider h2 {
+    font-size: 1.3em;
+  }
+  #positionSlider h3 {
+    font-size: 1.3em;
+  }
+
+  .highcharts-title {
+    font-size: 17px;
+  }
+
+  .highcharts-axis-title {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  #positionSlider h2 {
+    font-size: 1.7em;
+  }
+  #positionSlider h3 {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 735px) {
+  #positionSlider h2 {
+    font-size: 1.3em;
+  }
+  #positionSlider h3 {
+    font-size: 1.2em;
+  }
+}
+@media screen and (max-width: 610px) {
+  #positionSlider h2 {
+    font-size: 1.1em;
+  }
+  #positionSlider h3 {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #positionSlider h2 {
+    font-size: 0.9em;
+  }
+  #positionSlider h3 {
+    font-size: 0.8em;
+  }
+  #slider #graphiquePositionGP {
+    height: auto;
+  }
 }
