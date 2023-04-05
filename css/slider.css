@@ -70,6 +70,23 @@
 #pneuSlider {
   background-color: yellow;
   height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#pneuSlider .pneuPilote {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#pneuSlider #pneuPilote1 {
+  background-color: pink;
+}
+
+#pneuSlider #pneuPilote2 {
+  background-color: green;
 }
 
 /* responsive part  */
