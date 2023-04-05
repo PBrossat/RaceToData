@@ -66,49 +66,6 @@ app.get("/dataPython", async (req, res) => {
   });
 });
 
-//run du script python dans py/comparaisonPilote.py
-//fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2021&nomPilote1=LEC&nomPilote2=VER")
-app.get("/comparaisonPilote", async (req, res) => {
-  const nomGP = req.query.nomGP;
-  const nomPilote1 = req.query.nomPilote1;
-  const nomPilote2 = req.query.nomPilote2;
-  options = {
-    scriptPath: "py",
-    args: [nomGP, nomPilote1, nomPilote2],
-  };
-  const pyshell = new PythonShell("comparaisonPilote.py", options);
-
-  pyshell.on("message", (message) => {
-    console.log(message);
-  });
-
-  pyshell.end((err) => {
-    if (err) {
-      console.log("erreur python");
-      res.send(err);
-    } else {
-      fs.readFile(
-        "./json/comparaisonPilote/comparaison" +
-          nomPilote1 +
-          "_" +
-          nomPilote2 +
-          "_" +
-          nomGP +
-          ".json",
-        "utf-8",
-        (error, data) => {
-          if (error) {
-            console.log("erreur json");
-            res.send(error);
-          } else {
-            res.send(JSON.parse(data));
-          }
-        }
-      );
-    }
-  });
-});
-
 app.get("/dataDriverComparaison", (req, res) => {
   const nomGP = req.query.nomGP;
   const nomPilote1 = req.query.nomPilote1;
@@ -332,6 +289,55 @@ app.get("/dataSimulationGP", (req, res) => {
   });
 });
 
+//fetch("http://localhost:3000/dataComparaison?nomGP=Monaco&nomPilote1=LEC&nomPilote2=VER")
+app.get("/dataComparaison", (req, res) => {
+  //récupération des données du formulaire
+  const nomGP = req.query.nomGP;
+  const nomPilote1 = req.query.nomPilote1;
+  const nomPilote2 = req.query.nomPilote2;
+  const argv = [nomGP, nomPilote1, nomPilote2];
+
+  // Chemin vers votre script Python
+  const cheminScriptPython = "./py/comparaisonPilote.py";
+
+  // Exécuter le script Python en utilisant child_process.spawn
+  const executionScriptPython = spawn("python3", [cheminScriptPython, ...argv]);
+
+  // Gérer la sortie standard (stdout) du script Python
+  executionScriptPython.stdout.on("data", (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  // Gérer la sortie d'erreur (stderr) du script Python
+  executionScriptPython.stderr.on("data", (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  // Gérer la fin de l'exécution du script Python
+  executionScriptPython.on("close", (code) => {
+    console.log(`child process exited with code ${code}`);
+
+    fs.readFile(
+      "./json/comparaisonPilote/comparaison" +
+        nomPilote1 +
+        "_" +
+        nomPilote2 +
+        "_" +
+        nomGP +
+        ".json",
+      "utf-8",
+      (error, data) => {
+        if (error) {
+          console.log(error);
+          res.send(error);
+        } else {
+          res.send(JSON.parse(data));
+        }
+      }
+    );
+  });
+});
+
 // à reprendre
 app.get("/f1/:annee/:nomPiloteMinuscule", async (req, res) => {
   const annee = req.params.annee;
@@ -348,13 +354,6 @@ app.get("/f1/:annee/:nomPiloteMinuscule", async (req, res) => {
     }
   );
 });
-
-// const annee = req.params.annee;
-// const nomPiloteMinuscule = req.params.nomPiloteMinuscule;
-// const url = `https://ergast.com/api/f1/${annee}/drivers/${nomPiloteMinuscule}/results.json`;
-// const response = await fetch(url);
-// const data = await response.json();
-// res.send(data);
 
 app.use("/css", express.static("css/"));
 app.use("/js", express.static("js/"));
