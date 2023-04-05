@@ -374,8 +374,6 @@ app.get("/pointsPiloteSaison/:annee/:nomPilote", async (req, res) => {
   }
 });
 
-//`https://ergast.com/api/f1/${annee}/drivers/${nomPilote}/results.json`
-
 //route pilotesSaison avec l'année en paramètre (utilisée dans graphePilote.js)
 app.get("/pilotesSaison/:annee", async (req, res) => {
   try {
