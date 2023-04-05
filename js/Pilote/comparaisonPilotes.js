@@ -19,6 +19,8 @@ async function gestionFormulairePilote() {
 
     const data = await response.json();
     grahiquePositionComparaison(data);
+    pneuPilote(data, 0);
+    pneuPilote(data, 1);
   });
 }
 
@@ -95,18 +97,29 @@ function creationSlider() {
   slider.appendChild(sliderContent);
 
   //creation de 3 div pour le slider
-  const timeSlider = document.createElement("div");
-  timeSlider.className = "slider__item";
-  timeSlider.id = "timeSlider";
-  sliderContent.appendChild(timeSlider);
   const positionSlider = document.createElement("div");
   positionSlider.className = "slider__item";
   positionSlider.id = "positionSlider";
   sliderContent.appendChild(positionSlider);
+
   const pneuSlider = document.createElement("div");
   pneuSlider.className = "slider__item";
   pneuSlider.id = "pneuSlider";
   sliderContent.appendChild(pneuSlider);
+  //création de deux div dans pneuSlider
+  const pneuPilote1 = document.createElement("div");
+  pneuPilote1.className = "pneuPilote";
+  pneuPilote1.id = "pneuPilote1";
+  pneuSlider.appendChild(pneuPilote1);
+  const pneuPilote2 = document.createElement("div");
+  pneuPilote2.className = "pneuPilote";
+  pneuPilote2.id = "pneuPilote2";
+  pneuSlider.appendChild(pneuPilote2);
+
+  const timeSlider = document.createElement("div");
+  timeSlider.className = "slider__item";
+  timeSlider.id = "timeSlider";
+  sliderContent.appendChild(timeSlider);
 
   divParent.appendChild(slider);
 }
@@ -253,6 +266,49 @@ async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
       },
     ],
   });
+}
+
+async function pneuPilote(data, idPilote) {
+  const divParent = document.querySelector(`#pneuPilote${idPilote + 1}`);
+
+  //creation du titre
+  const titre = document.createElement("h2");
+  titre.innerHTML = "Pneu utilisé par " + data[idPilote]["nomPilote"];
+  divParent.appendChild(titre);
+  for (let i = 0; i < data[idPilote]["pneu"].length; i++) {
+    const divPneu = document.createElement("div");
+    divPneu.className = "pneu";
+    //hauteur de la div s'adapte en fonction de data[idPilote]["pneu"].length
+    divPneu.style.height = `${100 / data[idPilote]["pneu"].length - 3}%`;
+
+    //insertion de l'image du pneu dans la div
+    switch (data[idPilote]["pneu"][i]) {
+      case "SOFT":
+        divPneu.innerHTML =
+          "<img src='data/pneu/soft.png' alt='pneuSoft' class='pneu__image' style='height:85%'>";
+        break;
+      case "MEDIUM":
+        divPneu.innerHTML =
+          "<img src='data/pneu/medium.png' alt='pneuMedium' class='pneu__image' style='height:85%'>";
+        break;
+      case "HARD":
+        divPneu.innerHTML =
+          "<img src='data/pneu/hard.png' alt='pneuHard' class='pneu__image' style='height:85%'>";
+        break;
+      case "INTERMEDIATE":
+        divPneu.innerHTML =
+          "<img src='data/pneu/inter.png' alt='pneuIntermediate' class='pneu__image' style='height:85%'>";
+        break;
+      case "WET":
+        divPneu.innerHTML =
+          "<img src='data/pneu/wet.png' alt='pneuWet' class='pneu__image' style='height:85%'>";
+        break;
+    }
+
+    //Combien de tour sur ce pneu
+    divPneu.innerHTML += data[idPilote]["dureePneu"][i];
+    divParent.appendChild(divPneu);
+  }
 }
 
 export { gestionFormulairePilote, creationSlider, grahiquePositionComparaison };
