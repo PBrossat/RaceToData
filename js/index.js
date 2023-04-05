@@ -338,21 +338,57 @@ app.get("/dataComparaison", (req, res) => {
   });
 });
 
-// à reprendre
-app.get("/f1/:annee/:nomPiloteMinuscule", async (req, res) => {
-  const annee = req.params.annee;
-  const nomPiloteMinuscule = req.params.nomPiloteMinuscule;
-  request(
-    `https://ergast.com/api/f1/${annee}/drivers/${nomPiloteMinuscule}/results.json`,
-    function (error, response, body) {
-      if (error) {
-        console.log(error);
-        res.send(error);
-      } else {
-        res.send(body);
-      }
-    }
-  );
+//route GPAnnee avec l'année en paramètre (utilisée dans graphePilote.js)
+app.get("/GPAnnee/:annee", async (req, res) => {
+  try {
+    const annee = req.params.annee;
+    let GPannee = await fetch(`https://ergast.com/api/f1/${annee}/races.json`);
+    GPannee = await GPannee.json();
+    res.json(GPannee);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Erreur Liste des GP de la saison : " + annee);
+  }
+});
+
+//route pointPiloteSaison avec l'année et le nom du pilote en paramètre (utilisée dans graphePilote.js)
+app.get("/pointsPiloteSaison/:annee/:nomPilote", async (req, res) => {
+  try {
+    const annee = req.params.annee;
+    const nomPilote = req.params.nomPilote;
+    let pointPiloteSaison = await fetch(
+      `https://ergast.com/api/f1/${annee}/drivers/${nomPilote}/results.json`
+    );
+    pointPiloteSaison = await pointPiloteSaison.json();
+    res.json(pointPiloteSaison);
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send(
+        "Erreur récupération des points du pilote : " +
+          nomPilote +
+          " de la saison : " +
+          annee
+      );
+  }
+});
+
+//`https://ergast.com/api/f1/${annee}/drivers/${nomPilote}/results.json`
+
+//route pilotesSaison avec l'année en paramètre (utilisée dans graphePilote.js)
+app.get("/pilotesSaison/:annee", async (req, res) => {
+  try {
+    const annee = req.params.annee;
+    let pilotesSaison = await fetch(
+      `https://ergast.com/api/f1/${annee}/drivers.json`
+    );
+    pilotesSaison = await pilotesSaison.json();
+    res.json(pilotesSaison);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Erreur Liste des pilotes de la saison : " + annee);
+  }
 });
 
 app.use("/css", express.static("css/"));
