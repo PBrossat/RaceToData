@@ -22,6 +22,35 @@
   border-radius: 0.5em;
 }
 
+#pneuSlider h2 {
+  color: white;
+  text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
+  padding-bottom: 2%;
+  font-size: 1.6em;
+}
+
+#pneuSlider .pneu {
+  font-size: 0.8em;
+  margin-bottom: 3%;
+  color: white;
+}
+
+#pneuSlider .pneuPilote {
+  display: "flex";
+  flex-direction: "column";
+  height: "60%";
+  top: "10%";
+}
+
+#pneuSlider .pneu__image {
+  margin-bottom: 1%;
+  height: 85%;
+}
+
+#pneuSlider #zoneExplication {
+  color: white;
+  font-size: 0.8em;
+}
 /* responsive part */
 
 @media screen and (max-width: 1040px) {

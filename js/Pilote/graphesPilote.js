@@ -79,68 +79,74 @@ async function recuperationPilotesSaison(annee) {
 }
 
 //Création des boutons pour choisir l'années pour le graphique 1
-function creationBoutonChoixSaison() {
-  //Si la div n'existe pas => creéation div + création bouton
-  const divBoutonexiste = document.querySelector("#divBoutonChoix");
-  if (divBoutonexiste == null) {
-    const divParent = document.querySelector("#divAnalysePointsPilotes");
-    const divBouton = document.createElement("div");
-    divBouton.id = "divBoutonChoix";
-    divParent.appendChild(divBouton);
+// function creationBoutonChoixSaison() {
+//   //Si la div n'existe pas => creéation div + création bouton
+//   const divBoutonexiste = document.querySelector("#divBoutonChoix");
+//   if (divBoutonexiste == null) {
+//     const divParent = document.querySelector("#divAnalysePointsPilotes");
+//     const divBouton = document.createElement("div");
+//     divBouton.id = "divBoutonChoix";
+//     divParent.appendChild(divBouton);
 
-    const bouton2021 = document.createElement("button");
-    bouton2021.id = "bouton2021";
-    const bouton2022 = document.createElement("button");
-    bouton2022.id = "bouton2022";
+//     const bouton2021 = document.createElement("button");
+//     bouton2021.id = "bouton2021";
+//     const bouton2022 = document.createElement("button");
+//     bouton2022.id = "bouton2022";
 
-    bouton2021.className = "bouton";
-    bouton2022.className = "bouton";
+//     bouton2021.className = "bouton";
+//     bouton2022.className = "bouton";
 
-    bouton2021.textContent = "2021";
-    bouton2022.textContent = "2022";
+//     bouton2021.textContent = "2021";
+//     bouton2022.textContent = "2022";
 
-    divBouton.appendChild(bouton2021);
-    divBouton.appendChild(bouton2022);
-  }
-  //sinon on ne crée rien
-}
+//     divBouton.appendChild(bouton2021);
+//     divBouton.appendChild(bouton2022);
+//   }
+//   //sinon on ne crée rien
+// }
 
 //-----------------------------------Graphique 1---------------------------
 async function grapheDriverPoint(annee) {
   //Création container
   const divParent = document.querySelector(".divGraphique");
-  //Si la div n'existe pas => creéation div + création titre + création div graphique
-  if (document.querySelector("#divAnalysePointsPilotes") == null) {
-    const grapheEtExplication = document.createElement("div");
 
-    const divAnalyse = document.createElement("div");
-    divAnalyse.id = "divAnalysePointsPilotes";
-    divAnalyse.className = "composantDivGraphique";
-    divParent.appendChild(divAnalyse);
-    divAnalyse.innerHTML = "";
+  const grapheEtExplication = document.createElement("div");
+  grapheEtExplication.id = "grapheEtExplication";
+  //display flex pour que les div s'affichent cote à cote
+  grapheEtExplication.style.display = "flex";
+  grapheEtExplication.style.flexDirection = "row";
+  grapheEtExplication.style.width = "100%";
 
-    //Création Titre
-    const Titre = document.createElement("h1");
-    divAnalyse.appendChild(Titre);
-    Titre.innerHTML = "Graphique Points Pilotes ";
+  const divAnalyse = document.createElement("div");
+  divAnalyse.id = "divAnalysePointsPilotes";
+  divAnalyse.className = "composantDivGraphique";
+  divParent.appendChild(divAnalyse);
+  divAnalyse.innerHTML = "";
 
-    //Creation div où se trouve le graphique
-    const divGraphique = document.createElement("div");
-    divGraphique.id = "GraphiquePtPilotes";
-    divGraphique.className = "Graphique";
-    grapheEtExplication.appendChild(divGraphique);
+  //Création Titre
+  const Titre = document.createElement("h1");
+  divAnalyse.appendChild(Titre);
+  Titre.innerHTML = "Graphique Points Pilotes ";
 
-    //creation div où se trouve l'explication
-    const divExplication = document.createElement("div");
-    divExplication.id = "divExplication";
-    divExplication.className = "divExplication";
-    grapheEtExplication.appendChild(divExplication);
+  //Creation div où se trouve le graphique
+  const divGraphique = document.createElement("div");
+  divGraphique.id = "GraphiquePtPilotes";
+  grapheEtExplication.appendChild(divGraphique);
 
-    //création loader
-    const chargement = document.createElement("img");
-    chargement.src = "../data/white_loader.svg";
-    divAnalyse.appendChild(chargement);
-  }
+  //creation div où se trouve l'explication
+  const divExplication = document.createElement("div");
+  divExplication.id = "divExplication";
+  grapheEtExplication.appendChild(divExplication);
+
+  divAnalyse.appendChild(grapheEtExplication);
+
+  //création loader
+  //tant que le graphe n'est pas créé, on affiche le loader
+
+  const chargement = document.createElement("img");
+  chargement.src = "../data/white_loader.svg";
+  divAnalyse.appendChild(chargement);
+
   const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
 
   //permet de creer un tableau de tableau de points selon le nom des pilote et l'année passée en paramatre
@@ -218,21 +224,25 @@ async function grapheDriverPoint(annee) {
     chart: {
       type: "spline",
       backgroundColor: "#1b1b1b",
-      height: "60%",
+      height: "110%",
       marginBottom: 110,
       zoomType: "xy",
       panning: true,
       panKey: "shift",
       events: {
         load: function () {
-          if (window.innerWidth >= 1340) {
-            this.setSize(this.container.offsetWidth * 0.8, null);
-          } else if (window.innerWidth >= 1024) {
-            this.setSize(this.container.offsetWidth * 0.75, null);
-          } else if (window.innerWidth >= 600) {
-            this.setSize(this.container.offsetWidth * 0.7, "120%");
-          } else {
-            this.setSize(this.container.offsetWidth, "130%");
+          if (window.innerWidth >= 1300) {
+            this.setSize(this.container.offsetWidth * 1.7, null);
+          } else if (window.innerWidth >= 1200) {
+            this.setSize(this.container.offsetWidth * 1.5, null);
+          } else if (window.innerWidth >= 1050) {
+            this.setSize(this.container.offsetWidth * 1.3, "110%");
+          } else if (window.innerWidth >= 992) {
+            this.setSize(this.container.offsetWidth * 1.1, "110%");
+          } else if (window.innerWidth >= 760) {
+            this.setSize(this.container.offsetWidth * 0.9, "110%");
+          } else if (window.innerWidth >= 500) {
+            this.setSize(this.container.offsetWidth * 0.65, "110%");
           }
         },
       },
@@ -299,43 +309,55 @@ async function grapheDriverPoint(annee) {
     series: series,
   });
 
-  const GraphiquePtPilotes = document.querySelector("#GraphiquePtPilotes");
-  //création d'une zone de texte pour expliquer le graphique à droite de la div du graphique
-  const divExplication = document.createElement("div");
-  divExplication.id = "divExplication";
   if (window.innerWidth >= 1340) {
     divExplication.style.width = "20%";
     divExplication.style.float = "right";
+    divGraphique.style.width = "80%";
+    divGraphique.style.float = "left";
   } else if (window.innerWidth >= 1024) {
     divExplication.style.width = "25%";
     divExplication.style.float = "right";
+    divGraphique.style.width = "75%";
+    divGraphique.style.float = "left";
   } else if (window.innerWidth >= 600) {
     divExplication.style.width = "30%";
     divExplication.style.float = "right";
+    divGraphique.style.width = "70%";
+    divGraphique.style.float = "left";
   } else {
     //à voir
   }
   //ecrire dans la div le texte d'explication
+  divExplication.style.color = "#FFFFFF";
+  divExplication.style.fontSize = "0.9em";
   divExplication.innerHTML =
-    "Ce graphique représente l'évolution des points des pilotes de F1 durant la saison. Un pilote gragne des points en fonction de sa position finale durant le grand prix";
-
-  GraphiquePtPilotes.appendChild(divExplication);
+    "<p>Ce graphique représente l'évolution des points des pilotes de F1 durant la saison 2022. Un pilote gagne des points en fonction de sa position finale durant le grand prix</p>";
+  divExplication.innerHTML +=
+    "<p>Les points sont attribués de cette <span style='color:red'>manière</span><img src='data/pointsGrandPrix.jpeg' alt='Image' class='image-hover'></p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p>On peut aussi gagner un point bonus si l'on fait le <span style='color:red'>meilleur temps</span> et que l'on se trouve dans les 10 premiers à l'arrivé,</p>";
+  divExplication.innerHTML +=
+    "<p>Pour un maximum de <span class='highlighted'>26 points</span></p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p>Dans ce graphique on peut voir clairement qu'à partir du GP d'Espagne,<span style='color:blue'> Verstappen </span> a prit le dessus sur <span style='color:red'>Leclerc</span><br> et n'a jamais rendu sa premiere place</p>";
 }
 
 //fonction permettant de créer le graphique puis les boutons
 async function creationGraphePointPilote(annee) {
   //on attend que le graphe soit crée pour créer les boutons
   await grapheDriverPoint(annee);
-  creationBoutonChoixSaison();
+  // creationBoutonChoixSaison();
 
-  //Event sur les boutons
-  document.querySelector("#bouton2021").addEventListener("click", function () {
-    creationGraphePointPilote(2021);
-  });
+  // //Event sur les boutons
+  // document.querySelector("#bouton2021").addEventListener("click", function () {
+  //   creationGraphePointPilote(2021);
+  // });
 
-  document.querySelector("#bouton2022").addEventListener("click", function () {
-    creationGraphePointPilote(2022);
-  });
+  // document.querySelector("#bouton2022").addEventListener("click", function () {
+  //   creationGraphePointPilote(2022);
+  // });
 }
 
 //-----------------------------------Graphique 2---------------------------

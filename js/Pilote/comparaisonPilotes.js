@@ -270,11 +270,16 @@ async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
 
 async function pneuPilote(data, idPilote) {
   const divParent = document.querySelector(`#pneuPilote${idPilote + 1}`);
+  divParent.style.display = "flex";
+  divParent.style.flexDirection = "column";
+  divParent.style.height = "60%";
+  divParent.style.top = "10%";
 
   //creation du titre
   const titre = document.createElement("h2");
-  titre.innerHTML = "Pneu utilisé par " + data[idPilote]["nomPilote"];
+  titre.innerHTML = "Pneu utilisés par " + data[idPilote]["nomPilote"];
   divParent.appendChild(titre);
+
   for (let i = 0; i < data[idPilote]["pneu"].length; i++) {
     const divPneu = document.createElement("div");
     divPneu.className = "pneu";
@@ -285,30 +290,47 @@ async function pneuPilote(data, idPilote) {
     switch (data[idPilote]["pneu"][i]) {
       case "SOFT":
         divPneu.innerHTML =
-          "<img src='data/pneu/soft.png' alt='pneuSoft' class='pneu__image' style='height:85%'>";
+          "<img src='data/pneu/soft.png' alt='pneuSoft' class='pneu__image' >";
         break;
       case "MEDIUM":
         divPneu.innerHTML =
-          "<img src='data/pneu/medium.png' alt='pneuMedium' class='pneu__image' style='height:85%'>";
+          "<img src='data/pneu/medium.png' alt='pneuMedium' class='pneu__image' >";
         break;
       case "HARD":
         divPneu.innerHTML =
-          "<img src='data/pneu/hard.png' alt='pneuHard' class='pneu__image' style='height:85%'>";
+          "<img src='data/pneu/hard.png' alt='pneuHard' class='pneu__image' >";
         break;
       case "INTERMEDIATE":
         divPneu.innerHTML =
-          "<img src='data/pneu/inter.png' alt='pneuIntermediate' class='pneu__image' style='height:85%'>";
+          "<img src='data/pneu/inter.png' alt='pneuIntermediate' class='pneu__image' >";
         break;
       case "WET":
         divPneu.innerHTML =
-          "<img src='data/pneu/wet.png' alt='pneuWet' class='pneu__image' style='height:85%'>";
+          "<img src='data/pneu/wet.png' alt='pneuWet' class='pneu__image' >";
         break;
     }
 
     //Combien de tour sur ce pneu
-    divPneu.innerHTML += data[idPilote]["dureePneu"][i];
+    divPneu.innerHTML +=
+      "durée de vie du pneu : " +
+      data[idPilote]["dureePneu"][i] +
+      " - " +
+      data[idPilote]["dureePneu"][i + 1] +
+      " tours";
     divParent.appendChild(divPneu);
   }
+
+  const zoneExplication = document.createElement("div");
+  zoneExplication.id = "zoneExplication";
+  // const nbPneu = data[idPilote]["pneu"].length;
+  // zoneExplication.innerHTML = "Stratégie à : " + nbPneu - 1 + " arrêts";
+  zoneExplication.innerHTML +=
+    "<br> Pneu au départ : " + data[idPilote]["pneu"][0] + " ";
+  for (let i = 1; i < data[idPilote]["pneu"].length; i++) {
+    zoneExplication.innerHTML +=
+      "<br> Arrêt n°" + i + " : " + data[idPilote]["pneu"][i] + " ";
+  }
+  divParent.appendChild(zoneExplication);
 }
 
 export { gestionFormulairePilote, creationSlider, grahiquePositionComparaison };
