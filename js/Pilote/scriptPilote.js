@@ -37,7 +37,9 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
     document.querySelector(".divGraphique"),
     tabGlobalDataPilotes,
     tabGlobalDataGP,
-    "Comparaison !"
+    "Comparaison !",
+    //titreDuFormulaire
+    ""
   );
   gestionFormulairePilote();
   creationSlider();

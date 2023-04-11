@@ -41,16 +41,21 @@ async function recupererInfosSimulationGP(driver1, driver2, gp) {
 }
 
 //------------------------------------Création du formulaire de simulation------------------------------------------------------------
-function creationDivFormulaire(divParent, tabPilote, tabGrandPrix, nomSubmit) {
+function creationDivFormulaire(
+  divParent,
+  tabPilote,
+  tabGrandPrix,
+  nomSubmit,
+  nomFormulaire
+) {
   const divFormulaire = document.createElement("div");
   divFormulaire.id = "divFormulaire";
   divParent.appendChild(divFormulaire);
 
-  // //creation du titre du formulaire
-  // const titreFormulaire = document.createElement("h2");
-  // titreFormulaire.textContent =
-  //   "Comparez les meilleurs tours de vos pilotes préférés !";
-  // divFormulaire.appendChild(titreFormulaire);
+  //creation du titre du formulaire
+  const titreFormulaire = document.createElement("h2");
+  titreFormulaire.textContent = nomFormulaire;
+  divFormulaire.appendChild(titreFormulaire);
 
   //création de la balise form
   const formulaire = document.createElement("form");
@@ -126,8 +131,12 @@ export function gestionFormulaireGP() {
     document.querySelector("#stats"),
     tabGlobalDataPilotes,
     tabGlobalDataGP,
-    "Lancer la simulation"
+    "Lancer la simulation",
+    "Comparez les meilleurs tours de vos pilotes préférés !"
   );
+  document
+    .querySelector(".intro-formulaire")
+    .appendChild(document.querySelector("#divFormulaire"));
   const formulaire = document.getElementById("formulaire");
   formulaire.addEventListener("submit", (e) => {
     //pour éviter le rechargement de la page
@@ -193,6 +202,11 @@ export function gestionFormulaireGP() {
         let Driver2 = new Driver("Lando", "Norris", "NOR", "McLaren");
 
         afficherSimulationGP(xMin, yMin, xMax, yMax);
+
+        //move window to #canvas
+        document
+          .querySelector(".circuit-container")
+          .scrollIntoView({ behavior: "smooth", block: "center" });
 
         animateRace(tabInfosSimulationGP[0], "car1", "compteur1", Driver1);
         animateRace(tabInfosSimulationGP[1], "car2", "compteur2", Driver2);
@@ -559,11 +573,14 @@ function afficherSimulationGP(xMin, yMin, xMax, yMax) {
 //-------------------------------------Gestion de l'introduction du GP----------------
 export function afficherIntroductionGP() {
   const sectionStats = document.querySelector("#stats");
+  const divIntroEtFormulaire = document.createElement("div");
+  divIntroEtFormulaire.classList.add("intro-formulaire");
+  sectionStats.appendChild(divIntroEtFormulaire);
   const divIntroduction = document.createElement("div");
   divIntroduction.classList.add("presentation");
-  sectionStats.appendChild(divIntroduction);
+  divIntroEtFormulaire.appendChild(divIntroduction);
   const paragrapheIntroduction = document.createElement("p");
   paragrapheIntroduction.innerText =
-    "Pour lancer la simulation, il vous suffit de remplir le formulaire en sélectionnant deux pilotes de F1 ainsi que le circuit sur lequel vous souhaitez les voir concourir. Une fois que vous avez choisi vos options, validez le formulaire en cliquant sur le bouton 'Lancer la simulation'.\n\nAprès avoir validé le formulaire, une simulation de course va se lancer. Cette simulation permet de recréer les meilleurs tours effectués par les pilotes sélectionnés lors du Grand Prix correspondant à la saison 2022 de Formule 1.\n\nVous pourrez ainsi observer leurs performances en temps réel, avec leurs compteurs de vitesse, RPM, et d'autres informations affichées en direct. Enfin, vous pourrez consulter un graphe comparatif qui affiche les télémétries des deux pilotes. Cela vous permettra de voir les différences de performance entre les deux pilotes et de comprendre comment ils se sont comportés sur le tracé du circuit.\n\nNous espérons que vous apprécierez cette expérience immersive de simulation de courses de Formule 1 et que vous prendrez plaisir à suivre les performances de vos pilotes préférés !";
+    "Pour lancer la simulation, il vous suffit de remplir le formulaire en sélectionnant deux pilotes de F1 ainsi que le circuit sur lequel vous souhaitez les voir concourir. Une fois que vous avez choisi vos options, validez le formulaire en cliquant sur le bouton 'Lancer la simulation'.\n\nUne simulation de course va alors se lancer. Cette simulation permet de recréer les meilleurs tours effectués par les pilotes sélectionnés lors du Grand Prix correspondant à la saison 2022 de Formule 1.\n\nVous pourrez ainsi observer leurs performances en temps réel, avec leurs compteurs de vitesse, RPM, et d'autres informations affichées en direct. Enfin, vous pourrez consulter un graphe comparatif qui affiche les télémétries des deux pilotes. Cela vous permettra de voir les différences de performance entre les deux pilotes et de comprendre comment ils se sont comportés sur le tracé du circuit.\n\nNous espérons que vous apprécierez cette expérience immersive de simulation de courses de Formule 1 et que vous prendrez plaisir à suivre les performances de vos pilotes préférés !\n\nAttention, la simulation peut prendre quelques secondes à se lancer, le temps que les pneus soient à bonne température.";
   divIntroduction.appendChild(paragrapheIntroduction);
 }
