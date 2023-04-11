@@ -1,5 +1,5 @@
 import { afficherMapGP } from "./mapGP.js";
-import { gestionFormulaireGP } from "./simulationGP.js";
+import { gestionFormulaireGP, afficherIntroductionGP } from "./simulationGP.js";
 
 //Requete API pour avoir des infos sur les GP
 async function recupererInfosGpAPI() {
@@ -40,5 +40,6 @@ const boutonDecouvrirStatsGrandsPrix = document.querySelector(
 boutonDecouvrirStatsGrandsPrix.addEventListener("click", function () {
   document.querySelector("#stats").innerHTML = "";
   afficherMapGP();
+  afficherIntroductionGP();
   gestionFormulaireGP();
 });

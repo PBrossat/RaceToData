@@ -130,7 +130,6 @@ export function gestionFormulaireGP() {
   );
   const formulaire = document.getElementById("formulaire");
   formulaire.addEventListener("submit", (e) => {
-    console.log("submit");
     //pour éviter le rechargement de la page
     e.preventDefault();
     //récupération des données du formulaire
@@ -139,37 +138,13 @@ export function gestionFormulaireGP() {
     const gp = document.getElementById("selecteurGrandPrix").value;
     //désactiver la soumission du formulaire
     document.getElementById("boutonSubmit").disabled = true;
-    afficherSimulationGP();
-    // fetch("/dataDriver?namePilote=" + driver1 + "&nameGP=" + gp)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     for (let i = 0; i < data.length; i++) {
-    //       data[i].positionX = xScale(data[i].positionX);
-    //       data[i].positionY = yScale(data[i].positionY);
-    //     }
-    //     let Driver1 = new Driver("Charles", "Leclerc", "LEC", "Ferrari"); //TODO recup ces données via le formulaire / tableau de pilotes
-    //     animateRace(data, "car1", "compteur1", Driver1);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-
-    // fetch("/dataDriver?namePilote=" + driver2 + "&nameGP=" + gp)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     for (let i = 0; i < data.length; i++) {
-    //       data[i].positionX = xScale(data[i].positionX);
-    //       data[i].positionY = yScale(data[i].positionY);
-    //     }
-    //     let Driver2 = new Driver("Kevin", "Magnussen", "MAG", "Haas"); //TODO recup ces données via le formulaire / tableau de pilotes
-    //     animateRace(data, "car2", "compteur2", Driver2);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    //supprimer la div contenant la simulation précédente
+    if (document.querySelector(".simulation") != null) {
+      document.querySelector(".simulation").remove();
+    }
     recupererInfosSimulationGP(driver1, driver2, gp).then(
       (tabInfosSimulationGP) => {
-        //Mettre à l'échelle les coordonnées des pilotes
+        //Mettre à l'échelle les coordonnées des pilotes et réupérer les max et min de chaque axe pour la taile du canva
         for (let i = 0; i < tabInfosSimulationGP[0]["coordX"].length; i++) {
           tabInfosSimulationGP[0]["coordX"][i] = xScale(
             tabInfosSimulationGP[0]["coordX"][i]
@@ -187,16 +162,42 @@ export function gestionFormulaireGP() {
             tabInfosSimulationGP[1]["coordY"][i]
           );
         }
+        //récupération des max et min de chaque axe pour la taille du canva
+        let xMax = Math.max(
+          Math.max(...tabInfosSimulationGP[0]["coordX"]),
+          Math.max(...tabInfosSimulationGP[1]["coordX"])
+        );
+        let yMax = Math.max(
+          Math.max(...tabInfosSimulationGP[0]["coordY"]),
+          Math.max(...tabInfosSimulationGP[1]["coordY"])
+        );
+        let xMin = Math.min(
+          Math.min(...tabInfosSimulationGP[0]["coordX"]),
+          Math.min(...tabInfosSimulationGP[1]["coordX"])
+        );
+        let yMin = Math.min(
+          Math.min(...tabInfosSimulationGP[0]["coordY"]),
+          Math.min(...tabInfosSimulationGP[1]["coordY"])
+        );
+        //réajustement des coordx et coordy en enlevant les min de chaque axe
+        for (let i = 0; i < tabInfosSimulationGP[0]["coordX"].length; i++) {
+          tabInfosSimulationGP[0]["coordX"][i] -= xMin;
+          tabInfosSimulationGP[0]["coordY"][i] -= yMin;
+        }
+        for (let i = 0; i < tabInfosSimulationGP[1]["coordX"].length; i++) {
+          tabInfosSimulationGP[1]["coordX"][i] -= xMin;
+          tabInfosSimulationGP[1]["coordY"][i] -= yMin;
+        }
 
-        let Driver1 = new Driver("Kevin", "Magnussen", "MAG", "Haas");
-        let Driver2 = new Driver("Charles", "Leclerc", "LEC", "Ferrari");
+        let Driver1 = new Driver("Max", "Verstappen", "VER", "RedBull");
+        let Driver2 = new Driver("Lando", "Norris", "NOR", "McLaren");
+
+        afficherSimulationGP(xMin, yMin, xMax, yMax);
 
         animateRace(tabInfosSimulationGP[0], "car1", "compteur1", Driver1);
         animateRace(tabInfosSimulationGP[1], "car2", "compteur2", Driver2);
       }
     );
-
-    console.log("fin submit");
     //Attendre que l'animation soit terminée pour en relancer une autre -> temps mis à la zeub
     setTimeout(() => {
       //désactiver la soumission du formulaire
@@ -471,7 +472,7 @@ function animateRace(data, idCar, idCompteur, driver) {
     if (position < data["coordX"].length) {
       const x = data["coordX"][position];
       const y = data["coordY"][position];
-      car.style.left = `${x - 8}px`; //12 environ moitié de la largeur de la voiture => centrage
+      car.style.left = `${x - 8}px`; //8 environ moitié de la largeur de la voiture => centrage
       car.style.top = `${y}px`;
       //! ATTENTION PRBLM INDICE => position + 1 pose pbrlm car dernier élément du tableau + 1 = undefined
       if (position < data["coordX"].length - 1) {
@@ -506,33 +507,42 @@ function animateRace(data, idCar, idCompteur, driver) {
 }
 
 //----------------------Gestion de l'affichage de la simulation du GP------------
-function afficherSimulationGP() {
+function afficherSimulationGP(xMin, yMin, xMax, yMax) {
   //Création des conteneurs
   const sectionStats = document.querySelector("#stats");
   const divSimulation = document.createElement("div");
   divSimulation.classList.add("simulation");
   sectionStats.appendChild(divSimulation);
-  const divCircuitContainer = document.createElement("div");
+  const divCircuitContainer = document.createElement("span");
   divCircuitContainer.classList.add("circuit-container");
   divSimulation.appendChild(divCircuitContainer);
   //Création des voitures
   const spanCar1 = document.createElement("span");
   spanCar1.classList.add("car");
   spanCar1.id = "car1";
-  divCircuitContainer.appendChild(spanCar1);
+
+  //divCircuitContainer.appendChild(spanCar1);
+
   const spanCar2 = document.createElement("span");
   spanCar2.classList.add("car");
   spanCar2.id = "car2";
-  divCircuitContainer.appendChild(spanCar2);
+
+  //divCircuitContainer.appendChild(spanCar2);
+
   //Création du circuit
-  const divCircuit = document.createElement("div");
+  const divCircuit = document.createElement("span");
   divCircuit.classList.add("circuit");
   divCircuitContainer.appendChild(divCircuit);
   const canvas = document.createElement("canvas");
   canvas.id = "canvas";
-  canvas.width = 1600;
-  canvas.height = 1600;
+  canvas.width = xMax - xMin + 1;
+  canvas.height = yMax - yMin + 1;
+  canvas.justifyContent = "center";
   divCircuit.appendChild(canvas);
+
+  divCircuit.appendChild(spanCar1);
+  divCircuit.appendChild(spanCar2);
+
   //Création des compteurs
   const main = document.createElement("main");
   divSimulation.appendChild(main);
@@ -544,20 +554,16 @@ function afficherSimulationGP() {
   divCompteur2.classList.add("compteur");
   divCompteur2.id = "compteur2";
   main.appendChild(divCompteur2);
-  // //Gestion du formulaire : création et soumission
-  // gestionFormulaireGP();
+}
 
-  // const boutonAnimation = document.createElement("button");
-  // boutonAnimation.id = "boutonAnimation";
-  // boutonAnimation.textContent = "Lancer la simulation";
-  // sectionStats.appendChild(boutonAnimation);
-  // boutonAnimation.addEventListener("click", () => {
-  //   boutonAnimation.disabled = true;
-  //   animateRace(dataDriver1, "car1", "compteur1", driver1);
-  //   animateRace(dataDriver2, "car2", "compteur2", driver2);
-  //   //Attendre que l'animation soit terminée pour en relancer une autre -> temps mis à la zeub
-  //   setTimeout(() => {
-  //     boutonAnimation.disabled = false;
-  //   }, 25000);
-  // });
+//-------------------------------------Gestion de l'introduction du GP----------------
+export function afficherIntroductionGP() {
+  const sectionStats = document.querySelector("#stats");
+  const divIntroduction = document.createElement("div");
+  divIntroduction.classList.add("presentation");
+  sectionStats.appendChild(divIntroduction);
+  const paragrapheIntroduction = document.createElement("p");
+  paragrapheIntroduction.innerText =
+    "Pour lancer la simulation, il vous suffit de remplir le formulaire en sélectionnant deux pilotes de F1 ainsi que le circuit sur lequel vous souhaitez les voir concourir. Une fois que vous avez choisi vos options, validez le formulaire en cliquant sur le bouton 'Lancer la simulation'.\n\nAprès avoir validé le formulaire, une simulation de course va se lancer. Cette simulation permet de recréer les meilleurs tours effectués par les pilotes sélectionnés lors du Grand Prix correspondant à la saison 2022 de Formule 1.\n\nVous pourrez ainsi observer leurs performances en temps réel, avec leurs compteurs de vitesse, RPM, et d'autres informations affichées en direct. Enfin, vous pourrez consulter un graphe comparatif qui affiche les télémétries des deux pilotes. Cela vous permettra de voir les différences de performance entre les deux pilotes et de comprendre comment ils se sont comportés sur le tracé du circuit.\n\nNous espérons que vous apprécierez cette expérience immersive de simulation de courses de Formule 1 et que vous prendrez plaisir à suivre les performances de vos pilotes préférés !";
+  divIntroduction.appendChild(paragrapheIntroduction);
 }
