@@ -13,12 +13,12 @@
 }
 
 #car1 {
-  background-color: red;
+  background-color: #ff79c6;
   position: absolute;
 }
 
 #car2 {
-  background-color: blue;
+  background-color: #50fa7b;
   position: absolute;
 }
 
@@ -73,7 +73,6 @@ main {
   margin: 3%;
   /* max-width: 500px; */
   width: 100%;
-  border: 4px solid #e60012;
   /* include stripes atop a dark background */
   /* background: repeating-linear-gradient(
       -42deg,
@@ -110,12 +109,20 @@ main {
   letter-spacing: 0.1rem;
 }
 
+#stats #compteur1 {
+  border: 4px solid #ff79c6;
+}
+
+#stats #compteur2 {
+  border: 4px solid #00e600;
+}
+
 #stats #compteur1 .overview h2 {
-  border-left: 4px solid red;
+  border-left: 4px solid #ff79c6;
 }
 
 #stats #compteur2 .overview h2 {
-  border-left: 4px solid blue;
+  border-left: 4px solid #50fa7b;
 }
 
 .overview span {
@@ -138,11 +145,11 @@ main {
 }
 
 #stats #compteur1 .overview h3 {
-  border-left: 4px solid red;
+  border-left: 4px solid #ff79c6;
 }
 
 #stats #compteur2 .overview h3 {
-  border-left: 4px solid blue;
+  border-left: 4px solid #50fa7b;
 }
 
 /* position the character identifying the tyre type at the very right of the grid */

@@ -486,7 +486,7 @@ function animateRace(data, idCar, idCompteur, driver) {
     if (position < data["coordX"].length) {
       const x = data["coordX"][position];
       const y = data["coordY"][position];
-      car.style.left = `${x - 8}px`; //8 environ moitié de la largeur de la voiture => centrage
+      car.style.left = `${x - 6}px`; //6 environ moitié de la largeur de la voiture => centrage
       car.style.top = `${y}px`;
       //! ATTENTION PRBLM INDICE => position + 1 pose pbrlm car dernier élément du tableau + 1 = undefined
       if (position < data["coordX"].length - 1) {
