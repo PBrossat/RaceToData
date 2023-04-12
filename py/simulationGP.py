@@ -158,7 +158,7 @@ for i in range(len(data)):
 ax[len(data)].plot(ref_tel['Distance'], delta_time, "--" ,color='white')
 ax[len(data)].set_ylabel("Delta Time\n<-- " + namePilote2 + " ahead | " + namePilote1 + " ahead -->")
 ax[len(data)].yaxis.label.set_size(7)
-ax[len(data)].set_ylim(-1, 1)
+ax[len(data)].set_ylim(-2, 2)
 
 for a in ax.flat:
     a.label_outer()
