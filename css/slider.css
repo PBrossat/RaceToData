@@ -1,18 +1,25 @@
-#slider {
-  height: 600px;
+#divFormulaireEtSlider #slider {
+  height: 650px;
   width: 70%;
   float: right;
   position: relative;
   box-shadow: 0px 0px 10px rgb(255, 255, 255);
   border-radius: 1em;
   margin-bottom: 3%;
+  margin-right: 2%;
+  margin-left: 1%;
 }
 
-.sliderNav {
+#divFormulaireEtSlider #slider h2 {
+  width: 80%;
+  text-align: center;
+}
+
+#divFormulaireEtSlider .sliderNav {
   position: absolute;
 }
 
-.sliderNav__button {
+#divFormulaireEtSlider .sliderNav__button {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -20,27 +27,27 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.sliderNav__button:hover {
+#divFormulaireEtSlider .sliderNav__button:hover {
   transform: scale(1.1);
 }
 
-.sliderNav__button svg {
+#divFormulaireEtSlider .sliderNav__button svg {
   width: 50px;
   height: 50px;
 }
 
-#boutonDroite {
+#divFormulaireEtSlider #boutonDroite {
   right: 0px;
 }
-#boutonGauche {
+#divFormulaireEtSlider #boutonGauche {
   left: 0px;
 }
 
-.sliderNav__button svg path {
+#divFormulaireEtSlider .sliderNav__button svg path {
   stroke: #fff;
 }
 
-.sliderContent {
+#divFormulaireEtSlider .sliderContent {
   height: 100%;
   width: 100%;
   display: flex;
@@ -49,7 +56,7 @@
   border-radius: 1em;
 }
 
-.slider__item {
+#divFormulaireEtSlider .slider__item {
   height: 100%;
   min-width: 100%;
   padding-top: 5%;
@@ -60,38 +67,42 @@
   flex-direction: column;
 }
 
-#timeSlider {
+#divFormulaireEtSlider #timeSlider {
   height: 100%;
   display: flex;
   flex-direction: row;
 }
 
-#positionSlider {
+#divFormulaireEtSlider #positionSlider {
   height: 100%;
 }
 
-#pneuSlider {
+#divFormulaireEtSlider #pneuSlider {
   height: 100%;
   display: flex;
   flex-direction: row;
 }
 
-#pneuSlider .pneuPilote {
+#divFormulaireEtSlider #pneuSlider .pneuPilote {
   height: 100%;
   width: 50%;
   display: flex;
   flex-direction: column;
+  margin-left: 10%;
+  margin-bottom: 25%;
+  text-align: center;
 }
 
-#timeSlider .timePilote {
+#divFormulaireEtSlider #timeSlider .timePilote {
   height: 100%;
   width: 50%;
   display: flex;
   flex-direction: column;
+  margin-left: 10%;
 }
 
-#timeSlider .timePilote #lapTime,
-#timeSlider .timePilote .secteur {
+#divFormulaireEtSlider #timeSlider .timePilote #lapTime,
+#divFormulaireEtSlider #timeSlider .timePilote .secteur {
   display: flex;
   flex-direction: row;
   width: 20%;
@@ -108,7 +119,7 @@
 
 /* responsive part  */
 @media screen and (max-width: 950px) {
-  #slider {
-    width: 100%;
+  #divFormulaireEtSlider #slider {
+    width: 98%;
   }
 }
