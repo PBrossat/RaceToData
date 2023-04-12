@@ -10,11 +10,8 @@ var yScale = d3.scaleLinear().domain([-25000, 25000]).range([0, 1600]);
 
 //Class driver
 class Driver {
-  constructor(firstName, lastName, threeLetterName, team) {
-    this.firstName = firstName;
+  constructor(lastName) {
     this.lastName = lastName;
-    this.threeLetterName = threeLetterName;
-    this.team = team;
 
     this.telemetry = {
       speed: 0, // value in the [0-360] range, measured in km/h
@@ -151,6 +148,11 @@ export function gestionFormulaireGP() {
     if (document.querySelector(".simulation") != null) {
       document.querySelector(".simulation").remove();
     }
+    if (
+      document.querySelector(".div-graphe-telemetries-et-explication") != null
+    ) {
+      document.querySelector(".div-graphe-telemetries-et-explication").remove();
+    }
     recupererInfosSimulationGP(driver1, driver2, gp).then(
       (tabInfosSimulationGP) => {
         //Mettre à l'échelle les coordonnées des pilotes et réupérer les max et min de chaque axe pour la taile du canva
@@ -198,11 +200,10 @@ export function gestionFormulaireGP() {
           tabInfosSimulationGP[1]["coordY"][i] -= yMin;
         }
 
-        let Driver1 = new Driver("Max", "Verstappen", "VER", "RedBull");
-        let Driver2 = new Driver("Lando", "Norris", "NOR", "McLaren");
+        let Driver1 = new Driver(driver1);
+        let Driver2 = new Driver(driver2);
 
         afficherSimulationGP(xMin, yMin, xMax, yMax);
-
         //move window to #canvas
         document
           .querySelector(".circuit-container")
@@ -210,6 +211,8 @@ export function gestionFormulaireGP() {
 
         animateRace(tabInfosSimulationGP[0], "car1", "compteur1", Driver1);
         animateRace(tabInfosSimulationGP[1], "car2", "compteur2", Driver2);
+
+        afficherGrapheTelemetries(driver1, driver2, gp);
       }
     );
     //Attendre que l'animation soit terminée pour en relancer une autre -> temps mis à la zeub
@@ -231,7 +234,6 @@ function updateCompteur(idCompteur, driver) {
   // ajouter le contenu
   const overview = divCompteur.append("div").attr("class", "overview");
   overview.append("h2").text(driver.lastName);
-  overview.append("h3").text(driver.team);
   // following the HTML-centric section, include an SVG to highlight the telemetry
   const margin = {
     top: 20,
@@ -583,4 +585,31 @@ export function afficherIntroductionGP() {
   paragrapheIntroduction.innerText =
     "Pour lancer la simulation, il vous suffit de remplir le formulaire en sélectionnant deux pilotes de F1 ainsi que le circuit sur lequel vous souhaitez les voir concourir. Une fois que vous avez choisi vos options, validez le formulaire en cliquant sur le bouton 'Lancer la simulation'.\n\nUne simulation de course va alors se lancer. Cette simulation permet de recréer les meilleurs tours effectués par les pilotes sélectionnés lors du Grand Prix correspondant à la saison 2022 de Formule 1.\n\nVous pourrez ainsi observer leurs performances en temps réel, avec leurs compteurs de vitesse, RPM, et d'autres informations affichées en direct. Enfin, vous pourrez consulter un graphe comparatif qui affiche les télémétries des deux pilotes. Cela vous permettra de voir les différences de performance entre les deux pilotes et de comprendre comment ils se sont comportés sur le tracé du circuit.\n\nNous espérons que vous apprécierez cette expérience immersive de simulation de courses de Formule 1 et que vous prendrez plaisir à suivre les performances de vos pilotes préférés !\n\nAttention, la simulation peut prendre quelques secondes à se lancer, le temps que les pneus soient à bonne température.";
   divIntroduction.appendChild(paragrapheIntroduction);
+}
+
+// ------------------------------------Gestion du graphe de comparaison des télémétries----------------
+export function afficherGrapheTelemetries(driver1, driver2, circuit) {
+  const sectionStats = document.querySelector("#stats");
+  const divGrapheTelemetriesEtExplication = document.createElement("div");
+  divGrapheTelemetriesEtExplication.classList.add(
+    "div-graphe-telemetries-et-explication"
+  );
+  sectionStats.appendChild(divGrapheTelemetriesEtExplication);
+
+  const divGrapheTelemetries = document.createElement("div");
+  divGrapheTelemetries.classList.add("div-graphe-telemetries");
+  divGrapheTelemetriesEtExplication.appendChild(divGrapheTelemetries);
+  const graphe = document.createElement("img");
+  graphe.src =
+    "/data/simulationGP/" + driver1 + "_" + driver2 + "_" + circuit + ".png";
+  graphe.classList.add("graphe-telemetries");
+  divGrapheTelemetries.appendChild(graphe);
+
+  const divExplication = document.createElement("div");
+  divExplication.classList.add("presentation");
+  divGrapheTelemetriesEtExplication.appendChild(divExplication);
+  const paragrapheGraphe = document.createElement("p");
+  paragrapheGraphe.innerHTML =
+    "Ce graphique compare les télémétries des deux pilotes sélectionnés.<br/><br/>Les données comprennent le régime moteur (RPM), la vitesse (speed), l'accélérateur (throttle), le freinage (brake), les rapports de vitesse (nGear), et le temps d'écart entre les deux pilotes (Delta time).<br/><br/>Pour interpréter ces données, vous pouvez regarder les différences entre les tracés des deux pilotes pour chaque paramètre de télémétrie.<br/><br/>Par exemple, des différences importantes dans les RPM ou la vitesse peuvent indiquer que l'un des pilotes a une meilleure accélération ou une vitesse de pointe plus élevée. De même, des différences dans la position de l'accélérateur ou la position de la pédale de frein peuvent suggérer des styles de conduite différents ou des stratégies de course distinctes. Enfin, le temps d'écart entre les deux pilotes peut être un indicateur important de la performance globale de chaque pilote. Si l'un des pilotes parvient à creuser un écart important par rapport à l'autre, cela peut indiquer une meilleure maîtrise de la voiture ou une stratégie de course plus efficace.<br/><br/>Pour des conseils plus détaillés sur la façon d'analyser les données de télémétrie, nous vous recommandons de consulter le site : <a href=\"https://www.formule1fr.com/news/data-analyse-comment-lire-un-graphique-de-telemetrie-de-formule-1\" target=\"_blank\" style=\"color:#e60012;\">formule1fr.com</a>.";
+  divExplication.appendChild(paragrapheGraphe);
 }

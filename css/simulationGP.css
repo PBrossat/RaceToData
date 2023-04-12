@@ -33,7 +33,7 @@
 
 .intro-formulaire .presentation {
   width: 70%;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .simulation {
@@ -93,7 +93,7 @@ main {
 /* container describing a few information regarding the driver
     display the content in a grid with specific positions for the name, last lap and other relevant information*/
 .overview {
-  margin: 1rem 2rem;
+  margin: 0.8rem 0.8rem;
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas: "lastName lastLap" "team tyre";
@@ -107,6 +107,7 @@ main {
   padding-top: 0;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
+  font-size: 1em;
 }
 
 #stats #compteur1 {
@@ -137,20 +138,6 @@ main {
   align-self: center;
   text-align: right;
 }
-#stats .overview h3 {
-  grid-area: team;
-  padding-left: 0.5rem;
-  font-weight: 300;
-  padding-left: 0.5rem;
-}
-
-#stats #compteur1 .overview h3 {
-  border-left: 4px solid #ff79c6;
-}
-
-#stats #compteur2 .overview h3 {
-  border-left: 4px solid #50fa7b;
-}
 
 /* position the character identifying the tyre type at the very right of the grid */
 .overview strong {
@@ -164,11 +151,35 @@ main {
 
 /* have the svg horizontally centered and occupying a fraction of the available width */
 #stats .simulation svg {
-  width: 80%;
+  width: 100%;
   height: auto;
   align-self: center;
-  margin: 1rem;
   font-family: "Montserrat", sans-serif;
 }
 
 /*------------------------------------- FIN Styles relatifs aux visuels du GP et des compteurs -------------------------------------------*/
+
+/* -----------------------Styles relatifs aux graphes de telemetries---------------------------------- */
+
+.div-graphe-telemetries-et-explication {
+  margin: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.div-graphe-telemetries {
+  width: 60%;
+}
+
+.div-graphe-telemetries img {
+  box-shadow: 0px 0px 30px #fff;
+  width: 100%;
+  border-radius: 1em;
+}
+
+.div-graphe-telemetries-et-explication .presentation {
+  width: 40%;
+  font-size: 1em;
+  padding-top: 0;
+  padding-bottom: 0;
+}

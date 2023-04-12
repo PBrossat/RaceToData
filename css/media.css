@@ -1,3 +1,23 @@
+/* ------------------------------------1440px---------------------------------------- */
+
+@media (max-width: 1440px) {
+  #stats .div-graphe-telemetries-et-explication {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #stats .div-graphe-telemetries {
+    width: 100%;
+  }
+
+  #stats .div-graphe-telemetries-et-explication .presentation {
+    width: 100%;
+    font-size: 1em;
+    padding: 0;
+    padding-top: 5%;
+  }
+}
+
 /* -------------------------------------1200px------------------------------------------ */
 
 @media (max-width: 1200px) {

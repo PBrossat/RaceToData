@@ -85,14 +85,14 @@ header {
 
 .presentation {
   padding: 5%;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 400;
   color: #fff;
   text-align: justify;
 }
 
 .presentation p {
-  padding: 1.5rem;
+  padding: 1.2rem;
   box-shadow: 0px 0px 30px #fff;
   border-radius: 15px;
 }

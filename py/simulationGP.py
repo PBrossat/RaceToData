@@ -4,6 +4,7 @@ import sys
 import os
 from matplotlib import pyplot as plt
 from fastf1 import plotting
+from fastf1 import utils
 
 sysArgv = sys.argv
 namePilote1 = sysArgv[1]
@@ -142,13 +143,23 @@ with open('json/simulationGP/'+namePilote1+'_'+namePilote2+'_'+nameGP+'.json', '
 # Graphe comparatif des télémétries
 
 plotting.setup_mpl()
-data = ['rpm', 'speed', 'throttle', 'brake', 'nGear', 'drs']
-fig, ax = plt.subplots(len(data), figsize=(8, 8))
+
+delta_time, ref_tel, compare_tel = utils.delta_time(fast_pilote1, fast_pilote2)
+# reference is pilote1
+
+data = ['rpm', 'speed', 'throttle', 'brake', 'nGear']
+fig, ax = plt.subplots(len(data) + 1, figsize=(8, 8))
 fig.suptitle("Fastest Race Lap Telemetry Comparison - " + nameGP)
 for i in range(len(data)):
-    ax[i].plot(pilote1['time'], pilote1[data[i]], label=namePilote1)
-    ax[i].plot(pilote2['time'], pilote2[data[i]], label=namePilote2)
+    ax[i].plot(pilote1_car_telemetry["Distance"], pilote1[data[i]], label=namePilote1)
+    ax[i].plot(pilote2_car_telemetry["Distance"], pilote2[data[i]], label=namePilote2)
     ax[i].set(ylabel=data[i].upper())
+    
+ax[len(data)].plot(ref_tel['Distance'], delta_time, "--" ,color='white')
+ax[len(data)].set_ylabel("Delta Time\n<-- " + namePilote2 + " ahead | " + namePilote1 + " ahead -->")
+ax[len(data)].yaxis.label.set_size(7)
+ax[len(data)].set_ylim(-1, 1)
+
 for a in ax.flat:
     a.label_outer()
 ax[0].legend()
