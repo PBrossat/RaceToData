@@ -138,12 +138,12 @@ export function gestionFormulaireGP() {
   formulaire.addEventListener("submit", (e) => {
     //pour éviter le rechargement de la page
     e.preventDefault();
+    //désactiver la soumission du formulaire
+    document.getElementById("boutonSubmit").disabled = true;
     //récupération des données du formulaire
     const driver1 = document.getElementById("selecteurPilote1").value;
     const driver2 = document.getElementById("selecteurPilote2").value;
     const gp = document.getElementById("selecteurGrandPrix").value;
-    //désactiver la soumission du formulaire
-    document.getElementById("boutonSubmit").disabled = true;
     //supprimer la div contenant la simulation précédente
     if (document.querySelector(".simulation") != null) {
       document.querySelector(".simulation").remove();
@@ -204,10 +204,9 @@ export function gestionFormulaireGP() {
         let Driver2 = new Driver(driver2);
 
         afficherSimulationGP(xMin, yMin, xMax, yMax);
-        //move window to #canvas
-        document
-          .querySelector(".circuit-container")
-          .scrollIntoView({ behavior: "smooth", block: "center" });
+        //move window
+        document.querySelector(".simulation").scrollIntoView(true);
+        //descendre plus
 
         animateRace(tabInfosSimulationGP[0], "car1", "compteur1", Driver1);
         animateRace(tabInfosSimulationGP[1], "car2", "compteur2", Driver2);
@@ -219,7 +218,7 @@ export function gestionFormulaireGP() {
     setTimeout(() => {
       //désactiver la soumission du formulaire
       document.getElementById("boutonSubmit").disabled = false;
-    }, 2500); //valeur à redéfinir suite au chargement des données avec python et fastF1
+    }, 30000); //environ la durée de l'animation si on a déjà les données
   });
 
   //! problème : si on choisit le même pilote
