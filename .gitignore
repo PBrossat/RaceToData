@@ -5,4 +5,5 @@ prettier
 py/cache/*
 json/comparaisonPilote/*
 json/simulationGP/*
+data/simulationGP
 
