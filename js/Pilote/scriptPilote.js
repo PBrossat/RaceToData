@@ -33,16 +33,15 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   creationNouvelleDiv();
   creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
-  creationDivFormulaire(
-    document.querySelector(".divGraphique"),
+  await creationSlider();
+  await creationDivFormulaire(
+    document.querySelector("#divFormulaireEtSlider"), //container du slider et du formulaire
     tabGlobalDataPilotes,
     tabGlobalDataGP,
-    "Comparaison !",
-    //titreDuFormulaire
-    ""
+    "Comparer !",
+    "Comparez deux pilotes sur un Grand Prix"
   );
   gestionFormulairePilote();
-  creationSlider();
 });
 
 //------------------------------ Création des containers ----------------
