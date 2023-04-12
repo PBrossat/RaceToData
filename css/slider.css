@@ -62,11 +62,14 @@
 
 #timeSlider {
   height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 #positionSlider {
   height: 100%;
 }
+
 #pneuSlider {
   height: 100%;
   display: flex;
@@ -78,6 +81,21 @@
   width: 50%;
   display: flex;
   flex-direction: column;
+}
+
+#timeSlider .timePilote {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#timeSlider .timePilote #lapTime,
+#timeSlider .timePilote .secteur {
+  display: flex;
+  flex-direction: row;
+  width: 20%;
+  margin-bottom: 10%;
 }
 
 /* #pneuSlider #pneuPilote1 {

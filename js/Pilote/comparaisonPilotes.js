@@ -21,6 +21,8 @@ async function gestionFormulairePilote() {
     grahiquePositionComparaison(data);
     pneuPilote(data, 0);
     pneuPilote(data, 1);
+    tempsPilote(data, 1, "bleu");
+    tempsPilote(data, 2, "vert");
   });
 }
 
@@ -97,11 +99,14 @@ function creationSlider() {
   slider.appendChild(sliderContent);
 
   //creation de 3 div pour le slider
+
+  //création de la div pour la position
   const positionSlider = document.createElement("div");
   positionSlider.className = "slider__item";
   positionSlider.id = "positionSlider";
   sliderContent.appendChild(positionSlider);
 
+  //création de deux div pour les pneus
   const pneuSlider = document.createElement("div");
   pneuSlider.className = "slider__item";
   pneuSlider.id = "pneuSlider";
@@ -116,10 +121,20 @@ function creationSlider() {
   pneuPilote2.id = "pneuPilote2";
   pneuSlider.appendChild(pneuPilote2);
 
+  //création de la div pour le temps
   const timeSlider = document.createElement("div");
   timeSlider.className = "slider__item";
   timeSlider.id = "timeSlider";
   sliderContent.appendChild(timeSlider);
+  //création de deux div dans timeSlider
+  const timePilote1 = document.createElement("div");
+  timePilote1.className = "timePilote";
+  timePilote1.id = "timePilote1";
+  timeSlider.appendChild(timePilote1);
+  const timePilote2 = document.createElement("div");
+  timePilote2.className = "timePilote";
+  timePilote2.id = "timePilote2";
+  timeSlider.appendChild(timePilote2);
 
   divParent.appendChild(slider);
 }
@@ -333,4 +348,132 @@ async function pneuPilote(data, idPilote) {
   divParent.appendChild(zoneExplication);
 }
 
+function affichageTempsPilote(
+  data,
+  lapTimeOrSectorTime,
+  nbSecteur,
+  idPilote,
+  divParent,
+  couleur
+) {
+  let temps = null;
+  switch (lapTimeOrSectorTime) {
+    case "lapTime":
+      const chiffreLapTime = new Array(6);
+      temps = data[idPilote - 1]["meilleurTour"]; //une seule valeur (string)
+      var unite_minute = parseInt(temps.substr(4, 1));
+      chiffreLapTime[0] = new Image();
+      chiffreLapTime[0].src = `data/chiffres_${couleur}/${unite_minute}.gif`;
+      var dixaine_seconde = parseInt(temps.substr(6, 1));
+      chiffreLapTime[1] = new Image();
+      chiffreLapTime[1].src = `data/chiffres_${couleur}/${dixaine_seconde}.gif`;
+      var unite_seconde = parseInt(temps.substr(7, 1));
+      chiffreLapTime[2] = new Image();
+      chiffreLapTime[2].src = `data/chiffres_${couleur}/${unite_seconde}.gif`;
+      var dixaine_milliseconde = parseInt(temps.substr(9, 1));
+      chiffreLapTime[3] = new Image();
+      chiffreLapTime[3].src = `data/chiffres_${couleur}/${dixaine_milliseconde}.gif`;
+      var centaine_milliseconde = parseInt(temps.substr(10, 1));
+      chiffreLapTime[4] = new Image();
+      chiffreLapTime[4].src = `data/chiffres_${couleur}/${centaine_milliseconde}.gif`;
+      var unite_milliseconde = parseInt(temps.substr(11, 1));
+      chiffreLapTime[5] = new Image();
+      chiffreLapTime[5].src = `data/chiffres_${couleur}/${unite_milliseconde}.gif`;
+
+      for (let i = 0; i < 6; i++) {
+        chiffreLapTime[i].width = 40;
+        chiffreLapTime[i].height = 40;
+      }
+
+      const Blanc1 = new Image();
+      Blanc1.src = `data/chiffres_${couleur}/Points.gif`;
+      Blanc1.style.width = 40;
+      const Blanc2 = new Image();
+      Blanc2.src = `data/chiffres_${couleur}/Points.gif`;
+      Blanc2.style.width = 40;
+
+      //affichage des images dans le divParent
+      divParent.appendChild(chiffreLapTime[0]);
+      divParent.appendChild(Blanc1);
+      for (let i = 1; i < 3; i++) {
+        divParent.appendChild(chiffreLapTime[i]);
+      }
+      divParent.appendChild(Blanc2);
+      for (let i = 3; i < 6; i++) {
+        divParent.appendChild(chiffreLapTime[i]);
+      }
+
+      break;
+
+    case "sectorTime":
+      const chiffreSectorTime = new Array(5);
+      temps = data[idPilote - 1]["tempsSecteur"]; //tableau de 3 valeurs (string)
+      var dixaine_seconde = parseInt(temps[nbSecteur - 1].substr(6, 1));
+      chiffreSectorTime[0] = new Image();
+      chiffreSectorTime[0].src = `data/chiffres_${couleur}/${dixaine_seconde}.gif`;
+      var unite_seconde = parseInt(temps[nbSecteur - 1].substr(7, 1));
+      chiffreSectorTime[1] = new Image();
+      chiffreSectorTime[1].src = `data/chiffres_${couleur}/${unite_seconde}.gif`;
+      var dixaine_milliseconde = parseInt(temps[nbSecteur - 1].substr(9, 1));
+      chiffreSectorTime[2] = new Image();
+      chiffreSectorTime[2].src = `data/chiffres_${couleur}/${dixaine_milliseconde}.gif`;
+      var centaine_milliseconde = parseInt(temps[nbSecteur - 1].substr(10, 1));
+      chiffreSectorTime[3] = new Image();
+      chiffreSectorTime[3].src = `data/chiffres_${couleur}/${centaine_milliseconde}.gif`;
+      var unite_milliseconde = parseInt(temps[nbSecteur - 1].substr(11, 1));
+      chiffreSectorTime[4] = new Image();
+      chiffreSectorTime[4].src = `data/chiffres_${couleur}/${unite_milliseconde}.gif`;
+
+      //chiffre[i].width = 40;
+      for (let i = 0; i < 5; i++) {
+        chiffreSectorTime[i].width = 40;
+        chiffreSectorTime[i].height = 40;
+      }
+
+      const Blanc = new Image();
+      Blanc.src = `data/chiffres_${couleur}/Points.gif`;
+      Blanc.style.width = 40;
+
+      //affichage des images dans le divParent
+      for (let i = 0; i < 2; i++) {
+        divParent.appendChild(chiffreSectorTime[i]);
+      }
+      divParent.appendChild(Blanc);
+      for (let i = 2; i < 5; i++) {
+        divParent.appendChild(chiffreSectorTime[i]);
+      }
+      break;
+  }
+}
+
+function tempsPilote(data, idPilote, couleur) {
+  const divParent = document.querySelector(`#timePilote${idPilote}`);
+  const divLapTime = document.createElement("div");
+  divLapTime.id = "lapTime";
+  divLapTime.innerHTML = "Meilleur tour : ";
+  divLapTime.style.color = "white";
+
+  //création des trois div (secteur 1, secteur 2, secteur 3)
+  const divSecteur1 = createSecteurDiv("Secteur 1 : ", "red");
+  const divSecteur2 = createSecteurDiv("Secteur 2 : ", "blue");
+  const divSecteur3 = createSecteurDiv("Secteur 3 : ", "yellow");
+
+  divParent.append(divLapTime, divSecteur1, divSecteur2, divSecteur3);
+
+  affichageTempsPilote(data, "lapTime", 0, idPilote, divLapTime, couleur);
+  affichageTempsPilote(data, "sectorTime", 1, idPilote, divSecteur1, couleur);
+  affichageTempsPilote(data, "sectorTime", 2, idPilote, divSecteur2, couleur);
+  affichageTempsPilote(data, "sectorTime", 3, idPilote, divSecteur3, couleur);
+}
+
+//permet de créer un div pour chaque secteur
+function createSecteurDiv(label, color) {
+  const divSecteur = document.createElement("div");
+  divSecteur.className = "secteur";
+  divSecteur.innerHTML = label;
+  divSecteur.style.color = color;
+  divSecteur.style.fontSize = "0.7em";
+  divSecteur.style.fontWeight = "bold";
+  return divSecteur;
+}
 export { gestionFormulairePilote, creationSlider, grahiquePositionComparaison };
