@@ -27,7 +27,11 @@ async function gestionFormulairePilote() {
 }
 
 function creationSlider() {
-  const divParent = document.querySelector(".divGraphique");
+  const divParent = document.querySelector("#stats");
+  const divFormulaireEtSlider = document.createElement("div");
+  divFormulaireEtSlider.id = "divFormulaireEtSlider"; //style dans formulaire.css
+  divParent.appendChild(divFormulaireEtSlider);
+
   const slider = document.createElement("div");
   slider.class = "slider";
   slider.id = "slider";
@@ -136,7 +140,7 @@ function creationSlider() {
   timePilote2.id = "timePilote2";
   timeSlider.appendChild(timePilote2);
 
-  divParent.appendChild(slider);
+  divFormulaireEtSlider.appendChild(slider);
 }
 
 function next() {
