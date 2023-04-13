@@ -33,7 +33,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   creationNouvelleDiv();
   creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
-  await creationSlider();
+  creationSlider();
   await creationDivFormulaire(
     document.querySelector("#divFormulaireEtSlider"), //container du slider et du formulaire
     tabGlobalDataPilotes,
@@ -41,7 +41,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
     "Comparer !",
     "Comparez deux pilotes sur un Grand Prix"
   );
-  gestionFormulairePilote();
+  await gestionFormulairePilote();
 });
 
 //------------------------------ Création des containers ----------------
