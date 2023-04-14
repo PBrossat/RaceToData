@@ -2,6 +2,32 @@
 import { tabGlobalDataPilotes } from "./scriptPilote.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
 
+//enumeration des grands prix pour l'image dans le timeSlider
+const GrandPrix = {
+  Australie: "data/grands-prix/melbourne.png",
+  "Etats-Unis": "data/grands-prix/austin.png",
+  Bahrein: "data/grands-prix/bahrain.png",
+  Azerbaïdjan: "data/grands-prix/baku.png",
+  Espagne: "data/grands-prix/barcelone.png",
+  Monaco: "data/grands-prix/monaco.png",
+  Hongrie: "data/grands-prix/hungaroring.png",
+  Italie: "data/grands-prix/imola.png",
+  Brésil: "data/grands-prix/bresil.png",
+  "Arabie Saoudite": "data/grands-prix/jeddah.png",
+  Singapour: "data/grands-prix/singapour.png",
+  Miami: "data/grands-prix/miami.png",
+  Monza: "data/grands-prix/monza.png",
+  Autriche: "data/grands-prix/redBullRing.png",
+  France: "data/grands-prix/castellet.png",
+  Mexique: "data/grands-prix/mexique.png",
+  Angleterre: "data/grands-prix/silverstone.png",
+  Belgique: "data/grands-prix/spaFrancorchamps.png",
+  Japon: "data/grands-prix/suzuka.png",
+  Canada: "data/grands-prix/canada.png",
+  "Abu Dhabi": "data/grands-prix/abuDhabi.png",
+  "Pays-Bas": "data/grands-prix/zandvoort.png",
+};
+
 async function gestionFormulairePilote() {
   const formulaire = document.getElementById("formulaire");
   formulaire.addEventListener("submit", async (e) => {
@@ -21,13 +47,18 @@ async function gestionFormulairePilote() {
     grahiquePositionComparaison(data);
     pneuPilote(data, 0);
     pneuPilote(data, 1);
-    tempsPilote(data, 1, "bleu");
-    tempsPilote(data, 2, "vert");
+    tempsPilote(data, 1, "rouge");
+    tempsPilote(data, 2, "jaune");
+    imageGP(data);
   });
 }
 
-function creationSlider() {
-  const divParent = document.querySelector(".divGraphique");
+async function creationSlider() {
+  const divParent = document.querySelector("#stats");
+  const divFormulaireEtSlider = document.createElement("div");
+  divFormulaireEtSlider.id = "divFormulaireEtSlider"; //style dans formulaire.css
+  divParent.appendChild(divFormulaireEtSlider);
+
   const slider = document.createElement("div");
   slider.class = "slider";
   slider.id = "slider";
@@ -126,17 +157,25 @@ function creationSlider() {
   timeSlider.className = "slider__item";
   timeSlider.id = "timeSlider";
   sliderContent.appendChild(timeSlider);
-  //création de deux div dans timeSlider
+
+  //création de deux div dans timeSlider (une pour les temps, une pour l'image du gp)
+  const temps = document.createElement("div");
+  temps.id = "tempsPilote";
+  const imageGp = document.createElement("div");
+  imageGp.id = "imageGp";
+  timeSlider.appendChild(temps);
+  timeSlider.appendChild(imageGp);
+
   const timePilote1 = document.createElement("div");
   timePilote1.className = "timePilote";
   timePilote1.id = "timePilote1";
-  timeSlider.appendChild(timePilote1);
+  temps.appendChild(timePilote1);
   const timePilote2 = document.createElement("div");
   timePilote2.className = "timePilote";
   timePilote2.id = "timePilote2";
-  timeSlider.appendChild(timePilote2);
+  temps.appendChild(timePilote2);
 
-  divParent.appendChild(slider);
+  divFormulaireEtSlider.appendChild(slider);
 }
 
 function next() {
@@ -453,6 +492,9 @@ function tempsPilote(data, idPilote, couleur) {
   divLapTime.innerHTML = "Meilleur tour : ";
   divLapTime.style.color = "white";
 
+  divParent.innerHTML = `<h2>Meilleur temps de <br>${
+    data[idPilote - 1]["nomPilote"]
+  }</h2>`;
   //création des trois div (secteur 1, secteur 2, secteur 3)
   const divSecteur1 = createSecteurDiv("Secteur 1 : ", "red");
   const divSecteur2 = createSecteurDiv("Secteur 2 : ", "blue");
@@ -466,7 +508,6 @@ function tempsPilote(data, idPilote, couleur) {
   affichageTempsPilote(data, "sectorTime", 3, idPilote, divSecteur3, couleur);
 }
 
-//permet de créer un div pour chaque secteur
 function createSecteurDiv(label, color) {
   const divSecteur = document.createElement("div");
   divSecteur.className = "secteur";
@@ -476,4 +517,13 @@ function createSecteurDiv(label, color) {
   divSecteur.style.fontWeight = "bold";
   return divSecteur;
 }
+
+async function imageGP(data) {
+  const divParent = document.querySelector("#imageGp");
+  const imageGP = new Image();
+  imageGP.src = GrandPrix[data[0]["GrandPrix"]]; //vient de l'énumeration en debut de fichier
+  divParent.appendChild(imageGP);
+}
+
+//permet de créer un div pour chaque secteur
 export { gestionFormulairePilote, creationSlider, grahiquePositionComparaison };
