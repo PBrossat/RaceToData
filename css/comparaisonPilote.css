@@ -22,7 +22,7 @@
   border-radius: 0.5em;
 }
 
-#pneuSlider h2 {
+#pneuSlider .pneuPilote h2 {
   color: white;
   text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
   padding-bottom: 2%;
@@ -31,7 +31,11 @@
 
 #pneuSlider .pneu {
   font-size: 0.8em;
-  margin-bottom: 3%;
+  /* width et height selon le nombre de pneux total */
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  margin-bottom: 10%;
   color: white;
 }
 
