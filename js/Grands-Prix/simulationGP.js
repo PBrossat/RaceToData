@@ -480,6 +480,21 @@ function animateRace(data, idCar, idCompteur, driver) {
     }
     context.strokeStyle = "white";
     context.stroke();
+
+    //Ligne arrivée/départ
+    context.beginPath();
+    context.moveTo(coordinatesX[0], coordinatesY[0]);
+    context.lineTo(coordinatesX[5], coordinatesY[5]);
+    context.strokeStyle = "red";
+    context.stroke();
+    // context.fillStyle = "red";
+    // context.font = "bold 0.7rem sans-serif";
+    // context.textAlign = "center";
+    // context.fillText(
+    //   "Départ / Arrivée",
+    //   coordinatesX[0] - 40,
+    //   coordinatesY[0] - 20
+    // );
   };
 
   const moveCar = () => {
