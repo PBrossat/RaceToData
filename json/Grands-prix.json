@@ -13,7 +13,7 @@
     },
     {
       "Name": "Austin",
-      "Localisation": "Etats-Unis",
+      "Localisation": "Austin",
       "FirstGP": "2012",
       "NumberLaps": "56",
       "CircuitLength": "5.513",
@@ -35,7 +35,7 @@
     },
     {
       "Name": "Baku",
-      "Localisation": "Azerbaïdjan",
+      "Localisation": "Baku",
       "FirstGP": "2016",
       "NumberLaps": "51",
       "CircuitLength": "6.003",
@@ -68,7 +68,7 @@
     },
     {
       "Name": "Imola",
-      "Localisation": "Italie",
+      "Localisation": "Imola",
       "FirstGP": "1980",
       "NumberLaps": "63",
       "CircuitLength": "4.909",
@@ -90,7 +90,7 @@
     },
     {
       "Name": "Jeddah",
-      "Localisation": "Arabie Saoudite",
+      "Localisation": "Jeddah",
       "FirstGP": "2021",
       "NumberLaps": "50",
       "CircuitLength": "6.174",
@@ -178,7 +178,7 @@
     },
     {
       "Name": "Silverstone",
-      "Localisation": "Angleterre",
+      "Localisation": "Silverstone",
       "FirstGP": "1950",
       "NumberLaps": "52",
       "CircuitLength": "5.891",
@@ -233,7 +233,7 @@
     },
     {
       "Name": "Zandvoort",
-      "Localisation": "Pays-Bas",
+      "Localisation": "Zandvoort",
       "FirstGP": "1952",
       "NumberLaps": "72",
       "CircuitLength": "4.259",
