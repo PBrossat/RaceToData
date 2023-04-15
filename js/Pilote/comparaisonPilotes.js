@@ -37,18 +37,38 @@ async function gestionFormulairePilote() {
     const gp = document.getElementById("selecteurGrandPrix").value;
 
     //desactivation de la soumission du formulaire
-    document.getElementById("boutonSubmit").disabled = true;
-    // fetch("http://localhost:3000/comparaisonPilote?nomGP=Monaco&saison=2022&nomPilote1=LEC&nomPilote2=VER")
+    document.getElementById("boutonSubmit").disabled = false;
+    //fetch des données
     const response = await fetch(
       `/dataComparaison?nomGP=${gp}&nomPilote1=${pilote1}&nomPilote2=${pilote2}`
     );
 
     const data = await response.json();
+
+    //-----Rendre visible les boutons de navigation-----
+    document.getElementById("boutonGauche").style.visibility = "visible";
+    document.getElementById("boutonDroite").style.visibility = "visible";
+
+    //-----Suppression des données précédentes-----
+    // const explication = document.getElementById("#positionSlider");
+    // explication.innerHTML = "";
+
+    //------Affichage des données dans le slider-----
+
+    //slider 1
+    //Position des pilotes sur la grille de départ à la fin du GP
     grahiquePositionComparaison(data);
+
+    //slider 2
+    //Pneux utilisés par les pilotes
     pneuPilote(data, 0);
     pneuPilote(data, 1);
-    tempsPilote(data, 1, "rouge");
-    tempsPilote(data, 2, "jaune");
+
+    //slider 3
+    //Temps des pilotes
+    tempsPilote(data, 1);
+    tempsPilote(data, 2);
+    //image du circuit sélectionné
     imageGP(data);
   });
 }
@@ -75,6 +95,8 @@ async function creationSlider() {
     previous();
     desactiverBoutons();
   };
+  //invisible au chargement de la page
+  boutonGauche.style.visibility = "hidden";
   sliderNav.appendChild(boutonGauche);
 
   //création du bouton de droite
@@ -85,6 +107,8 @@ async function creationSlider() {
     next();
     desactiverBoutons();
   };
+  //invisible au chargement de la page
+  boutonDroite.style.visibility = "hidden";
   sliderNav.appendChild(boutonDroite);
 
   //svg dans bouton droit :
@@ -178,6 +202,7 @@ async function creationSlider() {
   divFormulaireEtSlider.appendChild(slider);
 }
 
+//fonction permettant de faire défiler le slider vers la droite
 function next() {
   const longueurSlider = document.querySelector("#slider").offsetWidth;
   const sliderContent = document.querySelector(".sliderContent");
@@ -190,6 +215,7 @@ function next() {
   }
 }
 
+//fonction permettant de faire défiler le slider vers la gauche
 function previous() {
   const longueurSlider = document.querySelector("#slider").offsetWidth;
   const sliderContent = document.querySelector(".sliderContent");
@@ -210,6 +236,19 @@ function desactiverBoutons() {
     document.getElementById("boutonGauche").disabled = false;
     document.getElementById("boutonDroite").disabled = false;
   }, 1000);
+}
+
+//fonction appélée lors du chargement de la page Pilote pour expliquer le fonctionnement de la comparaison
+async function explicationComparaison() {
+  //l'unique slider visible lors du chargement de la page est celui de la position
+  const divParent = document.querySelector("#positionSlider");
+  const titre = document.createElement("h2");
+  titre.innerHTML = "Comment comparer deux pilotes ?";
+  const explication = document.createElement("p");
+  explication.innerHTML =
+    "Pour comparer deux pilotes, il suffit de sélectionner les deux pilotes que vous souhaitez comparer dans le menu déroulant. Une fois les deux pilotes sélectionnés, vous pouvez naviguer entre les différents graphiques grâce aux flèches situées à gauche et à droite du slider.";
+  divParent.appendChild(titre);
+  divParent.appendChild(explication);
 }
 
 async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
@@ -339,6 +378,21 @@ async function pneuPilote(data, idPilote) {
     divPneu.className = "pneu";
     //hauteur de la div s'adapte en fonction de data[idPilote]["pneu"].length
     divPneu.style.height = `${100 / data[idPilote]["pneu"].length - 3}%`;
+    divPneu.style.width = `${100 / data[idPilote]["pneu"].length - 3}%`;
+
+    //gère le "centrage" de la divPneu selon le nombre de pneu total utilisés par le pilote
+    switch (data[idPilote]["pneu"].length) {
+      case 4:
+        divPneu.style.marginLeft = "35%";
+      case 3:
+        divPneu.style.marginLeft = "26%";
+        break;
+      case 2:
+        divPneu.style.marginLeft = "17%";
+        break;
+      case 1:
+        divPneu.style.marginLeft = "10%";
+    }
 
     //insertion de l'image du pneu dans la div
     switch (data[idPilote]["pneu"][i]) {
@@ -490,7 +544,7 @@ function tempsPilote(data, idPilote, couleur) {
   const divLapTime = document.createElement("div");
   divLapTime.id = "lapTime";
   divLapTime.innerHTML = "Meilleur tour : ";
-  divLapTime.style.color = "white";
+  divLapTime.style.color = "violet";
 
   divParent.innerHTML = `<h2>Meilleur temps de <br>${
     data[idPilote - 1]["nomPilote"]
@@ -502,10 +556,10 @@ function tempsPilote(data, idPilote, couleur) {
 
   divParent.append(divLapTime, divSecteur1, divSecteur2, divSecteur3);
 
-  affichageTempsPilote(data, "lapTime", 0, idPilote, divLapTime, couleur);
-  affichageTempsPilote(data, "sectorTime", 1, idPilote, divSecteur1, couleur);
-  affichageTempsPilote(data, "sectorTime", 2, idPilote, divSecteur2, couleur);
-  affichageTempsPilote(data, "sectorTime", 3, idPilote, divSecteur3, couleur);
+  affichageTempsPilote(data, "lapTime", 0, idPilote, divLapTime, "violet"); //meilleur tour
+  affichageTempsPilote(data, "sectorTime", 1, idPilote, divSecteur1, "rouge"); //secteur 1
+  affichageTempsPilote(data, "sectorTime", 2, idPilote, divSecteur2, "bleu"); //secteur 2
+  affichageTempsPilote(data, "sectorTime", 3, idPilote, divSecteur3, "jaune"); //secteur 3
 }
 
 function createSecteurDiv(label, color) {
@@ -526,4 +580,9 @@ async function imageGP(data) {
 }
 
 //permet de créer un div pour chaque secteur
-export { gestionFormulairePilote, creationSlider, grahiquePositionComparaison };
+export {
+  gestionFormulairePilote,
+  creationSlider,
+  grahiquePositionComparaison,
+  explicationComparaison,
+};

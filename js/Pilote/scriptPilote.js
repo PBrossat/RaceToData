@@ -8,6 +8,7 @@ import {
   gestionFormulairePilote,
   creationSlider,
   grahiquePositionComparaison,
+  explicationComparaison,
 } from "./comparaisonPilotes.js";
 import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
@@ -34,6 +35,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
   creationSlider();
+  //await explicationComparaison();
   await creationDivFormulaire(
     document.querySelector("#divFormulaireEtSlider"), //container du slider et du formulaire
     tabGlobalDataPilotes,
