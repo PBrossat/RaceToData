@@ -218,10 +218,8 @@ export function gestionFormulaireGP() {
     setTimeout(() => {
       //désactiver la soumission du formulaire
       document.getElementById("boutonSubmit").disabled = false;
-    }, 30000); //environ la durée de l'animation si on a déjà les données
+    }, 30000); //environ la durée de l'animation si on a déjà les données //! A REDEFINIR
   });
-
-  //! problème : si on choisit le même pilote
 }
 
 //-------------------Gestion du compteur----------------
@@ -506,7 +504,7 @@ function animateRace(data, idCar, idCompteur, driver) {
       car.style.top = `${y}px`;
       //! ATTENTION PRBLM INDICE => position + 1 pose pbrlm car dernier élément du tableau + 1 = undefined
       if (position < data["coordX"].length - 1) {
-        timeDiff = data["time"][position + 1] - data["time"][position] / 1000; //en secondes
+        timeDiff = data["time"][position + 1] - data["time"][position];
       } else {
         timeDiff = 0;
       }
@@ -525,7 +523,7 @@ function animateRace(data, idCar, idCompteur, driver) {
 
       updateCompteur(idCompteur, driver);
       position++;
-      setTimeout(moveCar, timeDiff / 1200);
+      setTimeout(moveCar, timeDiff / 6);
     }
   };
   // Dessiner le tracé du circuit
