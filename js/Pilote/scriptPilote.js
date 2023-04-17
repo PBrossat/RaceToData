@@ -10,7 +10,7 @@ import {
   grahiquePositionComparaison,
   explicationComparaison,
 } from "./comparaisonPilotes.js";
-import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
+import { creationDivFormulaire } from "../Grands-Prix/formulaireSimulation.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
 
 //----------------------------Récuperation Infos Pilotes depuis fichier json-------------
