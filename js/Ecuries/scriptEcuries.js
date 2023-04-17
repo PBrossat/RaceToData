@@ -1,7 +1,7 @@
 //----------------------------- Import des fonctions ----------------------------
 import { graphePie, grapheMultipleBars, grapheRace } from "./graphesEcuries.js";
-// import { main } from "./creationJson.js";
 import { mapEcuries } from "./mapEcuries.js";
+// import { main } from "./creationJson.js";
 
 //----------------------------Récuperation Infos Ecuries depuis fichier json-------------
 async function recupererInfosEcuries() {
@@ -60,7 +60,7 @@ function creationDivPie() {
   divAnalyse.innerHTML = "";
 
   //Création Texte Explicatif
-  const texteExplicatif = document.createElement("div");
+  const texteExplicatif = document.createElement("p");
   divAnalyse.appendChild(texteExplicatif);
   texteExplicatif.className = "presentation";
   texteExplicatif.innerHTML =
@@ -150,7 +150,7 @@ function creationDivMultipleBars() {
   divAnalyse.innerHTML = "";
 
   //Création Texte Explicatif
-  const texteExplicatif = document.createElement("div");
+  const texteExplicatif = document.createElement("p");
   divAnalyse.appendChild(texteExplicatif);
   texteExplicatif.className = "presentation";
   texteExplicatif.innerHTML =
@@ -249,7 +249,7 @@ function creationDivRace() {
   let data = "Points";
 
   //Création Texte Explicatif
-  const texteExplicatif = document.createElement("div");
+  const texteExplicatif = document.createElement("p");
   divAnalyse.appendChild(texteExplicatif);
   texteExplicatif.className = "presentation";
   texteExplicatif.innerHTML =
