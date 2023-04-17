@@ -14,8 +14,6 @@ async function recupererInfosGpJSON() {
   return response["Circuits"];
 }
 
-//! window.localStorage
-
 // Recuperer les infos sur les GP
 let tabGlobalDataGpAPI;
 let tabGlobalDataGpJSON;
