@@ -220,6 +220,6 @@ export function gestionFormulaireGP() {
     setTimeout(() => {
       //désactiver la soumission du formulaire
       document.getElementById("boutonSubmit").disabled = false;
-    }, 30000); //environ la durée de l'animation si on a déjà les données //! A REDEFINIR
+    }, 26000); //environ la durée de l'animation si on a déjà les données
   });
 }
