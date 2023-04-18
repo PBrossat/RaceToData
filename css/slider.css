@@ -2,7 +2,6 @@
   height: 650px;
   width: 70%;
   float: right;
-  position: relative;
   box-shadow: 0px 0px 10px rgb(255, 255, 255);
   border-radius: 1em;
   margin-bottom: 3%;
@@ -59,12 +58,33 @@
 #divFormulaireEtSlider .slider__item {
   height: 100%;
   min-width: 100%;
-  padding-top: 5%;
+  padding: 3%;
   /* permet de centre les element verticalement et horizontalement */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+#divFormulaireEtSlider .slider__item .divPointInterrogation {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* div point d'interrogation positionSlider  */
+#divFormulaireEtSlider .slider__item #divPointInterrogation0 {
+  height: 6%;
+  width: 100%;
+}
+
+#divFormulaireEtSlider .slider__item #divPointInterrogation1 {
+  height: 100%;
+  flex-direction: column;
+}
+
+#divFormulaireEtSlider .slider__item #divPointInterrogation2 {
+  height: 6%;
+  width: 100%;
 }
 
 #divFormulaireEtSlider #timeSlider {
@@ -109,6 +129,7 @@
   width: 50%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-left: 10%;
   margin-bottom: 25%;
   text-align: center;
@@ -119,7 +140,7 @@
   width: 50%;
   display: flex;
   flex-direction: column;
-  margin-left: 10%;
+  margin-left: 5%;
 }
 
 #divFormulaireEtSlider #timeSlider .timePilote #lapTime,
@@ -128,6 +149,7 @@
   flex-direction: row;
   width: 20%;
   margin-bottom: 10%;
+  align-items: center;
 }
 
 /* #pneuSlider #pneuPilote1 {
