@@ -13,18 +13,19 @@ async function graphePie(données, type) {
 
   const graphique = document.getElementById("GraphiquePtEcuries");
 
-  Highcharts.chart(graphique, {
+  Highcharts.chart({
     chart: {
+      renderTo: graphique,
       type: "pie",
       backgroundColor: "#1b1b1b",
-      marginBottom: 110,
       height: "40%",
       zoomType: "xy",
       panning: true,
       panKey: "shift",
+      marginBottom: 20,
     },
     title: {
-      text: "Nombre de titres " + type + " par écuries",
+      text: "Nombre de titres " + type + " par écurie",
       style: {
         color: "#FF2A2A",
         textShadow: "5px 5px 2px rgba(100,98,98,0.4)",
@@ -34,14 +35,15 @@ async function graphePie(données, type) {
     },
     plotOptions: {
       pie: {
-        innerSize: 100,
+        size: "100%",
+        innerSize: 130,
         depth: 45,
       },
     },
     colors: colors,
     series: [
       {
-        name: "Titres écuries",
+        name: "Titres " + type,
         data: données,
       },
     ],
@@ -62,7 +64,7 @@ async function grapheMultipleBars(données, annee) {
     chart: {
       type: "column",
       backgroundColor: "#1b1b1b",
-      height: "35%",
+      height: "40%",
     },
     title: {
       text: "Statistiques des écuries de F1 depuis " + annee,
@@ -75,7 +77,11 @@ async function grapheMultipleBars(données, annee) {
       },
     },
     xAxis: {
-      categories: ["Victoires All Time", "Poles All Time", "Podiums All Time"],
+      categories: [
+        "Victoires depuis " + annee,
+        "Poles depuis " + annee,
+        "Podiums depuis " + annee,
+      ],
       crosshair: true,
     },
     yAxis: {
@@ -245,7 +251,7 @@ async function grapheRace(données, year) {
         animation: {
           duration: 500,
         },
-        height: "40%",
+        height: "35%",
         marginRight: 50,
         backgroundColor: "#1b1b1b",
       },
