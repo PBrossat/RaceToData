@@ -1,0 +1,18 @@
+.popup {
+  background-color: #000000;
+  opacity: 90%; /* pour voir le fond */
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 10px rgb(255, 255, 255);
+  border-radius: 1em;
+  padding: 30%;
+  display: none;
+  position: absolute;
+}
+
+/* .popup #popup_O {
+  padding: 32%;
+}
+
+.popup #popup_1 {
+  padding: 33%;
+} */
