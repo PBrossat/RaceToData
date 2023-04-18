@@ -11,6 +11,7 @@ import {
   explicationComparaison,
 } from "./comparaisonPilotes.js";
 import { creationDivFormulaire } from "../Grands-Prix/simulationGP.js";
+//import { creationDivFormulaire } from "../Grands-Prix/formulaireSimulationGP.js";
 import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
 
 //----------------------------Récuperation Infos Pilotes depuis fichier json-------------
@@ -35,7 +36,7 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   creationGraphePointPilote(2022);
   graphePointsMoyenDriver();
   creationSlider();
-  //await explicationComparaison();
+  await explicationComparaison();
   await creationDivFormulaire(
     document.querySelector("#divFormulaireEtSlider"), //container du slider et du formulaire
     tabGlobalDataPilotes,
