@@ -5,27 +5,27 @@ import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
 //enumeration des grands prix pour l'image dans le timeSlider
 const GrandPrix = {
   Australie: "data/grands-prix/melbourne.png",
-  "Etats-Unis": "data/grands-prix/austin.png",
+  Austin: "data/grands-prix/austin.png",
   Bahrein: "data/grands-prix/bahrain.png",
-  Azerbaïdjan: "data/grands-prix/baku.png",
+  Baku: "data/grands-prix/baku.png",
   Espagne: "data/grands-prix/barcelone.png",
   Monaco: "data/grands-prix/monaco.png",
   Hongrie: "data/grands-prix/hungaroring.png",
-  Italie: "data/grands-prix/imola.png",
+  Imola: "data/grands-prix/imola.png",
   Brésil: "data/grands-prix/bresil.png",
-  "Arabie Saoudite": "data/grands-prix/jeddah.png",
+  Jeddah: "data/grands-prix/jeddah.png",
   Singapour: "data/grands-prix/singapour.png",
   Miami: "data/grands-prix/miami.png",
   Monza: "data/grands-prix/monza.png",
   Autriche: "data/grands-prix/redBullRing.png",
   France: "data/grands-prix/castellet.png",
   Mexique: "data/grands-prix/mexique.png",
-  Angleterre: "data/grands-prix/silverstone.png",
+  Silverstone: "data/grands-prix/silverstone.png",
   Belgique: "data/grands-prix/spaFrancorchamps.png",
   Japon: "data/grands-prix/suzuka.png",
   Canada: "data/grands-prix/canada.png",
   "Abu Dhabi": "data/grands-prix/abuDhabi.png",
-  "Pays-Bas": "data/grands-prix/zandvoort.png",
+  Zandvoort: "data/grands-prix/zandvoort.png",
 };
 
 async function gestionFormulairePilote() {
@@ -48,11 +48,6 @@ async function gestionFormulairePilote() {
     //-----Rendre visible les boutons de navigation-----
     document.getElementById("boutonGauche").style.visibility = "visible";
     document.getElementById("boutonDroite").style.visibility = "visible";
-
-    //-----Suppression des données précédentes-----
-    // const explication = document.getElementById("#positionSlider");
-    // explication.innerHTML = "";
-
     //------Affichage des données dans le slider-----
 
     //slider 1
@@ -70,6 +65,14 @@ async function gestionFormulairePilote() {
     tempsPilote(data, 2);
     //image du circuit sélectionné
     imageGP(data);
+    ajoutPointInterrogation();
+    hoverPointInterrogation(0, "positionSlider");
+    hoverPointInterrogation(1, "pneuSlider");
+    hoverPointInterrogation(2, "timeSlider");
+    //activation des hover sur les points d'interrogation
+    // for (let i = 0; i < 3; i++) {
+    //   hoverPointInterrogation(i);
+    // }
   });
 }
 
@@ -238,24 +241,69 @@ function desactiverBoutons() {
   }, 1000);
 }
 
+function ajoutPointInterrogation() {
+  const sliderItems = document.querySelectorAll(".slider__item");
+
+  //parcours de tous les sliders
+  sliderItems.forEach(function (slider, index) {
+    //ajout d'un point d'intérrogation (img) dans chaque slider
+    //création d'une div contenant l'image
+    const divPointInterrogation = document.createElement("div");
+    divPointInterrogation.id = "divPointInterrogation" + index;
+    divPointInterrogation.className = "divPointInterrogation";
+    divPointInterrogation.style.position = "relative";
+
+    const pointInterrogation = document.createElement("img");
+    pointInterrogation.src = "data/interrogation.png";
+
+    //resize image
+    pointInterrogation.style.width = "40px";
+    pointInterrogation.style.height = "40px";
+    pointInterrogation.style.cursor = "pointer";
+    pointInterrogation.className = "pointInterrogation";
+    pointInterrogation.id = "pointInterrogation_" + index;
+
+    // Ajout de l'attribut data-popup-id avec la valeur "popup+index"
+    //pointInterrogation.setAttribute("data-popup-id", "popup_" + index);
+
+    //création d'une div contenant le texte d'explication
+    const popup = document.createElement("div");
+    popup.className = "popup";
+    popup.id = "popup_" + index;
+    sliderItems[index].appendChild(popup);
+
+    divPointInterrogation.appendChild(pointInterrogation);
+    sliderItems[index].appendChild(divPointInterrogation);
+  });
+}
+
 //fonction appélée lors du chargement de la page Pilote pour expliquer le fonctionnement de la comparaison
 async function explicationComparaison() {
   //l'unique slider visible lors du chargement de la page est celui de la position
   const divParent = document.querySelector("#positionSlider");
   const titre = document.createElement("h2");
-  titre.innerHTML = "Comment comparer deux pilotes ?";
+  titre.style.textAlign = "center";
+  titre.innerHTML = "Comparaison de deux pilotes";
   const explication = document.createElement("p");
+  explication.style.textAlign = "center";
+  explication.style.color = "white";
   explication.innerHTML =
-    "Pour comparer deux pilotes, il suffit de sélectionner les deux pilotes que vous souhaitez comparer dans le menu déroulant. Une fois les deux pilotes sélectionnés, vous pouvez naviguer entre les différents graphiques grâce aux flèches situées à gauche et à droite du slider.";
+    "Bienvenue sur notre application de comparaison de pilotes de Formule 1 pour la saison 2022. Nous avons conçu un carrousel interactif qui vous permettra de comparer deux pilotes sur plusieurs critères clés d'un Grand Prix.<br><br>" +
+    "Le premier slider de notre carrousel est un graphique linéaire qui représente l'évolution des positions de départ et d'arrivée des deux pilotes pendant le Grand Prix. Vous pourrez ainsi visualiser leur progression tout au long de la course.<br><br>" +
+    "Le deuxième slider est une représentation visuelle des pneus utilisés par chaque pilote pendant le Grand Prix. Vous pourrez ainsi voir s'ils ont opté pour des pneus durs, moyens ou tendres à différents moments de la course.<br><br>" +
+    "Le troisième slider représente le meilleur temps des deux pilotes ainsi que le temps de chaque secteur de celui-ci. Cela vous permettra de voir les performances de chaque pilote dans les différents secteurs de la piste.<br><br>" +
+    'Pour utiliser notre application, il vous suffit de sélectionner les noms des deux pilotes que vous souhaitez comparer, ainsi que le Grand Prix que vous souhaitez analyser. Une fois que vous avez sélectionné ces critères, cliquez sur "Comparaison !" pour lancer la comparaison.<br><br>';
+
   divParent.appendChild(titre);
   divParent.appendChild(explication);
 }
 
 async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
-  console.log(tabGlobalDataPilotesComparaison);
   //récuperation de la div parent
   const divParent = document.querySelector("#positionSlider");
 
+  //suppression l'explication de la comparaison (qui se trouve dans ce slider)
+  divParent.innerHTML = "";
   //creation du titre
   const titre = document.createElement("h2");
   titre.innerHTML =
@@ -363,6 +411,7 @@ async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
 
 async function pneuPilote(data, idPilote) {
   const divParent = document.querySelector(`#pneuPilote${idPilote + 1}`);
+  divParent.innerHTML = "";
   divParent.style.display = "flex";
   divParent.style.flexDirection = "column";
   divParent.style.height = "60%";
@@ -376,47 +425,19 @@ async function pneuPilote(data, idPilote) {
   for (let i = 0; i < data[idPilote]["pneu"].length; i++) {
     const divPneu = document.createElement("div");
     divPneu.className = "pneu";
-    //hauteur de la div s'adapte en fonction de data[idPilote]["pneu"].length
-    divPneu.style.height = `${100 / data[idPilote]["pneu"].length - 3}%`;
-    divPneu.style.width = `${100 / data[idPilote]["pneu"].length - 3}%`;
-
-    //gère le "centrage" de la divPneu selon le nombre de pneu total utilisés par le pilote
-    switch (data[idPilote]["pneu"].length) {
-      case 4:
-        divPneu.style.marginLeft = "35%";
-      case 3:
-        divPneu.style.marginLeft = "26%";
-        break;
-      case 2:
-        divPneu.style.marginLeft = "17%";
-        break;
-      case 1:
-        divPneu.style.marginLeft = "10%";
+    if (data[idPilote]["pneu"].length > 1) {
+      //minimum 2 pneux
+      //hauteur de la div s'adapte en fonction de data[idPilote]["pneu"].length
+      divPneu.style.height = `${100 / data[idPilote]["pneu"].length - 3}%`;
+      divPneu.style.width = `${100 / data[idPilote]["pneu"].length - 3}%`;
+    } //si il n'y a qu'un seul pneu
+    else {
+      divPneu.style.height = "55%";
+      divPneu.style.width = "55%";
     }
 
     //insertion de l'image du pneu dans la div
-    switch (data[idPilote]["pneu"][i]) {
-      case "SOFT":
-        divPneu.innerHTML =
-          "<img src='data/pneu/soft.png' alt='pneuSoft' class='pneu__image' >";
-        break;
-      case "MEDIUM":
-        divPneu.innerHTML =
-          "<img src='data/pneu/medium.png' alt='pneuMedium' class='pneu__image' >";
-        break;
-      case "HARD":
-        divPneu.innerHTML =
-          "<img src='data/pneu/hard.png' alt='pneuHard' class='pneu__image' >";
-        break;
-      case "INTERMEDIATE":
-        divPneu.innerHTML =
-          "<img src='data/pneu/inter.png' alt='pneuIntermediate' class='pneu__image' >";
-        break;
-      case "WET":
-        divPneu.innerHTML =
-          "<img src='data/pneu/wet.png' alt='pneuWet' class='pneu__image' >";
-        break;
-    }
+    divPneu.innerHTML = `<img src='data/pneu/${data[idPilote]["pneu"][i]}.png' alt='pneu${data[idPilote]["pneu"][i]}' class='pneu__image' >`;
 
     //Combien de tour sur ce pneu
     divPneu.innerHTML +=
@@ -541,6 +562,7 @@ function affichageTempsPilote(
 
 function tempsPilote(data, idPilote, couleur) {
   const divParent = document.querySelector(`#timePilote${idPilote}`);
+  divParent.innerHTML = "";
   const divLapTime = document.createElement("div");
   divLapTime.id = "lapTime";
   divLapTime.innerHTML = "Meilleur tour : ";
@@ -574,9 +596,40 @@ function createSecteurDiv(label, color) {
 
 async function imageGP(data) {
   const divParent = document.querySelector("#imageGp");
+  divParent.innerHTML = "";
   const imageGP = new Image();
   imageGP.src = GrandPrix[data[0]["GrandPrix"]]; //vient de l'énumeration en debut de fichier
+
   divParent.appendChild(imageGP);
+}
+
+//---------------------------Gestion du hover sur le points d'interrogation---------------------------
+
+function hoverPointInterrogation(index, slider) {
+  let pointInterrogation = document.getElementById(
+    "pointInterrogation_" + index
+  );
+  let popup = document.getElementById("popup_" + index);
+  let sliderActuel = document.getElementById(slider);
+  let popupOuvert = false; //de base le popup est fermé
+
+  pointInterrogation.onmouseover = () => {
+    if (popupOuvert) {
+      return; //si le popup est ouvert, on ne fait rien
+    }
+    popup.style.display = "block";
+    sliderActuel.style.position = "relative";
+    popupOuvert = true;
+  };
+
+  pointInterrogation.onmouseout = () => {
+    if (!popupOuvert) {
+      return;
+    }
+    popup.style.display = "none";
+    sliderActuel.style.position = "static"; //désactivation de la position relative
+    popupOuvert = false;
+  };
 }
 
 //permet de créer un div pour chaque secteur
