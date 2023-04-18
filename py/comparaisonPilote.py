@@ -72,7 +72,7 @@ def getInitials(nomPilote):
     return nomPilote[0:3]
 
 #fonction permettant de recuperer le meilleur tour d'un pilote à partir de l'abbreviation de son nom sur une session donnée
-def get_best_lap(session, driver):
+#def get_best_lap(session, driver):
     fast_lap = session.laps.pick_driver(driver).pick_fastest()
     return fast_lap
 
@@ -117,6 +117,15 @@ def get_tyre(session, driver):
     
     return tabTyre
 
+def get_tyre_and_lap_number_best_lap(session, driver):
+    #création d'un tableau de taille 2
+    tabTyreAndLapNumberBestLap=[]
+    fast_lap_tyre = session.laps.pick_driver('VER').pick_fastest()["Compound"]
+    fast_lap_number = int(session.laps.pick_driver('VER').pick_fastest()["LapNumber"])
+    tabTyreAndLapNumberBestLap.append(fast_lap_tyre)
+    tabTyreAndLapNumberBestLap.append(fast_lap_number)
+    return tabTyreAndLapNumberBestLap
+    
 
 
 def get_tyreLife(session, driver):
@@ -219,6 +228,14 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
     tabPneuPilote1=get_tyre(session, nomPilote1)
     tabPneuPilote2=get_tyre(session, nomPilote2)
 
+    #on récupere dans une variable le pneu utilisé
+    pneuMeilleurTourPilote1=get_tyre_and_lap_number_best_lap(session, nomPilote1)[0]
+    pneuMeilleurTourPilote2=get_tyre_and_lap_number_best_lap(session, nomPilote2)[0]
+
+    #on récupere dans une variable le numéro du tour du meilleur tour du pilote 1 et du pilote 2
+    numeroMeilleurTourPilote1=get_tyre_and_lap_number_best_lap(session, nomPilote1)[1]
+    numeroMeilleurTourPilote2=get_tyre_and_lap_number_best_lap(session, nomPilote2)[1]
+
     #on crée un tableau contenant la durée de vie des pneus utilisés par les 2 pilotes (deux tableaux différents)
     tabDureePneuPilote1=get_tyreLife(session, nomPilote1)
     tabDureePneuPilote2=get_tyreLife(session, nomPilote2)
@@ -241,6 +258,8 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
         "dureePneu": tabDureePneuPilote1,
         "meilleurTour": meilleurTourPilote1,
         "tempsSecteur": tabTempsSecteurPilote1,
+        "pneuMeilleurTour": pneuMeilleurTourPilote1,
+        "numeroMeilleurTour": numeroMeilleurTourPilote1,
         }
     
     objetPilote2={
@@ -252,6 +271,8 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
         "dureePneu": tabDureePneuPilote2,
         "meilleurTour": meilleurTourPilote2,
         "tempsSecteur": tabTempsSecteurPilote2,
+        "pneuMeilleurTour": pneuMeilleurTourPilote2,
+        "numeroMeilleurTour": numeroMeilleurTourPilote2,
         }
     
 
