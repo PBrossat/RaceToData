@@ -1,5 +1,6 @@
 import { afficherMapGP } from "./mapGP.js";
-import { gestionFormulaireGP, afficherIntroductionGP } from "./simulationGP.js";
+import { gestionFormulaireGP } from "./formulaireSimulation.js";
+import { afficherIntroductionGP } from "./affichageSimulation.js";
 
 //Requete API pour avoir des infos sur les GP
 async function recupererInfosGpAPI() {
@@ -13,8 +14,6 @@ async function recupererInfosGpJSON() {
   response = await response.json();
   return response["Circuits"];
 }
-
-//! window.localStorage
 
 // Recuperer les infos sur les GP
 let tabGlobalDataGpAPI;

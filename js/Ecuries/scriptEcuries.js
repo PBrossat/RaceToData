@@ -1,7 +1,7 @@
 //----------------------------- Import des fonctions ----------------------------
 import { graphePie, grapheMultipleBars, grapheRace } from "./graphesEcuries.js";
-// import { main } from "./creationJson.js";
 import { mapEcuries } from "./mapEcuries.js";
+// import { main } from "./creationJson.js";
 
 //----------------------------Récuperation Infos Ecuries depuis fichier json-------------
 async function recupererInfosEcuries() {
@@ -46,6 +46,22 @@ function creationNouvelleDiv() {
 
   const nouvelleDiv = document.createElement("div");
   nouvelleDiv.className = "divGraphique";
+  nouvelleDiv.id = "textIntro";
+  const intro = document.createElement("div");
+  intro.id = "intro";
+  intro.innerHTML =
+    "Les graphes sont un moyen visuel et efficace de représenter des données complexes, et dans le contexte de la F1, ils peuvent fournir des informations claires sur les performances des équipes tout au long de la saison.";
+  intro.innerHTML += "<br> <br>";
+  intro.innerHTML +=
+    "Les titres pilotes et écuries sont des données clés dans la F1, car ils reflètent les performances globales d'une équipe. Vous avez utilisé ces données pour créer des graphes afin de montrer quelle équipe a remporté le championnat des constructeurs, ainsi que le championnat des pilotes. Les graphes permettent de visualiser facilement l'évolution des performances des équipes au fil de la saison, mettant en évidence les équipes qui ont dominé et celles qui ont eu du mal.";
+  intro.innerHTML += "<br> <br>";
+  intro.innerHTML +=
+    "Les victoires, les poles, les podiums et les points sont également des statistiques importantes en F1, car elles montrent les performances des équipes lors des différentes courses tout au long de la saison. En créant des graphes avec ces données, vous pouvez facilement comparer les performances des équipes et identifier les tendances et les motifs. Par exemple, un graphe montrant le nombre de victoires d'une équipe peut révéler si elle a été dominante tout au long de la saison ou si elle a connu des hauts et des bas.";
+  intro.innerHTML += "<br> <br>";
+  intro.innerHTML +=
+    "Les graphes sont également utiles pour mettre en évidence les écarts de performance entre les équipes. Par exemple, en comparant les graphes de différentes équipes, vous pouvez voir quelle équipe a obtenu le plus de poles, de podiums ou de points, ce qui peut révéler des informations sur la hiérarchie des équipes et les performances des pilotes.";
+
+  nouvelleDiv.appendChild(intro);
 
   StatsPilotes.appendChild(nouvelleDiv);
 }
@@ -54,28 +70,31 @@ function creationNouvelleDiv() {
 function creationDivPie() {
   //Création container
   const divParent = document.querySelector(".divGraphique");
+
+  const grapheEtExplication = document.createElement("div");
+  grapheEtExplication.id = "grapheEtExplication";
+  //display flex pour que les div s'affichent cote à cote
+  grapheEtExplication.style.display = "flex";
+  grapheEtExplication.style.flexDirection = "row";
+  grapheEtExplication.style.width = "100%";
+
   const divAnalyse = document.createElement("div");
   divAnalyse.id = "divAnalysePointsPilotes";
   divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
-
-  //Création Texte Explicatif
-  const texteExplicatif = document.createElement("div");
-  divAnalyse.appendChild(texteExplicatif);
-  texteExplicatif.className = "presentation";
-  texteExplicatif.innerHTML =
-    "La Formule 1 est une compétition de course automobile de haut niveau où les équipes construisent des voitures de course pour concourir. Les titres de pilote et de constructeur sont décernés à la fin de chaque saison pour récompenser les performances des pilotes et des équipes. Le titre de champion du monde des pilotes est attribué au pilote ayant remporté le plus grand nombre de points lors de la saison, tandis que le titre de champion du monde des constructeurs est décerné à l'équipe ayant accumulé le plus de points. C'est pour cela que j'ai voulu illustré cela avec un graphique donut pour illustrer le prestige des différentes équipes.";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Titres Ecuries ";
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
   divGraphique.id = "GraphiquePtEcuries";
   divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
+  grapheEtExplication.appendChild(divGraphique);
+
+  //creation div où se trouve l'explication
+  const divExplication = document.createElement("div");
+  divExplication.id = "divExplication";
+  divExplication.style.marginLeft = "4%";
+  grapheEtExplication.appendChild(divExplication);
+
+  divAnalyse.appendChild(grapheEtExplication);
 
   const titreConstructeurs = document.createElement("input");
   titreConstructeurs.id = "inputChoix";
@@ -105,6 +124,25 @@ function creationDivPie() {
   buttonMettreAJour.className = "buttonMettreAJour";
   buttonMettreAJour.innerHTML = "Mettre à jour";
   divAnalyse.appendChild(buttonMettreAJour);
+
+  divExplication.style.width = "20%";
+  divExplication.style.float = "right";
+  divGraphique.style.width = "80%";
+  divGraphique.style.float = "left";
+
+  divExplication.style.color = "#FFFFFF";
+  divExplication.style.fontSize = "0.9em";
+  divExplication.innerHTML =
+    "<p> La Formule 1 est une compétition de course automobile de haut niveau où les équipes construisent deux voitures de course chacunes pour concourir. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Le <span style='color:red'>titre</span> de champion du monde des pilotes est attribué au <span style='color:red'>pilote</span> ayant remporté le <span style='color:red'>plus</span> grand nombre de <span style='color:red'>points</span> lors de la saison. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Le <span style='color:red'>titre</span> de champion du monde des constructeurs est attribué à <span style='color:red'>l'écurie</span> ayant remporté le <span style='color:red'>plus</span> grand nombre de <span style='color:red'>points</span> lors de la saison. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Ce graphique illustre le prestige et la <span style='color:red'>dominance</span> des équipes actuelles en fonction du nombre de <span style='color:red'>titres récoltés</span>.</p>";
 
   const Ecuries = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
@@ -147,31 +185,46 @@ function creationDivMultipleBars() {
   const divAnalyse = document.createElement("div");
   divAnalyse.id = "divAnalysePointsPilotes";
   divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
 
-  //Création Texte Explicatif
-  const texteExplicatif = document.createElement("div");
-  divAnalyse.appendChild(texteExplicatif);
-  texteExplicatif.className = "presentation";
-  texteExplicatif.innerHTML =
-    "Les victoires, les poles positions et les podiums sont des éléments clés de la compétition en Formule 1. Les victoires récompensent la performance du pilote lors d'une course, tandis que les poles positions récompensent la performance lors des qualifications. Les podiums récompensent les pilotes qui ont terminé parmi les trois premiers à la fin d'une course. Un graphique barre peut être utilisé pour comparer le nombre de victoires, de poles positions et de podiums entre les différentes équipes, permettant ainsi de visualiser leur performance au fil des saisons.";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Statistiques écuries";
+  const grapheEtExplication = document.createElement("div");
+  grapheEtExplication.id = "grapheEtExplication";
+  grapheEtExplication.style.display = "flex";
+  grapheEtExplication.style.flexDirection = "row";
+  grapheEtExplication.style.width = "100%";
+  grapheEtExplication.style.height = "400px";
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
   divGraphique.id = "GraphiqueVictoires";
   divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
+  divGraphique.style.width = "80%";
+  divGraphique.style.float = "left";
+  grapheEtExplication.appendChild(divGraphique);
+
+  //Création Texte Explicatif
+  const divExplication = document.createElement("div");
+  grapheEtExplication.appendChild(divExplication);
+  divExplication.className = "divExplication";
+  divExplication.style.marginLeft = "4%";
+  divExplication.style.width = "20%";
+  divExplication.style.float = "right";
+  divExplication.style.color = "#FFFFFF";
+  divExplication.style.fontSize = "0.9em";
+  divExplication.innerHTML =
+    "<p> Les victoires, les poles positions et les podiums sont des éléments clés de la compétition en Formule 1. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Les <span style='color:red'>victoires</span> récompensent la performance du pilote lors d'une  <span style='color:red'>course</span>, tandis que les <span style='color:red'>poles positions</span> récompensent la performance lors des <span style='color:red'>qualifications</span>. Les  <span style='color:red'>podiums</span> récompensent les pilotes qui ont terminé <span style='color:red'>parmi les trois premiers</span> à la fin d'une course. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Ce graphique permet de comparer le <span style='color:red'>nombre</span> de victoires, de poles positions et de podiums entre les équipes, permettant ainsi de visualiser leur <span style='color:red'>performance</span> au fil des saisons. </p>";
+
+  divAnalyse.appendChild(grapheEtExplication);
 
   const StatsAll = document.createElement("input");
   StatsAll.id = "inputChoix";
   StatsAll.type = "radio";
   StatsAll.name = "option";
-  StatsAll.checked = true;
   divAnalyse.appendChild(StatsAll);
 
   const labelStatsAll = document.createElement("label");
@@ -244,21 +297,25 @@ function creationDivRace() {
   const divAnalyse = document.createElement("div");
   divAnalyse.id = "divAnalysePointsPilotes";
   divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
 
   let data = "Points";
 
   //Création Texte Explicatif
   const texteExplicatif = document.createElement("div");
   divAnalyse.appendChild(texteExplicatif);
-  texteExplicatif.className = "presentation";
+  texteExplicatif.style.color = "#FFFFFF";
+  texteExplicatif.style.fontSize = "1.0em";
+  texteExplicatif.style.marginBottom = "2%";
   texteExplicatif.innerHTML =
-    "Les points sont la monnaie de la Formule 1 et chaque écurie cherchent à en accumuler le plus possible au cours de la saison. Les points sont attribués en fonction de la position de chaque pilote à la fin de chaque course, avec des points supplémentaires accordés pour la pole position et le meilleur tour en course. Ce graphique permet de visualiser le nombre de points accumulés par chaque écurie tout au long des saisons depuis leur création, permettant ainsi de suivre leur progression et leur performance relative par rapport à leurs concurrents.";
-
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique données all time écuries 2022";
+    "Les points sont la monnaie de la Formule 1 et chaque écurie cherchent à en accumuler le plus possible au cours de la saison. Les <span style='color:red'>points</span> sont attribués en fonction de la <span style='color:red'>position de chaque pilote à la fin de chaque course</span>, avec des points supplémentaires accordés pour la pole position et le meilleur tour en course. Ce graphique permet de visualiser le <span style='color:red'>nombre de points accumulés</span> par chaque <span style='color:red'>écurie</span> tout au long des saisons <span style='color:red'>depuis leur création</span>, permettant ainsi de suivre leur progression et leur <span style='color:red'>performance</span> relative par rapport à leurs <span style='color:red'>concurrents</span>.";
+  texteExplicatif.innerHTML += "<br>";
+  //image dans le texte explicatif
+  const imgExplication = document.createElement("img");
+  imgExplication.src = "data/fleche-vers-le-bas.png";
+  imgExplication.style.width = "4%";
+  imgExplication.style.height = "4%";
+  imgExplication.style.marginTop = "1%";
+  texteExplicatif.appendChild(imgExplication);
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
@@ -290,7 +347,6 @@ function creationDivRace() {
   Points.id = "inputChoix";
   Points.type = "radio";
   Points.name = "option";
-  Points.checked = true;
   divAnalyse.appendChild(Points);
 
   const labelPoints = document.createElement("label");

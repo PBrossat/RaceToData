@@ -126,4 +126,4 @@ function main() {
 }
 
 //------------------------------- Export des données -----------------------------
-export { tabVictoiresEcuriesAllTime, tabPointsEcuriesAllTime, main };
+export { main };
