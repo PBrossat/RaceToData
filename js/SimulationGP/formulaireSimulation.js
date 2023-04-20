@@ -1,6 +1,6 @@
 import { animateRace } from "./animationGP.js";
 import { tabGlobalDataPilotes } from "../Pilote/scriptPilote.js";
-import { tabGlobalDataGP } from "./scriptGP.js";
+import { tabGlobalDataGP } from "./scriptSimulation.js";
 import {
   afficherSimulationGP,
   afficherGrapheTelemetries,
@@ -125,7 +125,7 @@ export function creationDivFormulaire(
 }
 
 //--------------------------------------------Gestion du formulaire------------------------------------------------------------
-export function gestionFormulaireGP() {
+export function gestionFormulaireSimulation() {
   creationDivFormulaire(
     document.querySelector("#stats"),
     tabGlobalDataPilotes,
