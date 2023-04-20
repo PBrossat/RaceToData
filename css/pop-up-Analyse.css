@@ -11,14 +11,16 @@
   text-align: -webkit-center;
 }
 
-#popup_0 #titreAnalysePosition {
-  align-items: center;
-}
-
-#popup_0 h2 {
+.titreAnalyse {
+  text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
   color: red;
   font-size: 1.3em;
 }
+
+/* #titreAnalysePosition h2 {
+  color: red;
+  font-size: 1.3em;
+} */
 
 /* media  */
 @media screen and (max-width: 485px) {
