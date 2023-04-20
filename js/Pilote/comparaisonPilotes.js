@@ -2,32 +2,7 @@
 import { tabGlobalDataPilotes } from "./scriptPilote.js";
 import { tabGlobalDataGP } from "../SimulationGP/scriptSimulation.js";
 import { analysePosition, analysePneus } from "./analyseComparaisonPilote.js";
-
-//enumeration des grands prix pour l'image dans le timeSlider
-const GrandPrix = {
-  Australie: "data/grands-prix/melbourne.png",
-  Austin: "data/grands-prix/austin.png",
-  Bahrein: "data/grands-prix/bahrain.png",
-  Baku: "data/grands-prix/baku.png",
-  Espagne: "data/grands-prix/barcelone.png",
-  Monaco: "data/grands-prix/monaco.png",
-  Hongrie: "data/grands-prix/hungaroring.png",
-  Imola: "data/grands-prix/imola.png",
-  Brésil: "data/grands-prix/bresil.png",
-  Jeddah: "data/grands-prix/jeddah.png",
-  Singapour: "data/grands-prix/singapour.png",
-  Miami: "data/grands-prix/miami.png",
-  Monza: "data/grands-prix/monza.png",
-  Autriche: "data/grands-prix/redBullRing.png",
-  France: "data/grands-prix/castellet.png",
-  Mexique: "data/grands-prix/mexique.png",
-  Silverstone: "data/grands-prix/silverstone.png",
-  Belgique: "data/grands-prix/spaFrancorchamps.png",
-  Japon: "data/grands-prix/suzuka.png",
-  Canada: "data/grands-prix/canada.png",
-  "Abu Dhabi": "data/grands-prix/abuDhabi.png",
-  Zandvoort: "data/grands-prix/zandvoort.png",
-};
+import { GrandPrix, Pilote } from "./enumeration.js";
 
 async function gestionFormulairePilote() {
   const formulaire = document.getElementById("formulaire");
@@ -70,10 +45,8 @@ async function gestionFormulairePilote() {
     hoverPointInterrogation(0, "positionSlider");
     hoverPointInterrogation(1, "pneuSlider");
     hoverPointInterrogation(2, "timeSlider");
-    //activation des hover sur les points d'interrogation
-    // for (let i = 0; i < 3; i++) {
-    //   hoverPointInterrogation(i);
-    // }
+
+    //analyse des données
     analysePosition(data);
     analysePneus(data);
   });
@@ -249,34 +222,37 @@ function ajoutPointInterrogation() {
 
   //parcours de tous les sliders
   sliderItems.forEach(function (slider, index) {
-    //ajout d'un point d'intérrogation (img) dans chaque slider
-    //création d'une div contenant l'image
-    const divPointInterrogation = document.createElement("div");
-    divPointInterrogation.id = "divPointInterrogation" + index;
-    divPointInterrogation.className = "divPointInterrogation";
-    divPointInterrogation.style.position = "relative";
+    const divPointInterrogationExiste = document.getElementById(
+      "divPointInterrogation" + index
+    );
+    //si cette div n'existe pas déjà
+    if (divPointInterrogationExiste == null) {
+      //ajout d'un point d'intérrogation (img) dans chaque slider
+      //création d'une div contenant l'image
+      const divPointInterrogation = document.createElement("div");
+      divPointInterrogation.id = "divPointInterrogation" + index;
+      divPointInterrogation.className = "divPointInterrogation";
+      divPointInterrogation.style.position = "relative";
 
-    const pointInterrogation = document.createElement("img");
-    pointInterrogation.src = "data/interrogation.png";
+      const pointInterrogation = document.createElement("img");
+      pointInterrogation.src = "data/interrogation.png";
 
-    //resize image
-    pointInterrogation.style.width = "40px";
-    pointInterrogation.style.height = "40px";
-    pointInterrogation.style.cursor = "pointer";
-    pointInterrogation.className = "pointInterrogation";
-    pointInterrogation.id = "pointInterrogation_" + index;
+      //resize image
+      pointInterrogation.style.width = "40px";
+      pointInterrogation.style.height = "40px";
+      pointInterrogation.style.cursor = "pointer";
+      pointInterrogation.className = "pointInterrogation";
+      pointInterrogation.id = "pointInterrogation_" + index;
 
-    // Ajout de l'attribut data-popup-id avec la valeur "popup+index"
-    //pointInterrogation.setAttribute("data-popup-id", "popup_" + index);
+      //création d'une div contenant le texte d'explication
+      const popup = document.createElement("div");
+      popup.className = "popup";
+      popup.id = "popup_" + index;
+      sliderItems[index].appendChild(popup);
 
-    //création d'une div contenant le texte d'explication
-    const popup = document.createElement("div");
-    popup.className = "popup";
-    popup.id = "popup_" + index;
-    sliderItems[index].appendChild(popup);
-
-    divPointInterrogation.appendChild(pointInterrogation);
-    sliderItems[index].appendChild(divPointInterrogation);
+      divPointInterrogation.appendChild(pointInterrogation);
+      sliderItems[index].appendChild(divPointInterrogation);
+    }
   });
 }
 
@@ -301,7 +277,7 @@ async function explicationComparaison() {
   divParent.appendChild(explication);
 }
 
-async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
+async function grahiquePositionComparaison(data) {
   //récuperation de la div parent
   const divParent = document.querySelector("#positionSlider");
 
@@ -311,13 +287,12 @@ async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
   const titre = document.createElement("h2");
   titre.innerHTML =
     "Position de " +
-    tabGlobalDataPilotesComparaison[0]["nomPilote"] +
+    Pilote[data[0]["nomPilote"]] +
     " et de " +
-    tabGlobalDataPilotesComparaison[1]["nomPilote"] +
+    Pilote[data[1]["nomPilote"]] +
     " au départ et à l'arrivée";
   const sousTitre = document.createElement("h3");
-  sousTitre.innerHTML =
-    "Grand-Prix : " + tabGlobalDataPilotesComparaison[0]["GrandPrix"] + ".";
+  sousTitre.innerHTML = "Grand-Prix : " + data[0]["GrandPrix"] + ".";
   divParent.appendChild(titre);
   divParent.appendChild(sousTitre);
 
@@ -328,10 +303,10 @@ async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
 
   let tabPositionPilote1 = [2];
   let tabPositionPilote2 = [2];
-  tabPositionPilote1[0] = tabGlobalDataPilotesComparaison[0]["positionDepart"];
-  tabPositionPilote1[1] = tabGlobalDataPilotesComparaison[0]["positionArrivee"];
-  tabPositionPilote2[0] = tabGlobalDataPilotesComparaison[1]["positionDepart"];
-  tabPositionPilote2[1] = tabGlobalDataPilotesComparaison[1]["positionArrivee"];
+  tabPositionPilote1[0] = data[0]["positionDepart"];
+  tabPositionPilote1[1] = data[0]["positionArrivee"];
+  tabPositionPilote2[0] = data[1]["positionDepart"];
+  tabPositionPilote2[1] = data[1]["positionArrivee"];
 
   const graphique = document.getElementById("graphiquePositionGP");
 
@@ -399,12 +374,12 @@ async function grahiquePositionComparaison(tabGlobalDataPilotesComparaison) {
 
     series: [
       {
-        name: tabGlobalDataPilotesComparaison[0]["nomPilote"],
+        name: Pilote[data[0]["nomPilote"]],
         data: tabPositionPilote1,
         color: "#FF0000",
       },
       {
-        name: tabGlobalDataPilotesComparaison[1]["nomPilote"], // nom de la série de données pour le pilote 2
+        name: Pilote[data[1]["nomPilote"]], // nom de la série de données pour le pilote 2
         data: tabPositionPilote2, // les données du pilote 2 à afficher
         color: "#FFD700",
       },
@@ -422,7 +397,7 @@ async function pneuPilote(data, idPilote) {
 
   //creation du titre
   const titre = document.createElement("h2");
-  titre.innerHTML = "Pneu utilisés par " + data[idPilote]["nomPilote"];
+  titre.innerHTML = "Pneus utilisés par " + Pilote[data[idPilote]["nomPilote"]];
   divParent.appendChild(titre);
 
   for (let i = 0; i < data[idPilote]["pneu"].length; i++) {
@@ -572,7 +547,7 @@ function tempsPilote(data, idPilote, couleur) {
   divLapTime.style.color = "violet";
 
   divParent.innerHTML = `<h2>Meilleur temps de <br>${
-    data[idPilote - 1]["nomPilote"]
+    Pilote[data[idPilote - 1]["nomPilote"]]
   }</h2>`;
   //création des trois div (secteur 1, secteur 2, secteur 3)
   const divSecteur1 = createSecteurDiv("Secteur 1 : ", "red");

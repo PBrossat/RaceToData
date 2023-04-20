@@ -1,7 +1,9 @@
+import { Pilote } from "./enumeration.js";
 //---------------------------Analyse des données---------------------------
 function analysePosition(data) {
   const divParent = document.querySelector("#popup_0");
   const divTitre = document.createElement("div");
+  divTitre.className = "titreAnalyse";
   divTitre.id = "titreAnalysePosition";
   const titre = document.createElement("h2");
   const paragraphe = document.createElement("p");
@@ -14,19 +16,21 @@ function analysePosition(data) {
   for (let i = 0; i < data.length; i++) {
     if (data[i]["positionDepart"] < positionPlusDevantDepart) {
       positionPlusDevantDepart = data[i]["positionDepart"];
-      nomPiloteDevantDepart = data[i]["nomPilote"];
+      nomPiloteDevantDepart = Pilote[data[i]["nomPilote"]];
     }
   }
-  if (nomPiloteDevantDepart == data[0]["nomPilote"]) {
-    nomPiloteDerriereDepart = data[1]["nomPilote"];
+  if (nomPiloteDevantDepart == Pilote[data[0]["nomPilote"]]) {
+    nomPiloteDerriereDepart = Pilote[data[1]["nomPilote"]];
   } else {
-    nomPiloteDerriereDepart = data[0]["nomPilote"];
+    nomPiloteDerriereDepart = Pilote[data[0]["nomPilote"]];
   }
 
-  titre.innerHTML = `Analyse des positions de ${data[0]["nomPilote"]} et de ${data[1]["nomPilote"]}`;
-  paragraphe.innerHTML += `Durant le Grand Prix de ${data[0]["GrandPrix"]}, ${nomPiloteDevantDepart} a commencé devant ${nomPiloteDerriereDepart}.<br><br>
+  titre.innerHTML = `Analyse des positions de ${
+    Pilote[data[0]["nomPilote"]]
+  } et de ${Pilote[data[1]["nomPilote"]]}<br>`;
+  paragraphe.innerHTML += `<br>Durant le Grand Prix de ${data[0]["GrandPrix"]}, ${nomPiloteDevantDepart} a commencé devant ${nomPiloteDerriereDepart}.<br><br>
     Cela signifie que ${nomPiloteDevantDepart} a effectué un meilleur temps en qualification que ${nomPiloteDerriereDepart}.<br>
-    Cela peut être dû à un meilleur pilotage, mais aussi au choix des pneux, de la météo ou encore des performances de la monoplace (la formule 1) <br><br>`;
+    Cela peut être dû à un meilleur pilotage, mais aussi au choix des pneux, de la météo ou encore des performances de la monoplace (la formule 1). <br><br>`;
 
   let texteAdaptatif = "";
   let nomPiloteDevantArrive = "";
@@ -36,18 +40,18 @@ function analysePosition(data) {
   for (let i = 0; i < data.length; i++) {
     if (data[i]["positionArrivee"] < positionPlusDevantArrive) {
       positionPlusDevantArrive = data[i]["positionArrivee"];
-      nomPiloteDevantArrive = data[i]["nomPilote"];
+      nomPiloteDevantArrive = Pilote[data[i]["nomPilote"]];
     }
   }
 
-  if (nomPiloteDevantArrive == data[0]["nomPilote"]) {
-    nomPiloteDerriereArrive = data[1]["nomPilote"];
+  if (nomPiloteDevantArrive == Pilote[data[0]["nomPilote"]]) {
+    nomPiloteDerriereArrive = Pilote[data[1]["nomPilote"]];
   } else {
-    nomPiloteDerriereArrive = data[0]["nomPilote"];
+    nomPiloteDerriereArrive = Pilote[data[0]["nomPilote"]];
   }
 
   for (let i = 0; i < data.length; i++) {
-    if (data[i].nomPilote === nomPiloteDevantArrive) {
+    if (Pilote[data[i]["nomPilote"]] === nomPiloteDevantArrive) {
       positionVainqueurArrivee = data[i].positionArrivee;
     }
   }
@@ -63,7 +67,7 @@ function analysePosition(data) {
     texteAdaptatif = ` Au final ${nomPiloteDevantDepart} est resté devant ${nomPiloteDerriereDepart} durant tout le Grand-Prix et arrive ${positionVainqueurArrivee}${preposition} de la course.<br><br>
       `;
   } else {
-    texteAdaptatif = ` Au final ${nomPiloteDerriereDepart} est passé devant ${nomPiloteDevantDepart} durant le Grand-Prix et arrive ${positionVainqueurArrivee}ème de la course.<br><br>
+    texteAdaptatif = ` Au final ${nomPiloteDerriereDepart} est passé devant ${nomPiloteDevantDepart} durant le Grand-Prix et arrive ${positionVainqueurArrivee}${preposition} de la course.<br><br>
       `;
   }
 
@@ -71,22 +75,26 @@ function analysePosition(data) {
 
   //texte adaptatif permettant de savoir l'evolution des places de chaque pilote
   if (data[0]["positionDepart"] > data[0]["positionArrivee"]) {
-    paragraphe.innerHTML += ` Enfin ${data[0]["nomPilote"]} a donc gagné ${
+    paragraphe.innerHTML += ` Enfin ${
+      Pilote[data[0]["nomPilote"]]
+    } a donc gagné ${
       data[0]["positionDepart"] - data[0]["positionArrivee"]
     } places <br>
       `;
   } else {
-    paragraphe.innerHTML += ` Enfin, ${data[0]["nomPilote"]} a donc perdu ${
+    paragraphe.innerHTML += ` Enfin, ${
+      Pilote[data[0]["nomPilote"]]
+    } a donc perdu ${
       data[0]["positionArrivee"] - data[0]["positionDepart"]
     } places`;
   }
   if (data[1]["positionDepart"] > data[1]["positionArrivee"]) {
-    paragraphe.innerHTML += ` et ${data[1]["nomPilote"]} en a gagné ${
+    paragraphe.innerHTML += ` et ${Pilote[data[1]["nomPilote"]]} en a gagné ${
       data[1]["positionDepart"] - data[1]["positionArrivee"]
     } durant le Grand Prix.<br>
       `;
   } else {
-    paragraphe.innerHTML += ` et ${data[1]["nomPilote"]} en a perdu ${
+    paragraphe.innerHTML += ` et ${Pilote[data[1]["nomPilote"]]} en a perdu ${
       data[1]["positionArrivee"] - data[1]["positionDepart"]
     } durant le Grand Prix.<br>
       `;
@@ -100,12 +108,15 @@ function analysePosition(data) {
 function analysePneus(data) {
   const divParent = document.querySelector("#popup_1");
   const divTitre = document.createElement("div");
+  divTitre.className = "titreAnalyse";
   divTitre.id = "titreAnalysePneus";
   const titre = document.createElement("h2");
   const paragraphe = document.createElement("p");
   divParent.innerHTML = "";
 
-  titre.innerHTML = `Analyse des pneus de ${data[0]["nomPilote"]} et de ${data[1]["nomPilote"]}`;
+  titre.innerHTML = `Analyse des pneus de ${
+    Pilote[data[0]["nomPilote"]]
+  } et de ${Pilote[data[1]["nomPilote"]]} <br>`;
 
   //description des avantages de chaque pneus
   const pneus = {
@@ -125,13 +136,23 @@ function analysePneus(data) {
 
   if (data[0]["pneu"][0] == data[1]["pneu"][0]) {
     //même type de pneu au départ
-    paragraphe.innerHTML += `Au départ du Grand-Prix, ${data[0]["nomPilote"]} et ${data[1]["nomPilote"]} ont choisi le même type de pneu : ${data[0]["pneu"][0]}<br>
+    paragraphe.innerHTML += `<br>Au départ du Grand-Prix, ${
+      Pilote[data[0]["nomPilote"]]
+    } et ${Pilote[data[1]["nomPilote"]]} ont choisi le même type de pneu : ${
+      data[0]["pneu"][0]
+    }<br>
     celui-ci `;
     paragraphe.innerHTML += texteAdaptatifMemePneu + "<br>";
   } else {
     //pneu différents au départ
-    paragraphe.innerHTML += `Au départ du Grand-Prix, ${data[0]["nomPilote"]} et ${data[1]["nomPilote"]} ont choisi une statégie différente,<br> 
-    pneus ${data[0]["pneu"][0]} pour ${data[0]["nomPilote"]} et ${data[1]["pneu"][0]} pour ${data[1]["nomPilote"]}<br><br>
+    paragraphe.innerHTML += `<br>Au départ du Grand-Prix, ${
+      Pilote[data[0]["nomPilote"]]
+    } et ${
+      Pilote[data[1]["nomPilote"]]
+    } ont choisi une statégie différente,<br> 
+    pneus ${data[0]["pneu"][0]} pour ${Pilote[data[0]["nomPilote"]]} et ${
+      data[1]["pneu"][0]
+    } pour ${Pilote[data[1]["nomPilote"]]}<br><br>
     Le pneu ${data[0]["pneu"][0]} `;
     paragraphe.innerHTML += texteAdaptatifPneuPilote1 + "<br>";
     paragraphe.innerHTML += `Et le pneu ${data[1]["pneu"][0]} `;
@@ -145,15 +166,27 @@ function analysePneus(data) {
       data[i]["pneu"][0] != "INTERMEDIATE" &&
       data[i]["pneu"][0] != "WET"
     ) {
-      paragraphe.innerHTML += `<br> On peut voir ici que ${data[i]["nomPilote"]} a utilisé qu'un unique type de pneu durant le Grand Prix.<br>
-      Cela s'explique par le fait que ${data[i]["nomPilote"]} a été contraint d'abandonner la course au tour ${data[i]["nbToursEffectuees"]} (Do Not Finish). <br>
+      paragraphe.innerHTML += `<br> On peut voir ici que ${
+        Pilote[data[i]["nomPilote"]]
+      } a utilisé qu'un unique type de pneu durant le Grand Prix.<br>
+      Cela s'explique par le fait que ${
+        Pilote[data[i]["nomPilote"]]
+      } a été contraint d'abandonner la course au tour ${
+        data[i]["nbToursEffectuees"]
+      } (Do Not Finish). <br>
       En voici la raison : ${data[i]["statu"]}.<br>`;
     } else if (
       data[i]["statu"] != "Finished" &&
       !data[i]["statu"].startsWith("+")
     ) {
-      paragraphe.innerHTML += `<br> On peut voir ici que ${data[i]["nomPilote"]} n'a pas fini la course.<br>
-      Cela s'explique par le fait que ${data[i]["nomPilote"]} a été contraint d'abandonner la course au tour ${data[i]["nbToursEffectuees"]} (Do Not Finish). <br>
+      paragraphe.innerHTML += `<br> On peut voir ici que ${
+        Pilote[data[i]["nomPilote"]]
+      } n'a pas fini la course.<br>
+      Cela s'explique par le fait que ${
+        Pilote[data[i]["nomPilote"]]
+      } a été contraint d'abandonner la course au tour ${
+        data[i]["nbToursEffectuees"]
+      } (Do Not Finish). <br>
       En voici la raison : ${data[i]["statu"]}.<br>`;
     }
   }

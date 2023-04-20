@@ -11,11 +11,13 @@
   text-align: -webkit-center;
 }
 
-#popup_0 #titreAnalysePosition {
-  align-items: center;
+.titreAnalyse {
+  text-shadow: rgba(100, 98, 98, 0.4) 5px 5px 2px;
+  color: red;
+  font-size: 1.3em;
 }
 
-#popup_0 h2 {
+#titreAnalysePosition h2 {
   color: red;
   font-size: 1.3em;
 }

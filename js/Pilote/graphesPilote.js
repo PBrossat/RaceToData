@@ -78,33 +78,6 @@ async function recuperationPilotesSaison(annee) {
   return pilotes;
 }
 
-//Création des boutons pour choisir l'années pour le graphique 1
-// function creationBoutonChoixSaison() {
-//   //Si la div n'existe pas => creéation div + création bouton
-//   const divBoutonexiste = document.querySelector("#divBoutonChoix");
-//   if (divBoutonexiste == null) {
-//     const divParent = document.querySelector("#divAnalysePointsPilotes");
-//     const divBouton = document.createElement("div");
-//     divBouton.id = "divBoutonChoix";
-//     divParent.appendChild(divBouton);
-
-//     const bouton2021 = document.createElement("button");
-//     bouton2021.id = "bouton2021";
-//     const bouton2022 = document.createElement("button");
-//     bouton2022.id = "bouton2022";
-
-//     bouton2021.className = "bouton";
-//     bouton2022.className = "bouton";
-
-//     bouton2021.textContent = "2021";
-//     bouton2022.textContent = "2022";
-
-//     divBouton.appendChild(bouton2021);
-//     divBouton.appendChild(bouton2022);
-//   }
-//   //sinon on ne crée rien
-// }
-
 //-----------------------------------Graphique 1---------------------------
 async function grapheDriverPoint(annee) {
   //Création container
@@ -319,8 +292,6 @@ async function grapheDriverPoint(annee) {
     divExplication.style.float = "right";
     divGraphique.style.width = "70%";
     divGraphique.style.float = "left";
-  } else {
-    //à voir
   }
   //ecrire dans la div le texte d'explication
   divExplication.style.color = "#FFFFFF";
@@ -400,8 +371,6 @@ function graphePointsMoyenDriver() {
     divExplication.style.float = "right";
     divGraphique.style.width = "70%";
     divGraphique.style.float = "left";
-  } else {
-    //à voir
   }
   //ecrire dans la div le texte d'explication
   divExplication.style.color = "#FFFFFF";
@@ -490,7 +459,5 @@ function graphePointsMoyenDriver() {
   });
 }
 
-//------------------------------- Graphique 3 -----------------------------
-function grapheNbDnf() {}
 //------------------------------- Export des données -----------------------------
 export { creationGraphePointPilote, graphePointsMoyenDriver };
