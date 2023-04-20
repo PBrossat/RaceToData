@@ -1,6 +1,7 @@
 //import des données des pilotes
 import { tabGlobalDataPilotes } from "./scriptPilote.js";
-import { tabGlobalDataGP } from "../Grands-Prix/scriptGP.js";
+import { tabGlobalDataGP } from "../SimulationGP/scriptSimulation.js";
+import { analysePosition, analysePneus } from "./analyseComparaisonPilote.js";
 
 //enumeration des grands prix pour l'image dans le timeSlider
 const GrandPrix = {
@@ -73,6 +74,8 @@ async function gestionFormulairePilote() {
     // for (let i = 0; i < 3; i++) {
     //   hoverPointInterrogation(i);
     // }
+    analysePosition(data);
+    analysePneus(data);
   });
 }
 
@@ -617,7 +620,8 @@ function hoverPointInterrogation(index, slider) {
     if (popupOuvert) {
       return; //si le popup est ouvert, on ne fait rien
     }
-    popup.style.display = "block";
+    popup.style.display = "flex";
+    popup.style.flexDirection = "column";
     sliderActuel.style.position = "relative";
     popupOuvert = true;
   };

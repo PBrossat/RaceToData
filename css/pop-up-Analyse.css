@@ -7,12 +7,49 @@
   padding: 30%;
   display: none;
   position: absolute;
+  color: white;
+  text-align: -webkit-center;
 }
 
-/* .popup #popup_O {
-  padding: 32%;
+#popup_0 #titreAnalysePosition {
+  align-items: center;
 }
 
-.popup #popup_1 {
-  padding: 33%;
+#popup_0 h2 {
+  color: red;
+  font-size: 1.3em;
+}
+
+/* media  */
+@media screen and (max-width: 485px) {
+  #popup_0 #titreAnalysePosition {
+    font-size: 0.9em;
+  }
+  #popup_0 h2 {
+    font-size: 0.9em;
+  }
+}
+/*
+@media screen and (max-width: 990px) {
+  .popup {
+    padding: 39%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .popup {
+    padding: 33%;
+  }
+} */
+
+/* @media screen and (max-width: 720px) {
+  .popup {
+    padding: 37%;
+  }
+} */
+
+/* @media screen and (max-width: 600px) {
+  .popup {
+    padding: 41%;
+  }
 } */
