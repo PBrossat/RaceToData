@@ -1,4 +1,4 @@
-import { tabGlobalDataGP } from "./scriptGP.js";
+import { tabGlobalDataGP } from "./scriptSimulation.js";
 
 export function afficherMapGP() {
   //Création des div nécessaires

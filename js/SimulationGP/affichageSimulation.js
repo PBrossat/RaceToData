@@ -44,8 +44,8 @@ export function afficherSimulationGP(xMin, yMin, xMax, yMax) {
   main.appendChild(divCompteur2);
 }
 
-//-------------------------------------Gestion de l'introduction du GP----------------
-export function afficherIntroductionGP() {
+//-------------------------------------Gestion de l'introduction de la simulation----------------
+export function afficherIntroductionSimulation() {
   const sectionStats = document.querySelector("#stats");
   const divIntroEtFormulaire = document.createElement("div");
   divIntroEtFormulaire.classList.add("intro-formulaire");
