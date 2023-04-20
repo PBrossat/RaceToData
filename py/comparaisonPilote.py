@@ -120,8 +120,8 @@ def get_tyre(session, driver):
 def get_tyre_and_lap_number_best_lap(session, driver):
     #création d'un tableau de taille 2
     tabTyreAndLapNumberBestLap=[]
-    fast_lap_tyre = session.laps.pick_driver('VER').pick_fastest()["Compound"]
-    fast_lap_number = int(session.laps.pick_driver('VER').pick_fastest()["LapNumber"])
+    fast_lap_tyre = session.laps.pick_driver(driver).pick_fastest()["Compound"]
+    fast_lap_number = int(session.laps.pick_driver(driver).pick_fastest()["LapNumber"])
     tabTyreAndLapNumberBestLap.append(fast_lap_tyre)
     tabTyreAndLapNumberBestLap.append(fast_lap_number)
     return tabTyreAndLapNumberBestLap
@@ -132,6 +132,7 @@ def get_tyreLife(session, driver):
     driver=session.laps.pick_driver(driver)
     tyreLife= driver['TyreLife']
     tyreLife=tyreLife.to_numpy()
+    
 
     #création d'un tableau vide avec les types de pneus dans l'ordre
     tabTyreLife=[]
@@ -142,7 +143,13 @@ def get_tyreLife(session, driver):
         #si la valeur actuel est égal à 1 on ajoute la valeur précédente au tableau
         if tyreLife[i] ==1.0:
             tabTyreLife.append(i+1)
+    tabTyreLife.append(len(tyreLife)) #ajout le dernier élément du tableau
     return tabTyreLife
+
+def get_nb_lap_done(session,driver):
+    driver=session.laps.pick_driver(driver)
+    tyreLife= driver['TyreLife']
+    return len(tyreLife)
 
 
 def comparaison_telemetry(session, pilote1, pilote2):
@@ -200,6 +207,10 @@ def get_speed(session, driver):
     tabSpeed=[speed1, speed2]
     return tabSpeed
 
+def get_status(session,driver):
+    driver=session.get_driver(driver)
+    grid_position = driver['Status']
+    return grid_position
 
 
 #fonction de comparaison entre 2 pilotes
@@ -248,6 +259,14 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
     tabTempsSecteurPilote1=get_best_lap_by_sector(session, nomPilote1)
     tabTempsSecteurPilote2=get_best_lap_by_sector(session, nomPilote2)
 
+    #on récupere le status de course du pilote (fini, crash, collision, etc...)
+    statuPilote1=get_status(session, nomPilote1)
+    statuPilote2=get_status(session, nomPilote2)
+
+    #on récupère le nombre de tours effectués par le pilote 1 et le pilote 2 (grâce au tableau de durée de vie des pneus)
+    nbTourEffectueesPilote1=tabDureePneuPilote1[len(tabDureePneuPilote1)-1] #renvoie un entier 
+    nbTourEffectueesPilote2=tabDureePneuPilote2[len(tabDureePneuPilote2)-1] #renvoie un entier
+
     #création de deux objets contenant les informations des deux pilotes
     objetPilote1={
         "nomPilote": nomPilote1,
@@ -260,6 +279,8 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
         "tempsSecteur": tabTempsSecteurPilote1,
         "pneuMeilleurTour": pneuMeilleurTourPilote1,
         "numeroMeilleurTour": numeroMeilleurTourPilote1,
+        "statu": statuPilote1,
+        "nbToursEffectuees": nbTourEffectueesPilote1,
         }
     
     objetPilote2={
@@ -273,6 +294,8 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
         "tempsSecteur": tabTempsSecteurPilote2,
         "pneuMeilleurTour": pneuMeilleurTourPilote2,
         "numeroMeilleurTour": numeroMeilleurTourPilote2,
+        "statu": statuPilote2,
+        "nbToursEffectuees": nbTourEffectueesPilote2,
         }
     
 
@@ -283,129 +306,6 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
 
 comparaison(nameGP, saison, nomPilote1, nomPilote2)
 
-#recuperation des meilleurs tours de chaque pilote
-# hamilton_lap=get_best_lap(session, 'HAM')
-# verstappen_lap=get_best_lap(session, 'VER')
-
-
-
-
-#----------------------------------Comparaison meilleurs minisecteurs----------------------------------
-# fastest_ham_lap=hamilton_lap.get_telemetry().add_distance()
-# fastest_ver_lap=verstappen_lap.get_telemetry().add_distance()
-
-# # Since the telemetry data does not have a variable that indicates the driver, 
-# # we need to create that column
-# fastest_ver_lap['Driver'] = 'VER'
-# fastest_ham_lap['Driver'] = 'HAM'
-
-# # Combine le telemetry de hamilton et verstappen
-# telemetry = fastest_ver_lap.append(fastest_ham_lap)
-
-# #Le nombre de mini-sectors est arbitraire
-# num_minisectors = 25
-
-# # Permet de recupperer la longueur totale du circuit (valeur max de la colonne distance)
-# total_distance = max(telemetry['Distance'])
-
-# # Creer des segments de longueur egale (à partir du nombre de mini-sectors)
-# minisector_length = total_distance / num_minisectors
-
-# # Initialise la liste des minisectors avec le premier minisector (0)
-# minisectors = [0]
-
-# # Add multiples of minisector_length to the minisectors
-# for i in range(0, (num_minisectors - 1)):
-#     minisectors.append(minisector_length * (i + 1)) # i + 1 car on a deja ajoute le premier minisector (0)
-
-# # ajoute le dernier minisector (valeur max de la colonne distance)
-# telemetry['Minisector'] = telemetry['Distance'].apply(
-#     lambda dist: (
-#         int((dist // minisector_length) + 1) 
-#     )
-# )
-
-# # Calcule la vitesse moyenne de chaque pilote par minisector
-# average_speed = telemetry.groupby(['Minisector', 'Driver'])['Speed'].mean().reset_index()
-
-
-
-# # Selectionne le pilote ayant la vitesse moyenne la plus elevee par minisector
-# fastest_driver = average_speed.loc[average_speed.groupby(['Minisector'])['Speed'].idxmax()]
-
-# # Renomme les colonnes pour faciliter la lecture
-# fastest_driver = fastest_driver[['Minisector', 'Driver']].rename(columns={'Driver': 'Fastest_driver'})
-
-# # Ajout de fastest_driver à telemetry pour avoir le nom du pilote ayant la vitesse moyenne la plus elevee par minisector
-# telemetry = telemetry.merge(fastest_driver, on=['Minisector'])
-
-# # ordonne les valeurs par distance
-# telemetry = telemetry.sort_values(by=['Distance'])
-
-# # verstappen = 1, hamilton = 2
-# telemetry.loc[telemetry['Fastest_driver'] == 'VER', 'Fastest_driver_int'] = 1
-# telemetry.loc[telemetry['Fastest_driver'] == 'HAM', 'Fastest_driver_int'] = 2
-
-# #Creation du plot avec les segments de couleurs differentes
-# x = np.array(telemetry['X'].values)
-# y = np.array(telemetry['Y'].values)
-
-# points = np.array([x, y]).T.reshape(-1, 1, 2)
-# segments = np.concatenate([points[:-1], points[1:]], axis=1)
-# fastest_driver_array = telemetry['Fastest_driver_int'].to_numpy().astype(float)
-
-# cmap = cm.get_cmap('winter', 2)
-# lc_comp = LineCollection(segments, norm=plt.Normalize(1, cmap.N+1), cmap=cmap)
-# lc_comp.set_array(fastest_driver_array)
-# lc_comp.set_linewidth(5)
-
-# plt.rcParams['figure.figsize'] = [18, 10]
-
-# plt.gca().add_collection(lc_comp)
-# plt.axis('equal')
-# plt.tick_params(labelleft=False, left=False, labelbottom=False, bottom=False)
-
-# cbar = plt.colorbar(mappable=lc_comp, boundaries=np.arange(1,4))
-# cbar.set_ticks([1.5, 2.5])
-# cbar.set_ticklabels(['HAM', 'VER'])
-
-# plt.savefig(f"2021_ver_ham_q.png", dpi=300)
-
-# plt.show()
-
-#----------------------------------Fin comparaison meilleurs minisecteurs----------------------------------
-
-
-
-
-
-
-#recuperation des donnees de chaque pilote
-# verstappen_tel = verstappen_lap.get_car_data().add_distance()
-# hamilton_tel = hamilton_lap.get_car_data().add_distance()
-
-
-#Gestion du graphique
-#! Optionnel
-
-
-#couleur de chaque pilote
-# rbr_color = fastf1.plotting.team_color('RBR')
-# mer_color = fastf1.plotting.team_color('MER')
-
-
-# fig, ax = plt.subplots()
-# ax.plot(verstappen_tel['Distance'], verstappen_tel['Speed'], color=rbr_color, label='VER')
-# ax.plot(hamilton_tel['Distance'], hamilton_tel['Speed'], color=mer_color, label='HAM')
-
-# ax.set_xlabel('Distance en metre')
-# ax.set_ylabel('Vitesse en km/h')
-
-# ax.legend()
-# plt.suptitle(f"Fastest Lap Comparison \n "
-#              f"{session.event['EventName']} {session.event.year} Course ")
-
-# plt.show()
 
 
 
