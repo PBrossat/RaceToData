@@ -1,16 +1,8 @@
 import fastf1 
-from fastf1 import plotting
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import figure
-from matplotlib.collections import LineCollection
-from matplotlib import cm
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 import json
 import sys
 import os
-import time
+
 
 
 sysArgv = sys.argv
@@ -152,25 +144,6 @@ def get_nb_lap_done(session,driver):
     tyreLife= driver['TyreLife']
     return len(tyreLife)
 
-
-def comparaison_telemetry(session, pilote1, pilote2):
-    telemetryPilote1=session.laps.pick_driver(pilote1).pick_fastest().get_telemetry().add_distance()
-    telemetryPilote2=session.laps.pick_driver(pilote2).pick_fastest().get_telemetry().add_distance()
-    # création d'un tableau avec les données à comparer
-    data = ['RPM', 'Speed', 'Throttle', 'Brake', 'nGear']
-    fig, ax = plt.subplots(len(data), figsize=(8, 8))
-    fig.suptitle("Comparaison des telemetries de " + pilote1 + " et de " + pilote2 + "sur leur meilleur tour")
-    #changer la couleur de fond de la figure en noir
-    fig.patch.set_facecolor('grey')
-    for i in range(len(data)):
-        ax[i].plot(telemetryPilote1['Distance'], telemetryPilote1[data[i]], label=pilote1)
-        ax[i].plot(telemetryPilote2['Distance'], telemetryPilote2[data[i]], label=pilote2)
-        ax[i].set(ylabel=data[i])
-    for a in ax.flat:
-        a.label_outer()
-    ax[0].legend()
-    # fig.subplots_adjust(left=0.095, bottom=0.04, right=1, top=0.96, wspace=None, hspace=None)
-    plt.show()
     
 def get_best_lap(session, driver):
     fast_lap = session.laps.pick_driver(driver).pick_fastest()
