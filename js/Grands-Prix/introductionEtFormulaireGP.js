@@ -73,7 +73,7 @@ export function gestionFormulaireGP() {
   creationFormulaire(
     document.querySelector("#stats"),
     tabGlobalDataGP,
-    "Analyse !",
+    "Analyser !",
     "Choisissez le Grand Prix à analyser"
   );
   document
