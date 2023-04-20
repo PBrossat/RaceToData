@@ -123,11 +123,6 @@ async function grapheDriverPoint(annee) {
   divParent.appendChild(divAnalyse);
   divAnalyse.innerHTML = "";
 
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Points Pilotes ";
-
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
   divGraphique.id = "GraphiquePtPilotes";
@@ -364,22 +359,65 @@ async function creationGraphePointPilote(annee) {
 function graphePointsMoyenDriver() {
   //Création container
   const divParent = document.querySelector(".divGraphique");
+
+  const grapheEtExplication = document.createElement("div");
+  grapheEtExplication.id = "grapheEtExplication";
+  //display flex pour que les div s'affichent cote à cote
+  grapheEtExplication.style.display = "flex";
+  grapheEtExplication.style.flexDirection = "row";
+  grapheEtExplication.style.width = "100%";
+
   const divAnalyse = document.createElement("div");
   divAnalyse.id = "divAnalysePointsMoyenPilotes";
   divAnalyse.className = "composantDivGraphique";
   divParent.appendChild(divAnalyse);
   divAnalyse.innerHTML = "";
 
-  //Création Titre
-  const Titre = document.createElement("h1");
-  divAnalyse.appendChild(Titre);
-  Titre.innerHTML = "Graphique Points Moyens pilotes par GP ";
-
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
   divGraphique.id = "GraphiquePtMoyen";
   divGraphique.className = "Graphique";
-  divAnalyse.appendChild(divGraphique);
+  grapheEtExplication.appendChild(divGraphique);
+
+  const divExplication = document.createElement("div");
+  divExplication.id = "divExplication";
+  grapheEtExplication.appendChild(divExplication);
+
+  divAnalyse.appendChild(grapheEtExplication);
+
+  if (window.innerWidth >= 1340) {
+    divExplication.style.width = "20%";
+    divExplication.style.float = "right";
+    divGraphique.style.width = "80%";
+    divGraphique.style.float = "left";
+  } else if (window.innerWidth >= 1024) {
+    divExplication.style.width = "25%";
+    divExplication.style.float = "right";
+    divGraphique.style.width = "75%";
+    divGraphique.style.float = "left";
+  } else if (window.innerWidth >= 600) {
+    divExplication.style.width = "30%";
+    divExplication.style.float = "right";
+    divGraphique.style.width = "70%";
+    divGraphique.style.float = "left";
+  } else {
+    //à voir
+  }
+  //ecrire dans la div le texte d'explication
+  divExplication.style.color = "#FFFFFF";
+  divExplication.style.fontSize = "0.9em";
+  divExplication.innerHTML =
+    "<p>Ce graphique représente l'évolution des points des pilotes de F1 durant la saison 2022. Un pilote gagne des points en fonction de sa position finale durant le grand prix</p>";
+  divExplication.innerHTML +=
+    "<p>Les points sont attribués de cette <span style='color:red'>manière</span><img src='data/pointsGrandPrix.jpeg' alt='Image' class='image-hover'></p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p>On peut aussi gagner un point bonus si l'on fait le <span style='color:red'>meilleur temps</span> et que l'on se trouve dans les 10 premiers à l'arrivé,</p>";
+  divExplication.innerHTML +=
+    "<p>Pour un maximum de <span class='highlighted'>26 points</span></p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p>Dans ce graphique on peut voir clairement qu'à partir du GP d'Espagne,<span style='color:blue'> Verstappen </span> a prit le dessus sur <span style='color:red'>Leclerc</span><br> et n'a jamais rendu sa premiere place</p>";
 
   const tabNomPilote = [];
   for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
