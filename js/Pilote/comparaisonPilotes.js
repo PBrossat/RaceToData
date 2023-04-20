@@ -1,6 +1,7 @@
 //import des données des pilotes
 import { tabGlobalDataPilotes } from "./scriptPilote.js";
 import { tabGlobalDataGP } from "../SimulationGP/scriptSimulation.js";
+import { analysePosition, analysePneus } from "./analyseComparaisonPilote.js";
 
 //enumeration des grands prix pour l'image dans le timeSlider
 const GrandPrix = {
