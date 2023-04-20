@@ -74,7 +74,11 @@
 
 /*------------------Bouton choix---------------------*/
 
-.divGraphique #divAnalysePointsPilotes #labelChoix {
+.divGraphique #divAnalysePointsPilotes #divChoix {
+  width: 75%;
+}
+
+#labelChoix {
   text-align: center;
   color: white;
   text-shadow: 2px 2px #463636;
@@ -82,7 +86,7 @@
   margin-right: 5%;
 }
 
-.divGraphique #divAnalysePointsPilotes #inputChoix {
+#inputChoix {
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;

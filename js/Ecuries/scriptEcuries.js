@@ -96,34 +96,38 @@ function creationDivPie() {
 
   divAnalyse.appendChild(grapheEtExplication);
 
+  const divChoix = document.createElement("div");
+  divChoix.id = "divChoix";
+  divAnalyse.appendChild(divChoix);
+
   const titreConstructeurs = document.createElement("input");
   titreConstructeurs.id = "inputChoix";
   titreConstructeurs.type = "radio";
   titreConstructeurs.name = "option";
   titreConstructeurs.checked = true;
-  divAnalyse.appendChild(titreConstructeurs);
+  divChoix.appendChild(titreConstructeurs);
 
   const labelTitreConstructeurs = document.createElement("label");
   labelTitreConstructeurs.id = "labelChoix";
   labelTitreConstructeurs.innerHTML =
     "Nombre de titres constructeurs par écuries";
-  divAnalyse.appendChild(labelTitreConstructeurs);
+  divChoix.appendChild(labelTitreConstructeurs);
 
   const titrePilotes = document.createElement("input");
   titrePilotes.id = "inputChoix";
   titrePilotes.type = "radio";
   titrePilotes.name = "option";
-  divAnalyse.appendChild(titrePilotes);
+  divChoix.appendChild(titrePilotes);
 
   const labelTitrePilotes = document.createElement("label");
   labelTitrePilotes.id = "labelChoix";
   labelTitrePilotes.innerHTML = "Nombre de titres pilotes par écuries";
-  divAnalyse.appendChild(labelTitrePilotes);
+  divChoix.appendChild(labelTitrePilotes);
 
   const buttonMettreAJour = document.createElement("button");
   buttonMettreAJour.className = "buttonMettreAJour";
   buttonMettreAJour.innerHTML = "Mettre à jour";
-  divAnalyse.appendChild(buttonMettreAJour);
+  divChoix.appendChild(buttonMettreAJour);
 
   divExplication.style.width = "20%";
   divExplication.style.float = "right";
@@ -221,32 +225,36 @@ function creationDivMultipleBars() {
 
   divAnalyse.appendChild(grapheEtExplication);
 
+  const divChoix = document.createElement("div");
+  divChoix.id = "divChoix";
+  divAnalyse.appendChild(divChoix);
+
   const StatsAll = document.createElement("input");
   StatsAll.id = "inputChoix";
   StatsAll.type = "radio";
   StatsAll.name = "option";
-  divAnalyse.appendChild(StatsAll);
+  divChoix.appendChild(StatsAll);
 
   const labelStatsAll = document.createElement("label");
   labelStatsAll.id = "labelChoix";
   labelStatsAll.innerHTML = "Statistiques depuis 1958 par écuries";
-  divAnalyse.appendChild(labelStatsAll);
+  divChoix.appendChild(labelStatsAll);
 
   const Stats = document.createElement("input");
   Stats.id = "inputChoix";
   Stats.type = "radio";
   Stats.name = "option";
-  divAnalyse.appendChild(Stats);
+  divChoix.appendChild(Stats);
 
   const labelStats = document.createElement("label");
   labelStats.id = "labelChoix";
   labelStats.innerHTML = "Satistiques saison 2022 par écuries";
-  divAnalyse.appendChild(labelStats);
+  divChoix.appendChild(labelStats);
 
   const buttonMettreAJour = document.createElement("button");
   buttonMettreAJour.className = "buttonMettreAJour";
   buttonMettreAJour.innerHTML = "Mettre à jour";
-  divAnalyse.appendChild(buttonMettreAJour);
+  divChoix.appendChild(buttonMettreAJour);
 
   const seriesAll = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
