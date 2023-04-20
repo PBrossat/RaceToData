@@ -90,5 +90,6 @@ export function gestionFormulaireGP() {
     if (document.querySelector(".analyse") != null) {
       document.querySelector(".analyse").remove();
     }
+    //afficherAnalyseGP(gp);
   });
 }
