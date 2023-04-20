@@ -17,10 +17,10 @@
   font-size: 1.3em;
 }
 
-/* #titreAnalysePosition h2 {
+#titreAnalysePosition h2 {
   color: red;
   font-size: 1.3em;
-} */
+}
 
 /* media  */
 @media screen and (max-width: 485px) {
