@@ -111,10 +111,10 @@ def get_tyre(session, driver):
     tabTyre.append(tyre[0])
     #parcours du tableau tyre
     for i in range(1, len(tyreLife)):
-        #si la valeur précédente est différente de la valeur actuelle on l'ajoute au tableau
-        if tyreLife[i]<tyreLife[i-1]:
+        #si la valeur actuelle est plus petite que la valeur précédente (ou si elle est aussi égale à 1), 
+        #alors on ajoute le type de pneu actuel dans le tableau tabTyre
+        if tyreLife[i]<=tyreLife[i-1]:
             tabTyre.append(tyre[i])
-    
     return tabTyre
 
 def get_tyre_and_lap_number_best_lap(session, driver):
@@ -140,8 +140,9 @@ def get_tyreLife(session, driver):
     tabTyreLife.append(1)
     #parcours du tableau tyreLife
     for i in range(1, len(tyreLife)):
-        #si la valeur actuel est égal à 1 on ajoute la valeur précédente au tableau
-        if tyreLife[i] <tyreLife[i-1]:
+        #si la valeur actuelle est plus petite que la valeur précédente (ou si elle est aussi égale à 1),
+        #alors on ajoute le type de pneu actuel dans le tableau tabTyre
+        if tyreLife[i] <=tyreLife[i-1] :
             tabTyreLife.append(i+1)
     tabTyreLife.append(len(tyreLife)) #ajout le dernier élément du tableau
     return tabTyreLife
