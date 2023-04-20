@@ -1,3 +1,4 @@
+import { Pilote } from "../Pilote/enumeration.js";
 //-------------------Gestion du compteur----------------
 
 export function updateCompteur(idCompteur, driver) {
@@ -6,7 +7,7 @@ export function updateCompteur(idCompteur, driver) {
   divCompteur.selectAll("*").remove();
   // ajouter le contenu
   const overview = divCompteur.append("div").attr("class", "overview");
-  overview.append("h2").text(driver.lastName);
+  overview.append("h2").text(Pilote[driver.lastName]);
   // following the HTML-centric section, include an SVG to highlight the telemetry
   const margin = {
     top: 20,
