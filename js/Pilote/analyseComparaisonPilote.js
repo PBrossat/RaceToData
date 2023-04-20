@@ -67,7 +67,7 @@ function analysePosition(data) {
     texteAdaptatif = ` Au final ${nomPiloteDevantDepart} est resté devant ${nomPiloteDerriereDepart} durant tout le Grand-Prix et arrive ${positionVainqueurArrivee}${preposition} de la course.<br><br>
       `;
   } else {
-    texteAdaptatif = ` Au final ${nomPiloteDerriereDepart} est passé devant ${nomPiloteDevantDepart} durant le Grand-Prix et arrive ${positionVainqueurArrivee}ème de la course.<br><br>
+    texteAdaptatif = ` Au final ${nomPiloteDerriereDepart} est passé devant ${nomPiloteDevantDepart} durant le Grand-Prix et arrive ${positionVainqueurArrivee}${preposition} de la course.<br><br>
       `;
   }
 
