@@ -1,4 +1,5 @@
 import { tabGlobalDataGP } from "../SimulationGP/scriptSimulation.js";
+import { afficherAnalyseGP } from "./affichageAnalyseGP.js";
 
 //-------------------------------------Gestion de l'introduction de la partie GP----------------
 export function afficherIntroductionGP() {
@@ -11,7 +12,7 @@ export function afficherIntroductionGP() {
   divIntroEtFormulaire.appendChild(divIntroduction);
   const paragrapheIntroduction = document.createElement("p");
   paragrapheIntroduction.innerText =
-    "Bienvenue dans notre partie d'analyse de courses de Formule 1 ! Après avoir sélectionné le Grand Prix de votre choix et appuyé sur le bouton 'Analyse !', vous accéderez à une analyse approfondie de la course, avec des graphiques et des commentaires.\n\n qVous pourrez ainsi comprendre les stratégies de course adoptées par les pilotes, comparer leurs rythmes et leurs vitesses maximales, et voir comment ils ont évolué au fil des tours.\n\nNous sommes convaincus que cette partie d'analyse vous aidera à approfondir votre compréhension de la course, à apprécier les performances de vos pilotes préférés et à mieux appréhender les enjeux de la saison de Formule 1.\n\nAlors, lancez-vous dès maintenant dans cette expérience immersive et profitez d'une analyse approfondie de la course pour vivre la Formule 1 comme jamais auparavant !";
+    "Bienvenue dans notre partie d'analyse de courses de Formule 1 de la saison 2022 ! Après avoir sélectionné le Grand Prix de votre choix et appuyé sur le bouton 'Analyse !', vous accéderez à une analyse approfondie de la course, avec des graphiques et des commentaires.\n\nVous pourrez ainsi comprendre les stratégies de course adoptées par les pilotes, comparer leurs rythmes et leurs vitesses maximales, et voir comment ils ont évolué au fil des tours.\n\nNous sommes convaincus que cette partie d'analyse vous aidera à approfondir votre compréhension de la course, à apprécier les performances de vos pilotes préférés et à mieux appréhender les enjeux de la saison de Formule 1.\n\nAlors, lancez-vous dès maintenant dans cette expérience immersive et profitez d'une analyse approfondie de la course pour vivre la Formule 1 comme jamais auparavant !";
   divIntroduction.appendChild(paragrapheIntroduction);
 }
 
@@ -90,6 +91,10 @@ export function gestionFormulaireGP() {
     if (document.querySelector(".analyse") != null) {
       document.querySelector(".analyse").remove();
     }
-    //afficherAnalyseGP(gp);
+    afficherAnalyseGP(gp);
+    setTimeout(
+      () => document.querySelector(".analyse").scrollIntoView(true),
+      100
+    );
   });
 }

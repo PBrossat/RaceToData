@@ -16,6 +16,28 @@
     padding: 0;
     padding-top: 5%;
   }
+
+  #stats .div-graphe-gauche-et-explication {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #stats .div-graphe-droite-et-explication {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  #stats .div-graphe {
+    width: 100%;
+  }
+
+  #stats .div-graphe-droite-et-explication .presentation,
+  #stats .div-graphe-gauche-et-explication .presentation {
+    width: 100%;
+    font-size: 1em;
+    padding: 0;
+    padding-top: 5%;
+  }
 }
 
 /* -------------------------------------1366px---------------------------------------- */
@@ -42,6 +64,14 @@
 
   #stats #divMapEtInfos #divInfos #divInfosContent {
     width: 100%;
+  }
+
+  #stats .simulation {
+    flex-direction: column;
+  }
+
+  #stats main {
+    flex-direction: row;
   }
 }
 
