@@ -1,0 +1,25 @@
+.div-graphe-gauche-et-explication,
+.div-graphe-droite-et-explication {
+  margin: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.div-graphe {
+  width: 60%;
+}
+
+.div-graphe img {
+  box-shadow: 0px 0px 30px #fff;
+  width: 100%;
+  border-radius: 1em;
+}
+
+.div-graphe-droite-et-explication .presentation,
+.div-graphe-gauche-et-explication .presentation {
+  width: 40%;
+  font-size: 1em;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0%;
+}
