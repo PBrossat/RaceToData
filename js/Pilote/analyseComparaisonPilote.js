@@ -146,14 +146,14 @@ function analysePneus(data) {
       data[i]["pneu"][0] != "WET"
     ) {
       paragraphe.innerHTML += `<br> On peut voir ici que ${data[i]["nomPilote"]} a utilisé qu'un unique type de pneu durant le Grand Prix.<br>
-      Cela s'explique par le fait que ${data[i]["nomPilote"]} a été contraint d'abandonner la course au tour n°${data[i]["nbToursEffectuees"]} (Do Not Finish). <br>
+      Cela s'explique par le fait que ${data[i]["nomPilote"]} a été contraint d'abandonner la course au tour ${data[i]["nbToursEffectuees"]} (Do Not Finish). <br>
       En voici la raison : ${data[i]["statu"]}.<br>`;
     } else if (
       data[i]["statu"] != "Finished" &&
       !data[i]["statu"].startsWith("+")
     ) {
       paragraphe.innerHTML += `<br> On peut voir ici que ${data[i]["nomPilote"]} n'a pas fini la course.<br>
-      Cela s'explique par le fait que ${data[i]["nomPilote"]} a été contraint d'abandonner la course au tour n°${data[i]["nbToursEffectuees"]} (Do Not Finish). <br>
+      Cela s'explique par le fait que ${data[i]["nomPilote"]} a été contraint d'abandonner la course au tour ${data[i]["nbToursEffectuees"]} (Do Not Finish). <br>
       En voici la raison : ${data[i]["statu"]}.<br>`;
     }
   }
