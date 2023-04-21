@@ -22,7 +22,7 @@ boutonDecouvrirStatsEcuries.addEventListener("click", async function () {
   afficherStatsEcuries();
   recupererInfosEcuries();
   mapEcuries();
-  creationNouvelleDiv();
+  creationIntro();
   creationDivPie();
   creationDivMultipleBars();
   creationDivRace();
@@ -41,7 +41,7 @@ function afficherStatsEcuries() {
 }
 
 //création d'une div pour les graphiques
-function creationNouvelleDiv() {
+function creationIntro() {
   const StatsPilotes = document.querySelector("#stats");
 
   const nouvelleDiv = document.createElement("div");
@@ -71,16 +71,13 @@ function creationDivPie() {
   //Création container
   const divParent = document.querySelector(".divGraphique");
 
-  const grapheEtExplication = document.createElement("div");
-  grapheEtExplication.id = "grapheEtExplication";
-  //display flex pour que les div s'affichent cote à cote
-  grapheEtExplication.style.display = "flex";
-  grapheEtExplication.style.flexDirection = "row";
-  grapheEtExplication.style.width = "100%";
-
   const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
+  divAnalyse.id = "divPieEcurieEtExplication";
+  divAnalyse.className = "divGraphiqueEcurie";
   divParent.appendChild(divAnalyse);
+
+  const grapheEtExplication = document.createElement("div");
+  grapheEtExplication.className = "grapheEtExplication";
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
@@ -90,22 +87,21 @@ function creationDivPie() {
 
   //creation div où se trouve l'explication
   const divExplication = document.createElement("div");
-  divExplication.id = "divExplication";
-  divExplication.style.marginLeft = "4%";
+  divExplication.className = "divExplication";
   grapheEtExplication.appendChild(divExplication);
 
   divAnalyse.appendChild(grapheEtExplication);
 
   const divChoix = document.createElement("div");
-  divChoix.id = "divChoix";
+  divChoix.className = "divChoix";
   divAnalyse.appendChild(divChoix);
 
-  const titreConstructeurs = document.createElement("input");
-  titreConstructeurs.id = "inputChoix";
-  titreConstructeurs.type = "radio";
-  titreConstructeurs.name = "option";
-  titreConstructeurs.checked = true;
-  divChoix.appendChild(titreConstructeurs);
+  const boutonRadioTitreConstructeurs = document.createElement("input");
+  boutonRadioTitreConstructeurs.id = "inputChoix";
+  boutonRadioTitreConstructeurs.type = "radio";
+  boutonRadioTitreConstructeurs.name = "option";
+  boutonRadioTitreConstructeurs.checked = true;
+  divChoix.appendChild(boutonRadioTitreConstructeurs);
 
   const labelTitreConstructeurs = document.createElement("label");
   labelTitreConstructeurs.id = "labelChoix";
@@ -129,13 +125,6 @@ function creationDivPie() {
   buttonMettreAJour.innerHTML = "Mettre à jour";
   divChoix.appendChild(buttonMettreAJour);
 
-  divExplication.style.width = "20%";
-  divExplication.style.float = "right";
-  divGraphique.style.width = "80%";
-  divGraphique.style.float = "left";
-
-  divExplication.style.color = "#FFFFFF";
-  divExplication.style.fontSize = "0.9em";
   divExplication.innerHTML =
     "<p> La Formule 1 est une compétition de course automobile de haut niveau où les équipes construisent deux voitures de course chacunes pour concourir. </p>";
   divExplication.innerHTML += "<br>";
@@ -170,7 +159,7 @@ function creationDivPie() {
   graphePie(data, type);
 
   buttonMettreAJour.addEventListener("click", function () {
-    if (titreConstructeurs.checked) {
+    if (boutonRadioTitreConstructeurs.checked) {
       data = Ecuries;
       type = "constructeurs";
     } else if (titrePilotes.checked) {
@@ -187,33 +176,24 @@ function creationDivMultipleBars() {
   //Création container
   const divParent = document.querySelector(".divGraphique");
   const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
+  divAnalyse.id = "divMultipleBarsEtExplication";
+  divAnalyse.className = "divGraphiqueEcurie";
   divParent.appendChild(divAnalyse);
   divAnalyse.innerHTML = "";
 
   const grapheEtExplication = document.createElement("div");
-  grapheEtExplication.id = "grapheEtExplication";
-  grapheEtExplication.style.display = "flex";
-  grapheEtExplication.style.flexDirection = "row";
-  grapheEtExplication.style.width = "100%";
+  grapheEtExplication.className = "grapheEtExplication";
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
   grapheEtExplication.appendChild(divGraphique);
   divGraphique.id = "GraphiqueVictoires";
   divGraphique.className = "Graphique";
-  divGraphique.style.width = "80%";
-  divGraphique.style.float = "left";
 
   //Création Texte Explicatif
   const divExplication = document.createElement("div");
   grapheEtExplication.appendChild(divExplication);
   divExplication.className = "divExplication";
-  divExplication.style.marginLeft = "4%";
-  divExplication.style.width = "20%";
-  divExplication.style.float = "right";
-  divExplication.style.color = "#FFFFFF";
-  divExplication.style.fontSize = "0.9em";
   divExplication.innerHTML =
     "<p> Les victoires, les poles positions et les podiums sont des éléments clés de la compétition en Formule 1. </p>";
   divExplication.innerHTML += "<br>";
@@ -225,32 +205,36 @@ function creationDivMultipleBars() {
 
   divAnalyse.appendChild(grapheEtExplication);
 
-  const StatsAll = document.createElement("input");
-  StatsAll.id = "inputChoix";
-  StatsAll.type = "radio";
-  StatsAll.name = "option";
-  divAnalyse.appendChild(StatsAll);
+  const divChoix = document.createElement("div");
+  divChoix.className = "divChoix";
+  divAnalyse.appendChild(divChoix);
+
+  const boutonStatsAll = document.createElement("input");
+  boutonStatsAll.id = "inputChoix";
+  boutonStatsAll.type = "radio";
+  boutonStatsAll.name = "option";
+  divChoix.appendChild(boutonStatsAll);
 
   const labelStatsAll = document.createElement("label");
   labelStatsAll.id = "labelChoix";
   labelStatsAll.innerHTML = "Statistiques depuis 1958 par écuries";
-  divAnalyse.appendChild(labelStatsAll);
+  divChoix.appendChild(labelStatsAll);
 
-  const Stats = document.createElement("input");
-  Stats.id = "inputChoix";
-  Stats.type = "radio";
-  Stats.name = "option";
-  divAnalyse.appendChild(Stats);
+  const boutonStats2022 = document.createElement("input");
+  boutonStats2022.id = "inputChoix";
+  boutonStats2022.type = "radio";
+  boutonStats2022.name = "option";
+  divChoix.appendChild(boutonStats2022);
 
-  const labelStats = document.createElement("label");
-  labelStats.id = "labelChoix";
-  labelStats.innerHTML = "Satistiques saison 2022 par écuries";
-  divAnalyse.appendChild(labelStats);
+  const labelStats2022 = document.createElement("label");
+  labelStats2022.id = "labelChoix";
+  labelStats2022.innerHTML = "Satistiques saison 2022 par écuries";
+  divChoix.appendChild(labelStats2022);
 
   const buttonMettreAJour = document.createElement("button");
   buttonMettreAJour.className = "buttonMettreAJour";
   buttonMettreAJour.innerHTML = "Mettre à jour";
-  divAnalyse.appendChild(buttonMettreAJour);
+  divChoix.appendChild(buttonMettreAJour);
 
   const seriesAll = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
@@ -282,7 +266,7 @@ function creationDivMultipleBars() {
   grapheMultipleBars(data, annee);
 
   buttonMettreAJour.addEventListener("click", function () {
-    if (StatsAll.checked) {
+    if (boutonStatsAll.checked) {
       data = seriesAll;
       annee = 1958;
     } else if (Stats.checked) {
@@ -299,17 +283,21 @@ function creationDivRace() {
   //Création container
   const divParent = document.querySelector(".divGraphique");
   const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
+  divAnalyse.id = "divChartRaceExplication";
+  divAnalyse.className = "divGraphiqueEcurie";
   divParent.appendChild(divAnalyse);
 
   let data = "Points";
 
   //Création Texte Explicatif
   const texteExplicatif = document.createElement("div");
+  texteExplicatif.id = "texteExplicationChartRace";
+  texteExplicatif.className = "divExplication";
   divAnalyse.appendChild(texteExplicatif);
-  texteExplicatif.style.color = "#FFFFFF";
-  texteExplicatif.style.fontSize = "1.0em";
-  texteExplicatif.style.marginBottom = "2%";
+
+  // texteExplicatif.style.color = "#FFFFFF";
+  // texteExplicatif.style.fontSize = "1.0em";
+  // texteExplicatif.style.marginBottom = "2%";
   texteExplicatif.innerHTML =
     "Les points sont la monnaie de la Formule 1 et chaque écurie cherchent à en accumuler le plus possible au cours de la saison. Les <span style='color:red'>points</span> sont attribués en fonction de la <span style='color:red'>position de chaque pilote à la fin de chaque course</span>, avec des points supplémentaires accordés pour la pole position et le meilleur tour en course. Ce graphique permet de visualiser le <span style='color:red'>nombre de points accumulés</span> par chaque <span style='color:red'>écurie</span> tout au long des saisons <span style='color:red'>depuis leur création</span>, permettant ainsi de suivre leur progression et leur <span style='color:red'>performance</span> relative par rapport à leurs <span style='color:red'>concurrents</span>.";
   texteExplicatif.innerHTML += "<br>";
@@ -347,37 +335,41 @@ function creationDivRace() {
   year.type = "range";
   divPlay.appendChild(year);
 
-  const Points = document.createElement("input");
-  Points.id = "inputChoix";
-  Points.type = "radio";
-  Points.name = "option";
-  divAnalyse.appendChild(Points);
+  const divChoix = document.createElement("div");
+  divChoix.className = "divChoix";
+  divAnalyse.appendChild(divChoix);
+
+  const nbPointsEcurie = document.createElement("input");
+  nbPointsEcurie.id = "inputChoix";
+  nbPointsEcurie.type = "radio";
+  nbPointsEcurie.name = "option";
+  divChoix.appendChild(nbPointsEcurie);
 
   const labelPoints = document.createElement("label");
   labelPoints.id = "labelChoix";
   labelPoints.innerHTML = "Evolution du nombre de points par écuries";
-  divAnalyse.appendChild(labelPoints);
+  divChoix.appendChild(labelPoints);
 
-  const Victoires = document.createElement("input");
-  Victoires.id = "inputChoix";
-  Victoires.type = "radio";
-  Victoires.name = "option";
-  divAnalyse.appendChild(Victoires);
+  const nbVictoiresEcurie = document.createElement("input");
+  nbVictoiresEcurie.id = "inputChoix";
+  nbVictoiresEcurie.type = "radio";
+  nbVictoiresEcurie.name = "option";
+  divChoix.appendChild(nbVictoiresEcurie);
 
   const labelVictoires = document.createElement("label");
   labelVictoires.id = "labelChoix";
   labelVictoires.innerHTML = "Evolution du nombre de victoires par écuries";
-  divAnalyse.appendChild(labelVictoires);
+  divChoix.appendChild(labelVictoires);
 
   const buttonMettreAJour = document.createElement("button");
   buttonMettreAJour.className = "buttonMettreAJour";
   buttonMettreAJour.innerHTML = "Mettre à jour";
-  divAnalyse.appendChild(buttonMettreAJour);
+  divChoix.appendChild(buttonMettreAJour);
 
   grapheRace(data, year);
 
   buttonMettreAJour.addEventListener("click", function () {
-    if (Points.checked) {
+    if (nbPointsEcurie.checked) {
       data = "Points";
       year.value = 1958;
     } else if (Victoires.checked) {
