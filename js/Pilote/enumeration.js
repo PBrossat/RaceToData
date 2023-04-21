@@ -47,3 +47,27 @@ export const Pilote = {
   TSU: "Tsunoda",
   STR: "Stroll",
 };
+
+//énumeration des couleurs des pilotes selon leur abréviation
+export const CouleurPilote = {
+  VET: "#006F62",
+  BOT: "#900000",
+  GAS: "#2B4562",
+  PER: "#0600EF",
+  HAM: "#00D2BE",
+  RIC: "#FF8700",
+  OCO: "#0090FF",
+  ALB: "#005AFF",
+  MAG: "#FFFFFF",
+  VER: "#0600EF",
+  ALO: "#0090FF",
+  LEC: "#DC0000",
+  SAI: "#DC0000",
+  ZHO: "#900000",
+  RUS: "#00D2BE",
+  LAT: "#005AFF",
+  SCH: "#FFFFFF",
+  NOR: "#FF8700",
+  TSU: "#2B4562",
+  STR: "#006F62",
+};
