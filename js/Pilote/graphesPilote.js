@@ -84,17 +84,14 @@ async function grapheDriverPoint(annee) {
   const divParent = document.querySelector(".divGraphique");
 
   const grapheEtExplication = document.createElement("div");
-  grapheEtExplication.id = "grapheEtExplication";
-  //display flex pour que les div s'affichent cote à cote
-  grapheEtExplication.style.display = "flex";
-  grapheEtExplication.style.flexDirection = "row";
-  grapheEtExplication.style.width = "100%";
+  grapheEtExplication.id = "grapheEtExplicationEvolutionPoints";
+  grapheEtExplication.className = "grapheEtExplicationPilotes";
 
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsPilotes";
-  divAnalyse.className = "composantDivGraphique";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
+  // const divAnalyse = document.createElement("div");
+  // divAnalyse.id = "divAnalysePointsPilotes";
+  // divAnalyse.className = "composantDivGraphique";
+  // divParent.appendChild(divAnalyse);
+  // divAnalyse.innerHTML = "";
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
@@ -103,17 +100,18 @@ async function grapheDriverPoint(annee) {
 
   //creation div où se trouve l'explication
   const divExplication = document.createElement("div");
-  divExplication.id = "divExplication";
+  divExplication.id = "divExplicationPointsPilote2022";
+  divExplication.className = "divExplicationPilotes";
   grapheEtExplication.appendChild(divExplication);
 
-  divAnalyse.appendChild(grapheEtExplication);
+  divParent.appendChild(grapheEtExplication);
 
   //création loader
   //tant que le graphe n'est pas créé, on affiche le loader
 
   const chargement = document.createElement("img");
   chargement.src = "../data/white_loader.svg";
-  divAnalyse.appendChild(chargement);
+  grapheEtExplication.appendChild(chargement);
 
   const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
 
@@ -137,8 +135,10 @@ async function grapheDriverPoint(annee) {
   }
 
   //suppression de l'image chargement si elle existe déjà
-  if (document.querySelector("#divAnalysePointsPilotes img") != null) {
-    document.querySelector("#divAnalysePointsPilotes img").remove();
+  if (
+    document.querySelector("#grapheEtExplicationEvolutionPoints img") != null
+  ) {
+    document.querySelector("#grapheEtExplicationEvolutionPoints img").remove();
   }
 
   //Tableau avec le noms des GP de l'année
@@ -197,23 +197,23 @@ async function grapheDriverPoint(annee) {
       zoomType: "xy",
       panning: true,
       panKey: "shift",
-      events: {
-        load: function () {
-          if (window.innerWidth >= 1300) {
-            this.setSize(this.container.offsetWidth * 1.7, null);
-          } else if (window.innerWidth >= 1200) {
-            this.setSize(this.container.offsetWidth * 1.5, null);
-          } else if (window.innerWidth >= 1050) {
-            this.setSize(this.container.offsetWidth * 1.3, "110%");
-          } else if (window.innerWidth >= 992) {
-            this.setSize(this.container.offsetWidth * 1.1, "110%");
-          } else if (window.innerWidth >= 760) {
-            this.setSize(this.container.offsetWidth * 0.9, "110%");
-          } else if (window.innerWidth >= 500) {
-            this.setSize(this.container.offsetWidth * 0.65, "110%");
-          }
-        },
-      },
+      // events: {
+      //   load: function () {
+      //     if (window.innerWidth >= 1300) {
+      //       this.setSize(this.container.offsetWidth * 1.7, null);
+      //     } else if (window.innerWidth >= 1200) {
+      //       this.setSize(this.container.offsetWidth * 1.5, null);
+      //     } else if (window.innerWidth >= 1050) {
+      //       this.setSize(this.container.offsetWidth * 1.3, "110%");
+      //     } else if (window.innerWidth >= 992) {
+      //       this.setSize(this.container.offsetWidth * 1.1, "110%");
+      //     } else if (window.innerWidth >= 760) {
+      //       this.setSize(this.container.offsetWidth * 0.9, "110%");
+      //     } else if (window.innerWidth >= 500) {
+      //       this.setSize(this.container.offsetWidth * 0.65, "110%");
+      //     }
+      //   },
+      // },
     },
 
     //s'adapte à la taille de l'ecran lorsqu'on redimensionne avec la souris (addEventlistener resize)
@@ -351,7 +351,8 @@ function graphePointsMoyenDriver() {
   grapheEtExplication.appendChild(divGraphique);
 
   const divExplication = document.createElement("div");
-  divExplication.id = "divExplication";
+  divExplication.id = "divExplicationPointsMoyenPilotes";
+  divExplication.className = "divExplicationPilotes";
   grapheEtExplication.appendChild(divExplication);
 
   divAnalyse.appendChild(grapheEtExplication);
