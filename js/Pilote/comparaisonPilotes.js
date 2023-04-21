@@ -1,8 +1,12 @@
 //import des données des pilotes
 import { tabGlobalDataPilotes } from "./scriptPilote.js";
 import { tabGlobalDataGP } from "../SimulationGP/scriptSimulation.js";
-import { analysePosition, analysePneus } from "./analyseComparaisonPilote.js";
-import { GrandPrix, Pilote } from "./enumeration.js";
+import {
+  analysePosition,
+  analysePneus,
+  analyseTemps,
+} from "./analyseComparaisonPilote.js";
+import { GrandPrix, Pilote, CouleurPilote } from "./enumeration.js";
 
 async function gestionFormulairePilote() {
   const formulaire = document.getElementById("formulaire");
@@ -49,6 +53,7 @@ async function gestionFormulairePilote() {
     //analyse des données
     analysePosition(data);
     analysePneus(data);
+    analyseTemps(data);
   });
 }
 
@@ -235,13 +240,13 @@ function ajoutPointInterrogation() {
       divPointInterrogation.style.position = "relative";
 
       const pointInterrogation = document.createElement("img");
+      pointInterrogation.className = "pointInterrogation";
       pointInterrogation.src = "data/interrogation.png";
 
       //resize image
       pointInterrogation.style.width = "40px";
       pointInterrogation.style.height = "40px";
       pointInterrogation.style.cursor = "pointer";
-      pointInterrogation.className = "pointInterrogation";
       pointInterrogation.id = "pointInterrogation_" + index;
 
       //création d'une div contenant le texte d'explication
@@ -264,8 +269,7 @@ async function explicationComparaison() {
   titre.style.textAlign = "center";
   titre.innerHTML = "Comparaison de deux pilotes";
   const explication = document.createElement("p");
-  explication.style.textAlign = "center";
-  explication.style.color = "white";
+  explication.id = "explicationComparaisonIntro";
   explication.innerHTML =
     "Bienvenue sur notre application de comparaison de pilotes de Formule 1 pour la saison 2022. Nous avons conçu un carrousel interactif qui vous permettra de comparer deux pilotes sur plusieurs critères clés d'un Grand Prix.<br><br>" +
     "Le premier slider de notre carrousel est un graphique linéaire qui représente l'évolution des positions de départ et d'arrivée des deux pilotes pendant le Grand Prix. Vous pourrez ainsi visualiser leur progression tout au long de la course.<br><br>" +
@@ -312,6 +316,19 @@ async function grahiquePositionComparaison(data) {
 
   const styleText = { color: "#FFFFFF", fontWeight: "bold" };
 
+  //trouver le min des data et le max
+  var max1 = Math.max.apply(null, tabPositionPilote1);
+  var min1 = Math.min.apply(null, tabPositionPilote1);
+  var max2 = Math.max.apply(null, tabPositionPilote2);
+  var min2 = Math.min.apply(null, tabPositionPilote2);
+
+  var maxY = Math.max(max1, max2) + 1;
+  var minY = Math.min(min1, min2) - 1;
+
+  // ZOOM dans le chart adapté aux data (pour éviter d'avoir un graphique vide)
+  var maxY = Math.max(max1, max2) + 1;
+  var minY = Math.min(min1, min2) - 1;
+
   //creation du graphique
   Highcharts.chart(graphique, {
     chart: {
@@ -343,10 +360,11 @@ async function grahiquePositionComparaison(data) {
         text: "Position",
         itemStyle: {
           fontWeight: "bold",
+          color: "#FFFFFF",
         },
       },
-      min: 1,
-      max: 20,
+      min: minY,
+      max: maxY,
       gridLineWidth: 0.5,
       tickInterval: 1,
       startOnTick: false,
@@ -369,6 +387,7 @@ async function grahiquePositionComparaison(data) {
     legend: {
       itemStyle: {
         fontWeight: "bold",
+        color: "#FFFFFF",
       },
     },
 
@@ -376,12 +395,12 @@ async function grahiquePositionComparaison(data) {
       {
         name: Pilote[data[0]["nomPilote"]],
         data: tabPositionPilote1,
-        color: "#FF0000",
+        color: CouleurPilote[data[0]["nomPilote"]],
       },
       {
-        name: Pilote[data[1]["nomPilote"]], // nom de la série de données pour le pilote 2
-        data: tabPositionPilote2, // les données du pilote 2 à afficher
-        color: "#FFD700",
+        name: Pilote[data[1]["nomPilote"]],
+        data: tabPositionPilote2,
+        color: CouleurPilote[data[1]["nomPilote"]],
       },
     ],
   });
