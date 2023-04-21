@@ -1,0 +1,43 @@
+.divGraphiqueEcurie {
+  margin-bottom: 9%;
+}
+
+.divGraphiqueEcurie .grapheEtExplication {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.divGraphiqueEcurie .Graphique {
+  width: 80%;
+  float: left;
+  overflow: hidden;
+}
+
+.divGraphiqueEcurie #GraphiqueWinsAllTime {
+  width: 100%; /*pour qu'il prenne toute la largeur  */
+  margin-bottom: 4%;
+}
+
+.divGraphiqueEcurie #texteExplicationChartRace {
+  width: 100%;
+  font-size: 1em;
+}
+/* pour le texte  */
+.divGraphique p {
+  color: white;
+  text-shadow: 2px 2px #463636;
+}
+
+.divGraphiqueEcurie .divExplication {
+  margin-left: 4%;
+  height: 100%;
+  width: 20%;
+  float: right;
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 30px #fff;
+  font-size: 0.8em;
+  border-radius: 1em;
+  margin-bottom: 3%;
+  padding: 2%;
+}

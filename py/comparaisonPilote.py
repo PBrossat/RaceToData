@@ -12,13 +12,6 @@ nomPilote2 = sysArgv[3]
 saison=2022
 
 
-#TODO Je veux pourvoir récuperer :
-# - le temps du meilleur tour
-# - la position du pilote au départ 
-# - la position du pilote à l'arrivée
-# - les differents pneus utilisés par le pilote et leur durée de vie
-# - la vitesse moyenne du pilote durant le gp
-
 
 if not os.path.exists("py/cache"):
  os.makedirs("py/cache")
@@ -276,7 +269,6 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
     with open('json/comparaisonPilote/comparaison'+pilote1+'_'+pilote2+'_'+grandPrix+'.json', 'w') as f:
             json.dump([objetPilote1, objetPilote2], f, indent=4)
 
-    
 
 comparaison(nameGP, saison, nomPilote1, nomPilote2)
 
