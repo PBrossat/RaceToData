@@ -33,6 +33,11 @@
   color: white;
   text-shadow: 2px 2px #463636;
   font-size: unset;
+  margin-bottom: 5%;
+}
+
+.divGraphique .divExplicationPilotes img {
+  width: 95%;
 }
 
 .divGraphique .Graphique {
@@ -41,6 +46,25 @@
   height: 0%; /*la div s'adapte a la hautteur du graphique  */
 }
 
+.divGraphique .grapheEtExplicationPilotes {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.divGraphique .divExplicationPilotes {
+  margin-left: 4%;
+  height: 100%;
+  width: 20%;
+  float: right;
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 30px #fff;
+  font-size: 0.7em;
+  border-radius: 1em;
+  margin-bottom: 3%;
+  padding: 2%;
+}
 .divGraphique #divAnalysePointsPilotes {
   margin-bottom: 8%;
 }

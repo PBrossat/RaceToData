@@ -48,6 +48,14 @@
   }
 }
 
+/* -------------------------------------1270px------------------------------------------ */
+
+@media (max-width: 1200px) {
+  .divGraphiqueEcurie .divExplication {
+    font-size: 0.7em;
+  }
+}
+
 /* -------------------------------------1200px------------------------------------------ */
 
 @media (max-width: 1200px) {
@@ -81,6 +89,50 @@
   .wrapper .card {
     width: 20vh;
     height: 40vh;
+  }
+
+  #stats .divGraphiqueEcurie .grapheEtExplication {
+    flex-direction: column-reverse;
+  }
+
+  #stats .divGraphiqueEcurie .Graphique {
+    width: 100%;
+    margin-bottom: 3%;
+  }
+
+  #stats .divGraphiqueEcurie {
+    margin-bottom: 15%;
+  }
+
+  .divGraphiqueEcurie .divExplication {
+    width: 100%;
+    float: none;
+    margin-left: 0%;
+    font-size: 1em;
+  }
+
+  #stats .divGraphique .grapheEtExplicationPilotes {
+    width: 100%;
+  }
+
+  #stats .divGraphique .grapheEtExplicationPilotes {
+    flex-direction: column;
+  }
+
+  #stats .divGraphique .divExplicationPilotes {
+    width: 100%;
+    float: none;
+    font-size: 1em;
+    margin-bottom: 5%;
+    padding: 5%;
+  }
+
+  .divGraphique .divExplicationPilotes img {
+    width: 45%;
+  }
+
+  #stats .divGraphique #GraphiquePtPilotes {
+    width: 100%;
   }
 }
 
