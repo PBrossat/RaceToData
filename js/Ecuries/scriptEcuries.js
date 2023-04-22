@@ -269,7 +269,7 @@ function creationDivMultipleBars() {
     if (boutonStatsAll.checked) {
       data = seriesAll;
       annee = 1958;
-    } else if (Stats.checked) {
+    } else if (boutonStats2022.checked) {
       data = series;
       annee = 2022;
     }
@@ -372,7 +372,7 @@ function creationDivRace() {
     if (nbPointsEcurie.checked) {
       data = "Points";
       year.value = 1958;
-    } else if (Victoires.checked) {
+    } else if (nbVictoiresEcurie.checked) {
       data = "Victoires";
       year.value = 1958;
     }
