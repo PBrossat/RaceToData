@@ -182,7 +182,7 @@ function creationDivPie() {
       divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
       divAnalyseExplication.innerHTML += "<br>";
       divAnalyseExplication.innerHTML +=
-        "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> sur le monde de la F1. En effet, la Scuderia a remporté <span style='color:red'>15 titres</span> constructeurs, soit <span style='color:red'>3 de plus que</span> McLaren, qui est <span style='color:red'>la seconde équipe</span> la plus titrée. </p>";
+        "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> sur le monde de la F1. En effet, la Scuderia a remporté <span style='color:red'>15 titres</span> pilotes, soit <span style='color:red'>3 de plus que</span> McLaren, qui est <span style='color:red'>la seconde équipe</span> la plus titrée. </p>";
       divAnalyse.appendChild(divAnalyseExplication);
     }
     graphePie(data, type);
@@ -262,7 +262,7 @@ function creationDivMultipleBars() {
   divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
   divAnalyseExplication.innerHTML += "<br>";
   divAnalyseExplication.innerHTML +=
-    "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> en <span style='color:red'>qualifications</span>. Cependant on voit également que <span style='color:red'>RedBull domine</span> en terme de <span style='color:red'>victoires</span> et de <span style='color:red'>podiums</span>. </p>";
+    "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> depuis la création de la discipline. En effet, <span style='color:red'>Ferrari</span> compte 789 podiums soit <span style='color:red'>299 podiums de plus</span> que McLaren, qui est <span style='color:red'>la seconde équipe</span> avec le plus de podiums, ce qui montre la <span style='color:red'>régularité</span> de cette équipe <span style='color:red'>au plus haut niveau</span> de ce sport depuis sa création. </p>";
   divAnalyse.appendChild(divAnalyseExplication);
 
   const seriesAll = [];
