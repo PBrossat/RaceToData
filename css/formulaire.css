@@ -204,32 +204,3 @@ select,
 #divFormulaireEtSlider .selecteur select + select {
   margin-bottom: 3%;
 }
-
-@media (max-width: 950px) {
-  #divFormulaireEtSlider {
-    flex-direction: column-reverse;
-  }
-
-  #divFormulaireEtSlider #divFormulaire {
-    width: 96%;
-    margin-bottom: 3%;
-  }
-
-  #divFormulaireEtSlider #formulaire {
-    display: flex;
-    flex-direction: row;
-    height: 62px;
-  }
-  #divFormulaireEtSlider #formulaire .selecteur {
-    margin-right: auto;
-  }
-
-  #divFormulaireEtSlider #boutonSubmit {
-    margin-right: auto;
-    padding: 1%;
-  }
-
-  #divFormulaireEtSlider #slider {
-    width: 100%;
-  }
-}

@@ -50,9 +50,45 @@
 
 /* -------------------------------------1270px------------------------------------------ */
 
-@media (max-width: 1200px) {
+@media (max-width: 1270px) {
   .divGraphiqueEcurie .divExplication {
     font-size: 0.7em;
+  }
+
+  #stats .divGraphique #divExplicationPointsPilote2022 {
+    width: 100%;
+  }
+
+  /* les composants se placent les uns en dessous des autres */
+  #stats .divGraphique .grapheEtExplicationPilotes {
+    flex-direction: column;
+  }
+
+  /* taille de l'image de l'explication du graphique Pilote Points 2022 */
+  #stats .divGraphique #divExplicationPointsPilote2022 img {
+    width: 20%;
+    height: 15%;
+    border-radius: 0.2em;
+  }
+
+  /* la div prend toute la largueur en dessous du graphique  */
+  #stats .divGraphique .divExplicationPilotes {
+    width: 100%;
+    margin-left: 0%;
+    float: none;
+    font-size: 0.9em;
+    margin-bottom: 0%;
+    padding: 1%;
+  }
+
+  #stats .divGraphique .divExplicationPilotes p {
+    margin-bottom: 0%;
+    padding: 0%;
+  }
+
+  /* la div graphique prend toute la largeur au dessus de l'explication  */
+  #stats .divGraphique .Graphique {
+    width: 100%;
   }
 }
 
@@ -110,30 +146,6 @@
     margin-left: 0%;
     font-size: 1em;
   }
-
-  #stats .divGraphique .grapheEtExplicationPilotes {
-    width: 100%;
-  }
-
-  #stats .divGraphique .grapheEtExplicationPilotes {
-    flex-direction: column;
-  }
-
-  #stats .divGraphique .divExplicationPilotes {
-    width: 100%;
-    float: none;
-    font-size: 1em;
-    margin-bottom: 5%;
-    padding: 5%;
-  }
-
-  .divGraphique .divExplicationPilotes img {
-    width: 45%;
-  }
-
-  #stats .divGraphique #GraphiquePtPilotes {
-    width: 100%;
-  }
 }
 
 /* ---------------------------------------1079px------------------------------------- */
@@ -141,6 +153,24 @@
 @media (max-width: 1079px) {
   #stats #divMapEtInfos #divInfos #divInfosContent {
     width: 110%;
+  }
+}
+
+/* ---------------------------------------1040px------------------------------------- */
+@media screen and (max-width: 1040px) {
+  #positionSlider h2 {
+    font-size: 1.3em;
+  }
+  #positionSlider h3 {
+    font-size: 1.3em;
+  }
+
+  .highcharts-title {
+    font-size: 17px;
+  }
+
+  .highcharts-axis-title {
+    font-size: 12px;
   }
 }
 
@@ -279,6 +309,44 @@
   .divGraphique .selecteur {
     margin-right: 1%;
   }
+
+  #stats #divFormulaireEtSlider #slider {
+    width: 90%;
+  }
+
+  #positionSlider h2 {
+    font-size: 1.7em;
+  }
+  #positionSlider h3 {
+    font-size: 1.5em;
+  }
+
+  #stats #divFormulaireEtSlider #slider {
+    font-size: 0.8em;
+  }
+
+  #stats #divFormulaireEtSlider {
+    flex-direction: column-reverse;
+  }
+
+  #stats #divFormulaireEtSlider #divFormulaire {
+    width: 96%;
+    margin-bottom: 3%;
+  }
+
+  #stats #divFormulaireEtSlider #formulaire {
+    display: flex;
+    flex-direction: row;
+    height: 62px;
+  }
+  #stats #divFormulaireEtSlider #formulaire .selecteur {
+    margin-right: auto;
+  }
+
+  #stats #divFormulaireEtSlider #boutonSubmit {
+    margin-right: auto;
+    padding: 1%;
+  }
 }
 
 /* ----------------------------------------820px------------------------------------ */
@@ -318,6 +386,21 @@
     padding-top: 0%;
     width: 80%;
   }
+
+  .slider__item #tempsPilote img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ---------------------------------------735px----------------------------------- */
+@media screen and (max-width: 735px) {
+  #positionSlider h2 {
+    font-size: 1.3em;
+  }
+  #positionSlider h3 {
+    font-size: 1.2em;
+  }
 }
 
 /* -----------------------------------------690px----------------------------------- */
@@ -338,6 +421,10 @@
   #stats #map-et-infos-gp #map {
     margin-bottom: 20%;
   }
+  .slider__item #tempsPilote img {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 /* --------------------------------------635px--------------------------- */
@@ -355,12 +442,55 @@
   }
 }
 
+/* --------------------------------------610px--------------------------- */
+@media screen and (max-width: 610px) {
+  #positionSlider h2 {
+    font-size: 1.1em;
+  }
+  #positionSlider h3 {
+    font-size: 1em;
+  }
+}
+
+/* --------------------------------------550px--------------------------- */
+@media screen and (max-width: 550px) {
+  #positionSlider h2 {
+    font-size: 0.9em;
+  }
+  #positionSlider h3 {
+    font-size: 0.8em;
+  }
+  #slider #graphiquePositionGP {
+    height: auto;
+  }
+}
+
 /* --------------------------------------500px---------------------------- */
 
 @media (max-width: 500px) {
   #stats #divMapEtInfos .bouton {
     left: 35%;
     bottom: auto;
+  }
+  .slider__item #tempsPilote img {
+    width: 19px;
+    height: 19px;
+  }
+
+  #divFormulaireEtSlider .selecteur {
+    padding: 1%;
+    width: 20%;
+    font-size: 0.3em;
+  }
+}
+
+/*--------------------------------------485px----------------------------  */
+@media screen and (max-width: 485px) {
+  #popup_0 #titreAnalysePosition {
+    font-size: 0.9em;
+  }
+  #popup_0 h2 {
+    font-size: 0.9em;
   }
 }
 
