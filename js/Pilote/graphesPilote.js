@@ -80,22 +80,17 @@ async function recuperationPilotesSaison(annee) {
 
 //-----------------------------------Graphique 1---------------------------
 async function grapheDriverPoint(annee) {
-  //Création container
+  //Créations containers
   const divParent = document.querySelector(".divGraphique");
 
   const grapheEtExplication = document.createElement("div");
   grapheEtExplication.id = "grapheEtExplicationEvolutionPoints";
   grapheEtExplication.className = "grapheEtExplicationPilotes";
 
-  // const divAnalyse = document.createElement("div");
-  // divAnalyse.id = "divAnalysePointsPilotes";
-  // divAnalyse.className = "composantDivGraphique";
-  // divParent.appendChild(divAnalyse);
-  // divAnalyse.innerHTML = "";
-
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
   divGraphique.id = "GraphiquePtPilotes";
+  divGraphique.className = "Graphique";
   grapheEtExplication.appendChild(divGraphique);
 
   //creation div où se trouve l'explication
@@ -108,10 +103,12 @@ async function grapheDriverPoint(annee) {
 
   //création loader
   //tant que le graphe n'est pas créé, on affiche le loader
-
-  const chargement = document.createElement("img");
-  chargement.src = "../data/white_loader.svg";
-  grapheEtExplication.appendChild(chargement);
+  const chargement1 = document.createElement("img");
+  chargement1.src = "../data/white_loader.svg";
+  const chargement2 = document.createElement("img");
+  chargement2.src = "../data/white_loader.svg";
+  divGraphique.appendChild(chargement1);
+  divExplication.appendChild(chargement2);
 
   const tabNomPiloteSaison = await recuperationPilotesSaison(annee);
 
@@ -192,28 +189,11 @@ async function grapheDriverPoint(annee) {
     chart: {
       type: "spline",
       backgroundColor: "#1b1b1b",
-      height: "110%",
+      height: "60%",
       marginBottom: 110,
       zoomType: "xy",
       panning: true,
       panKey: "shift",
-      // events: {
-      //   load: function () {
-      //     if (window.innerWidth >= 1300) {
-      //       this.setSize(this.container.offsetWidth * 1.7, null);
-      //     } else if (window.innerWidth >= 1200) {
-      //       this.setSize(this.container.offsetWidth * 1.5, null);
-      //     } else if (window.innerWidth >= 1050) {
-      //       this.setSize(this.container.offsetWidth * 1.3, "110%");
-      //     } else if (window.innerWidth >= 992) {
-      //       this.setSize(this.container.offsetWidth * 1.1, "110%");
-      //     } else if (window.innerWidth >= 760) {
-      //       this.setSize(this.container.offsetWidth * 0.9, "110%");
-      //     } else if (window.innerWidth >= 500) {
-      //       this.setSize(this.container.offsetWidth * 0.65, "110%");
-      //     }
-      //   },
-      // },
     },
 
     //s'adapte à la taille de l'ecran lorsqu'on redimensionne avec la souris (addEventlistener resize)
@@ -277,72 +257,26 @@ async function grapheDriverPoint(annee) {
     series: series,
   });
 
-  if (window.innerWidth >= 1340) {
-    divExplication.style.width = "20%";
-    divExplication.style.float = "right";
-    divGraphique.style.width = "80%";
-    divGraphique.style.float = "left";
-  } else if (window.innerWidth >= 1024) {
-    divExplication.style.width = "25%";
-    divExplication.style.float = "right";
-    divGraphique.style.width = "75%";
-    divGraphique.style.float = "left";
-  } else if (window.innerWidth >= 600) {
-    divExplication.style.width = "30%";
-    divExplication.style.float = "right";
-    divGraphique.style.width = "70%";
-    divGraphique.style.float = "left";
-  }
-  //ecrire dans la div le texte d'explication
-  divExplication.style.color = "#FFFFFF";
-  divExplication.style.fontSize = "0.9em";
+  //Texte explicatif/analyse du graphique
   divExplication.innerHTML =
-    "<p>Ce graphique représente l'évolution des points des pilotes de F1 durant la saison 2022. Un pilote gagne des points en fonction de sa position finale durant le grand prix</p>";
-  divExplication.innerHTML +=
-    "<p>Les points sont attribués de cette <span style='color:red'>manière</span><img src='data/pointsGrandPrix.jpeg' alt='Image' class='image-hover'></p>";
-  divExplication.innerHTML += "<br>";
-  divExplication.innerHTML +=
-    "<p>On peut aussi gagner un point bonus si l'on fait le <span style='color:red'>meilleur temps</span> et que l'on se trouve dans les 10 premiers à l'arrivé,</p>";
-  divExplication.innerHTML +=
-    "<p>Pour un maximum de <span class='highlighted'>26 points</span></p>";
-  divExplication.innerHTML += "<br>";
-  divExplication.innerHTML +=
-    "<p>Dans ce graphique on peut voir clairement qu'à partir du GP d'Espagne,<span style='color:blue'> Verstappen </span> a prit le dessus sur <span style='color:red'>Leclerc</span><br> et n'a jamais rendu sa premiere place</p>";
-}
-
-//fonction permettant de créer le graphique puis les boutons
-async function creationGraphePointPilote(annee) {
-  //on attend que le graphe soit crée pour créer les boutons
-  await grapheDriverPoint(annee);
-  // creationBoutonChoixSaison();
-
-  // //Event sur les boutons
-  // document.querySelector("#bouton2021").addEventListener("click", function () {
-  //   creationGraphePointPilote(2021);
-  // });
-
-  // document.querySelector("#bouton2022").addEventListener("click", function () {
-  //   creationGraphePointPilote(2022);
-  // });
+    "<p>Ce graphique représente l'évolution des points des pilotes de F1 durant la saison 2022. Un pilote gagne des points en fonction de sa position finale durant le grand prix.</p>" +
+    "<p>Les points sont attribués de cette <span style='color:red;text-shadow:none;'>manière</span> :<br><br><img src='data/pointsGrandPrix.jpeg' alt='Image' class='image-hover'></p><br>" +
+    "<p>On peut aussi gagner un point bonus si l'on fait le <span style='color:red;text-shadow:none;'>meilleur temps</span> en course et que l'on se trouve dans les 10 premiers à l'arrivée,</p>" +
+    "<p>pour un maximum de <span class='highlighted'>26 points</span>. (25+1)</p><br>" +
+    "<p>Dans ce graphique on peut voir clairement qu'à partir du GP d'Espagne,<span style='color:blue;text-shadow:none;'> Verstappen </span> a prit le dessus sur <span style='color:red;text-shadow:none;'>Leclerc</span><br> et n'a jamais rendu sa premiere place.</p>" +
+    "<p>Cependant, <span style='color:blue;text-shadow:none;'> Verstappen </span> a effectué un mauvais début de saison car il n'a marqué son premier point de la saison qu'au GP de Jeddah.</p>" +
+    "<p>Cela prouve qu'un mauvais début de saison n'est pas forcément fatal pour le championnat du monde. D'ailleurs, <span style='color:blue;text-shadow:none;'> Verstappen </span> a été primé champion du monde au GP du Japon soit 5 courses avant la fin de la saison.</p>" +
+    "<p>On peut aussi voir que <span style='color:red;text-shadow:none;'>Leclerc</span> a fait quelques erreurs de pilotages durant toute la saison (comme au GP de France où il s'est crashé).<br> C'est en partie à cause de ces fautes qu'il n'est pas Champion du Monde aujourd'hui.</p>";
 }
 
 //-----------------------------------Graphique 2---------------------------
 function graphePointsMoyenDriver() {
-  //Création container
+  //Créations containers
   const divParent = document.querySelector(".divGraphique");
 
   const grapheEtExplication = document.createElement("div");
   grapheEtExplication.id = "grapheEtExplication";
-  //display flex pour que les div s'affichent cote à cote
-  grapheEtExplication.style.display = "flex";
-  grapheEtExplication.style.flexDirection = "row";
-  grapheEtExplication.style.width = "100%";
-
-  const divAnalyse = document.createElement("div");
-  divAnalyse.id = "divAnalysePointsMoyenPilotes";
-  divAnalyse.className = "composantDivGraphique";
-  divParent.appendChild(divAnalyse);
-  divAnalyse.innerHTML = "";
+  grapheEtExplication.className = "grapheEtExplicationPilotes";
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
@@ -355,39 +289,19 @@ function graphePointsMoyenDriver() {
   divExplication.className = "divExplicationPilotes";
   grapheEtExplication.appendChild(divExplication);
 
-  divAnalyse.appendChild(grapheEtExplication);
+  divParent.appendChild(grapheEtExplication);
 
-  if (window.innerWidth >= 1340) {
-    divExplication.style.width = "20%";
-    divExplication.style.float = "right";
-    divGraphique.style.width = "80%";
-    divGraphique.style.float = "left";
-  } else if (window.innerWidth >= 1024) {
-    divExplication.style.width = "25%";
-    divExplication.style.float = "right";
-    divGraphique.style.width = "75%";
-    divGraphique.style.float = "left";
-  } else if (window.innerWidth >= 600) {
-    divExplication.style.width = "30%";
-    divExplication.style.float = "right";
-    divGraphique.style.width = "70%";
-    divGraphique.style.float = "left";
-  }
-  //ecrire dans la div le texte d'explication
-  divExplication.style.color = "#FFFFFF";
-  divExplication.style.fontSize = "0.9em";
+  //Texte explicatif/analyse du graphique
+
   divExplication.innerHTML =
-    "<p>Ce graphique représente l'évolution des points des pilotes de F1 durant la saison 2022. Un pilote gagne des points en fonction de sa position finale durant le grand prix</p>";
-  divExplication.innerHTML +=
-    "<p>Les points sont attribués de cette <span style='color:red'>manière</span><img src='data/pointsGrandPrix.jpeg' alt='Image' class='image-hover'></p>";
-  divExplication.innerHTML += "<br>";
-  divExplication.innerHTML +=
-    "<p>On peut aussi gagner un point bonus si l'on fait le <span style='color:red'>meilleur temps</span> et que l'on se trouve dans les 10 premiers à l'arrivé,</p>";
-  divExplication.innerHTML +=
-    "<p>Pour un maximum de <span class='highlighted'>26 points</span></p>";
-  divExplication.innerHTML += "<br>";
-  divExplication.innerHTML +=
-    "<p>Dans ce graphique on peut voir clairement qu'à partir du GP d'Espagne,<span style='color:blue'> Verstappen </span> a prit le dessus sur <span style='color:red'>Leclerc</span><br> et n'a jamais rendu sa premiere place</p>";
+    "<p>Ce graphique représente le nombre de points moyens que gagne chaque pilote lors d'UN Grand Prix.</p>" +
+    "<p>On peut constater que les trois seuls pilotes qui ont une moyenne de points supérieure à 10 pts/Grand Prix sont tous des champions du monde de Formule 1 :</p>" +
+    "<p><span style='color: #0600EF;text-shadow:none;'>Max Verstappen</span>, <span style='color: #00D2BE;text-shadow:none;'>Lewis Hamilton</span> et <span style='color: #006F62;text-shadow:none;'>Sebastian Vettel</span>.</p>" +
+    "<p>Ceci montre bien que pour remporter le championnat du monde de Formule 1, il est nécessaire de marquer des points de manière régulière tout au long de sa carrière.</p><br>" +
+    "<p>En revanche, on peut également voir que la moyenne de points gagnés par les autres pilotes varie considérablement.</p>" +
+    "<p>Certains pilotes ont des performances très irrégulières, avec des courses où ils ne marquent aucun point, tandis que d'autres ont une moyenne plus régulière, mais inférieure à 10 points par course.</p><br>" +
+    "<p>Cette analyse met en évidence l'importance de la régularité dans les performances en Formule 1.<br> Bien que remporter une ou deux courses peut être gratifiant, cela ne suffit pas pour remporter le championnat du monde de Formule 1.<br>" +
+    "<p>Il est important de marquer des points de manière régulière tout au long de la saison, en évitant les erreurs et en maximisant les performances lors de chaque course.</p>";
 
   const tabNomPilote = [];
   for (let i = 0; i < tabGlobalDataPilotes.length; i++) {
@@ -401,7 +315,7 @@ function graphePointsMoyenDriver() {
       polar: true,
       type: "line",
       backgroundColor: "#1b1b1b",
-      height: "55%",
+      height: "50%",
     },
     title: {
       text: "Points moyens des pilotes de F1 marqués par GP",
@@ -438,14 +352,14 @@ function graphePointsMoyenDriver() {
       {
         name: "Points moyens par GP",
         type: "area",
-        color: "#DC0000", //couleur de l'area
+        color: "none", //couleur de l'area (sous la courbe)
         marker: {
-          fillColor: "#FFFFFF",
+          fillColor: "red", //couleur des points
         },
         data: tabGlobalDataPilotes.map(
           (pilote) => pilote["Nb points moyen/GP"]
         ),
-        lineWidth: 1,
+        lineWidth: 3,
         lineColor: "#FFFFFF",
         pointPlacement: "on", // permet de centrer les points
       },
@@ -461,4 +375,4 @@ function graphePointsMoyenDriver() {
 }
 
 //------------------------------- Export des données -----------------------------
-export { creationGraphePointPilote, graphePointsMoyenDriver };
+export { grapheDriverPoint, graphePointsMoyenDriver };
