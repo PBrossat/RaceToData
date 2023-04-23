@@ -53,7 +53,7 @@ function creationIntro() {
     "Les graphes sont un moyen visuel et efficace de représenter des données complexes, et dans le contexte de la F1, ils peuvent fournir des informations claires sur les performances des équipes tout au long de la saison.";
   intro.innerHTML += "<br> <br>";
   intro.innerHTML +=
-    "Les titres pilotes et écuries sont des données clés dans la F1, car ils reflètent les performances globales d'une équipe. Vous avez utilisé ces données pour créer des graphes afin de montrer quelle équipe a remporté le championnat des constructeurs, ainsi que le championnat des pilotes. Les graphes permettent de visualiser facilement l'évolution des performances des équipes au fil de la saison, mettant en évidence les équipes qui ont dominé et celles qui ont eu du mal.";
+    "Les titres pilotes et écuries sont des données clés dans la F1, car ils reflètent les performances globales d'une équipe. Nous avons utilisé ces données pour créer des graphes afin de montrer quelle équipe a remporté le championnat des constructeurs, ainsi que le championnat des pilotes. Les graphes permettent de visualiser facilement l'évolution des performances des équipes au fil de la saison, mettant en évidence les équipes qui ont dominé et celles qui ont eu du mal.";
   intro.innerHTML += "<br> <br>";
   intro.innerHTML +=
     "Les victoires, les poles, les podiums et les points sont également des statistiques importantes en F1, car elles montrent les performances des équipes lors des différentes courses tout au long de la saison. En créant des graphes avec ces données, vous pouvez facilement comparer les performances des équipes et identifier les tendances et les motifs. Par exemple, un graphe montrant le nombre de victoires d'une équipe peut révéler si elle a été dominante tout au long de la saison ou si elle a connu des hauts et des bas.";
@@ -88,6 +88,19 @@ function creationDivPie() {
   //creation div où se trouve l'explication
   const divExplication = document.createElement("div");
   divExplication.className = "divExplication";
+  divExplication.innerHTML = "<h3>Explication : </h3>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> La Formule 1 est une compétition de course automobile de haut niveau où les équipes construisent deux voitures de course chacunes pour concourir. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Le <span style='color:red'>titre</span> de champion du monde des pilotes est attribué au <span style='color:red'>pilote</span> ayant remporté le <span style='color:red'>plus</span> grand nombre de <span style='color:red'>points</span> lors de la saison. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Le <span style='color:red'>titre</span> de champion du monde des constructeurs est attribué à <span style='color:red'>l'écurie</span> ayant remporté le <span style='color:red'>plus</span> grand nombre de <span style='color:red'>points</span> lors de la saison. </p>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
+    "<p> Ce graphique illustre le prestige et la <span style='color:red'>dominance</span> des équipes actuelles en fonction du nombre de <span style='color:red'>titres récoltés</span>.</p>";
   grapheEtExplication.appendChild(divExplication);
 
   divAnalyse.appendChild(grapheEtExplication);
@@ -125,17 +138,13 @@ function creationDivPie() {
   buttonMettreAJour.innerHTML = "Mettre à jour";
   divChoix.appendChild(buttonMettreAJour);
 
-  divExplication.innerHTML =
-    "<p> La Formule 1 est une compétition de course automobile de haut niveau où les équipes construisent deux voitures de course chacunes pour concourir. </p>";
-  divExplication.innerHTML += "<br>";
-  divExplication.innerHTML +=
-    "<p> Le <span style='color:red'>titre</span> de champion du monde des pilotes est attribué au <span style='color:red'>pilote</span> ayant remporté le <span style='color:red'>plus</span> grand nombre de <span style='color:red'>points</span> lors de la saison. </p>";
-  divExplication.innerHTML += "<br>";
-  divExplication.innerHTML +=
-    "<p> Le <span style='color:red'>titre</span> de champion du monde des constructeurs est attribué à <span style='color:red'>l'écurie</span> ayant remporté le <span style='color:red'>plus</span> grand nombre de <span style='color:red'>points</span> lors de la saison. </p>";
-  divExplication.innerHTML += "<br>";
-  divExplication.innerHTML +=
-    "<p> Ce graphique illustre le prestige et la <span style='color:red'>dominance</span> des équipes actuelles en fonction du nombre de <span style='color:red'>titres récoltés</span>.</p>";
+  const divAnalyseExplication = document.createElement("div");
+  divAnalyseExplication.className = "divAnalyseGraphiqueEcurie";
+  divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
+  divAnalyseExplication.innerHTML += "<br>";
+  divAnalyseExplication.innerHTML +=
+    "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> dans le monde de la F1. En effet, la Scuderia a remporté <span style='color:red'>16 titres</span> constructeurs, soit <span style='color:red'>7 de plus que</span> McLaren, qui est <span style='color:red'>la seconde équipe</span> la plus titrée. </p>";
+  divAnalyse.appendChild(divAnalyseExplication);
 
   const Ecuries = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
@@ -162,9 +171,19 @@ function creationDivPie() {
     if (boutonRadioTitreConstructeurs.checked) {
       data = Ecuries;
       type = "constructeurs";
+      divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
+      divAnalyseExplication.innerHTML += "<br>";
+      divAnalyseExplication.innerHTML +=
+        "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> sur le monde de la F1. En effet, la Scuderia a remporté <span style='color:red'>16 titres</span> constructeurs, soit <span style='color:red'>7 de plus que</span> McLaren, qui est <span style='color:red'>la seconde équipe</span> la plus titrée. </p>";
+      divAnalyse.appendChild(divAnalyseExplication);
     } else if (titrePilotes.checked) {
       data = Pilotes;
       type = "pilotes";
+      divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
+      divAnalyseExplication.innerHTML += "<br>";
+      divAnalyseExplication.innerHTML +=
+        "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> sur le monde de la F1. En effet, la Scuderia a remporté <span style='color:red'>15 titres</span> constructeurs, soit <span style='color:red'>3 de plus que</span> McLaren, qui est <span style='color:red'>la seconde équipe</span> la plus titrée. </p>";
+      divAnalyse.appendChild(divAnalyseExplication);
     }
     graphePie(data, type);
   });
@@ -192,16 +211,18 @@ function creationDivMultipleBars() {
 
   //Création Texte Explicatif
   const divExplication = document.createElement("div");
-  grapheEtExplication.appendChild(divExplication);
   divExplication.className = "divExplication";
-  divExplication.innerHTML =
+  divExplication.innerHTML = "<h3>Explication : </h3>";
+  divExplication.innerHTML += "<br>";
+  divExplication.innerHTML +=
     "<p> Les victoires, les poles positions et les podiums sont des éléments clés de la compétition en Formule 1. </p>";
   divExplication.innerHTML += "<br>";
   divExplication.innerHTML +=
-    "<p> Les <span style='color:red'>victoires</span> récompensent la performance du pilote lors d'une  <span style='color:red'>course</span>, tandis que les <span style='color:red'>poles positions</span> récompensent la performance lors des <span style='color:red'>qualifications</span>. Les  <span style='color:red'>podiums</span> récompensent les pilotes qui ont terminé <span style='color:red'>parmi les trois premiers</span> à la fin d'une course. </p>";
+    "<p> Les <span style='color:red'>victoires</span> récompensent la performance du pilote lors d'une <span style='color:red'>course</span>, tandis que les <span style='color:red'>poles positions</span> récompensent la performance lors des <span style='color:red'>qualifications</span>. Les  <span style='color:red'>podiums</span> récompensent les pilotes qui ont terminé <span style='color:red'>parmi les trois premiers</span> à la fin d'une course. </p>";
   divExplication.innerHTML += "<br>";
   divExplication.innerHTML +=
     "<p> Ce graphique permet de comparer le <span style='color:red'>nombre</span> de victoires, de poles positions et de podiums entre les équipes, permettant ainsi de visualiser leur <span style='color:red'>performance</span> au fil des saisons. </p>";
+  grapheEtExplication.appendChild(divExplication);
 
   divAnalyse.appendChild(grapheEtExplication);
 
@@ -236,6 +257,14 @@ function creationDivMultipleBars() {
   buttonMettreAJour.innerHTML = "Mettre à jour";
   divChoix.appendChild(buttonMettreAJour);
 
+  const divAnalyseExplication = document.createElement("div");
+  divAnalyseExplication.className = "divAnalyseGraphiqueEcurie";
+  divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
+  divAnalyseExplication.innerHTML += "<br>";
+  divAnalyseExplication.innerHTML +=
+    "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> en <span style='color:red'>qualifications</span>. Cependant on voit également que <span style='color:red'>RedBull domine</span> en terme de <span style='color:red'>victoires</span> et de <span style='color:red'>podiums</span>. </p>";
+  divAnalyse.appendChild(divAnalyseExplication);
+
   const seriesAll = [];
   for (let i = 0; i < tabGlobalDataEcuries.length; i++) {
     seriesAll.push({
@@ -269,9 +298,19 @@ function creationDivMultipleBars() {
     if (boutonStatsAll.checked) {
       data = seriesAll;
       annee = 1958;
+      divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
+      divAnalyseExplication.innerHTML += "<br>";
+      divAnalyseExplication.innerHTML +=
+        "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> depuis la création de la discipline. En effet, <span style='color:red'>Ferrari</span> compte 789 podiums soit <span style='color:red'>299 podiums de plus</span> que McLaren, qui est <span style='color:red'>la seconde équipe</span> avec le plus de podiums, ce qui montre la <span style='color:red'>régularité</span> de cette équipe <span style='color:red'>au plus haut niveau</span> de ce sport depuis sa création. </p>";
+      divAnalyse.appendChild(divAnalyseExplication);
     } else if (boutonStats2022.checked) {
       data = series;
       annee = 2022;
+      divAnalyseExplication.innerHTML = "<h3>Analyse : </h3>";
+      divAnalyseExplication.innerHTML += "<br>";
+      divAnalyseExplication.innerHTML +=
+        "<p> Sur ce graphique, on peut clairement voir la <span style='color:red'>domination de Ferrari</span> en <span style='color:red'>qualifications</span>. Cependant on voit également que <span style='color:red'>RedBull domine</span> en terme de <span style='color:red'>victoires</span> et de <span style='color:red'>podiums</span>. Cela signifie que Ferrari a une voiture construite pour être rapide en qualifications alors que RedBull a opté pour une voiture rapide en course, ce qui est une meilleure stratégie de développement car les points sont marqués lors de la course. </p>";
+      divAnalyse.appendChild(divAnalyseExplication);
     }
     grapheMultipleBars(data, annee);
   });
@@ -293,21 +332,11 @@ function creationDivRace() {
   const texteExplicatif = document.createElement("div");
   texteExplicatif.id = "texteExplicationChartRace";
   texteExplicatif.className = "divExplication";
-  divAnalyse.appendChild(texteExplicatif);
-
-  // texteExplicatif.style.color = "#FFFFFF";
-  // texteExplicatif.style.fontSize = "1.0em";
-  // texteExplicatif.style.marginBottom = "2%";
-  texteExplicatif.innerHTML =
-    "Les points sont la monnaie de la Formule 1 et chaque écurie cherchent à en accumuler le plus possible au cours de la saison. Les <span style='color:red'>points</span> sont attribués en fonction de la <span style='color:red'>position de chaque pilote à la fin de chaque course</span>, avec des points supplémentaires accordés pour la pole position et le meilleur tour en course. Ce graphique permet de visualiser le <span style='color:red'>nombre de points accumulés</span> par chaque <span style='color:red'>écurie</span> tout au long des saisons <span style='color:red'>depuis leur création</span>, permettant ainsi de suivre leur progression et leur <span style='color:red'>performance</span> relative par rapport à leurs <span style='color:red'>concurrents</span>.";
+  texteExplicatif.innerHTML = "<h3>Explication : </h3>";
   texteExplicatif.innerHTML += "<br>";
-  //image dans le texte explicatif
-  const imgExplication = document.createElement("img");
-  imgExplication.src = "data/fleche-vers-le-bas.png";
-  imgExplication.style.width = "4%";
-  imgExplication.style.height = "4%";
-  imgExplication.style.marginTop = "1%";
-  texteExplicatif.appendChild(imgExplication);
+  texteExplicatif.innerHTML +=
+    "Les points sont la monnaie de la Formule 1 et chaque écurie cherchent à en accumuler le plus possible au cours de la saison. Les <span style='color:red'>points</span> sont attribués en fonction de la <span style='color:red'>position de chaque pilote à la fin de chaque course</span>, avec des points supplémentaires accordés pour la pole position et le meilleur tour en course. Ce graphique permet de visualiser le <span style='color:red'>nombre de points accumulés</span> par chaque <span style='color:red'>écurie</span> tout au long des saisons <span style='color:red'>depuis leur création</span>, permettant ainsi de suivre leur progression et leur <span style='color:red'>performance</span> relative par rapport à leurs <span style='color:red'>concurrents</span>.";
+  divAnalyse.appendChild(texteExplicatif);
 
   //Creation div où se trouve le graphique
   const divGraphique = document.createElement("div");
@@ -336,6 +365,7 @@ function creationDivRace() {
   divPlay.appendChild(year);
 
   const divChoix = document.createElement("div");
+  divChoix.id = "divChoixRaceChart";
   divChoix.className = "divChoix";
   divAnalyse.appendChild(divChoix);
 

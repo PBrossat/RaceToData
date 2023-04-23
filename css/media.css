@@ -104,11 +104,24 @@
     margin-bottom: 15%;
   }
 
-  .divGraphiqueEcurie .divExplication {
+  #stats .divGraphiqueEcurie .divExplication {
     width: 100%;
     float: none;
     margin-left: 0%;
     font-size: 1em;
+    margin-bottom: 4%;
+  }
+
+  #stats .divGraphiqueEcurie .divExplication p {
+    margin-bottom: 0%;
+  }
+
+  #stats .divGraphiqueEcurie .divAnalyseGraphiqueEcurie {
+    width: 100%;
+  }
+
+  #stats .divGraphiqueEcurie .divChoix {
+    margin-right: 0%;
   }
 
   #stats .divGraphique .grapheEtExplicationPilotes {
