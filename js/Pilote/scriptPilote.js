@@ -1,13 +1,9 @@
-//----------------------------- Import des fonctions ----------------------------
-import {
-  creationGraphePointPilote,
-  graphePointsMoyenDriver,
-} from "./graphesPilote.js";
+//----------------------------- Import des fonctions/données ----------------------------
+import { grapheDriverPoint, graphePointsMoyenDriver } from "./graphesPilote.js";
 import { mapPilote } from "./mapPilote.js";
 import {
   gestionFormulairePilote,
   creationSlider,
-  grahiquePositionComparaison,
   explicationComparaison,
 } from "./comparaisonPilotes.js";
 import { creationDivFormulaire } from "../SimulationGP/formulaireSimulation.js";
@@ -28,11 +24,11 @@ const boutonDecouvrirStatsPilotes = document.querySelector(
 );
 boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
   document.querySelector("#stats").innerHTML = "";
-  afficherStatsPilotes();
-  recupererInfosPilotes();
+  creationDivAvecNom("#stats", "divMapEtInfos", "none", true, false);
   mapPilote();
-  creationNouvelleDiv();
-  creationGraphePointPilote(2022);
+  recupererInfosPilotes();
+  creationDivAvecNom("#stats", "none", "divGraphique", false, true);
+  grapheDriverPoint(2022);
   graphePointsMoyenDriver();
   creationSlider();
   await explicationComparaison();
@@ -40,30 +36,31 @@ boutonDecouvrirStatsPilotes.addEventListener("click", async function () {
     document.querySelector("#divFormulaireEtSlider"), //container du slider et du formulaire
     tabGlobalDataPilotes,
     tabGlobalDataGP,
-    "Comparer !",
+    "Comparaison !",
     "Comparez deux pilotes sur un Grand Prix"
   );
   await gestionFormulairePilote();
 });
 
-//------------------------------ Création des containers ----------------
-
-function afficherStatsPilotes() {
-  const StatsPilotes = document.querySelector("#stats");
-
-  const divMapEtInfos = document.createElement("div");
-  divMapEtInfos.id = "divMapEtInfos";
-
-  StatsPilotes.appendChild(divMapEtInfos);
-}
-
-function creationNouvelleDiv() {
-  const StatsPilotes = document.querySelector("#stats");
+//------------------------------ Création des containers ----------------------------
+function creationDivAvecNom(
+  idDivParent,
+  idNouvelleDiv,
+  classNouvelleDiv,
+  besoinId,
+  besoinClassName
+) {
+  const container = document.querySelector(idDivParent);
 
   const nouvelleDiv = document.createElement("div");
-  nouvelleDiv.className = "divGraphique";
+  if (besoinId) {
+    nouvelleDiv.id = idNouvelleDiv;
+  }
+  if (besoinClassName) {
+    nouvelleDiv.className = classNouvelleDiv;
+  }
 
-  StatsPilotes.appendChild(nouvelleDiv);
+  container.appendChild(nouvelleDiv);
 }
 
 //------------------------------- Export des données -----------------------------
