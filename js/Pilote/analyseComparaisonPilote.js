@@ -1,4 +1,6 @@
+//import des énumérations
 import { Pilote, CouleurPilote } from "./enumeration.js";
+
 //---------------------------Analyse des données---------------------------
 function analysePosition(data) {
   const divParent = document.querySelector("#popup_0");
