@@ -43,23 +43,8 @@ def loadAllSessionLaps(saison, tabNomGP):
         session = fastf1.get_session(saison, tabNomGP[i], 'R')
         session.load_laps()
 
-def getColor(pilote):
-    #recuperation de la couleur du pilote
-    driverColor = fastf1.plotting.driver_colors(pilote)
-    return driverColor
-
-
-
-def getInitials(nomPilote):
-    #mettre en majuscule le nom du pilote
-    nomPilote = nomPilote.upper()
-    #recuperer les trois premiere lettres de nomPilote
-    return nomPilote[0:3]
 
 #fonction permettant de recuperer le meilleur tour d'un pilote à partir de l'abbreviation de son nom sur une session donnée
-#def get_best_lap(session, driver):
-    fast_lap = session.laps.pick_driver(driver).pick_fastest()
-    return fast_lap
 
 def get_starting_position(session, driver):
     #recuperation de la position de depart du pilote
@@ -137,7 +122,7 @@ def get_nb_lap_done(session,driver):
     tyreLife= driver['TyreLife']
     return len(tyreLife)
 
-    
+#fonction permettant de recuperer le meilleur tour d'un pilote qu'on convertie en string sans les 7 premiers caracteres 
 def get_best_lap(session, driver):
     fast_lap = session.laps.pick_driver(driver).pick_fastest()
     fastest_lap=fast_lap['LapTime']    
@@ -146,6 +131,7 @@ def get_best_lap(session, driver):
     return fastest_lap
     
 
+#fonction permettant de récuperer le temps de chaque secteur du meilleur tour d'un pilote qu'on convertie en string sans les 7 premiers caracteres
 def get_best_lap_by_sector(session, driver):
     fast_lap = session.laps.pick_driver(driver).pick_fastest()
     #creation d'un tableau vide de string avec les temps de chaque secteur
@@ -191,9 +177,6 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
     session.load()
     session.load_laps(with_telemetry=True)
 
-    nomPilote1=getInitials(pilote1)
-    nomPilote2=getInitials(pilote2)
-
     #on récupere dans une variable la position de départ du pilote 1 et du pilote 2
     positionDepartPilote1=get_starting_position(session, nomPilote1)
     positionDepartPilote2=get_starting_position(session, nomPilote2)
@@ -236,7 +219,7 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
 
     #création de deux objets contenant les informations des deux pilotes
     objetPilote1={
-        "nomPilote": nomPilote1,
+        "nomPilote": pilote1,
         "GrandPrix": grandPrix,
         "positionDepart": positionDepartPilote1,
         "positionArrivee": positionArriveePilote1,
@@ -266,10 +249,12 @@ def comparaison(grandPrix, saison, pilote1, pilote2):
         }
     
 
+    #on crée le fichier json contenant les informations des deux pilotes
     with open('json/comparaisonPilote/comparaison'+pilote1+'_'+pilote2+'_'+grandPrix+'.json', 'w') as f:
             json.dump([objetPilote1, objetPilote2], f, indent=4)
 
 
+#fonction qui permet de comparer les informations de deux pilotes
 comparaison(nameGP, saison, nomPilote1, nomPilote2)
 
 
