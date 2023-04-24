@@ -91,7 +91,6 @@ for i, driver_team in enumerate(laps_rythme.index):
     prev_laptime = laptime
 
 # plt.show()
-# save dans le repertoir "data/analyse/nameGP"
 plt.savefig('rythme_moyen_pilotes.png', dpi=300)
 
 #######################################################################################################################################################
@@ -146,7 +145,7 @@ compound_colors = {
 
 laps["LapTimeSec"] = laps["LapTime"].dt.total_seconds() 
 
-# To get accurate laps only, we exclude in- and outlaps
+# On exclut les tours d'entrée et de sortie des stands
 laps_without_na = laps.loc[(laps['PitOutTime'].isnull() & laps['PitInTime'].isnull())]
 
 quartile1 = laps_without_na["LapTimeSec"].quantile(0.25)
@@ -167,7 +166,7 @@ fig, ax = plt.subplots()
 times_compounds = laps_without_na[["LapTimeSec", "Compound"]].groupby(['Compound'])
 laptimes = []
 
-# create a list of colors for each compound
+# créer une liste de couleurs pour chaque compound
 colors = [compound_colors[compound] for compound in times_compounds.groups.keys()]
 
 # pour chaque groupe de pneus de times_compounds, on récupère le nom du pneu/groupe (compound) et les données associées (group)
@@ -193,6 +192,7 @@ plt.savefig('temps_tour_pneus.png', dpi=300)
 #######################################################################################################################################################
 
 ################################################################# Stratégie de course ################################################################
+#https://medium.com/towards-formula-1-analysis/visualizing-formula-1-race-strategies-in-python-using-fastf1-pandas-and-matplotlib-95fe6b3298fa
 
 driver_stints = laps[['Driver', 'Stint', 'Compound', 'LapNumber']].groupby(
     ['Driver', 'Stint', 'Compound']
