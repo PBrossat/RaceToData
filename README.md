@@ -7,11 +7,11 @@ Il s'agit d'un projet dans le cadre de l'UE LIFPROJET de l'Université Lyon 1.
 - L'objectif du projet était de proposer une analyse visuelle des données de formule 1, en se concentrant sur trois parties principales : les pilotes, les écuries et les grands-Prix.
 - Les pilotes : carte interactive, cartes avec différentes données, graphique spline, comparaison entre deux pilotes sur chaque GP
 - Les écuries : carte interactive, cartes avec différentes données, graphiques avec des textes explicatifs, choix des données à afficher sur les graphiques
-- Les grands-prix : carte interactive, cartes avec différentes données, comparaison entre deux pilotes sur un GP en visuel, comparaison des télémétries
+- Les grands-prix : carte interactive, cartes avec différentes données, comparaison entre deux pilotes sur un GP en visuel, comparaison des télémétries, analyse de graphiques
 
 # 📓 Sujet
 
-Le sujet du projet est disponible [here](http://cazabetremy.fr/wiki/doku.php?id=projet:sujets).
+Le sujet du projet est disponible [ici](http://cazabetremy.fr/wiki/doku.php?id=projet:sujets).
 Il s'agit du projet "RC1. Data Explorable".
 
 # 🏁 Comment installer et run le projet
@@ -85,11 +85,30 @@ Ces instructions vous permettront d'obtenir une copie du projet et de le faire f
 <summary>Arborescence du dossier</summary>
 
 ```
-├── css
-├── data
-
-ect.....
-
+└── RaceToData/
+    ├── css/
+    ├── data/
+    ├── js/
+    │   ├── Ecuries/
+    │   ├── Grands-Prix/
+    │   ├── Pilote/
+    │   ├── SimulationGP/
+    │   └── index.js
+    ├── json/
+    │   ├── comparaisonPilote/
+    │   ├── Ecuries/
+    │   ├── simulationGP/
+    │   ├── Driver.json
+    │   └── Grands-prix.json
+    ├── py/
+    │   ├── cache/
+    │   ├── analyseGP.py
+    │   ├── comparaisonPilote.py
+    │   └── simulationGP.py
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    └── README.md
 ```
 
 </details>  
@@ -107,6 +126,6 @@ Le projet RaceToData permet d'obtenir une analyse visuelle des données de la co
 
 # ✍️ Authors
 
-- [Matis BRUN](https://forge.univ-lyon1.fr/p2003969) : p2003969
 - [Pierrick BROSSAT](https://forge.univ-lyon1.fr/p2002218) : p2002218
+- [Matis BRUN](https://forge.univ-lyon1.fr/p2003969) : p2003969
 - [Lucas FAUSTMANN](https://forge.univ-lyon1.fr/p2020351) : p2020351
