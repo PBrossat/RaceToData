@@ -116,12 +116,40 @@ Ces instructions vous permettront d'obtenir une copie du projet et de le faire f
 
 # Organisation et explications de code
 
-??????????????????????????????????????????????????
-Le code du projet RaceToData est organisé en différentes parties, chacune correspondant à une des fonctionnalités du projet. Les explications détaillées de chaque partie sont fournies dans le code.
+## css/
+
+Le dossier "css" contient des fichiers CSS pour la mise en page du site web.
+
+## data/
+
+Le dossier "data" est destiné à stocker les images, vidéos utilisées dans le site web.
+
+## js/
+
+Le dossier "js" contient le code JavaScript de notre site web, qui est divisé en sous-dossiers pour les fonctionnalités relatives aux écuries, grands prix, pilotes et simulations de GP. Le fichier "index.js" dans ce dossier est le point d'entrée de notre site web.
+
+## json/
+
+Le dossier "json" contient des fichiers JSON, qui stockent les données de notre site web, telles que les fichiers de comparaison entre pilotes, ceux liés aux simulations de GP et les données des pilotes, des écuries et des Grands-Prix.
+
+## py/
+
+Le dossier "py" contient le code Python de notre site web. Le dossier "cache" stocke des fichiers temporaires, tels que les fichiers de cache de fastf1. Les fichiers Python "analyseGP.py", "comparaisonPilote.py" et "simulationGP.py" sont les fichiers principaux de notre site web pour récupérer les données de fastf1.
+
+## index.html
+
+Le fichier "index.html" est la page d'accueil de notre site web.
+
+## package-lock.json
+
+Le fichier "package-lock.json" contient des informations sur les packages installés et leurs dépendances.
+
+## package.json
+
+Le fichier "package.json" est un fichier de configuration pour notre projet, qui contient des informations sur notre site web, les dépendances de notre projet et les scripts de construction.
 
 # Résultats
 
-??????????????????????????????????????????????????
 Le projet RaceToData permet d'obtenir une analyse visuelle des données de la course automobile, en se concentrant sur les pilotes, les écuries et les Grands-Prix. Les différentes fonctionnalités proposées permettent de comparer facilement différentes données et de visualiser les résultats de manière claire et concise.
 
 # ✍️ Authors
