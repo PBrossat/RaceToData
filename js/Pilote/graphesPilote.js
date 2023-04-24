@@ -294,7 +294,7 @@ function graphePointsMoyenDriver() {
   //Texte explicatif/analyse du graphique
 
   divExplication.innerHTML =
-    "<p>Ce graphique représente le nombre de points moyens que gagne chaque pilote lors d'UN Grand Prix.</p>" +
+    "<p>Ce graphique représente le nombre de points moyens que gagne chaque pilote lors d'un Grand Prix.</p>" +
     "<p>On peut constater que les trois seuls pilotes qui ont une moyenne de points supérieure à 10 pts/Grand Prix sont tous des champions du monde de Formule 1 :</p>" +
     "<p><span style='color: #0600EF;text-shadow:none;'>Max Verstappen</span>, <span style='color: #00D2BE;text-shadow:none;'>Lewis Hamilton</span> et <span style='color: #006F62;text-shadow:none;'>Sebastian Vettel</span>.</p>" +
     "<p>Ceci montre bien que pour remporter le championnat du monde de Formule 1, il est nécessaire de marquer des points de manière régulière tout au long de sa carrière.</p><br>" +
