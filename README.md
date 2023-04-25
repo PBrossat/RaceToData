@@ -5,9 +5,9 @@
 Il s'agit d'un projet dans le cadre de l'UE LIFPROJET de l'Université Lyon 1.
 
 - L'objectif du projet était de proposer une analyse visuelle des données de formule 1, en se concentrant sur trois parties principales : les pilotes, les écuries et les grands-Prix.
-- Les pilotes : carte interactive, cartes avec différentes données, graphique spline, comparaison entre deux pilotes sur chaque GP
-- Les écuries : carte interactive, cartes avec différentes données, graphiques avec des textes explicatifs, choix des données à afficher sur les graphiques
-- Les grands-prix : carte interactive, cartes avec différentes données, comparaison entre deux pilotes sur un GP en visuel, comparaison des télémétries, analyse de graphiques
+- Les pilotes : carte interactive, cartes avec différentes données, graphique spline, comparaison entre deux pilotes sur chaque GP (réalisée par [Pierrick BROSSAT](https://forge.univ-lyon1.fr/p2002218))
+- Les écuries : carte interactive, cartes avec différentes données, graphiques avec des textes explicatifs, choix des données à afficher sur les graphiques (réalisée par [Matis BRUN](https://forge.univ-lyon1.fr/p2003969))
+- Les grands-prix : carte interactive, cartes avec différentes données, comparaison de tours entre deux pilotes sur un GP en visuel (simulationGP), comparaison des télémétries, analyse de graphiques (réalisée par [Lucas FAUSTMANN](https://forge.univ-lyon1.fr/p2020351))
 
 # 📓 Sujet
 
